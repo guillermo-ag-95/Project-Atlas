@@ -18,7 +18,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         textField.delegate = self
 
         view.addSubview(textField) // Add the textField to the view.
+        view.addSubview(button) // Add the button to the view.
+        view.addSubview(label) // Add the label to the view.
         view.setNeedsUpdateConstraints() // Let us introduce AutoLayout code.
+    }
+    
+    @objc func buttonPressed(){
+        label.text = "Hello, \(textField.text!)"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -28,6 +34,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     override func updateViewConstraints() {
         textFieldConstraints()
+        buttonConstraints()
+        labelConstraints()
         super.updateViewConstraints()
     }
     
@@ -71,6 +79,93 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             toItem: view,
             attribute: .bottom,
             multiplier: 0.1,
+            constant: 0.0
+        ).isActive = true
+    }
+    
+    lazy var button: UIButton! = {
+        let view = UIButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(MainViewController.buttonPressed), for: .touchDown) // Let's specify an action when the button is pressed.
+        view.setTitle("Press Me!", for: .normal)
+        view.backgroundColor = UIColor.blue
+        return view
+    }()
+    
+    func buttonConstraints(){
+        // Center the button in page view.
+        NSLayoutConstraint(
+            item: button,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0
+        ).isActive = true
+        
+        // Set Width to 30% of the page view width.
+        NSLayoutConstraint(
+            item: button,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .width,
+            multiplier: 0.3,
+            constant: 0.0
+        ).isActive = true
+        
+        // Set Y position relative to bottom of page view.
+        NSLayoutConstraint(
+            item: button,
+            attribute: .bottom,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .bottom,
+            multiplier: 0.9,
+            constant: 0.0
+        ).isActive = true
+    }
+    
+    lazy var label: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Hello World!"
+        view.textAlignment = .center
+        return view
+    }()
+    
+    func labelConstraints(){
+        // Center label to page view.
+        NSLayoutConstraint(
+            item: label,
+            attribute: .centerX,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .centerX,
+            multiplier: 1.0,
+            constant: 0.0
+        ).isActive = true
+        
+        // Set width to be 80% of the page view width.
+        NSLayoutConstraint(
+            item: label,
+            attribute: .width,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .width,
+            multiplier: 0.8,
+            constant: 0.0
+        ).isActive = true
+        
+        // Set Y position relative to bottom of page view.
+        NSLayoutConstraint(
+            item: label,
+            attribute: .centerY,
+            relatedBy: .equal,
+            toItem: view,
+            attribute: .centerY,
+            multiplier: 1.0,
             constant: 0.0
         ).isActive = true
     }
