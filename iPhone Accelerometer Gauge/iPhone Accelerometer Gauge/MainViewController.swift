@@ -23,7 +23,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         view.setNeedsUpdateConstraints() // Let us introduce AutoLayout code.
     }
     
-    @objc func buttonPressed(){
+    @IBAction func buttonPressed(){
         label.text = "Hello, \(textField.text!)"
     }
     
