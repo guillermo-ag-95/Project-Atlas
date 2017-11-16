@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  iPhone Accelerometer Gauge
 //
-//  Created by Guillermo Alcalá Gamero on 14/11/17.
+//  Created by Guillermo Alcalá Gamero on 16/11/17.
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
 //
 
@@ -16,22 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // Initialize the window.
-        window = UIWindow.init(frame: UIScreen.main.bounds)
-        
-        // Set Background Color of windows
-        window?.backgroundColor = UIColor.white
-        
-        // Allocate memory for an instance of the 'MainViewController' class
-        let mainViewController = MainViewController()
-        
-        // Set the root view controller of the app window.
-        window!.rootViewController = mainViewController
-        
-        // Make window visible
-        window!.makeKeyAndVisible()
-        
         return true
     }
 

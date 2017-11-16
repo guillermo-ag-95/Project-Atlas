@@ -7,126 +7,57 @@
 //
 
 import UIKit
+import CoreMotion
+import AVFoundation
 
 class MainViewController: UIViewController {
 
+    var motionManager = CMMotionManager()
+    
+    let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add UI Elements to view
-        initializeButtons()
-        
-        // Let introduce AutoLayout Code.
-        view.setNeedsUpdateConstraints()
-    }
-    
-    func initializeButtons(){
-        playButton.isHidden = false
-        pauseButton.isHidden = true
-        
-        view.addSubview(playButton)
-        view.addSubview(pauseButton)
-    }
-    
-    override func updateViewConstraints() {
-        playPauseButtonConstraints(playButton)
-        playPauseButtonConstraints(pauseButton)
+        initializeInterface() // Include labels and buttons.
+        motionManager.accelerometerUpdateInterval = 0.01 // 100 Hz
 
-        super.updateViewConstraints()
     }
+
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var pauseButton: UIButton!
     
-    @IBAction func playPauseButtonPressed(){
+    @IBOutlet weak var accelerationTextLabel: UILabel!
+    @IBOutlet weak var accelerationValueLabel: UILabel!
+    @IBOutlet weak var xAxisTextLabel: UILabel!
+    @IBOutlet weak var yAxisTextLabel: UILabel!
+    @IBOutlet weak var zAxisTextLabel: UILabel!
+    @IBOutlet weak var xAxisValueLabel: UILabel!
+    @IBOutlet weak var yAxisValueLabel: UILabel!
+    @IBOutlet weak var ZAxisValueLabel: UILabel!
+    
+    @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         playButton.isHidden = !playButton.isHidden
         pauseButton.isHidden = !pauseButton.isHidden
     }
     
-    lazy var playButton: UIButton! = {
-        let view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed), for: .touchDown)
-        view.backgroundColor = UIColor.white
-        return view
-    }()
-    
-    lazy var pauseButton: UIButton! = {
-        let view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed), for: .touchDown)
-        view.backgroundColor = UIColor.white
-        return view
-    }()
-    
-    func playPauseButtonConstraints(_ sender: UIButton){
-        // The button is centered.
-        NSLayoutConstraint(
-            item: sender,
-            attribute: .centerX,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .centerX,
-            multiplier: 1.0,
-            constant: 0.0
-        ).isActive = true
+    func initializeInterface(){
+        playButton.isHidden = false
+        pauseButton.isHidden = true
         
-        // The bottom of the button is the 90% of the height of the view.
-        NSLayoutConstraint(
-            item: sender,
-            attribute: .bottom,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .bottom,
-            multiplier: 0.9,
-            constant: 0.0
-        ).isActive = true
+        accelerationTextLabel.text = "Acceleration"
+        xAxisTextLabel.text = "X Axis:"
+        yAxisTextLabel.text = "Y Axis:"
+        zAxisTextLabel.text = "Z Axis:"
         
-        // The width of the button is the 20% of the width of the view.
-        NSLayoutConstraint(
-            item: sender,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: nil,
-            attribute: .notAnAttribute,
-            multiplier: 1.0,
-            constant: view.bounds.size.width * 0.2
-        ).isActive = true
-        
-        // The height of the button is the same as its width.
-        NSLayoutConstraint(
-            item: sender,
-            attribute: .height,
-            relatedBy: .equal,
-            toItem: sender,
-            attribute: .width,
-            multiplier: 1.0,
-            constant: 0.0
-        ).isActive = true
-        
+        accelerationValueLabel.text = nil
+        xAxisValueLabel.text = nil
+        yAxisValueLabel.text = nil
+        ZAxisValueLabel.text = nil
     }
     
-    lazy var accelerationLabel: UILabel! = {
-        let view = UILabel()
-        view.text = "Acceleration"
-        return view
-    }()
+    func playSound(){
+        AudioServicesPlaySystemSound(systemSoundID)
+    }
     
-    lazy var xAxisLabel: UILabel! = {
-        let view = UILabel()
-        view.text = "X Axis"
-        return view
-    }()
-    
-    lazy var yAxisLabel: UILabel! = {
-        let view = UILabel()
-        view.text = "Y Axis"
-        return view
-    }()
-    
-    lazy var zAxisLabel: UILabel! = {
-        let view = UILabel()
-        view.text = "Z Axis"
-        return view
-    }()
-
 }
