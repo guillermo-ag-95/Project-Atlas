@@ -2,100 +2,48 @@
 //  MainViewController.swift
 //  iPhone Accelerometer Gauge
 //
-//  Created by Guillermo Alcalá Gamero on 14/11/17.
+//  Created by Guillermo Alcalá Gamero on 16/11/17.
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
 //
 
 import UIKit
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // This lets the application sknow where to look for the implementation of the delegate methods.
-        // In this case is inside Self, a reference to our MainViewController class.
-        textField.delegate = self
-
-        view.addSubview(textField) // Add the textField to the view.
-        view.addSubview(button) // Add the button to the view.
-        view.addSubview(label) // Add the label to the view.
-        view.setNeedsUpdateConstraints() // Let us introduce AutoLayout code.
-    }
-    
-    @IBAction func buttonPressed(){
-        label.text = "Hello, \(textField.text!)"
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder() // Dismiss the keyboard by making the text field resign first responder.
-        return false // Instead of adding a line break, the text field resigns.
+        // Add UI Elements to view
+        view.addSubview(playPauseButton)
+        
+        // Let introduce AutoLayout Code.
+        view.setNeedsUpdateConstraints()
     }
     
     override func updateViewConstraints() {
-        textFieldConstraints()
-        buttonConstraints()
-        labelConstraints()
+        playPauseButtonConstraints()
+        
         super.updateViewConstraints()
     }
     
-    lazy var textField: UITextField! = {
-        let view = UITextField()
-        view.translatesAutoresizingMaskIntoConstraints = false // Let us set our custom constraints to the text field.
-        view.borderStyle = .roundedRect
-        view.textAlignment = .center
+    @IBAction func playPauseButtonPressed(){
         
-        return view
-    }()
-    
-    func textFieldConstraints(){
-        // Center Text Field relative to page view.
-        NSLayoutConstraint(
-            item: textField,
-            attribute: .centerX,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .centerX,
-            multiplier: 1.0,
-            constant: 0.0
-        ).isActive = true
-        
-        // Set Text Field width to 80% of the width of the page view.
-        NSLayoutConstraint(
-            item: textField,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .width,
-            multiplier: 0.8,
-            constant: 0.0
-        ).isActive = true
-        
-        // Set Text Field Y position 10% down from the top of the page view.
-        NSLayoutConstraint(
-            item: textField,
-            attribute: .top,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .bottom,
-            multiplier: 0.1,
-            constant: 0.0
-        ).isActive = true
     }
     
-    lazy var button: UIButton! = {
+    lazy var playPauseButton: UIButton! = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.addTarget(self, action: #selector(MainViewController.buttonPressed), for: .touchDown) // Let's specify an action when the button is pressed.
-        view.setTitle("Press Me!", for: .normal)
-        view.backgroundColor = UIColor.blue
+        view.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        view.setImage(#imageLiteral(resourceName: "pause"), for: .highlighted) // TODO
+        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed), for: .touchDown)
+        view.backgroundColor = UIColor.white
         return view
     }()
     
-    func buttonConstraints(){
-        // Center the button in page view.
+    func playPauseButtonConstraints(){
+        // The button is centered.
         NSLayoutConstraint(
-            item: button,
+            item: playPauseButton,
             attribute: .centerX,
             relatedBy: .equal,
             toItem: view,
@@ -104,20 +52,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             constant: 0.0
         ).isActive = true
         
-        // Set Width to 30% of the page view width.
+        // The bottom of the button is the 90% of the height of the view.
         NSLayoutConstraint(
-            item: button,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .width,
-            multiplier: 0.3,
-            constant: 0.0
-        ).isActive = true
-        
-        // Set Y position relative to bottom of page view.
-        NSLayoutConstraint(
-            item: button,
+            item: playPauseButton,
             attribute: .bottom,
             relatedBy: .equal,
             toItem: view,
@@ -125,49 +62,29 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             multiplier: 0.9,
             constant: 0.0
         ).isActive = true
-    }
-    
-    lazy var label: UILabel! = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Hello World!"
-        view.textAlignment = .center
-        return view
-    }()
-    
-    func labelConstraints(){
-        // Center label to page view.
+        
+        // The width of the button is the 20% of the width of the view.
         NSLayoutConstraint(
-            item: label,
-            attribute: .centerX,
+            item: playPauseButton,
+            attribute: .width,
             relatedBy: .equal,
-            toItem: view,
-            attribute: .centerX,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1.0,
+            constant: view.bounds.size.width * 0.2
+        ).isActive = true
+        
+        // The height of the button is the same as its width.
+        NSLayoutConstraint(
+            item: playPauseButton,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: playPauseButton,
+            attribute: .width,
             multiplier: 1.0,
             constant: 0.0
         ).isActive = true
         
-        // Set width to be 80% of the page view width.
-        NSLayoutConstraint(
-            item: label,
-            attribute: .width,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .width,
-            multiplier: 0.8,
-            constant: 0.0
-        ).isActive = true
-        
-        // Set Y position relative to bottom of page view.
-        NSLayoutConstraint(
-            item: label,
-            attribute: .centerY,
-            relatedBy: .equal,
-            toItem: view,
-            attribute: .centerY,
-            multiplier: 1.0,
-            constant: 0.0
-        ).isActive = true
     }
 
 }
