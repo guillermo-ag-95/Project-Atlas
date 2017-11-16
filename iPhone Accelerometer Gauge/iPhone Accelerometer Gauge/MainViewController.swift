@@ -14,36 +14,54 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         // Add UI Elements to view
-        view.addSubview(playPauseButton)
+        initializeButtons()
         
         // Let introduce AutoLayout Code.
         view.setNeedsUpdateConstraints()
     }
     
-    override func updateViewConstraints() {
-        playPauseButtonConstraints()
+    func initializeButtons(){
+        playButton.isHidden = false
+        pauseButton.isHidden = true
         
+        view.addSubview(playButton)
+        view.addSubview(pauseButton)
+    }
+    
+    override func updateViewConstraints() {
+        playPauseButtonConstraints(playButton)
+        playPauseButtonConstraints(pauseButton)
+
         super.updateViewConstraints()
     }
     
     @IBAction func playPauseButtonPressed(){
-        
+        playButton.isHidden = !playButton.isHidden
+        pauseButton.isHidden = !pauseButton.isHidden
     }
     
-    lazy var playPauseButton: UIButton! = {
+    lazy var playButton: UIButton! = {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-        view.setImage(#imageLiteral(resourceName: "pause"), for: .highlighted) // TODO
         view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed), for: .touchDown)
         view.backgroundColor = UIColor.white
         return view
     }()
     
-    func playPauseButtonConstraints(){
+    lazy var pauseButton: UIButton! = {
+        let view = UIButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed), for: .touchDown)
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    func playPauseButtonConstraints(_ sender: UIButton){
         // The button is centered.
         NSLayoutConstraint(
-            item: playPauseButton,
+            item: sender,
             attribute: .centerX,
             relatedBy: .equal,
             toItem: view,
@@ -54,7 +72,7 @@ class MainViewController: UIViewController {
         
         // The bottom of the button is the 90% of the height of the view.
         NSLayoutConstraint(
-            item: playPauseButton,
+            item: sender,
             attribute: .bottom,
             relatedBy: .equal,
             toItem: view,
@@ -65,7 +83,7 @@ class MainViewController: UIViewController {
         
         // The width of the button is the 20% of the width of the view.
         NSLayoutConstraint(
-            item: playPauseButton,
+            item: sender,
             attribute: .width,
             relatedBy: .equal,
             toItem: nil,
@@ -76,15 +94,39 @@ class MainViewController: UIViewController {
         
         // The height of the button is the same as its width.
         NSLayoutConstraint(
-            item: playPauseButton,
+            item: sender,
             attribute: .height,
             relatedBy: .equal,
-            toItem: playPauseButton,
+            toItem: sender,
             attribute: .width,
             multiplier: 1.0,
             constant: 0.0
         ).isActive = true
         
     }
+    
+    lazy var accelerationLabel: UILabel! = {
+        let view = UILabel()
+        view.text = "Acceleration"
+        return view
+    }()
+    
+    lazy var xAxisLabel: UILabel! = {
+        let view = UILabel()
+        view.text = "X Axis"
+        return view
+    }()
+    
+    lazy var yAxisLabel: UILabel! = {
+        let view = UILabel()
+        view.text = "Y Axis"
+        return view
+    }()
+    
+    lazy var zAxisLabel: UILabel! = {
+        let view = UILabel()
+        view.text = "Z Axis"
+        return view
+    }()
 
 }
