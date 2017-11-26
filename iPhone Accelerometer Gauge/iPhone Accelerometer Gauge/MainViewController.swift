@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
     let updatesIntervalOn = 0.01 // 100 Hz (Max)
     let updatesIntervalOff = 0.1 // 10 Hz (Min)
+    let gravity = 9.8 // Gravity in m/s2
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var zAxisTextLabel: UILabel!
     @IBOutlet weak var xAxisValueLabel: UILabel!
     @IBOutlet weak var yAxisValueLabel: UILabel!
-    @IBOutlet weak var ZAxisValueLabel: UILabel!
+    @IBOutlet weak var zAxisValueLabel: UILabel!
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
@@ -59,7 +60,7 @@ class MainViewController: UIViewController {
         accelerationValueLabel.text = nil
         xAxisValueLabel.text = nil
         yAxisValueLabel.text = nil
-        ZAxisValueLabel.text = nil
+        zAxisValueLabel.text = nil
     }
     
     func recordData(){
@@ -71,10 +72,9 @@ class MainViewController: UIViewController {
     }
     
     func updateLabels(_ data: CMAccelerometerData){
-        xAxisValueLabel.text = String(data.acceleration.x)
-        yAxisValueLabel.text = String(data.acceleration.y)
-        ZAxisValueLabel.text = String(data.acceleration.z)
-
+        xAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.x * gravity])
+        yAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.y * gravity])
+        zAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.z * gravity])
     }
     
     func playSound(){
