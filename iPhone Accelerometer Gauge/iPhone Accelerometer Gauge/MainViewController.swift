@@ -15,13 +15,11 @@ class MainViewController: UIViewController {
     var motionManager = CMMotionManager()
     
     let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeInterface() // Include labels and buttons.
-        motionManager.accelerometerUpdateInterval = 0.01 // 100 Hz
-
     }
 
     @IBOutlet weak var playButton: UIButton!
@@ -37,8 +35,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var ZAxisValueLabel: UILabel!
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
+        // Updates which button is shown.
         playButton.isHidden = !playButton.isHidden
         pauseButton.isHidden = !pauseButton.isHidden
+        
+        // Updates the interval to avoid 100Hz when the app is paused.
+        motionManager.accelerometerUpdateInterval = playButton.isHidden ? 0.01 : 0.1
+        
+        playButton.isHidden ? recordData() : motionManager.stopAccelerometerUpdates()
     }
     
     func initializeInterface(){
@@ -54,6 +58,20 @@ class MainViewController: UIViewController {
         xAxisValueLabel.text = nil
         yAxisValueLabel.text = nil
         ZAxisValueLabel.text = nil
+    }
+    
+    func recordData(){
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
+            if let data = data{
+                self.updateLabels(data)
+            }
+        }
+    }
+    
+    func updateLabels(_ data: CMAccelerometerData){
+        xAxisValueLabel.text = String(data.acceleration.x)
+        yAxisValueLabel.text = String(data.acceleration.y)
+        ZAxisValueLabel.text = String(data.acceleration.z)
     }
     
     func playSound(){
