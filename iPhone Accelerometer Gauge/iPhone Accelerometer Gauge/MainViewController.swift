@@ -15,6 +15,8 @@ class MainViewController: UIViewController {
     var motionManager = CMMotionManager()
     
     let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
+    let updatesIntervalOn = 0.01 // 100 Hz (Max)
+    let updatesIntervalOff = 0.1 // 10 Hz (Min)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,7 @@ class MainViewController: UIViewController {
         pauseButton.isHidden = !pauseButton.isHidden
         
         // Updates the interval to avoid 100Hz when the app is paused.
-        motionManager.accelerometerUpdateInterval = playButton.isHidden ? 0.01 : 0.1
+        motionManager.accelerometerUpdateInterval = playButton.isHidden ? updatesIntervalOn : updatesIntervalOff
         
         playButton.isHidden ? recordData() : motionManager.stopAccelerometerUpdates()
     }
@@ -72,6 +74,7 @@ class MainViewController: UIViewController {
         xAxisValueLabel.text = String(data.acceleration.x)
         yAxisValueLabel.text = String(data.acceleration.y)
         ZAxisValueLabel.text = String(data.acceleration.z)
+
     }
     
     func playSound(){
