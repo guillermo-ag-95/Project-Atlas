@@ -11,13 +11,9 @@ import CoreMotion
 import AVFoundation
 
 class MainViewController: UIViewController {
-
-    var motionManager = CMMotionManager()
     
-    let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
-    let updatesIntervalOn = 0.01 // 100 Hz (Max)
-    let updatesIntervalOff = 0.1 // 10 Hz (Min)
-    let gravity = 9.8 // Gravity in m/s2
+    let accelerometerService = AccelerometerService.shared
+    var motionManager = CMMotionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +38,20 @@ class MainViewController: UIViewController {
         playButton.isHidden = !playButton.isHidden
         pauseButton.isHidden = !pauseButton.isHidden
         
-        // Updates the interval to avoid 100Hz when the app is paused.
-        motionManager.accelerometerUpdateInterval = playButton.isHidden ? updatesIntervalOn : updatesIntervalOff
+        guard self.motionManager.isDeviceMotionAvailable else {return}
         
-        playButton.isHidden ? recordData() : motionManager.stopAccelerometerUpdates()
+        // Updates the interval to avoid 100Hz when the app is paused.
+        motionManager.deviceMotionUpdateInterval = playButton.isHidden ? accelerometerService.updatesIntervalOn : accelerometerService.updatesIntervalOff
+        
+        playButton.isHidden ? recordData() : motionManager.stopDeviceMotionUpdates()
+    }
+    
+    func recordData(){
+        motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { (data, error) in
+            if let data = data {
+                self.updateLabels(data)
+            }
+        }
     }
     
     func initializeInterface(){
@@ -63,22 +69,10 @@ class MainViewController: UIViewController {
         zAxisValueLabel.text = nil
     }
     
-    func recordData(){
-        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
-            if let data = data{
-                self.updateLabels(data)
-            }
-        }
-    }
-    
-    func updateLabels(_ data: CMAccelerometerData){
-        xAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.x * gravity])
-        yAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.y * gravity])
-        zAxisValueLabel.text = String(format: "%.2f", arguments: [data.acceleration.z * gravity])
-    }
-    
-    func playSound(){
-        AudioServicesPlaySystemSound(systemSoundID)
+    func updateLabels(_ data: CMDeviceMotion){
+        xAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.x])
+        yAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.y])
+        zAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.z])
     }
     
 }
