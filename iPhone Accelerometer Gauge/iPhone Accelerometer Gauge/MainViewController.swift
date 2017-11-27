@@ -13,11 +13,9 @@ import AVFoundation
 class MainViewController: UIViewController {
     
     let accelerometerService = AccelerometerService.shared
-    var motionManager = CMMotionManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initializeInterface() // Include labels and buttons.
     }
 
@@ -38,19 +36,13 @@ class MainViewController: UIViewController {
         playButton.isHidden = !playButton.isHidden
         pauseButton.isHidden = !pauseButton.isHidden
         
-        guard self.motionManager.isDeviceMotionAvailable else {return}
-        
         // Updates the interval to avoid 100Hz when the app is paused.
-        motionManager.deviceMotionUpdateInterval = playButton.isHidden ? accelerometerService.updatesIntervalOn : accelerometerService.updatesIntervalOff
+        accelerometerService.motionManager.deviceMotionUpdateInterval = playButton.isHidden ? accelerometerService.updatesIntervalOn : accelerometerService.updatesIntervalOff
         
-        playButton.isHidden ? recordData() : motionManager.stopDeviceMotionUpdates()
-    }
-    
-    func recordData(){
-        motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { (data, error) in
-            if let data = data {
-                self.updateLabels(data)
-            }
+        playButton.isHidden ? accelerometerService.startRecordData() : accelerometerService.stopRecordData()
+        
+        Timer.scheduledTimer(withTimeInterval: accelerometerService.motionManager.deviceMotionUpdateInterval, repeats: true) { (timer) in
+            self.updateLabels()
         }
     }
     
@@ -69,10 +61,14 @@ class MainViewController: UIViewController {
         zAxisValueLabel.text = nil
     }
     
-    func updateLabels(_ data: CMDeviceMotion){
-        xAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.x])
-        yAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.y])
-        zAxisValueLabel.text = String(format: "%.6f", arguments: [data.userAcceleration.z])
+    func updateLabels(){
+        guard let data = accelerometerService.motionManager.deviceMotion else { return }
+        guard playButton.isHidden else { return }
+        
+        self.xAxisValueLabel.text = String(data.userAcceleration.x * self.accelerometerService.gravity)
+        self.yAxisValueLabel.text = String(data.userAcceleration.y * self.accelerometerService.gravity)
+        self.zAxisValueLabel.text = String(data.userAcceleration.z * self.accelerometerService.gravity)
+        
     }
     
 }
