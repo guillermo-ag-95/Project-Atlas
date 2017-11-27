@@ -12,7 +12,15 @@ import AVFoundation
 
 class MainViewController: UIViewController {
     
-    let accelerometerService = AccelerometerService.shared
+    var motionManager = CMMotionManager()
+    var accelerometerXData: [Double] = []
+    var accelerometerYData: [Double] = []
+    var accelerometerZData: [Double] = []
+    
+    let systemSoundID: SystemSoundID = 1052 // SIMToolkitGeneralBeep.caf
+    let updatesIntervalOn = 0.01
+    let updatesIntervalOff = 0.1
+    let gravity = 9.81
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +45,35 @@ class MainViewController: UIViewController {
         pauseButton.isHidden = !pauseButton.isHidden
         
         // Updates the interval to avoid 100Hz when the app is paused.
-        accelerometerService.motionManager.deviceMotionUpdateInterval = playButton.isHidden ? accelerometerService.updatesIntervalOn : accelerometerService.updatesIntervalOff
+        self.motionManager.deviceMotionUpdateInterval = playButton.isHidden ? self.updatesIntervalOn : self.updatesIntervalOff
         
-        playButton.isHidden ? accelerometerService.startRecordData() : accelerometerService.stopRecordData()
+        playButton.isHidden ? startRecordData() : stopRecordData()
+    }
+    
+    func startRecordData(){
+        guard motionManager.isDeviceMotionAvailable else { return }
         
-        Timer.scheduledTimer(withTimeInterval: accelerometerService.motionManager.deviceMotionUpdateInterval, repeats: true) { (timer) in
-            self.updateLabels()
+        accelerometerXData.removeAll()
+        accelerometerYData.removeAll()
+        accelerometerZData.removeAll()
+        
+        motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { (data, error) in
+            if let data = data {
+                self.updateStoredData(data)
+                self.updateLabels()
+            }
         }
+    }
+    
+    func stopRecordData(){
+        guard motionManager.isDeviceMotionAvailable else { return }
+        motionManager.stopDeviceMotionUpdates()
+    }
+    
+    func updateStoredData(_ data: CMDeviceMotion){
+        accelerometerXData.append(data.userAcceleration.x * gravity)
+        accelerometerYData.append(data.userAcceleration.y * gravity)
+        accelerometerZData.append(data.userAcceleration.z * gravity)
     }
     
     func initializeInterface(){
@@ -62,13 +92,13 @@ class MainViewController: UIViewController {
     }
     
     func updateLabels(){
-        guard let data = accelerometerService.motionManager.deviceMotion else { return }
-        guard playButton.isHidden else { return }
-        
-        self.xAxisValueLabel.text = String(data.userAcceleration.x * self.accelerometerService.gravity)
-        self.yAxisValueLabel.text = String(data.userAcceleration.y * self.accelerometerService.gravity)
-        self.zAxisValueLabel.text = String(data.userAcceleration.z * self.accelerometerService.gravity)
-        
+        self.xAxisValueLabel.text = String(accelerometerXData.last!)
+        self.yAxisValueLabel.text = String(accelerometerYData.last!)
+        self.zAxisValueLabel.text = String(accelerometerZData.last!)
+    }
+    
+    func playSound(){
+        AudioServicesPlaySystemSound(systemSoundID)
     }
     
 }
