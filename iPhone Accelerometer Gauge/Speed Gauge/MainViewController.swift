@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  iPhone Accelerometer Gauge
+//  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 16/11/17.
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
