@@ -32,52 +32,52 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Hb-Fv-fOW">
-                                <rect key="frame" x="92.5" y="147.5" width="190" height="372"/>
+                                <rect key="frame" x="124" y="147.5" width="127.5" height="372"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acceleration:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fo-t5-fat">
-                                        <rect key="frame" x="0.0" y="0.0" width="190" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fo-t5-fat">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acceleration value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW3-3f-fQW">
-                                        <rect key="frame" x="0.0" y="49" width="190" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW3-3f-fQW">
+                                        <rect key="frame" x="0.0" y="49" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X Axis:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tA-6M-lfQ">
-                                        <rect key="frame" x="0.0" y="98" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="98" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X Axis value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DO6-FH-Qmx">
-                                        <rect key="frame" x="0.0" y="147" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="147" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y Axis:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geJ-yB-iZB">
-                                        <rect key="frame" x="0.0" y="196" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="196" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y Axis value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLm-6P-b1I">
-                                        <rect key="frame" x="0.0" y="245" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="245" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z Axis:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVG-lS-CVv">
-                                        <rect key="frame" x="0.0" y="294" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="294" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z Axis value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31C-oP-bZv">
-                                        <rect key="frame" x="0.0" y="343" width="190" height="29"/>
+                                        <rect key="frame" x="0.0" y="343" width="127.5" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -97,10 +97,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="accelerationTextLabel" destination="7fo-t5-fat" id="HpR-fd-97H"/>
-                        <outlet property="accelerationValueLabel" destination="iW3-3f-fQW" id="Uhr-Eb-zMH"/>
                         <outlet property="pauseButton" destination="0ZH-Rp-USp" id="sR4-TS-jTA"/>
                         <outlet property="playButton" destination="Ru4-PQ-tac" id="5c7-AR-WmL"/>
+                        <outlet property="speedTextLabel" destination="7fo-t5-fat" id="C32-1h-qeg"/>
+                        <outlet property="speedValueLabel" destination="iW3-3f-fQW" id="XcX-f7-HHB"/>
                         <outlet property="xAxisTextLabel" destination="7tA-6M-lfQ" id="6ML-gj-4nB"/>
                         <outlet property="xAxisValueLabel" destination="DO6-FH-Qmx" id="p1v-3g-ctm"/>
                         <outlet property="yAxisTextLabel" destination="geJ-yB-iZB" id="1Dg-B0-lQG"/>
