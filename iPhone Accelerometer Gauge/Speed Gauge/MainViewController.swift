@@ -36,12 +36,18 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var speedTextLabel: UILabel!
     @IBOutlet weak var speedValueLabel: UILabel!
-    @IBOutlet weak var xAxisTextLabel: UILabel!
-    @IBOutlet weak var yAxisTextLabel: UILabel!
-    @IBOutlet weak var zAxisTextLabel: UILabel!
-    @IBOutlet weak var xAxisValueLabel: UILabel!
-    @IBOutlet weak var yAxisValueLabel: UILabel!
-    @IBOutlet weak var zAxisValueLabel: UILabel!
+    @IBOutlet weak var accelerationXTextLabel: UILabel!
+    @IBOutlet weak var accelerationYTextLabel: UILabel!
+    @IBOutlet weak var accelerationZTextLabel: UILabel!
+    @IBOutlet weak var accelerationXValueLabel: UILabel!
+    @IBOutlet weak var accelerationYValueLabel: UILabel!
+    @IBOutlet weak var accelerationZValueLabel: UILabel!
+    @IBOutlet weak var velocityXTextLabel: UILabel!
+    @IBOutlet weak var velocityYTextLabel: UILabel!
+    @IBOutlet weak var velocityZTextLabel: UILabel!
+    @IBOutlet weak var velocityXValueLabel: UILabel!
+    @IBOutlet weak var velocityYValueLabel: UILabel!
+    @IBOutlet weak var velocityZValueLabel: UILabel!
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
@@ -86,18 +92,36 @@ class MainViewController: UIViewController {
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
+        
         accelerometerXData.append(data.userAcceleration.x * gravity)
         accelerometerYData.append(data.userAcceleration.y * gravity)
         accelerometerZData.append(data.userAcceleration.z * gravity)
         
+        calculateVelocityByAccelerationDefinition()
+    }
+    
+    func calculateVelocityByAccelerationDefinition(){
         // Vi = Vi-1 + ai*t
+        // https://www.wired.com/story/iphone-accelerometer-physics/
         let newXVelocity = velocityXData.last! + accelerometerXData.last! * updatesIntervalOn
         let newYVelocity = velocityYData.last! + accelerometerYData.last! * updatesIntervalOn
         let newZVelocity = velocityZData.last! + accelerometerZData.last! * updatesIntervalOn
-
+        
         velocityXData.append(newXVelocity)
         velocityYData.append(newYVelocity)
         velocityZData.append(newZVelocity)
+    }
+    
+    func calculateVelocityByIntegration(){
+        // https://www.nxp.com/docs/en/application-note/AN3397.pdf
+        
+        let newXVelocity: Double
+        let newYVelocity: Double
+        let newZVelocity: Double
+                
+        // velocityXData.append(newXVelocity)
+        // velocityYData.append(newYVelocity)
+        // velocityZData.append(newZVelocity)
     }
     
     func initializeInterface(){
@@ -105,20 +129,32 @@ class MainViewController: UIViewController {
         pauseButton.isHidden = true
         
         speedTextLabel.text = "Speed"
-        xAxisTextLabel.text = "X Axis:"
-        yAxisTextLabel.text = "Y Axis:"
-        zAxisTextLabel.text = "Z Axis:"
+        accelerationXTextLabel.text = "Acceleration X Axis:"
+        accelerationYTextLabel.text = "Acceleration Y Axis:"
+        accelerationZTextLabel.text = "Acceleration Z Axis:"
         
         speedValueLabel.text = nil
-        xAxisValueLabel.text = nil
-        yAxisValueLabel.text = nil
-        zAxisValueLabel.text = nil
+        accelerationXValueLabel.text = nil
+        accelerationYValueLabel.text = nil
+        accelerationZValueLabel.text = nil
+        
+        velocityXTextLabel.text = "Velocity X Axis:"
+        velocityYTextLabel.text = "Velocity Y Axis:"
+        velocityZTextLabel.text = "Velocity Z Axis:"
+        
+        velocityXValueLabel.text = nil
+        velocityYValueLabel.text = nil
+        velocityZValueLabel.text = nil
     }
     
     func updateLabels(){
-        self.xAxisValueLabel.text = String(format: "%.2f", arguments: [accelerometerXData.last!])
-        self.yAxisValueLabel.text = String(format: "%.2f", arguments: [accelerometerYData.last!])
-        self.zAxisValueLabel.text = String(format: "%.2f", arguments: [accelerometerZData.last!])
+        self.accelerationXValueLabel.text = String(format: "%.2f", arguments: [accelerometerXData.last!])
+        self.accelerationYValueLabel.text = String(format: "%.2f", arguments: [accelerometerYData.last!])
+        self.accelerationZValueLabel.text = String(format: "%.2f", arguments: [accelerometerZData.last!])
+        
+        self.velocityXValueLabel.text = String(format: "%.2f", arguments: [velocityXData.last!])
+        self.velocityYValueLabel.text = String(format: "%.2f", arguments: [velocityYData.last!])
+        self.velocityZValueLabel.text = String(format: "%.2f", arguments: [velocityZData.last!])
         
         let velocity = sqrt(pow(velocityXData.last!, 2) + pow(velocityYData.last!, 2) + pow(velocityZData.last!, 2))
         self.speedValueLabel.text = String(format: "%.2f", arguments: [velocity])
