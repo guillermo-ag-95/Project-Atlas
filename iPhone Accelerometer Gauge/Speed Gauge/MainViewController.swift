@@ -98,14 +98,14 @@ class MainViewController: UIViewController {
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
-        var newXAcceleration = data.userAcceleration.x
-        var newYAcceleration = data.userAcceleration.y
-        var newZAcceleration = data.userAcceleration.z
+        var newXAcceleration = data.userAcceleration.x * self.gravity
+        var newYAcceleration = data.userAcceleration.y * self.gravity
+        var newZAcceleration = data.userAcceleration.z * self.gravity
         
         // Filter
-        if abs(newXAcceleration) < 0.01 { newXAcceleration = 0 }
-        if abs(newYAcceleration) < 0.01 { newYAcceleration = 0 }
-        if abs(newZAcceleration) < 0.01 { newZAcceleration = 0 }
+        if abs(newXAcceleration) < 0.05 { newXAcceleration = 0 }
+        if abs(newYAcceleration) < 0.05 { newYAcceleration = 0 }
+        if abs(newZAcceleration) < 0.05 { newZAcceleration = 0 }
         
         // Velocity calculation
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
