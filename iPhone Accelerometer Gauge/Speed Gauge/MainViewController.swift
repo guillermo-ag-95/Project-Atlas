@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
     
+    var speedData: [Double] = []
+    
     let updatesIntervalOn = 0.01
     let updatesIntervalOff = 0.1
     let gravity = 9.81
@@ -92,6 +94,9 @@ class MainViewController: UIViewController {
         velocityYData.append(0)
         velocityZData.removeAll()
         velocityZData.append(0)
+        
+        speedData.removeAll()
+        speedData.append(0)
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -107,19 +112,24 @@ class MainViewController: UIViewController {
         if abs(newYAcceleration) < 0.05 { newYAcceleration = 0 }
         if abs(newZAcceleration) < 0.05 { newZAcceleration = 0 }
         
-        // Velocity calculation
+        // Velocity calculation by Integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
         let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
         
+        let newSpeed = sqrt(pow(newXVelocity, 2) + pow(newYVelocity, 2) + pow(newZVelocity, 2))
+        
         // Data storage
+        accelerometerXData.append(newXAcceleration)
+        accelerometerYData.append(newYAcceleration)
+        accelerometerZData.append(newZAcceleration)
+        
         velocityXData.append(newXVelocity)
         velocityYData.append(newYVelocity)
         velocityZData.append(newZVelocity)
         
-        accelerometerXData.append(newXAcceleration)
-        accelerometerYData.append(newYAcceleration)
-        accelerometerZData.append(newZAcceleration)
+        speedData.append(newSpeed)
+        
     }
     
     func initializeInterface(){
@@ -154,8 +164,7 @@ class MainViewController: UIViewController {
         self.velocityYValueLabel.text = String(format: "%.4f", arguments: [velocityYData.last!])
         self.velocityZValueLabel.text = String(format: "%.4f", arguments: [velocityZData.last!])
         
-        let velocity = sqrt(pow(velocityXData.last!, 2) + pow(velocityYData.last!, 2) + pow(velocityZData.last!, 2))
-        self.speedValueLabel.text = String(format: "%.4f", arguments: [velocity])
+        self.speedValueLabel.text = String(format: "%.4f", arguments: [speedData.last!])
     }
     
     func playSound(){
