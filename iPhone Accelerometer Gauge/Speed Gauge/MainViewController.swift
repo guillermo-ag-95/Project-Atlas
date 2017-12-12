@@ -112,23 +112,28 @@ class MainViewController: UIViewController {
         if abs(newYAcceleration) < 0.05 { newYAcceleration = 0 }
         if abs(newZAcceleration) < 0.05 { newZAcceleration = 0 }
         
-        // Velocity calculation by Integration
+        // Instant velocity calculation by Integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
         let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
         
-        let newSpeed = sqrt(pow(newXVelocity, 2) + pow(newYVelocity, 2) + pow(newZVelocity, 2))
+        // Current velocity by cumulative velocities.
+        let currentXVelocity = velocityXData.last! + newXVelocity
+        let currentYVelocity = velocityYData.last! + newYVelocity
+        let currentZVelocity = velocityZData.last! + newZVelocity
+
+        let currentSpeed = sqrt(pow(currentXVelocity, 2) + pow(currentYVelocity, 2) + pow(currentZVelocity, 2))
         
         // Data storage
         accelerometerXData.append(newXAcceleration)
         accelerometerYData.append(newYAcceleration)
         accelerometerZData.append(newZAcceleration)
         
-        velocityXData.append(newXVelocity)
-        velocityYData.append(newYVelocity)
-        velocityZData.append(newZVelocity)
+        velocityXData.append(currentXVelocity)
+        velocityYData.append(currentYVelocity)
+        velocityZData.append(currentZVelocity)
         
-        speedData.append(newSpeed)
+        speedData.append(currentSpeed)
         
     }
     
