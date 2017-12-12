@@ -24,8 +24,8 @@ class MainViewController: UIViewController {
     
     var speedData: [Double] = []
     
-    let updatesIntervalOn = 0.01
-    let updatesIntervalOff = 0.1
+    let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
+    let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
 
     override func viewDidLoad() {
