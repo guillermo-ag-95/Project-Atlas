@@ -30,26 +30,46 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeInterface() // Include labels and buttons.
-    }
+        
+        // Addition of the UI Elements.
+        view.addSubview(playButton)
+        view.addSubview(pauseButton)
+        
+        view.addSubview(mainStackView)
+        
+        mainStackView.addArrangedSubview(textStackView)
+        mainStackView.addArrangedSubview(valuesStackView)
+        
+        textStackView.addArrangedSubview(speedTextLabel)
+        textStackView.addArrangedSubview(accelerationXTextLabel)
+        textStackView.addArrangedSubview(accelerationYTextLabel)
+        textStackView.addArrangedSubview(accelerationZTextLabel)
+        textStackView.addArrangedSubview(velocityXTextLabel)
+        textStackView.addArrangedSubview(velocityYTextLabel)
+        textStackView.addArrangedSubview(velocityZTextLabel)
+        
+        valuesStackView.addArrangedSubview(speedValueLabel)
+        valuesStackView.addArrangedSubview(accelerationXValueLabel)
+        valuesStackView.addArrangedSubview(accelerationYValueLabel)
+        valuesStackView.addArrangedSubview(accelerationZValueLabel)
+        valuesStackView.addArrangedSubview(velocityXValueLabel)
+        valuesStackView.addArrangedSubview(velocityYValueLabel)
+        valuesStackView.addArrangedSubview(velocityZValueLabel)
 
-    @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var pauseButton: UIButton!
+        view.setNeedsUpdateConstraints()
+    }
     
-    @IBOutlet weak var speedTextLabel: UILabel!
-    @IBOutlet weak var speedValueLabel: UILabel!
-    @IBOutlet weak var accelerationXTextLabel: UILabel!
-    @IBOutlet weak var accelerationYTextLabel: UILabel!
-    @IBOutlet weak var accelerationZTextLabel: UILabel!
-    @IBOutlet weak var accelerationXValueLabel: UILabel!
-    @IBOutlet weak var accelerationYValueLabel: UILabel!
-    @IBOutlet weak var accelerationZValueLabel: UILabel!
-    @IBOutlet weak var velocityXTextLabel: UILabel!
-    @IBOutlet weak var velocityYTextLabel: UILabel!
-    @IBOutlet weak var velocityZTextLabel: UILabel!
-    @IBOutlet weak var velocityXValueLabel: UILabel!
-    @IBOutlet weak var velocityYValueLabel: UILabel!
-    @IBOutlet weak var velocityZValueLabel: UILabel!
+    override func updateViewConstraints() {
+        // Addition of custom constraints.
+        playPauseButtonContraints(button: playButton)
+        playPauseButtonContraints(button: pauseButton)
+        
+        mainStackConstraints()
+        textStackConstraints()
+        valuesStackConstraints()
+
+        super.updateViewConstraints()
+    }
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
@@ -137,28 +157,7 @@ class MainViewController: UIViewController {
         
     }
     
-    func initializeInterface(){
-        playButton.isHidden = false
-        pauseButton.isHidden = true
-        
-        speedTextLabel.text = "Speed"
-        accelerationXTextLabel.text = "Acceleration X Axis:"
-        accelerationYTextLabel.text = "Acceleration Y Axis:"
-        accelerationZTextLabel.text = "Acceleration Z Axis:"
-        
-        speedValueLabel.text = nil
-        accelerationXValueLabel.text = nil
-        accelerationYValueLabel.text = nil
-        accelerationZValueLabel.text = nil
-        
-        velocityXTextLabel.text = "Velocity X Axis:"
-        velocityYTextLabel.text = "Velocity Y Axis:"
-        velocityZTextLabel.text = "Velocity Z Axis:"
-        
-        velocityXValueLabel.text = nil
-        velocityYValueLabel.text = nil
-        velocityZValueLabel.text = nil
-    }
+    // INTERFACE UPDATES
     
     func updateLabels(){
         self.accelerationXValueLabel.text = String(format: "%.4f", arguments: [accelerometerXData.last!])
@@ -171,6 +170,207 @@ class MainViewController: UIViewController {
         
         self.speedValueLabel.text = String(format: "%.4f", arguments: [speedData.last!])
     }
+    
+    // MARK: - INTERFACE DECLARATION
+    
+    lazy var playButton: UIButton! = {
+        let view = UIButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed(_:)), for: .touchDown)
+        view.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        view.backgroundColor = UIColor.white
+        view.isHidden = false
+       return view
+    }()
+    
+    lazy var pauseButton: UIButton! = {
+        let view = UIButton()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(MainViewController.playPauseButtonPressed(_:)), for: .touchDown)
+        view.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        view.backgroundColor = UIColor.white
+        view.isHidden = true
+        return view
+    }()
+    
+    lazy var speedTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Speed"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var speedValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var accelerationXTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Acceleration X Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var accelerationYTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Acceleration Y Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var accelerationZTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Acceleration Z Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var accelerationXValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var accelerationYValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var accelerationZValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var velocityXTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Velocity X Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var velocityYTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Velocity Y Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var velocityZTextLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = "Velocity Z Axis:"
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        return view
+    }()
+    
+    lazy var velocityXValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var velocityYValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var velocityZValueLabel: UILabel! = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.text = nil
+        view.textAlignment = .center
+        return view
+    }()
+    
+    lazy var mainStackView: UIStackView! = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .center
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        view.spacing = 0.0
+        return view
+    }()
+    
+    lazy var textStackView: UIStackView! = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .center
+        view.axis = .vertical
+        view.distribution = .equalSpacing
+        view.spacing = 0.0
+        return view
+    }()
+    
+    lazy var valuesStackView: UIStackView! = {
+        let view = UIStackView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alignment = .center
+        view.axis = .vertical
+        view.distribution = .equalSpacing
+        view.spacing = 0.0
+        return view
+    }()
+    
+    // MARK: - INTERFACE CONSTRAINTS
+
+    func playPauseButtonContraints(button: UIButton){
+        NSLayoutConstraint(item: button, attribute: .centerX, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .centerX, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: button, attribute: .bottom, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .bottom, multiplier: 0.95, constant: 0.0).isActive = true
+    }
+    
+    func mainStackConstraints(){
+        NSLayoutConstraint(item: mainStackView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: mainStackView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1.0, constant: 16.0).isActive = true
+        NSLayoutConstraint(item: mainStackView, attribute: .trailing, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: mainStackView, attribute: .bottom, relatedBy: .equal, toItem: playButton, attribute: .top, multiplier: 0.95, constant: 0.0).isActive = true
+    }
+    
+    func textStackConstraints(){
+        NSLayoutConstraint(item: textStackView, attribute: .leading, relatedBy: .equal, toItem: mainStackView, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: textStackView, attribute: .top, relatedBy: .equal, toItem: mainStackView, attribute: .top, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: textStackView, attribute: .bottom, relatedBy: .equal, toItem: mainStackView, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: textStackView, attribute: .width, relatedBy: .equal, toItem: mainStackView, attribute: .width, multiplier: 0.55, constant: 0.0).isActive = true
+    }
+    
+    func valuesStackConstraints(){
+        NSLayoutConstraint(item: valuesStackView, attribute: .trailing, relatedBy: .equal, toItem: mainStackView, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: valuesStackView, attribute: .top, relatedBy: .equal, toItem: mainStackView, attribute: .top, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: valuesStackView, attribute: .bottom, relatedBy: .equal, toItem: mainStackView, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: valuesStackView, attribute: .width, relatedBy: .equal, toItem: mainStackView, attribute: .width, multiplier: 0.45, constant: 0.0).isActive = true
+    }
+    
+    // MARK: - ANCILLARY FUNCTIONS
     
     func playSound(){
         AudioServicesPlaySystemSound(1052) // SIMToolkitGeneralBeep.caf
