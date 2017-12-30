@@ -79,6 +79,20 @@ class MainViewController: UIViewController {
     func stopRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
+        
+        print("X-Acceleration: \(accelerometerXData)")
+        print("X-Velocity: \(velocityXData)")
+        print("")
+        
+        print("Y-Acceleration: \(accelerometerYData)")
+        print("Y-Velocity: \(velocityYData)")
+        print("")
+        
+        print("Z-Acceleration: \(accelerometerZData)")
+        print("Z-Velocity: \(velocityZData)")
+        print("")
+
+        print("Speed: \(speedData)")
     }
     
     func initializeStoredData(){
@@ -177,6 +191,8 @@ class MainViewController: UIViewController {
         
         self.speedValueLabel.text = String(format: "%.4f", arguments: [speedData.last!])
     }
+    
+    // MARK: NAVIGATION
     
     // MARK: - ANCILLARY FUNCTIONS
     
