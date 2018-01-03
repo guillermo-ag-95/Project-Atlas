@@ -24,6 +24,10 @@ class MainViewController: UIViewController {
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
     
+    var velocityXDataset: LineChartDataSet = LineChartDataSet()
+    var velocityYDataset: LineChartDataSet = LineChartDataSet()
+    var velocityZDataset: LineChartDataSet = LineChartDataSet()
+    
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
@@ -81,6 +85,10 @@ class MainViewController: UIViewController {
         velocityZData.removeAll()
         velocityZData.append(0)
         
+        velocityXDataset.values.removeAll()
+        velocityYDataset.values.removeAll()
+        velocityZDataset.values.removeAll()
+
         lineChartGraph.clear()
     }
     
@@ -115,7 +123,16 @@ class MainViewController: UIViewController {
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
-                
+        
+        // Velocity added to Chart Dataset
+        let entryX = ChartDataEntry(x: Double(velocityXData.count - 1) / 100, y: currentXVelocity)
+        let entryY = ChartDataEntry(x: Double(velocityYData.count - 1) / 100, y: currentYVelocity)
+        let entryZ = ChartDataEntry(x: Double(velocityZData.count - 1) / 100, y: currentZVelocity)
+        
+        velocityXDataset.values.append(entryX)
+        velocityYDataset.values.append(entryY)
+        velocityZDataset.values.append(entryZ)
+
     }
     
     // INTERFACE UPDATES
@@ -127,53 +144,25 @@ class MainViewController: UIViewController {
     }
     
     func updateGraph(){
-        let velocityXdataset: LineChartDataSet = LineChartDataSet()
-        let velocityYdataset: LineChartDataSet = LineChartDataSet()
-        let velocityZdataset: LineChartDataSet = LineChartDataSet()
-
-        velocityXdataset.label = "X - Axis"
-        velocityXdataset.colors = [NSUIColor.red]
-        velocityXdataset.setCircleColor(NSUIColor.red)
-        velocityXdataset.circleRadius = 1
-        velocityXdataset.circleHoleRadius = 1
+        velocityXDataset.label = "X - Axis"
+        velocityXDataset.colors = [NSUIColor.red]
+        velocityXDataset.setCircleColor(NSUIColor.red)
+        velocityXDataset.circleRadius = 1
+        velocityXDataset.circleHoleRadius = 1
         
-        velocityYdataset.label = "Y - Axis"
-        velocityYdataset.colors = [NSUIColor.green]
-        velocityYdataset.setCircleColor(NSUIColor.green)
-        velocityYdataset.circleRadius = 1
-        velocityYdataset.circleHoleRadius = 1
+        velocityYDataset.label = "Y - Axis"
+        velocityYDataset.colors = [NSUIColor.green]
+        velocityYDataset.setCircleColor(NSUIColor.green)
+        velocityYDataset.circleRadius = 1
+        velocityYDataset.circleHoleRadius = 1
         
-        velocityZdataset.label = "Z - Axis"
-        velocityZdataset.colors = [NSUIColor.blue]
-        velocityZdataset.setCircleColor(NSUIColor.blue)
-        velocityZdataset.circleRadius = 1
-        velocityZdataset.circleHoleRadius = 1
+        velocityZDataset.label = "Z - Axis"
+        velocityZDataset.colors = [NSUIColor.blue]
+        velocityZDataset.setCircleColor(NSUIColor.blue)
+        velocityZDataset.circleRadius = 1
+        velocityZDataset.circleHoleRadius = 1
         
-        var x: Double = 0.0
-        
-        for velocityX in velocityXData {
-            let entry = ChartDataEntry(x: x, y: velocityX)
-            velocityXdataset.values.append(entry)
-            x += updatesIntervalOn
-        }
-        
-        x = 0.0
-        
-        for velocityY in velocityYData {
-            let entry = ChartDataEntry(x: x, y: velocityY)
-            velocityYdataset.values.append(entry)
-            x += updatesIntervalOn
-        }
-        
-        x = 0.0
-
-        for velocityZ in velocityZData {
-            let entry = ChartDataEntry(x: x, y: velocityZ)
-            velocityZdataset.values.append(entry)
-            x += updatesIntervalOn
-        }
-        
-        let data: LineChartData = LineChartData(dataSets: [velocityXdataset, velocityYdataset, velocityZdataset])
+        let data: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
         lineChartGraph.data = data
         
         lineChartGraph.notifyDataSetChanged()
