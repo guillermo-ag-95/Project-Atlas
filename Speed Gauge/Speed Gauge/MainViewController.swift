@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreMotion
+import Charts
+
 import AVFoundation
 
 class MainViewController: UIViewController {
@@ -22,35 +24,18 @@ class MainViewController: UIViewController {
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
     
-    var speedData: [Double] = []
-    
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeLabels()
+        initializeInterface()
     }
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
-    
-    @IBOutlet weak var speedTextLabel: UILabel!
-    @IBOutlet weak var accelerationXTextLabel: UILabel!
-    @IBOutlet weak var accelerationYTextLabel: UILabel!
-    @IBOutlet weak var accelerationZTextLabel: UILabel!
-    @IBOutlet weak var velocityXTextLabel: UILabel!
-    @IBOutlet weak var velocityYTextLabel: UILabel!
-    @IBOutlet weak var velocityZTextLabel: UILabel!
-    
-    @IBOutlet weak var speedValueLabel: UILabel!
-    @IBOutlet weak var accelerationXValueLabel: UILabel!
-    @IBOutlet weak var accelerationYValueLabel: UILabel!
-    @IBOutlet weak var accelerationZValueLabel: UILabel!
-    @IBOutlet weak var velocityXValueLabel: UILabel!
-    @IBOutlet weak var velocityYValueLabel: UILabel!
-    @IBOutlet weak var velocityZValueLabel: UILabel!
+    @IBOutlet weak var lineChartGraph: LineChartView!
     
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
@@ -71,7 +56,6 @@ class MainViewController: UIViewController {
         motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { (data, error) in
             if let data = data {
                 self.updateStoredData(data)
-                self.updateLabels()
             }
         }
     }
@@ -79,6 +63,7 @@ class MainViewController: UIViewController {
     func stopRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
+        updateGraph()
     }
     
     func initializeStoredData(){
@@ -96,8 +81,7 @@ class MainViewController: UIViewController {
         velocityZData.removeAll()
         velocityZData.append(0)
         
-        speedData.removeAll()
-        speedData.append(0)
+        lineChartGraph.clear()
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -122,8 +106,6 @@ class MainViewController: UIViewController {
         let currentXVelocity = velocityXData.last! + newXVelocity
         let currentYVelocity = velocityYData.last! + newYVelocity
         let currentZVelocity = velocityZData.last! + newZVelocity
-
-        let currentSpeed = sqrt(pow(currentXVelocity, 2) + pow(currentYVelocity, 2) + pow(currentZVelocity, 2))
         
         // Data storage
         accelerometerXData.append(newXAcceleration)
@@ -133,49 +115,69 @@ class MainViewController: UIViewController {
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
-        
-        speedData.append(currentSpeed)
-        
+                
     }
     
     // INTERFACE UPDATES
-    
-    func initializeLabels(){
+    func initializeInterface(){
         playButton.isHidden = false
         pauseButton.isHidden = true
         
-        self.speedTextLabel.text = "Speed"
-        
-        self.accelerationXTextLabel.text = "X-Acceleration"
-        self.accelerationYTextLabel.text = "Y-Acceleration"
-        self.accelerationZTextLabel.text = "Z-Acceleration"
-        
-        self.velocityXTextLabel.text = "X-Velocity"
-        self.velocityYTextLabel.text = "Y=Velocity"
-        self.velocityZTextLabel.text = "Z-Velocity"
-        
-        self.speedValueLabel.text = nil
-        
-        self.accelerationXValueLabel.text = nil
-        self.accelerationYValueLabel.text = nil
-        self.accelerationZValueLabel.text = nil
-        
-        self.velocityXValueLabel.text = nil
-        self.velocityYValueLabel.text = nil
-        self.velocityZValueLabel.text = nil
-
+        lineChartGraph.chartDescription?.text = "Velocity by axis"
     }
     
-    func updateLabels(){
-        self.accelerationXValueLabel.text = String(format: "%.4f", arguments: [accelerometerXData.last!])
-        self.accelerationYValueLabel.text = String(format: "%.4f", arguments: [accelerometerYData.last!])
-        self.accelerationZValueLabel.text = String(format: "%.4f", arguments: [accelerometerZData.last!])
+    func updateGraph(){
+        let velocityXdataset: LineChartDataSet = LineChartDataSet()
+        let velocityYdataset: LineChartDataSet = LineChartDataSet()
+        let velocityZdataset: LineChartDataSet = LineChartDataSet()
+
+        velocityXdataset.label = "X - Axis"
+        velocityXdataset.colors = [NSUIColor.red]
+        velocityXdataset.setCircleColor(NSUIColor.red)
+        velocityXdataset.circleRadius = 1
+        velocityXdataset.circleHoleRadius = 1
         
-        self.velocityXValueLabel.text = String(format: "%.4f", arguments: [velocityXData.last!])
-        self.velocityYValueLabel.text = String(format: "%.4f", arguments: [velocityYData.last!])
-        self.velocityZValueLabel.text = String(format: "%.4f", arguments: [velocityZData.last!])
+        velocityYdataset.label = "Y - Axis"
+        velocityYdataset.colors = [NSUIColor.green]
+        velocityYdataset.setCircleColor(NSUIColor.green)
+        velocityYdataset.circleRadius = 1
+        velocityYdataset.circleHoleRadius = 1
         
-        self.speedValueLabel.text = String(format: "%.4f", arguments: [speedData.last!])
+        velocityZdataset.label = "Z - Axis"
+        velocityZdataset.colors = [NSUIColor.blue]
+        velocityZdataset.setCircleColor(NSUIColor.blue)
+        velocityZdataset.circleRadius = 1
+        velocityZdataset.circleHoleRadius = 1
+        
+        var x: Double = 0.0
+        
+        for velocityX in velocityXData {
+            let entry = ChartDataEntry(x: x, y: velocityX)
+            velocityXdataset.values.append(entry)
+            x += updatesIntervalOn
+        }
+        
+        x = 0.0
+        
+        for velocityY in velocityYData {
+            let entry = ChartDataEntry(x: x, y: velocityY)
+            velocityYdataset.values.append(entry)
+            x += updatesIntervalOn
+        }
+        
+        x = 0.0
+
+        for velocityZ in velocityZData {
+            let entry = ChartDataEntry(x: x, y: velocityZ)
+            velocityZdataset.values.append(entry)
+            x += updatesIntervalOn
+        }
+        
+        let data: LineChartData = LineChartData(dataSets: [velocityXdataset, velocityYdataset, velocityZdataset])
+        lineChartGraph.data = data
+        
+        lineChartGraph.notifyDataSetChanged()
+        
     }
     
     // MARK: NAVIGATION

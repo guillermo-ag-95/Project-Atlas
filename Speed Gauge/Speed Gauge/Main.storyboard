@@ -39,137 +39,28 @@
                                     <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="5ib-GB-wBA"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3it-yo-Khd">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ncI-cr-gO6" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="16" y="20" width="343" height="559"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oit-cN-dTQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="559"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y94-ME-Ppp">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X-Acceleration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an2-mE-hkw">
-                                                <rect key="frame" x="0.0" y="80" width="171.5" height="79.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y-Acceleration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59i-vd-tfR">
-                                                <rect key="frame" x="0.0" y="159.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z-Acceleration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myu-3R-gju">
-                                                <rect key="frame" x="0.0" y="239.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X-Velocity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39v-qk-R8I">
-                                                <rect key="frame" x="0.0" y="319.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y-Velocity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqc-PW-Pbs">
-                                                <rect key="frame" x="0.0" y="399.5" width="171.5" height="79.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z-Velocity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esy-sr-tgu">
-                                                <rect key="frame" x="0.0" y="479" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="otK-yo-eG9">
-                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="559"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ir-GE-n0T">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X-Acceleration value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v0-SD-t4b">
-                                                <rect key="frame" x="0.0" y="80" width="171.5" height="79.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y-Acceleration value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCD-EM-dfe">
-                                                <rect key="frame" x="0.0" y="159.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z-Acceleration value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBw-yC-O6U">
-                                                <rect key="frame" x="0.0" y="239.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X-Velocity value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv9-cU-dgt">
-                                                <rect key="frame" x="0.0" y="319.5" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Y-Velocity value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWc-8p-Qcp">
-                                                <rect key="frame" x="0.0" y="399.5" width="171.5" height="79.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Z-Velocity value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHa-wi-t5t">
-                                                <rect key="frame" x="0.0" y="479" width="171.5" height="80"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="3it-yo-Khd" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="72x-lk-KNd"/>
+                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="ncI-cr-gO6" secondAttribute="trailing" constant="16" id="54N-8u-0ye"/>
+                            <constraint firstItem="ncI-cr-gO6" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" id="IhT-Bg-O1w"/>
+                            <constraint firstItem="ncI-cr-gO6" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Tje-qQ-rL0"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="uON-a0-ChI" secondAttribute="bottom" constant="20" id="Vmx-tT-GYo"/>
+                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="ncI-cr-gO6" secondAttribute="bottom" constant="8" id="WPd-Md-sPY"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="c9R-vI-dEO" secondAttribute="bottom" constant="20" id="X4G-kV-h4n"/>
-                            <constraint firstItem="3it-yo-Khd" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" id="aOo-vv-A0J"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="gcA-Tl-VhR"/>
                             <constraint firstItem="c9R-vI-dEO" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="pMj-fm-fCn"/>
-                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="3it-yo-Khd" secondAttribute="trailing" constant="16" id="quF-2x-k6w"/>
-                            <constraint firstItem="3it-yo-Khd" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="sUn-8S-EHe"/>
-                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="3it-yo-Khd" secondAttribute="bottom" constant="8" id="zuY-T6-bMK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZV7-gz-hBg"/>
                     </view>
                     <connections>
-                        <outlet property="accelerationXTextLabel" destination="an2-mE-hkw" id="JvH-og-66C"/>
-                        <outlet property="accelerationXValueLabel" destination="0v0-SD-t4b" id="9La-8o-Qkh"/>
-                        <outlet property="accelerationYTextLabel" destination="59i-vd-tfR" id="fFe-qR-s5K"/>
-                        <outlet property="accelerationYValueLabel" destination="oCD-EM-dfe" id="Myz-tR-uMY"/>
-                        <outlet property="accelerationZTextLabel" destination="Myu-3R-gju" id="yj5-3j-tIa"/>
-                        <outlet property="accelerationZValueLabel" destination="rBw-yC-O6U" id="ocU-N4-k6f"/>
+                        <outlet property="lineChartGraph" destination="ncI-cr-gO6" id="t9d-IY-QVS"/>
                         <outlet property="pauseButton" destination="c9R-vI-dEO" id="Rkc-fC-Xwz"/>
                         <outlet property="playButton" destination="uON-a0-ChI" id="srq-KD-0hg"/>
-                        <outlet property="speedTextLabel" destination="Y94-ME-Ppp" id="M5b-yU-Yoq"/>
-                        <outlet property="speedValueLabel" destination="6Ir-GE-n0T" id="RtG-XD-8iH"/>
-                        <outlet property="velocityXTextLabel" destination="39v-qk-R8I" id="dtE-xd-nMF"/>
-                        <outlet property="velocityXValueLabel" destination="Vv9-cU-dgt" id="hWz-M7-WGW"/>
-                        <outlet property="velocityYTextLabel" destination="Mqc-PW-Pbs" id="d07-Xh-mer"/>
-                        <outlet property="velocityYValueLabel" destination="oWc-8p-Qcp" id="cgd-qA-Yvd"/>
-                        <outlet property="velocityZTextLabel" destination="Esy-sr-tgu" id="Nj0-Mm-7UG"/>
-                        <outlet property="velocityZValueLabel" destination="MHa-wi-t5t" id="9U0-nT-L1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0h-xA-C95" userLabel="First Responder" sceneMemberID="firstResponder"/>
