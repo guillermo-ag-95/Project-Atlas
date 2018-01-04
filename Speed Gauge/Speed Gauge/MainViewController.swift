@@ -24,6 +24,10 @@ class MainViewController: UIViewController {
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
     
+    var accelerometerXDataset: LineChartDataSet = LineChartDataSet()
+    var accelerometerYDataset: LineChartDataSet = LineChartDataSet()
+    var accelerometerZDataset: LineChartDataSet = LineChartDataSet()
+    
     var velocityXDataset: LineChartDataSet = LineChartDataSet()
     var velocityYDataset: LineChartDataSet = LineChartDataSet()
     var velocityZDataset: LineChartDataSet = LineChartDataSet()
@@ -39,8 +43,10 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
-    @IBOutlet weak var lineChartGraph: LineChartView!
-    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var accelerationLineChartGraph: LineChartView!
+    @IBOutlet weak var velocityLineChartGraph: LineChartView!
+
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
         playButton.isHidden = !playButton.isHidden
@@ -85,11 +91,16 @@ class MainViewController: UIViewController {
         velocityZData.removeAll()
         velocityZData.append(0)
         
+        accelerometerXDataset.values.removeAll()
+        accelerometerYDataset.values.removeAll()
+        accelerometerZDataset.values.removeAll()
+
         velocityXDataset.values.removeAll()
         velocityYDataset.values.removeAll()
         velocityZDataset.values.removeAll()
 
-        lineChartGraph.clear()
+        accelerationLineChartGraph.clear()
+        velocityLineChartGraph.clear()
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -124,14 +135,26 @@ class MainViewController: UIViewController {
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
         
-        // Velocity added to Chart Dataset
-        let entryX = ChartDataEntry(x: Double(velocityXData.count - 1) / 100, y: currentXVelocity)
-        let entryY = ChartDataEntry(x: Double(velocityYData.count - 1) / 100, y: currentYVelocity)
-        let entryZ = ChartDataEntry(x: Double(velocityZData.count - 1) / 100, y: currentZVelocity)
+        // Current position in graft
+        let position: Double = Double(accelerometerXData.count - 1) / 100
         
-        velocityXDataset.values.append(entryX)
-        velocityYDataset.values.append(entryY)
-        velocityZDataset.values.append(entryZ)
+        // Acceleration added to Chart Dataset
+        let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
+        let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
+        let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
+        
+        accelerometerXDataset.values.append(entryXAcceleration)
+        accelerometerYDataset.values.append(entryYAcceleration)
+        accelerometerZDataset.values.append(entryZAcceleration)
+        
+        // Velocity added to Chart Dataset
+        let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
+        let entryYVelocity = ChartDataEntry(x: position, y: currentYVelocity)
+        let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
+        
+        velocityXDataset.values.append(entryXVelocity)
+        velocityYDataset.values.append(entryYVelocity)
+        velocityZDataset.values.append(entryZVelocity)
 
     }
     
@@ -140,10 +163,31 @@ class MainViewController: UIViewController {
         playButton.isHidden = false
         pauseButton.isHidden = true
         
-        lineChartGraph.chartDescription?.text = "Velocity by axis"
-    }
-    
-    func updateGraph(){
+        segmentedControl.setTitle("Acceleration Chart", forSegmentAt: 0)
+        segmentedControl.setTitle("Velocity Chart", forSegmentAt: 1)
+        segmentedControl.selectedSegmentIndex = 1
+
+        accelerationLineChartGraph.chartDescription?.text = "Acceleration by axis"
+        velocityLineChartGraph.chartDescription?.text = "Velocity by axis"
+        
+        accelerometerXDataset.label = "X - Axis"
+        accelerometerXDataset.colors = [NSUIColor.red]
+        accelerometerXDataset.setCircleColor(NSUIColor.red)
+        accelerometerXDataset.circleRadius = 1
+        accelerometerXDataset.circleHoleRadius = 1
+        
+        accelerometerYDataset.label = "Y - Axis"
+        accelerometerYDataset.colors = [NSUIColor.green]
+        accelerometerYDataset.setCircleColor(NSUIColor.green)
+        accelerometerYDataset.circleRadius = 1
+        accelerometerYDataset.circleHoleRadius = 1
+        
+        accelerometerZDataset.label = "Z - Axis"
+        accelerometerZDataset.colors = [NSUIColor.blue]
+        accelerometerZDataset.setCircleColor(NSUIColor.blue)
+        accelerometerZDataset.circleRadius = 1
+        accelerometerZDataset.circleHoleRadius = 1
+        
         velocityXDataset.label = "X - Axis"
         velocityXDataset.colors = [NSUIColor.red]
         velocityXDataset.setCircleColor(NSUIColor.red)
@@ -161,12 +205,31 @@ class MainViewController: UIViewController {
         velocityZDataset.setCircleColor(NSUIColor.blue)
         velocityZDataset.circleRadius = 1
         velocityZDataset.circleHoleRadius = 1
+    }
+    
+    func updateGraph(){
+        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
+        accelerationLineChartGraph.data = accelerationData
+        accelerationLineChartGraph.notifyDataSetChanged()
         
-        let data: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
-        lineChartGraph.data = data
+        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
+        velocityLineChartGraph.data = velocityData
+        velocityLineChartGraph.notifyDataSetChanged()
         
-        lineChartGraph.notifyDataSetChanged()
-        
+        segmentedControlChanged(segmentedControl)
+    }
+    
+    @IBAction func segmentedControlChanged(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            accelerationLineChartGraph.isHidden = false
+            velocityLineChartGraph.isHidden = true
+        case 1:
+            accelerationLineChartGraph.isHidden = true
+            velocityLineChartGraph.isHidden = false
+        default:
+            break
+        }
     }
     
     // MARK: NAVIGATION
