@@ -7,5 +7,6 @@ target 'Speed Gauge' do
 
   # Pods for Speed Gauge
   pod 'Charts'
+  pod 'Surge'
 
 end
