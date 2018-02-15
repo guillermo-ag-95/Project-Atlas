@@ -24,6 +24,10 @@ class MainViewController: UIViewController {
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
     
+    var gravityXData: [Double] = []
+    var gravityYData: [Double] = []
+    var gravityZData: [Double] = []
+
     var accelerometerXDataset: LineChartDataSet = LineChartDataSet()
     var accelerometerYDataset: LineChartDataSet = LineChartDataSet()
     var accelerometerZDataset: LineChartDataSet = LineChartDataSet()
@@ -32,6 +36,10 @@ class MainViewController: UIViewController {
     var velocityYDataset: LineChartDataSet = LineChartDataSet()
     var velocityZDataset: LineChartDataSet = LineChartDataSet()
     
+    var gravityXDataset: LineChartDataSet = LineChartDataSet()
+    var gravityYDataset: LineChartDataSet = LineChartDataSet()
+    var gravityZDataset: LineChartDataSet = LineChartDataSet()
+
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
@@ -46,7 +54,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var accelerationLineChartGraph: LineChartView!
     @IBOutlet weak var velocityLineChartGraph: LineChartView!
-
+    @IBOutlet weak var gravityLineChartGraph: LineChartView!
+    
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
         playButton.isHidden = !playButton.isHidden
@@ -91,6 +100,13 @@ class MainViewController: UIViewController {
         velocityZData.removeAll()
         velocityZData.append(0)
         
+        gravityXData.removeAll()
+        gravityXData.append(0)
+        gravityYData.removeAll()
+        gravityYData.append(0)
+        gravityZData.removeAll()
+        gravityZData.append(0)
+        
         accelerometerXDataset.values.removeAll()
         accelerometerYDataset.values.removeAll()
         accelerometerZDataset.values.removeAll()
@@ -98,23 +114,29 @@ class MainViewController: UIViewController {
         velocityXDataset.values.removeAll()
         velocityYDataset.values.removeAll()
         velocityZDataset.values.removeAll()
+        
+        gravityXDataset.values.removeAll()
+        gravityYDataset.values.removeAll()
+        gravityZDataset.values.removeAll()
 
         accelerationLineChartGraph.clear()
         velocityLineChartGraph.clear()
+        gravityLineChartGraph.clear()
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
-        let newXAcceleration = data.userAcceleration.x * self.gravity
-        let newYAcceleration = data.userAcceleration.y * self.gravity
-        let newZAcceleration = data.userAcceleration.z * self.gravity
+        // The accelerometer sensor seems to be inverted, so we need to change its sign
+        let newXAcceleration =  -data.userAcceleration.x * self.gravity
+        let newYAcceleration =  -data.userAcceleration.y * self.gravity
+        let newZAcceleration =  -data.userAcceleration.z * self.gravity
         
-//        // Filter
-//        if abs(newXAcceleration) < 0.05 { newXAcceleration = 0 }
-//        if abs(newYAcceleration) < 0.05 { newYAcceleration = 0 }
-//        if abs(newZAcceleration) < 0.05 { newZAcceleration = 0 }
+        let newXGravity = data.gravity.x
+        let newYGravity = data.gravity.y
+        let newZGravity = data.gravity.z
+        
         
         // Instant velocity calculation by Integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
@@ -134,6 +156,10 @@ class MainViewController: UIViewController {
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
+        
+        gravityXData.append(newXGravity)
+        gravityYData.append(newYGravity)
+        gravityZData.append(newZGravity)
         
         // Current position in graft
         let position: Double = Double(accelerometerXData.count - 1) / 100
@@ -155,6 +181,15 @@ class MainViewController: UIViewController {
         velocityXDataset.values.append(entryXVelocity)
         velocityYDataset.values.append(entryYVelocity)
         velocityZDataset.values.append(entryZVelocity)
+        
+        // Gravity added to the Chart Dataset
+        let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
+        let entryYGravity = ChartDataEntry(x: position, y: newYGravity)
+        let entryZGravity = ChartDataEntry(x: position, y: newZGravity)
+        
+        gravityXDataset.values.append(entryXGravity)
+        gravityYDataset.values.append(entryYGravity)
+        gravityZDataset.values.append(entryZGravity)
 
     }
     
@@ -163,12 +198,14 @@ class MainViewController: UIViewController {
         playButton.isHidden = false
         pauseButton.isHidden = true
         
-        segmentedControl.setTitle("Acceleration Chart", forSegmentAt: 0)
-        segmentedControl.setTitle("Velocity Chart", forSegmentAt: 1)
+        segmentedControl.setTitle("Acceleration", forSegmentAt: 0)
+        segmentedControl.setTitle("Velocity", forSegmentAt: 1)
+        segmentedControl.setTitle("Gravity", forSegmentAt: 2)
         segmentedControl.selectedSegmentIndex = 1
 
         accelerationLineChartGraph.chartDescription?.text = "Acceleration by axis"
         velocityLineChartGraph.chartDescription?.text = "Velocity by axis"
+        gravityLineChartGraph.chartDescription?.text = "Gravity by axis"
         
         accelerometerXDataset.label = "X - Axis"
         accelerometerXDataset.colors = [NSUIColor.red]
@@ -205,18 +242,41 @@ class MainViewController: UIViewController {
         velocityZDataset.setCircleColor(NSUIColor.blue)
         velocityZDataset.circleRadius = 1
         velocityZDataset.circleHoleRadius = 1
+        
+        gravityXDataset.label = "X - Axis"
+        gravityXDataset.colors = [NSUIColor.red]
+        gravityXDataset.setCircleColor(NSUIColor.red)
+        gravityXDataset.circleRadius = 1
+        gravityXDataset.circleHoleRadius = 1
+        
+        gravityYDataset.label = "Y - Axis"
+        gravityYDataset.colors = [NSUIColor.green]
+        gravityYDataset.setCircleColor(NSUIColor.green)
+        gravityYDataset.circleRadius = 1
+        gravityYDataset.circleHoleRadius = 1
+        
+        gravityZDataset.label = "Z - Axis"
+        gravityZDataset.colors = [NSUIColor.blue]
+        gravityZDataset.setCircleColor(NSUIColor.blue)
+        gravityZDataset.circleRadius = 1
+        gravityZDataset.circleHoleRadius = 1
     }
     
     func updateGraph(){
-        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
-        accelerationLineChartGraph.data = accelerationData
-        accelerationLineChartGraph.notifyDataSetChanged()
+            let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
+            accelerationLineChartGraph.data = accelerationData
+            accelerationLineChartGraph.notifyDataSetChanged()
+            
+            let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
+            velocityLineChartGraph.data = velocityData
+            velocityLineChartGraph.notifyDataSetChanged()
+            
+            let gravityData: LineChartData = LineChartData(dataSets: [gravityXDataset, gravityYDataset, gravityZDataset])
+            gravityLineChartGraph.data = gravityData
+            gravityLineChartGraph.notifyDataSetChanged()
+            
+            segmentedControlChanged(segmentedControl)
         
-        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
-        velocityLineChartGraph.data = velocityData
-        velocityLineChartGraph.notifyDataSetChanged()
-        
-        segmentedControlChanged(segmentedControl)
     }
     
     @IBAction func segmentedControlChanged(_ sender: Any) {
@@ -224,9 +284,15 @@ class MainViewController: UIViewController {
         case 0:
             accelerationLineChartGraph.isHidden = false
             velocityLineChartGraph.isHidden = true
+            gravityLineChartGraph.isHidden = true
         case 1:
             accelerationLineChartGraph.isHidden = true
             velocityLineChartGraph.isHidden = false
+            gravityLineChartGraph.isHidden = true
+        case 2:
+            accelerationLineChartGraph.isHidden = true
+            velocityLineChartGraph.isHidden = true
+            gravityLineChartGraph.isHidden = false
         default:
             break
         }
@@ -235,6 +301,15 @@ class MainViewController: UIViewController {
     // MARK: NAVIGATION
     
     // MARK: - ANCILLARY FUNCTIONS
+    
+    func printAccelerationData(){
+        print("X-Acceleration")
+        print(accelerometerXData)
+        print("Y-Acceleration")
+        print(accelerometerYData)
+        print("Z-Acceleration")
+        print(accelerometerZData)
+    }
     
     func playSound(){
         AudioServicesPlaySystemSound(1052) // SIMToolkitGeneralBeep.caf

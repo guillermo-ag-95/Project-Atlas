@@ -40,10 +40,11 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-zI-CYz">
-                                <rect key="frame" x="127" y="28" width="121" height="29"/>
+                                <rect key="frame" x="96.5" y="28" width="182" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Second"/>
+                                    <segment title="Gravity"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlChanged:" destination="eoa-zI-3wh" eventType="valueChanged" id="mqA-hx-RvA"/>
@@ -57,11 +58,18 @@
                                 <rect key="frame" x="16" y="64" width="343" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DC-Nz-X4G" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="64" width="343" height="515"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" constant="8" id="6l6-dU-SmD"/>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="7Tu-5y-c7h"/>
+                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="5DC-Nz-X4G" secondAttribute="bottom" constant="8" id="8ym-gP-IYs"/>
+                            <constraint firstItem="5DC-Nz-X4G" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Den-WR-Pm2"/>
+                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="5DC-Nz-X4G" secondAttribute="trailing" constant="16" id="UGl-1O-O6v"/>
                             <constraint firstItem="BIr-Wt-6eC" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Uzt-mn-MMK"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="uON-a0-ChI" secondAttribute="bottom" constant="20" id="Vmx-tT-GYo"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="c9R-vI-dEO" secondAttribute="bottom" constant="20" id="X4G-kV-h4n"/>
@@ -72,6 +80,7 @@
                             <constraint firstItem="xlH-xt-mDI" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="o6d-Jg-i5e"/>
                             <constraint firstItem="c9R-vI-dEO" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="pMj-fm-fCn"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="xlH-xt-mDI" secondAttribute="trailing" constant="16" id="tdL-Rn-UtT"/>
+                            <constraint firstItem="5DC-Nz-X4G" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z1Q-HC-eNd"/>
                             <constraint firstItem="xlH-xt-mDI" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z6d-yk-LUa"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="xlH-xt-mDI" secondAttribute="bottom" constant="8" id="zKN-Fp-sdF"/>
                         </constraints>
@@ -79,6 +88,7 @@
                     </view>
                     <connections>
                         <outlet property="accelerationLineChartGraph" destination="xlH-xt-mDI" id="T2v-vT-N5B"/>
+                        <outlet property="gravityLineChartGraph" destination="5DC-Nz-X4G" id="G8u-63-b0n"/>
                         <outlet property="pauseButton" destination="c9R-vI-dEO" id="Rkc-fC-Xwz"/>
                         <outlet property="playButton" destination="uON-a0-ChI" id="srq-KD-0hg"/>
                         <outlet property="segmentedControl" destination="cdj-zI-CYz" id="1sq-JQ-vIK"/>
