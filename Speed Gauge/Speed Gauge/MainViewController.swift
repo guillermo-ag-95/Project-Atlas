@@ -86,6 +86,7 @@ class MainViewController: UIViewController {
     }
     
     func initializeStoredData(){
+        // Clean accelerometer data.
         accelerometerXData.removeAll()
         accelerometerXData.append(0)
         accelerometerYData.removeAll()
@@ -93,6 +94,7 @@ class MainViewController: UIViewController {
         accelerometerZData.removeAll()
         accelerometerZData.append(0)
         
+        // Clean velocity data.
         velocityXData.removeAll()
         velocityXData.append(0)
         velocityYData.removeAll()
@@ -100,6 +102,7 @@ class MainViewController: UIViewController {
         velocityZData.removeAll()
         velocityZData.append(0)
         
+        // Clean gravity data
         gravityXData.removeAll()
         gravityXData.append(0)
         gravityYData.removeAll()
@@ -107,18 +110,22 @@ class MainViewController: UIViewController {
         gravityZData.removeAll()
         gravityZData.append(0)
         
+        // Clean acceleration LineChartDataSet
         accelerometerXDataset.values.removeAll()
         accelerometerYDataset.values.removeAll()
         accelerometerZDataset.values.removeAll()
 
+        // Clean velocity LineChartDataSet
         velocityXDataset.values.removeAll()
         velocityYDataset.values.removeAll()
         velocityZDataset.values.removeAll()
         
+        // Clean gravity LineChartDataSet
         gravityXDataset.values.removeAll()
         gravityYDataset.values.removeAll()
         gravityZDataset.values.removeAll()
 
+        // Clean charts (LineChartView)
         accelerationLineChartGraph.clear()
         velocityLineChartGraph.clear()
         gravityLineChartGraph.clear()
@@ -137,8 +144,7 @@ class MainViewController: UIViewController {
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
         
-        
-        // Instant velocity calculation by Integration
+        // Instant velocity calculation by integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
         let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
