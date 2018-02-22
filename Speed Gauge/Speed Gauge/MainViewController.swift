@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
     var gravityYDataset: LineChartDataSet = LineChartDataSet()
     var gravityZDataset: LineChartDataSet = LineChartDataSet()
 
-    let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
+    let updatesIntervalOn = 0.1 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
 
@@ -82,7 +82,6 @@ class MainViewController: UIViewController {
     func stopRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
-        updateGraph()
     }
     
     func initializeStoredData(){
@@ -129,6 +128,21 @@ class MainViewController: UIViewController {
         accelerationLineChartGraph.clear()
         velocityLineChartGraph.clear()
         gravityLineChartGraph.clear()
+        
+        // Create empty chart data
+        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
+        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
+        let gravityData: LineChartData = LineChartData(dataSets: [gravityXDataset, gravityYDataset, gravityZDataset])
+        
+        // Empty data added to the chart
+        accelerationLineChartGraph.data = accelerationData
+        velocityLineChartGraph.data = velocityData
+        gravityLineChartGraph.data = gravityData
+        
+        // Chart must recalculate itself
+        accelerationLineChartGraph.notifyDataSetChanged()
+        velocityLineChartGraph.notifyDataSetChanged()
+        gravityLineChartGraph.notifyDataSetChanged()
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -170,32 +184,35 @@ class MainViewController: UIViewController {
         // Current position in graft
         let position: Double = Double(accelerometerXData.count - 1) / 100
         
-        // Acceleration added to Chart Dataset
+        // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
         let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
         let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
         
-        accelerometerXDataset.values.append(entryXAcceleration)
-        accelerometerYDataset.values.append(entryYAcceleration)
-        accelerometerZDataset.values.append(entryZAcceleration)
+        accelerationLineChartGraph.data?.addEntry(entryXAcceleration, dataSetIndex: 0)
+        accelerationLineChartGraph.data?.addEntry(entryYAcceleration, dataSetIndex: 1)
+        accelerationLineChartGraph.data?.addEntry(entryZAcceleration, dataSetIndex: 2)
+        accelerationLineChartGraph.notifyDataSetChanged()
         
-        // Velocity added to Chart Dataset
+        // Velocity added to Chart
         let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
         let entryYVelocity = ChartDataEntry(x: position, y: currentYVelocity)
         let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
         
-        velocityXDataset.values.append(entryXVelocity)
-        velocityYDataset.values.append(entryYVelocity)
-        velocityZDataset.values.append(entryZVelocity)
+        velocityLineChartGraph.data?.addEntry(entryXVelocity, dataSetIndex: 0)
+        velocityLineChartGraph.data?.addEntry(entryYVelocity, dataSetIndex: 1)
+        velocityLineChartGraph.data?.addEntry(entryZVelocity, dataSetIndex: 2)
+        velocityLineChartGraph.notifyDataSetChanged()
         
-        // Gravity added to the Chart Dataset
+        // Gravity added to the Chart
         let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
         let entryYGravity = ChartDataEntry(x: position, y: newYGravity)
         let entryZGravity = ChartDataEntry(x: position, y: newZGravity)
         
-        gravityXDataset.values.append(entryXGravity)
-        gravityYDataset.values.append(entryYGravity)
-        gravityZDataset.values.append(entryZGravity)
+        gravityLineChartGraph.data?.addEntry(entryXGravity, dataSetIndex: 0)
+        gravityLineChartGraph.data?.addEntry(entryYGravity, dataSetIndex: 1)
+        gravityLineChartGraph.data?.addEntry(entryZGravity, dataSetIndex: 2)
+        gravityLineChartGraph.notifyDataSetChanged()
 
     }
     
@@ -208,6 +225,7 @@ class MainViewController: UIViewController {
         segmentedControl.setTitle("Velocity", forSegmentAt: 1)
         segmentedControl.setTitle("Gravity", forSegmentAt: 2)
         segmentedControl.selectedSegmentIndex = 1
+        segmentedControlChanged(segmentedControl)
 
         accelerationLineChartGraph.chartDescription?.text = "Acceleration by axis"
         velocityLineChartGraph.chartDescription?.text = "Velocity by axis"
@@ -266,23 +284,6 @@ class MainViewController: UIViewController {
         gravityZDataset.setCircleColor(NSUIColor.blue)
         gravityZDataset.circleRadius = 1
         gravityZDataset.circleHoleRadius = 1
-    }
-    
-    func updateGraph(){
-            let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
-            accelerationLineChartGraph.data = accelerationData
-            accelerationLineChartGraph.notifyDataSetChanged()
-            
-            let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
-            velocityLineChartGraph.data = velocityData
-            velocityLineChartGraph.notifyDataSetChanged()
-            
-            let gravityData: LineChartData = LineChartData(dataSets: [gravityXDataset, gravityYDataset, gravityZDataset])
-            gravityLineChartGraph.data = gravityData
-            gravityLineChartGraph.notifyDataSetChanged()
-            
-            segmentedControlChanged(segmentedControl)
-        
     }
     
     @IBAction func segmentedControlChanged(_ sender: Any) {
