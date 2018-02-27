@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
     var gravityYDataset: LineChartDataSet = LineChartDataSet()
     var gravityZDataset: LineChartDataSet = LineChartDataSet()
 
-    let updatesIntervalOn = 0.1 // 100 Hz (1/100 s)
+    let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
 
@@ -123,12 +123,12 @@ class MainViewController: UIViewController {
         gravityXDataset.values.removeAll()
         gravityYDataset.values.removeAll()
         gravityZDataset.values.removeAll()
-
+        
         // Clean charts (LineChartView)
         accelerationLineChartGraph.clear()
         velocityLineChartGraph.clear()
         gravityLineChartGraph.clear()
-        
+                
         // Create empty chart data
         let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
         let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
@@ -183,6 +183,9 @@ class MainViewController: UIViewController {
         
         // Current position in graft
         let position: Double = Double(accelerometerXData.count - 1) / 100
+        
+        // Add one of every four entrances per second.
+        guard Int(position*100) % 10 == 0 else { return }
         
         // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
