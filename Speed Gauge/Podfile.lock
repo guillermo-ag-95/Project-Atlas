@@ -1,7 +1,7 @@
 PODS:
-  - Charts (3.0.5):
-    - Charts/Core (= 3.0.5)
-  - Charts/Core (3.0.5)
+  - Charts (3.1.0):
+    - Charts/Core (= 3.1.0)
+  - Charts/Core (3.1.0)
   - Surge (2.0.0)
 
 DEPENDENCIES:
@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Surge
 
 SPEC CHECKSUMS:
-  Charts: 45cdc985b764c838b35ee47eb1365d15735f6d1a
+  Charts: 0b0c96f6118b6ce63f11adbcaa3b31045ee4d772
   Surge: 1f0286bc5f0fe4283f3455479895bf85c7ef7760
 
 PODFILE CHECKSUM: 7289e9acc48abae56d7d77b83ab297535609a536
