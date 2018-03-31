@@ -43,4 +43,20 @@ class G_H_Filter_Tests: Abstract_Test {
         XCTAssert(expected == result)
     }
     
+    /// Textbook example
+    func test_gen_data_1(){
+        let result = g_h_filter.gen_data(x0: 0, dx: 1, count: 100, noise_factor: 1)
+        
+        XCTAssert(result.count == 100)
+    }
+    
+    /// Clean data
+    func test_gen_data_2(){
+        let expected = Array(0...99).map { Double($0) }
+        let result = g_h_filter.gen_data(x0: 0, dx: 1, count: 100, noise_factor: 0)
+        
+        XCTAssert(expected.count == result.count)
+        XCTAssert(expected == result)
+    }
+    
 }

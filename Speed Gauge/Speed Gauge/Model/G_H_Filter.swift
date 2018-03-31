@@ -39,7 +39,26 @@ class G_H_Filter: Filter {
         }
         
         return results
+    }
+    
+    /**
+     - parameters:
+        - x0: The initial value of the noisy measurements.
+        - dx: The initial change rate of the noisy measurements.
+        - noise_factor:
+     - returns: Noisy data.
+     - complexity: O(n) where n is count.
+     */
+    func gen_data(x0: Double, dx: Double, count: Int, noise_factor: Double) -> [Double] {
+        var result: [Double] = []
+        let data = x0
         
+        for i in 0..<count {
+            let data = data + dx * Double(i) + (Double(arc4random()) / Double(UInt32.max)) * noise_factor
+            result.append(data)
+        }
+        
+        return result
     }
     
 }
