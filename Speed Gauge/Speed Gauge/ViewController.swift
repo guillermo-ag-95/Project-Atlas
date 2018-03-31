@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  ViewController.swift
 //  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 16/11/17.
@@ -12,7 +12,7 @@ import Charts
 
 import AVFoundation
 
-class MainViewController: UIViewController {
+class ViewController: UIViewController {
     
     var motionManager = CMMotionManager()
     
