@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7E8922CA8FE7A8FD0C176808 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */; };
+		B30F1413206FB24400DC1745 /* GH_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* GH_Filter.swift */; };
+		B30F1415206FB29300DC1745 /* GH_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* GH_Filter_Tests.swift */; };
 		B39863FD206FA12500066E06 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39863FC206FA12500066E06 /* Filter.swift */; };
 		B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640D206FA46000066E06 /* Filter_Tests.swift */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
@@ -32,6 +34,8 @@
 		05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Speed_Gauge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F29B3F0D577579192BE08B3 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
 		878D01F2C4C9A0C9D8C84E92 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
+		B30F1412206FB24400DC1745 /* GH_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GH_Filter.swift; sourceTree = "<group>"; };
+		B30F1414206FB29300DC1745 /* GH_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GH_Filter_Tests.swift; sourceTree = "<group>"; };
 		B39863FC206FA12500066E06 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				B39863FC206FA12500066E06 /* Filter.swift */,
+				B30F1412206FB24400DC1745 /* GH_Filter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 				B3986407206FA35300066E06 /* Info.plist */,
 				B398640F206FA75100066E06 /* Abstract_Test.swift */,
 				B398640D206FA46000066E06 /* Filter_Tests.swift */,
+				B30F1414206FB29300DC1745 /* GH_Filter_Tests.swift */,
 			);
 			path = "Speed Gauge Tests";
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
+				B30F1415206FB29300DC1745 /* GH_Filter_Tests.swift in Sources */,
 				B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +314,7 @@
 			files = (
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
 				B39863FD206FA12500066E06 /* Filter.swift in Sources */,
+				B30F1413206FB24400DC1745 /* GH_Filter.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
