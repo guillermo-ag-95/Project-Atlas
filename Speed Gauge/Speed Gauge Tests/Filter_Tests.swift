@@ -9,7 +9,7 @@
 import XCTest
 @testable import Speed_Gauge
 
-class Filter_Tests: Speed_Gauge_Tests {
+class Filter_Tests: Abstract_Test {
     
     let filter = Filter()
     

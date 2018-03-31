@@ -11,6 +11,7 @@
 		B39863FD206FA12500066E06 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39863FC206FA12500066E06 /* Filter.swift */; };
 		B3986406206FA35200066E06 /* Speed_Gauge_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */; };
 		B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640D206FA46000066E06 /* Filter_Tests.swift */; };
+		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC613D1FBDBB0C00B2334D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed_Gauge_Tests.swift; sourceTree = "<group>"; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B398640D206FA46000066E06 /* Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter_Tests.swift; sourceTree = "<group>"; };
+		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				B3986407206FA35300066E06 /* Info.plist */,
+				B398640F206FA75100066E06 /* Abstract_Test.swift */,
 				B398640D206FA46000066E06 /* Filter_Tests.swift */,
 				B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */,
 			);
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
 				B3986406206FA35200066E06 /* Speed_Gauge_Tests.swift in Sources */,
 				B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */,
 			);
