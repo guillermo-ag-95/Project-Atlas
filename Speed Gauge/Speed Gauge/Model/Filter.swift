@@ -11,7 +11,4 @@ import Surge
 
 class Filter {
     
-    func sum(first: Int, last: Int) -> Int {
-        return first + last;
-    }
 }

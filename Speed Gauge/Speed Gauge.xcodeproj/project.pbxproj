@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7E8922CA8FE7A8FD0C176808 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */; };
 		B39863FD206FA12500066E06 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39863FC206FA12500066E06 /* Filter.swift */; };
+		B3986406206FA35200066E06 /* Speed_Gauge_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC613D1FBDBB0C00B2334D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */; };
@@ -16,11 +17,24 @@
 		B3C068E91FF7B4380076B4D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3C068E81FF7B4380076B4D2 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B3986408206FA35300066E06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AC61271FBDBB0C00B2334D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3AC612E1FBDBB0C00B2334D;
+			remoteInfo = "Speed Gauge";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Speed_Gauge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F29B3F0D577579192BE08B3 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
 		878D01F2C4C9A0C9D8C84E92 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
 		B39863FC206FA12500066E06 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed_Gauge_Tests.swift; sourceTree = "<group>"; };
+		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -31,6 +45,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B3986400206FA35200066E06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AC612C1FBDBB0C00B2334D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,10 +80,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B3986404206FA35200066E06 /* Speed Gauge Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B3986405206FA35200066E06 /* Speed_Gauge_Tests.swift */,
+				B3986407206FA35300066E06 /* Info.plist */,
+			);
+			path = "Speed Gauge Tests";
+			sourceTree = "<group>";
+		};
 		B3AC61261FBDBB0C00B2334D = {
 			isa = PBXGroup;
 			children = (
 				B3AC61311FBDBB0C00B2334D /* Speed Gauge */,
+				B3986404206FA35200066E06 /* Speed Gauge Tests */,
 				B3AC61301FBDBB0C00B2334D /* Products */,
 				17F73A9F5F2C204DA5687D63 /* Pods */,
 				B5B7E457DC720C217C22667B /* Frameworks */,
@@ -73,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */,
+				B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +134,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B3986402206FA35200066E06 /* Speed Gauge Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B398640A206FA35300066E06 /* Build configuration list for PBXNativeTarget "Speed Gauge Tests" */;
+			buildPhases = (
+				B39863FF206FA35200066E06 /* Sources */,
+				B3986400206FA35200066E06 /* Frameworks */,
+				B3986401206FA35200066E06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3986409206FA35300066E06 /* PBXTargetDependency */,
+			);
+			name = "Speed Gauge Tests";
+			productName = "Speed Gauge Tests";
+			productReference = B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B3AC612E1FBDBB0C00B2334D /* Speed Gauge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3AC61411FBDBB0C00B2334D /* Build configuration list for PBXNativeTarget "Speed Gauge" */;
@@ -128,10 +178,15 @@
 		B3AC61271FBDBB0C00B2334D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Guillermo Alcalá Gamero";
 				TargetAttributes = {
+					B3986402206FA35200066E06 = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B3AC612E1FBDBB0C00B2334D;
+					};
 					B3AC612E1FBDBB0C00B2334D = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -152,11 +207,19 @@
 			projectRoot = "";
 			targets = (
 				B3AC612E1FBDBB0C00B2334D /* Speed Gauge */,
+				B3986402206FA35200066E06 /* Speed Gauge Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B3986401206FA35200066E06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AC612D1FBDBB0C00B2334D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +289,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B39863FF206FA35200066E06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3986406206FA35200066E06 /* Speed_Gauge_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3AC612B1FBDBB0C00B2334D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,6 +308,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B3986409206FA35300066E06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3AC612E1FBDBB0C00B2334D /* Speed Gauge */;
+			targetProxy = B3986408206FA35300066E06 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */ = {
@@ -250,6 +329,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B398640B206FA35300066E06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				INFOPLIST_FILE = "Speed Gauge Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Speed Gauge.app/Speed Gauge";
+			};
+			name = Debug;
+		};
+		B398640C206FA35300066E06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				INFOPLIST_FILE = "Speed Gauge Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Speed Gauge.app/Speed Gauge";
+			};
+			name = Release;
+		};
 		B3AC613F1FBDBB0C00B2334D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -394,6 +513,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B398640A206FA35300066E06 /* Build configuration list for PBXNativeTarget "Speed Gauge Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B398640B206FA35300066E06 /* Debug */,
+				B398640C206FA35300066E06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B3AC612A1FBDBB0C00B2334D /* Build configuration list for PBXProject "Speed Gauge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
