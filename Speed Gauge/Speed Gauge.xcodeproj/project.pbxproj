@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E8922CA8FE7A8FD0C176808 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */; };
+		B39863FD206FA12500066E06 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39863FC206FA12500066E06 /* Filter.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC613D1FBDBB0C00B2334D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */; };
@@ -19,6 +20,7 @@
 		05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Speed_Gauge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F29B3F0D577579192BE08B3 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
 		878D01F2C4C9A0C9D8C84E92 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
+		B39863FC206FA12500066E06 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B39863FE206FA12A00066E06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B39863FC206FA12500066E06 /* Filter.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B3AC61261FBDBB0C00B2334D = {
 			isa = PBXGroup;
 			children = (
@@ -70,12 +80,13 @@
 		B3AC61311FBDBB0C00B2334D /* Speed Gauge */ = {
 			isa = PBXGroup;
 			children = (
+				B3AC613E1FBDBB0C00B2334D /* Info.plist */,
+				B3C068E81FF7B4380076B4D2 /* Main.storyboard */,
 				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
 				B3AC61441FBDBBB100B2334D /* ViewController.swift */,
-				B3C068E81FF7B4380076B4D2 /* Main.storyboard */,
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
 				B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */,
-				B3AC613E1FBDBB0C00B2334D /* Info.plist */,
+				B39863FE206FA12A00066E06 /* Model */,
 			);
 			path = "Speed Gauge";
 			sourceTree = "<group>";
@@ -220,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
+				B39863FD206FA12500066E06 /* Filter.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
