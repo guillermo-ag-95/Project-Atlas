@@ -32,4 +32,5 @@ class One_Dimensional_Kalman_Filter_Tests: Abstract_Test {
         XCTAssertEqual(gaussian_3.mean, 10.377358490566, accuracy: 0.001)
         XCTAssertEqual(gaussian_3.variance, 0.0369811320754717, accuracy: 0.001)
     }
+
 }
