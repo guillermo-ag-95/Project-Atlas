@@ -57,7 +57,7 @@ class G_H_Filter: Filter {
             let data = data + dx * Double(i) + (Double(arc4random()) / Double(UInt32.max)) * noise_factor
             result.append(data)
         }
-        
+                
         return result
     }
     

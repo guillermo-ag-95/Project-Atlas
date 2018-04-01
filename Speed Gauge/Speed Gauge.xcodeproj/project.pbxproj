@@ -18,6 +18,8 @@
 		B3AC613D1FBDBB0C00B2334D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */; };
 		B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ViewController.swift */; };
 		B3C068E91FF7B4380076B4D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3C068E81FF7B4380076B4D2 /* Main.storyboard */; };
+		B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */; };
+		B3F4E0122070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		B3AC613E1FBDBB0C00B2334D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3AC61441FBDBBB100B2334D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B3C068E81FF7B4380076B4D2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter.swift; sourceTree = "<group>"; };
+		B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			children = (
 				B39863FC206FA12500066E06 /* Filter.swift */,
 				B30F1412206FB24400DC1745 /* G_H_Filter.swift */,
+				B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +99,7 @@
 				B398640F206FA75100066E06 /* Abstract_Test.swift */,
 				B398640D206FA46000066E06 /* Filter_Tests.swift */,
 				B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */,
+				B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */,
 			);
 			path = "Speed Gauge Tests";
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
 				B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */,
 				B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */,
+				B3F4E0122070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
+				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
 				B39863FD206FA12500066E06 /* Filter.swift in Sources */,
 				B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */,
