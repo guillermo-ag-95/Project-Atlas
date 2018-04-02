@@ -11,6 +11,28 @@ import Surge
 
 class One_Dimensional_Kalman_Filter: Filter {
     
+    func predict(prior: Gaussian, measurement: Gaussian) -> Gaussian {
+        var (x, P) = (prior.mean, prior.variance) // Mean and variance of prior
+        let (z, R) = (measurement.mean, measurement.variance) // Mean and variance of measurement
+        
+        let y = z - x // Residual
+        let K = P / (P + R) // Kalman gain
+        
+        x = x + K * y // Posterior
+        P = (1 - K) * P // Posterior variance
+        
+        return Gaussian(mean: x, variance: P)
+    }
+    
+    func update(posterior: Gaussian, movement: Gaussian) -> Gaussian {
+        var (x, P) = (posterior.mean, posterior.variance) // Mean and variance of posterior
+        let (dx, Q) = (movement.mean, movement.variance) // Mean and variance of movement
+        
+        x = x + dx
+        P = P + Q
+        
+        return Gaussian(mean: x, variance: P)
+    }
 }
 
 class Gaussian {

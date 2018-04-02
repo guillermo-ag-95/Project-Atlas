@@ -10,6 +10,8 @@
 		7E8922CA8FE7A8FD0C176808 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
+		B310BDBD2072BF4700887FBC /* Multivariate_Gaussians.swift in Sources */ = {isa = PBXBuildFile; fileRef = B310BDBC2072BF4700887FBC /* Multivariate_Gaussians.swift */; };
+		B310BDBF2072BF5000887FBC /* Multivariate_Gaussians_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B310BDBE2072BF5000887FBC /* Multivariate_Gaussians_Tests.swift */; };
 		B39863FD206FA12500066E06 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39863FC206FA12500066E06 /* Filter.swift */; };
 		B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640D206FA46000066E06 /* Filter_Tests.swift */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
@@ -40,6 +42,8 @@
 		878D01F2C4C9A0C9D8C84E92 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
+		B310BDBC2072BF4700887FBC /* Multivariate_Gaussians.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multivariate_Gaussians.swift; sourceTree = "<group>"; };
+		B310BDBE2072BF5000887FBC /* Multivariate_Gaussians_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multivariate_Gaussians_Tests.swift; sourceTree = "<group>"; };
 		B39863FC206FA12500066E06 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 				B30F1412206FB24400DC1745 /* G_H_Filter.swift */,
 				B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */,
 				B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */,
+				B310BDBC2072BF4700887FBC /* Multivariate_Gaussians.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 				B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */,
 				B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */,
 				B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */,
+				B310BDBE2072BF5000887FBC /* Multivariate_Gaussians_Tests.swift */,
 			);
 			path = "Speed Gauge Tests";
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 				B398640E206FA46000066E06 /* Filter_Tests.swift in Sources */,
 				B3ED3D26207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift in Sources */,
 				B3F4E0122070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift in Sources */,
+				B310BDBF2072BF5000887FBC /* Multivariate_Gaussians_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +335,7 @@
 			files = (
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
+				B310BDBD2072BF4700887FBC /* Multivariate_Gaussians.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
 				B39863FD206FA12500066E06 /* Filter.swift in Sources */,
 				B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */,
