@@ -19,8 +19,8 @@ class One_Dimensional_Kalman_Filter_Tests: Abstract_Test {
         
         let prior = Gaussian.predict(lhs: position, rhs: velocity)
         
-        XCTAssertEqual(prior.mean, 25.0, accuracy: 0.001)
-        XCTAssertEqual(prior.variance, 0.53, accuracy: 0.001)
+        XCTAssertEqual(prior.mean, 25.0, accuracy: 0.01)
+        XCTAssertEqual(prior.variance, 0.53, accuracy: 0.01)
     }
     
     func test_gaussian_2(){
@@ -29,8 +29,8 @@ class One_Dimensional_Kalman_Filter_Tests: Abstract_Test {
         
         let posterior = Gaussian.update(lhs: prior, rhs: likehood)
         
-        XCTAssertEqual(posterior.mean, 23.0921526278, accuracy: 0.001)
-        XCTAssertEqual(posterior.variance, 0.02442044636, accuracy: 0.001)
+        XCTAssertEqual(posterior.mean, 23.0921526278, accuracy: 0.01)
+        XCTAssertEqual(posterior.variance, 0.02442044636, accuracy: 0.01)
     }
     
     func test_fist_kalman_filter_1(){
@@ -52,7 +52,7 @@ class One_Dimensional_Kalman_Filter_Tests: Abstract_Test {
             x = Gaussian.update(lhs: prior, rhs: likehood)
         }
         
-        XCTAssertEqual(x.mean, 15.053, accuracy: 0.1)
+        XCTAssertEqual(x.mean, 15.053, accuracy: 0.01)
     }
 
 }

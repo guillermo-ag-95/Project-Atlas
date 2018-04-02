@@ -20,7 +20,7 @@ class G_H_Filter_Tests: Abstract_Test {
         let expected: [Double] = [159.8, 161.62, 161.92, 161.46, 161.59, 162.82, 166.09, 168.23, 168.86, 170.34, 171.50, 172.67]
         let result = g_H_Filter.filter(data, x0: 160.0, dx: 1, g: 0.4, h: 0.3, dt: 1.0)
         
-        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.1) }
+        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.01) }
         
     }
     
@@ -31,7 +31,7 @@ class G_H_Filter_Tests: Abstract_Test {
         let expected: [Double] = [161.0, 162.0, 163.0, 164.0, 165.0, 166.0, 167.0, 168.0, 169.0, 170.0, 171.0, 172.0]
         let result = g_H_Filter.filter(data, x0: 160.0, dx: 1, g: 0, h: 0, dt: 1.0)
         
-        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.1) }
+        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.01) }
         
         XCTAssert(expected == result)
     }
@@ -43,7 +43,7 @@ class G_H_Filter_Tests: Abstract_Test {
         let expected: [Double] = [158.0, 164.2, 160.3, 159.9, 162.1, 164.6, 169.6, 167.4, 166.4, 171.0, 171.2, 172.6]
         let result = g_H_Filter.filter(data, x0: 160.0, dx: 1, g: 1, h: 0, dt: 1.0)
         
-        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.1) }
+        _ = zip(expected, result).map { XCTAssertEqual($0, $1, accuracy: 0.01) }
         
         XCTAssert(expected == result)
     }
