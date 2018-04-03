@@ -9,7 +9,7 @@
 import Foundation
 import Surge
 
-class Discrete_Bayes_Filter: Filter {
+class Discrete_Bayes_Filter {
     
     func update_belief(hall: [Int], belief: [Double], z: Int, z_prob: Double) -> [Double] {
         var belief = belief

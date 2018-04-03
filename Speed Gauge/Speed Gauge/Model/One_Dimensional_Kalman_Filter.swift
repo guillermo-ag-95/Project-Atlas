@@ -9,7 +9,7 @@
 import Foundation
 import Surge
 
-class One_Dimensional_Kalman_Filter: Filter {
+class One_Dimensional_Kalman_Filter {
     
     func predict(prior: Gaussian, measurement: Gaussian) -> Gaussian {
         var (x, P) = (prior.mean, prior.variance) // Mean and variance of prior

@@ -9,7 +9,7 @@
 import Foundation
 import Surge
 
-class G_H_Filter: Filter {
+class G_H_Filter {
     
     /**
      - parameters:
