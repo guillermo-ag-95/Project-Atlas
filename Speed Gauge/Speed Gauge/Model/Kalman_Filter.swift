@@ -63,7 +63,7 @@ class Kalman_Filter {
         
         (x, P) = Kalman_Filter.update(x_prior, P_prior, z, R, H)
         print(x, P)
-
+        
     }
     
     class func predict(_ x: Matrix<Double>, _ P: Matrix<Double>, _ F: Matrix<Double>, _ Q: Matrix<Double>, _ B: Matrix<Double>, _ u: Matrix<Double>) -> (Matrix<Double>, Matrix<Double>) {

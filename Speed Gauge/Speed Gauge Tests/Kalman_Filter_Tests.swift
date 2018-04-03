@@ -9,6 +9,8 @@
 import XCTest
 @testable import Speed_Gauge
 
+import Surge
+
 class Kalman_Filter_Tests: Abstract_Test {
     
     let kalman_filter = Kalman_Filter()
