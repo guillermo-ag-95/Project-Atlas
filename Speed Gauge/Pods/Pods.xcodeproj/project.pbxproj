@@ -83,7 +83,7 @@
 		7548ACB434594E231EFE5D75A5D96CCF /* LineChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D5F8C769312483DC1C8F83154553F5 /* LineChartDataSet.swift */; };
 		7596C4EC49FA537B84FB3C63F3890188 /* LineRadarRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6818DF29A8CECE18D9C75F3E0E05B2D /* LineRadarRenderer.swift */; };
 		78E9166215F02F3FA8A5E2923C86E2E8 /* ChartBaseDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC418E93A827B59682AD473545906372 /* ChartBaseDataSet.swift */; };
-		7BB91D9A103C9E33197FEB10D76D0780 /* Pods-Speed Gauge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7996C1119A0F7BBE9A95657AF87C7B /* Pods-Speed Gauge-dummy.m */; };
+		7BB91D9A103C9E33197FEB10D76D0780 /* Pods-Speed Gauge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 010B0922888ED547D21BF635D198EF3B /* Pods-Speed Gauge-dummy.m */; };
 		7E4271876298C299BE9C94B0620F4D18 /* BubbleChartDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0497F26845FDAF944BD2DA24AD9D2D /* BubbleChartDataProvider.swift */; };
 		805C26328E942629D7243E5059372CF5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */; };
 		806564C05DA4E1954384AE79FFDAFAE6 /* RadarHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F125D9BBFB8F0636635FEB928835B /* RadarHighlighter.swift */; };
@@ -106,7 +106,7 @@
 		9B53647E6877E38B0F49C09303DE7397 /* TransformerHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7D5AED3357F136F00C6983092D2BA8 /* TransformerHorizontalBarChart.swift */; };
 		9CABBB1A02009EC2595AEAC4F61CDF04 /* MarkerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91D6221C5C3455E2804C0B58F6E5C4F /* MarkerImage.swift */; };
 		9F21ED7D80D5E74E3AFEF10C51A76102 /* Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F872BD70E59F28E6905CFE936A6F641 /* Exponential.swift */; };
-		A386E684A766F1CC4B156CDE0F557F82 /* Pods-Speed Gauge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6376C35AD7F403EDE531A4960AC01284 /* Pods-Speed Gauge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A386E684A766F1CC4B156CDE0F557F82 /* Pods-Speed Gauge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 85F924FF7C0FC23F0DF575488F4754F0 /* Pods-Speed Gauge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4151F881DAB4651899F9E8F510DA531 /* IBarLineScatterCandleBubbleChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41768B11276104BE617AE21BB198F804 /* IBarLineScatterCandleBubbleChartDataSet.swift */; };
 		A69CD59AB50E01403A646479704F1792 /* AxisBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BA287A228395D6A329EC9E25DDF021 /* AxisBase.swift */; };
 		A765ECF1A0B82EC35E719ED9B30AE016 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B0345BAF924C8E540F3E2948C8011A /* Arithmetic.swift */; };
@@ -115,6 +115,7 @@
 		B04260EC5D10CD45F926F700DD1AAEE0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9BEA3ADA9594BC194919329A004D9C /* Accelerate.framework */; };
 		B5C06A9E2E9333E2CE5ADCFCFBE195E9 /* BarLineScatterCandleBubbleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF0BFDC2D77171D3F6E2F11DFA79A00 /* BarLineScatterCandleBubbleRenderer.swift */; };
 		B7251BCC063F1B5D357B31DDA9D3911F /* PieRadarChartViewBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09840DC62A519F305817C8F76A41F3CC /* PieRadarChartViewBase.swift */; };
+		B76C299CC2A0A79B43627D819EE0055C /* Pods-Speed Gauge Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AA972AD332E8E9EFA21F8653E3294B65 /* Pods-Speed Gauge Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B9E2A3DF455414E2BE8C54E50FF87A50 /* YAxisRendererHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB624A4445F53F6AD179F8BC2861A21 /* YAxisRendererHorizontalBarChart.swift */; };
 		BBC5DF13B0556466C9FC06D9A620EFE9 /* BubbleChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 460CF7F22DF7FE7435A7A0A76B118926 /* BubbleChartDataEntry.swift */; };
 		BD7B00B2F65ECB9F95EF3CAA327B4B58 /* ChevronUpShapeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BBDB5719927F98E727D2C905DDE955 /* ChevronUpShapeRenderer.swift */; };
@@ -150,6 +151,7 @@
 		EAFE66969B8288438DB654702FE920CF /* LineRadarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10907F218336D224F263EB3F5B4FDA1A /* LineRadarChartDataSet.swift */; };
 		ECA8832916B8D8EFFAB5A2C766A6330D /* BarChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C241857A887472BB111C5CC3A7F6766F /* BarChartDataSet.swift */; };
 		EE96809B72CD956D93B2C74C5CEC3079 /* IChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE8D2C37F394958D733A473DDECAB2 /* IChartDataSet.swift */; };
+		EF10CDD0887B3AE3A3A1FEC81FD6D3A3 /* Pods-Speed Gauge Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 554D0A0E9B9CEFE3250434DBA01FFB0F /* Pods-Speed Gauge Tests-dummy.m */; };
 		F1657543192F8AE888B0EC60DEFE1A75 /* YAxisRendererRadarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57C3E695EE47977EC2CDBE71CCDB61 /* YAxisRendererRadarChart.swift */; };
 		F17F62DDB93ADF8E88628A6DEAE2D5E5 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090568E560FCADF2C92BDC8AF05AAC80 /* ChartData.swift */; };
 		F3164A48C4BD14B24589513631E76289 /* RadarChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3E3F9EAEE12CAD789BE1D4C3FB0B37 /* RadarChartData.swift */; };
@@ -159,6 +161,7 @@
 		FB0545D14B1E4861481C33CBAA0C0E38 /* Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113FB27E79C6FD99DAF85284783A3304 /* Description.swift */; };
 		FBE3E2442ACE2FBA04F7AB0C162C4D89 /* RadarChartRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA56EE5690C96BE5F66D99B0C7438F04 /* RadarChartRenderer.swift */; };
 		FC57776203D958993075D6E1E166A07F /* IAxisValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2884BA0CF3A1F86141B94DAD14EB2EF /* IAxisValueFormatter.swift */; };
+		FDC9150F10E7C71D89C4C1C115246521 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */; };
 		FF094B99FBD0FC5CFAC0091958D49032 /* HorizontalBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230F2B5512018C9A0FE3A6D2BA58B368 /* HorizontalBarChartView.swift */; };
 		FFF38F053B3F4842CAFAFD53109555E3 /* IScatterChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E59EDB4A5D835202D4824DE981824 /* IScatterChartDataSet.swift */; };
 /* End PBXBuildFile section */
@@ -171,6 +174,13 @@
 			remoteGlobalIDString = C64B059C9DD4D0908B1A924D26EDC4DF;
 			remoteInfo = Surge;
 		};
+		041C14EB444D2FDD6EB489760E933865 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D416D5E8AAA52C62EECDEEAFED16087;
+			remoteInfo = Charts;
+		};
 		6B0A5C23579AD29D1C7010C0B8EA7864 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -178,12 +188,21 @@
 			remoteGlobalIDString = 1D416D5E8AAA52C62EECDEEAFED16087;
 			remoteInfo = Charts;
 		};
+		6C6BCB9BD973EDB0D9C020A1765B4F0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C64B059C9DD4D0908B1A924D26EDC4DF;
+			remoteInfo = Surge;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010B0922888ED547D21BF635D198EF3B /* Pods-Speed Gauge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Speed Gauge-dummy.m"; sourceTree = "<group>"; };
 		022D9DC2C27A916A113BD2C6DC283050 /* CombinedHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedHighlighter.swift; path = Source/Charts/Highlight/CombinedHighlighter.swift; sourceTree = "<group>"; };
 		06CCECD1B802B3E0B530BA7B17C48106 /* PieChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataEntry.swift; sourceTree = "<group>"; };
 		06DF87F67EFF4534B7E811994BE52438 /* CombinedChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedChartRenderer.swift; path = Source/Charts/Renderers/CombinedChartRenderer.swift; sourceTree = "<group>"; };
+		07AE86A920F53635D44A072BBE48FF5C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08F6073858CFACBBDA4A5F0BE81A0039 /* IRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IRadarChartDataSet.swift; path = Source/Charts/Data/Interfaces/IRadarChartDataSet.swift; sourceTree = "<group>"; };
 		090568E560FCADF2C92BDC8AF05AAC80 /* ChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartData.swift; path = Source/Charts/Data/Implementations/Standard/ChartData.swift; sourceTree = "<group>"; };
 		09840DC62A519F305817C8F76A41F3CC /* PieRadarChartViewBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarChartViewBase.swift; path = Source/Charts/Charts/PieRadarChartViewBase.swift; sourceTree = "<group>"; };
@@ -212,13 +231,12 @@
 		25F3E1E7F105C5B4EEC575D27AD60DB6 /* Hyperbolic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hyperbolic.swift; path = Source/Hyperbolic.swift; sourceTree = "<group>"; };
 		27F0CB3385B51117DECD6001C304E0A7 /* ChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/ChartDataSet.swift; sourceTree = "<group>"; };
 		2919BBEED9678067EB6D48D727B5E2D1 /* ChartAnimationEasing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartAnimationEasing.swift; path = Source/Charts/Animation/ChartAnimationEasing.swift; sourceTree = "<group>"; };
+		294B05718F9D8ED5D8B4BBA81DD82ABB /* Pods-Speed Gauge-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Speed Gauge-acknowledgements.plist"; sourceTree = "<group>"; };
 		29FE4FD949D1C1E5C8E9E07A9A8B02F8 /* MarkerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarkerView.swift; path = Source/Charts/Components/MarkerView.swift; sourceTree = "<group>"; };
 		2A6B88BFB83B4FFB7680A2F88D059695 /* Animator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Animator.swift; path = Source/Charts/Animation/Animator.swift; sourceTree = "<group>"; };
 		2F57C3E695EE47977EC2CDBE71CCDB61 /* YAxisRendererRadarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxisRendererRadarChart.swift; path = Source/Charts/Renderers/YAxisRendererRadarChart.swift; sourceTree = "<group>"; };
-		2FB45C2649868D7F33943B3042314663 /* Pods-Speed Gauge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Speed Gauge.modulemap"; sourceTree = "<group>"; };
 		30834E68170DEF6FFA6E4C766FA53A80 /* PieRadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieRadarHighlighter.swift; path = Source/Charts/Highlight/PieRadarHighlighter.swift; sourceTree = "<group>"; };
 		30F075C3CBF2DC08D699390A0D64DCB7 /* Convolution.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Convolution.swift; path = Source/Convolution.swift; sourceTree = "<group>"; };
-		31E2ECE178EB2672B8AAA6CF550940DB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33B6FF13DAA8745E8DE14545AB0944E8 /* ZoomViewJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZoomViewJob.swift; path = Source/Charts/Jobs/ZoomViewJob.swift; sourceTree = "<group>"; };
 		35BBDB5719927F98E727D2C905DDE955 /* ChevronUpShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChevronUpShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/ChevronUpShapeRenderer.swift; sourceTree = "<group>"; };
 		364AB2AEC345D4160AF96960A3525369 /* DefaultAxisValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultAxisValueFormatter.swift; path = Source/Charts/Formatters/DefaultAxisValueFormatter.swift; sourceTree = "<group>"; };
@@ -230,56 +248,60 @@
 		3D5F53063B3D57CC92076B9D52FCF9E2 /* CrossShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrossShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/CrossShapeRenderer.swift; sourceTree = "<group>"; };
 		3E84D94D245A615B7366D8AA8326A7EF /* LegendRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LegendRenderer.swift; path = Source/Charts/Renderers/LegendRenderer.swift; sourceTree = "<group>"; };
 		3F44FF0F0B7F38029BAAFCE2E86B3343 /* BarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarHighlighter.swift; path = Source/Charts/Highlight/BarHighlighter.swift; sourceTree = "<group>"; };
-		3F7996C1119A0F7BBE9A95657AF87C7B /* Pods-Speed Gauge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Speed Gauge-dummy.m"; sourceTree = "<group>"; };
-		4168DAEB687D1F6AA1B3686E925447AB /* Pods-Speed Gauge-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge-frameworks.sh"; sourceTree = "<group>"; };
 		41768B11276104BE617AE21BB198F804 /* IBarLineScatterCandleBubbleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IBarLineScatterCandleBubbleChartDataSet.swift; path = Source/Charts/Data/Interfaces/IBarLineScatterCandleBubbleChartDataSet.swift; sourceTree = "<group>"; };
 		434402AB3501C94CB595DF9D93D773B5 /* CombinedChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedChartView.swift; path = Source/Charts/Charts/CombinedChartView.swift; sourceTree = "<group>"; };
 		460CF7F22DF7FE7435A7A0A76B118926 /* BubbleChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/BubbleChartDataEntry.swift; sourceTree = "<group>"; };
 		465E46D61E5698542945CA5E67907E2C /* HorizontalBarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBarHighlighter.swift; path = Source/Charts/Highlight/HorizontalBarHighlighter.swift; sourceTree = "<group>"; };
+		485F693AAC735FD330E624237151315A /* Pods-Speed Gauge-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Speed Gauge-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4895050F4F3B4F30DC1B59986B0FCBAF /* ChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartDataProvider.swift; path = Source/Charts/Interfaces/ChartDataProvider.swift; sourceTree = "<group>"; };
 		490E0265D715F9F483F4041B1323F9E7 /* Transformer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformer.swift; path = Source/Charts/Utils/Transformer.swift; sourceTree = "<group>"; };
 		495A92DB85A6697BFD1C64D865F6AAAD /* PieHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieHighlighter.swift; path = Source/Charts/Highlight/PieHighlighter.swift; sourceTree = "<group>"; };
 		49BD7D927E400C4764B54643F3B15496 /* CircleShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CircleShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/CircleShapeRenderer.swift; sourceTree = "<group>"; };
 		49F6F8E0358DF525812C50ACAC4021DD /* CandleStickChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleStickChartRenderer.swift; path = Source/Charts/Renderers/CandleStickChartRenderer.swift; sourceTree = "<group>"; };
-		4AE4545399087D0A8B51A321C4B3AE2E /* Pods-Speed Gauge-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Speed Gauge-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4B7D5AED3357F136F00C6983092D2BA8 /* TransformerHorizontalBarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformerHorizontalBarChart.swift; path = Source/Charts/Utils/TransformerHorizontalBarChart.swift; sourceTree = "<group>"; };
 		4B8308E1491B98FB71D8B0988AD3307F /* BubbleChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartRenderer.swift; path = Source/Charts/Renderers/BubbleChartRenderer.swift; sourceTree = "<group>"; };
 		4C2335CFF9D24C5FFF1F481F855DE6CE /* ChartViewBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartViewBase.swift; path = Source/Charts/Charts/ChartViewBase.swift; sourceTree = "<group>"; };
-		4FA868A70B04D9541342ADC2570829D9 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Charts.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F4F90E5D68C0383816D608C65300885 /* Pods-Speed Gauge Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4FADF15F68F8A94C5CBA756BA78392F1 /* BarLineScatterCandleBubbleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineScatterCandleBubbleChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/BarLineScatterCandleBubbleChartDataSet.swift; sourceTree = "<group>"; };
 		504138CB0AE4F10B117C24CC9F698609 /* ChartLimitLine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartLimitLine.swift; path = Source/Charts/Components/ChartLimitLine.swift; sourceTree = "<group>"; };
+		52550E91343945523D6928140DCF6BE7 /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Speed_Gauge.framework; path = "Pods-Speed Gauge.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D8D61A0B313AFBB0152968C26FAE51 /* CombinedChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CombinedChartDataProvider.swift; path = Source/Charts/Interfaces/CombinedChartDataProvider.swift; sourceTree = "<group>"; };
 		534A9F3A8EFF8DD2141A63741ECF1415 /* ILineScatterCandleRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ILineScatterCandleRadarChartDataSet.swift; path = Source/Charts/Data/Interfaces/ILineScatterCandleRadarChartDataSet.swift; sourceTree = "<group>"; };
+		554D0A0E9B9CEFE3250434DBA01FFB0F /* Pods-Speed Gauge Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Speed Gauge Tests-dummy.m"; sourceTree = "<group>"; };
 		55975F6755E46D33A16CA75B99C73DEB /* YAxis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YAxis.swift; path = Source/Charts/Components/YAxis.swift; sourceTree = "<group>"; };
 		5718C606B800B077EBA33DF7D75B6B51 /* IHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IHighlighter.swift; path = Source/Charts/Highlight/IHighlighter.swift; sourceTree = "<group>"; };
 		5CEDE7069340DD91B0A2FAD0B6619D6E /* Charts-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Charts-prefix.pch"; sourceTree = "<group>"; };
 		5CF2238781CA3EDC4892C2C824D62291 /* IBubbleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IBubbleChartDataSet.swift; path = Source/Charts/Data/Interfaces/IBubbleChartDataSet.swift; sourceTree = "<group>"; };
-		6376C35AD7F403EDE531A4960AC01284 /* Pods-Speed Gauge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Speed Gauge-umbrella.h"; sourceTree = "<group>"; };
 		6404B404E7A50C9BD4D44A61B596DB33 /* LineChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartData.swift; path = Source/Charts/Data/Implementations/Standard/LineChartData.swift; sourceTree = "<group>"; };
+		65B559FB52970EA7EB1015C23F8F795B /* Pods-Speed Gauge-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge-resources.sh"; sourceTree = "<group>"; };
 		66F16995035B01AC5C3BD58E638DBF52 /* XShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/XShapeRenderer.swift; sourceTree = "<group>"; };
 		6B1A957C47FE5FBCC2F9A96FE75D4F00 /* ChartDataRendererBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartDataRendererBase.swift; path = Source/Charts/Renderers/ChartDataRendererBase.swift; sourceTree = "<group>"; };
 		6B4C7C6E03565F917744754FC33D5D0F /* LineScatterCandleRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineScatterCandleRadarChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/LineScatterCandleRadarChartDataSet.swift; sourceTree = "<group>"; };
 		6CCBBF74C7CF5D44DF4AD349A5F59A89 /* AnimatedZoomViewJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedZoomViewJob.swift; path = Source/Charts/Jobs/AnimatedZoomViewJob.swift; sourceTree = "<group>"; };
+		6CDE52407B0F0CF7B42876942FCE7C15 /* Pods-Speed Gauge-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge-frameworks.sh"; sourceTree = "<group>"; };
 		6DD5701576DCBB12AE2CC7EABC3E6E27 /* DefaultValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DefaultValueFormatter.swift; path = Source/Charts/Formatters/DefaultValueFormatter.swift; sourceTree = "<group>"; };
 		6DE9C823218B8ED673F3BAB4E7F25730 /* XAxisRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XAxisRenderer.swift; path = Source/Charts/Renderers/XAxisRenderer.swift; sourceTree = "<group>"; };
 		6E79B61FE42F23BC5C404D2D194F98E4 /* ChartHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartHighlighter.swift; path = Source/Charts/Highlight/ChartHighlighter.swift; sourceTree = "<group>"; };
-		721438451F94245B3B4CD763A89A5B11 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
 		7754D46F5D42A4B86750D2C226D4D6C4 /* CandleChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartData.swift; path = Source/Charts/Data/Implementations/Standard/CandleChartData.swift; sourceTree = "<group>"; };
 		77C77DD0D0E1748AB7C546AC74EFFAB5 /* RadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataSet.swift; sourceTree = "<group>"; };
 		78474F0936F1783A10171A18E5BB61C9 /* LineChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartRenderer.swift; path = Source/Charts/Renderers/LineChartRenderer.swift; sourceTree = "<group>"; };
+		7B54E06D21AFEB43F7C9156C0E6D239C /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Charts.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CAB820E042B29B948CC2F1AF3C47062 /* BubbleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/BubbleChartDataSet.swift; sourceTree = "<group>"; };
 		7D8FD6521040045B961C7BAAA836B6AC /* Surge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Surge-dummy.m"; sourceTree = "<group>"; };
 		7DFF24CE19EA806AF3CD3BBFA903D7E6 /* ChevronDownShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChevronDownShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/ChevronDownShapeRenderer.swift; sourceTree = "<group>"; };
 		7E53BB1C6323ACF1F6BF5C0152593592 /* ScatterChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScatterChartData.swift; path = Source/Charts/Data/Implementations/Standard/ScatterChartData.swift; sourceTree = "<group>"; };
+		80E7C99D58AEFA55A3818344EF102FCE /* Pods-Speed Gauge Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Speed Gauge Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8172D624A0A067A34275667E6AFC0352 /* HorizontalBarChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HorizontalBarChartRenderer.swift; path = Source/Charts/Renderers/HorizontalBarChartRenderer.swift; sourceTree = "<group>"; };
 		82D99AC2E26CFE6E59AD5A4729615C4D /* Power.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Power.swift; path = Source/Power.swift; sourceTree = "<group>"; };
 		856575C6D2474B5471D68B130D9D0AFA /* Charts.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Charts.modulemap; sourceTree = "<group>"; };
 		85AAF4A86C7B9FA63FC88BB8BB2D0679 /* Matrix.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = Source/Matrix.swift; sourceTree = "<group>"; };
+		85F924FF7C0FC23F0DF575488F4754F0 /* Pods-Speed Gauge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Speed Gauge-umbrella.h"; sourceTree = "<group>"; };
 		8A3F1B3AB3AF0F1D3D7A6C3A7752F31E /* XAxis.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XAxis.swift; path = Source/Charts/Components/XAxis.swift; sourceTree = "<group>"; };
 		8B641179C4456D11163347DF780FC217 /* Surge.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Surge.xcconfig; sourceTree = "<group>"; };
-		8D805F5DF6AB5CF7A2CD4B1EC5221E21 /* Surge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Surge.framework; path = Surge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BD6F14ABC65402196CA16138C734189 /* Pods-Speed Gauge Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		8F7E59EDB4A5D835202D4824DE981824 /* IScatterChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IScatterChartDataSet.swift; path = Source/Charts/Data/Interfaces/IScatterChartDataSet.swift; sourceTree = "<group>"; };
 		8F872BD70E59F28E6905CFE936A6F641 /* Exponential.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Exponential.swift; path = Source/Exponential.swift; sourceTree = "<group>"; };
+		919BF23513181F334D9C1BD1E971654F /* Pods-Speed Gauge Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge Tests-resources.sh"; sourceTree = "<group>"; };
 		91DEF6BF6AF286562C3998917FC66D99 /* IPieChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IPieChartDataSet.swift; path = Source/Charts/Data/Interfaces/IPieChartDataSet.swift; sourceTree = "<group>"; };
 		924A75461E73858389478C0389FE3D71 /* ScatterChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScatterChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/ScatterChartDataSet.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -292,17 +314,17 @@
 		9C6CF8AA02CE3C24D0E85369BD652119 /* BarLineScatterCandleBubbleChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineScatterCandleBubbleChartData.swift; path = Source/Charts/Data/Implementations/Standard/BarLineScatterCandleBubbleChartData.swift; sourceTree = "<group>"; };
 		9CA7C092E573F60601CB80E1B62E8413 /* AnimatedViewPortJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedViewPortJob.swift; path = Source/Charts/Jobs/AnimatedViewPortJob.swift; sourceTree = "<group>"; };
 		9D508438EA99EF1991BFEE5690FD41EC /* LineChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartDataProvider.swift; path = Source/Charts/Interfaces/LineChartDataProvider.swift; sourceTree = "<group>"; };
+		9DB4784355B410E43E8BF809AA893C5D /* Pods-Speed Gauge Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Speed Gauge Tests.modulemap"; sourceTree = "<group>"; };
 		A05C3A88E49EF38CCB1646CB2DD4CAA3 /* ChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/ChartDataEntry.swift; sourceTree = "<group>"; };
 		A0857D94730C7D3DF3B4AE64397AF07D /* Auxiliary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Auxiliary.swift; path = Source/Auxiliary.swift; sourceTree = "<group>"; };
 		A2884BA0CF3A1F86141B94DAD14EB2EF /* IAxisValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IAxisValueFormatter.swift; path = Source/Charts/Formatters/IAxisValueFormatter.swift; sourceTree = "<group>"; };
-		A2E6C5A46A08EE974D6F883828394F77 /* Pods-Speed Gauge-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge-resources.sh"; sourceTree = "<group>"; };
 		A3069E1390E1B0975C5F597603A220A7 /* RadarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/RadarChartDataEntry.swift; sourceTree = "<group>"; };
 		A387F252AE3B349C70860491F1286F76 /* Range.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Range.swift; path = Source/Charts/Highlight/Range.swift; sourceTree = "<group>"; };
 		A3E24032BD87FE31CB713B7CE0226A28 /* BarChartDataEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarChartDataEntry.swift; path = Source/Charts/Data/Implementations/Standard/BarChartDataEntry.swift; sourceTree = "<group>"; };
 		A988D8823B301A15785C04E9563F399B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA972AD332E8E9EFA21F8653E3294B65 /* Pods-Speed Gauge Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Speed Gauge Tests-umbrella.h"; sourceTree = "<group>"; };
 		AAF0BFDC2D77171D3F6E2F11DFA79A00 /* BarLineScatterCandleBubbleRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineScatterCandleBubbleRenderer.swift; path = Source/Charts/Renderers/BarLineScatterCandleBubbleRenderer.swift; sourceTree = "<group>"; };
 		AB17E071CD68AB2563D5ED008E5D3C70 /* Surge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Surge.modulemap; sourceTree = "<group>"; };
-		ADEF93A6271CD3E26DF8DE3EE577E05D /* Pods-Speed Gauge-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Speed Gauge-acknowledgements.plist"; sourceTree = "<group>"; };
 		AECF37D7600AF8E61FDFB1E479F62FBD /* RadarChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartView.swift; path = Source/Charts/Charts/RadarChartView.swift; sourceTree = "<group>"; };
 		AEDEA82203CA6393A08EAEA9886303C5 /* BarLineChartViewBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineChartViewBase.swift; path = Source/Charts/Charts/BarLineChartViewBase.swift; sourceTree = "<group>"; };
 		B040F843E6792985D1A22563437D7C3C /* LegendEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LegendEntry.swift; path = Source/Charts/Components/LegendEntry.swift; sourceTree = "<group>"; };
@@ -311,8 +333,10 @@
 		B44DFEA487DFAF6CDC44D4EB8CAF1113 /* BubbleChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartView.swift; path = Source/Charts/Charts/BubbleChartView.swift; sourceTree = "<group>"; };
 		B4B8685584DFB5B8590F80E0AB5ED8A9 /* BubbleChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BubbleChartData.swift; path = Source/Charts/Data/Implementations/Standard/BubbleChartData.swift; sourceTree = "<group>"; };
 		B884351B7C1AD263B2D769B3DB0D1132 /* AnimatedMoveViewJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedMoveViewJob.swift; path = Source/Charts/Jobs/AnimatedMoveViewJob.swift; sourceTree = "<group>"; };
+		BD5D318E376B827D60EAA64C7361D08E /* Pods_Speed_Gauge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Speed_Gauge_Tests.framework; path = "Pods-Speed Gauge Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE17A1EAF725143BC5EF079616330FEA /* Surge-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-prefix.pch"; sourceTree = "<group>"; };
 		BEF51A2C2232A94C1DD4E8A91B9760AC /* IValueFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IValueFormatter.swift; path = Source/Charts/Formatters/IValueFormatter.swift; sourceTree = "<group>"; };
+		BF293D3EB7A935BFA35A41250F4C63D5 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
 		BF2C40B7CB960A4B60DA23F8714C7285 /* DataApproximator+N.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DataApproximator+N.swift"; path = "Source/Charts/Filters/DataApproximator+N.swift"; sourceTree = "<group>"; };
 		BFE202E64F81935467C7FD392ADF8BE9 /* LineScatterCandleRadarRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineScatterCandleRadarRenderer.swift; path = Source/Charts/Renderers/LineScatterCandleRadarRenderer.swift; sourceTree = "<group>"; };
 		C226986416B694AABA5523601B8D4390 /* ScatterChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ScatterChartRenderer.swift; path = Source/Charts/Renderers/ScatterChartRenderer.swift; sourceTree = "<group>"; };
@@ -322,6 +346,8 @@
 		C3F22B5D45B294B744A7B5277335C009 /* Renderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Renderer.swift; path = Source/Charts/Renderers/Renderer.swift; sourceTree = "<group>"; };
 		C52C335BC14BFD9DB98BFA3745D83D17 /* PieChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartView.swift; path = Source/Charts/Charts/PieChartView.swift; sourceTree = "<group>"; };
 		CA56EE5690C96BE5F66D99B0C7438F04 /* RadarChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarChartRenderer.swift; path = Source/Charts/Renderers/RadarChartRenderer.swift; sourceTree = "<group>"; };
+		CAFDAB5789345542EDDC04287E4080C4 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
+		CC74CC64430DC838AC11ABB19A7CEEF1 /* Surge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Surge.framework; path = Surge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB958F3B662680A2040119F1C7BE4D2 /* LineChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LineChartView.swift; path = Source/Charts/Charts/LineChartView.swift; sourceTree = "<group>"; };
 		D051BF0C2195C3F871F9DADF8C39EFBB /* PieChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/PieChartDataSet.swift; sourceTree = "<group>"; };
 		D212C44E99A006268B37379A60727CB6 /* TriangleShapeRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TriangleShapeRenderer.swift; path = Source/Charts/Renderers/Scatter/TriangleShapeRenderer.swift; sourceTree = "<group>"; };
@@ -333,17 +359,19 @@
 		D8A7DEE049BEBD0C1FA11038DBD9045B /* BarLineScatterCandleBubbleChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarLineScatterCandleBubbleChartDataProvider.swift; path = Source/Charts/Interfaces/BarLineScatterCandleBubbleChartDataProvider.swift; sourceTree = "<group>"; };
 		DA762C59BC40C3808F29D2D3758FAB0F /* Surge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-umbrella.h"; sourceTree = "<group>"; };
 		DC418E93A827B59682AD473545906372 /* ChartBaseDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartBaseDataSet.swift; path = Source/Charts/Data/Implementations/ChartBaseDataSet.swift; sourceTree = "<group>"; };
+		DC9138D5FA2A75B4F2E3D6E1ECEE8C14 /* Pods-Speed Gauge Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Speed Gauge Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		DDC63821616F84B16AB930182FACC3A0 /* ViewPortJob.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewPortJob.swift; path = Source/Charts/Jobs/ViewPortJob.swift; sourceTree = "<group>"; };
+		DE12E7FD9A671E4A4FD10C419B034724 /* Pods-Speed Gauge Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Speed Gauge Tests-frameworks.sh"; sourceTree = "<group>"; };
 		DE6A8E3BA41B81345C2F0C3831535175 /* PieChartRenderer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartRenderer.swift; path = Source/Charts/Renderers/PieChartRenderer.swift; sourceTree = "<group>"; };
 		DF10DD8F7ECF9AE7C1C8706AD3ED3194 /* CandleChartDataProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataProvider.swift; path = Source/Charts/Interfaces/CandleChartDataProvider.swift; sourceTree = "<group>"; };
 		DF4F125D9BBFB8F0636635FEB928835B /* RadarHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarHighlighter.swift; path = Source/Charts/Highlight/RadarHighlighter.swift; sourceTree = "<group>"; };
-		DFFAD4D00877E5BBA4BC37A87554F1E8 /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Speed_Gauge.framework; path = "Pods-Speed Gauge.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6723F9AC0C764EA129D454A48DDF3E2 /* BarChartView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BarChartView.swift; path = Source/Charts/Charts/BarChartView.swift; sourceTree = "<group>"; };
-		E891C1B03FF9651DBECD821FE14AC945 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
+		E802860984489520148E2D18934CB11B /* Pods-Speed Gauge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Speed Gauge.modulemap"; sourceTree = "<group>"; };
 		E9BA287A228395D6A329EC9E25DDF021 /* AxisBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AxisBase.swift; path = Source/Charts/Components/AxisBase.swift; sourceTree = "<group>"; };
 		EC9F1BBBDEA2191E014D7A58252F9B53 /* ILineRadarChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ILineRadarChartDataSet.swift; path = Source/Charts/Data/Interfaces/ILineRadarChartDataSet.swift; sourceTree = "<group>"; };
 		ECAAB201D69A9FCCD02047E8EFD85DD4 /* Charts.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Charts.xcconfig; sourceTree = "<group>"; };
 		ED5798A870D1DD761236696F41A3CF88 /* PieChartData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PieChartData.swift; path = Source/Charts/Data/Implementations/Standard/PieChartData.swift; sourceTree = "<group>"; };
+		F1F9DB5AD27F4FB35D254D983ACE30B2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F337562F93E3CC7E623D60FD2D4297A9 /* FFT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FFT.swift; path = Source/FFT.swift; sourceTree = "<group>"; };
 		F5612FD265FB57AC40D650097CE383C1 /* AxisRendererBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AxisRendererBase.swift; path = Source/Charts/Renderers/AxisRendererBase.swift; sourceTree = "<group>"; };
 		F68E96896CAD6CA73ECC35C0943CDCDE /* CandleChartDataSet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CandleChartDataSet.swift; path = Source/Charts/Data/Implementations/Standard/CandleChartDataSet.swift; sourceTree = "<group>"; };
@@ -361,6 +389,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				85EF2D3B8EE970A70669B94FFC8B995A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45A249DB4CDCA548AAC3E7A6E18A0348 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDC9150F10E7C71D89C4C1C115246521 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,14 +420,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B06CC497F12E5309DF5459C35CA59A1 /* Products */ = {
+		36877D47CF0F2AB9A95B76A1AA779AF4 /* Pods-Speed Gauge */ = {
 			isa = PBXGroup;
 			children = (
-				4FA868A70B04D9541342ADC2570829D9 /* Charts.framework */,
-				DFFAD4D00877E5BBA4BC37A87554F1E8 /* Pods_Speed_Gauge.framework */,
-				8D805F5DF6AB5CF7A2CD4B1EC5221E21 /* Surge.framework */,
+				F1F9DB5AD27F4FB35D254D983ACE30B2 /* Info.plist */,
+				E802860984489520148E2D18934CB11B /* Pods-Speed Gauge.modulemap */,
+				485F693AAC735FD330E624237151315A /* Pods-Speed Gauge-acknowledgements.markdown */,
+				294B05718F9D8ED5D8B4BBA81DD82ABB /* Pods-Speed Gauge-acknowledgements.plist */,
+				010B0922888ED547D21BF635D198EF3B /* Pods-Speed Gauge-dummy.m */,
+				6CDE52407B0F0CF7B42876942FCE7C15 /* Pods-Speed Gauge-frameworks.sh */,
+				65B559FB52970EA7EB1015C23F8F795B /* Pods-Speed Gauge-resources.sh */,
+				85F924FF7C0FC23F0DF575488F4754F0 /* Pods-Speed Gauge-umbrella.h */,
+				BF293D3EB7A935BFA35A41250F4C63D5 /* Pods-Speed Gauge.debug.xcconfig */,
+				CAFDAB5789345542EDDC04287E4080C4 /* Pods-Speed Gauge.release.xcconfig */,
 			);
-			name = Products;
+			name = "Pods-Speed Gauge";
+			path = "Target Support Files/Pods-Speed Gauge";
 			sourceTree = "<group>";
 		};
 		3A6CE3174FE4654D0F80AA38D64079B8 /* Pods */ = {
@@ -411,12 +455,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5B18F52DCA2E68CDF3F364D8CE23B908 /* Targets Support Files */ = {
+		68C9642D80EAC819499AC21C9E77EB23 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B07C144C72972705079FF8C7C9DEE430 /* Pods-Speed Gauge */,
+				7B54E06D21AFEB43F7C9156C0E6D239C /* Charts.framework */,
+				52550E91343945523D6928140DCF6BE7 /* Pods_Speed_Gauge.framework */,
+				BD5D318E376B827D60EAA64C7361D08E /* Pods_Speed_Gauge_Tests.framework */,
+				CC74CC64430DC838AC11ABB19A7CEEF1 /* Surge.framework */,
 			);
-			name = "Targets Support Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		75E087F996C14D619749BE63FDB8A2B2 /* Charts */ = {
@@ -458,8 +505,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				3A6CE3174FE4654D0F80AA38D64079B8 /* Pods */,
-				1B06CC497F12E5309DF5459C35CA59A1 /* Products */,
-				5B18F52DCA2E68CDF3F364D8CE23B908 /* Targets Support Files */,
+				68C9642D80EAC819499AC21C9E77EB23 /* Products */,
+				F6C24951D4EB8F27C4472C83CDDEA999 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -475,6 +522,24 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Surge";
+			sourceTree = "<group>";
+		};
+		848FA70681508B0704AE9875FF39689E /* Pods-Speed Gauge Tests */ = {
+			isa = PBXGroup;
+			children = (
+				07AE86A920F53635D44A072BBE48FF5C /* Info.plist */,
+				9DB4784355B410E43E8BF809AA893C5D /* Pods-Speed Gauge Tests.modulemap */,
+				80E7C99D58AEFA55A3818344EF102FCE /* Pods-Speed Gauge Tests-acknowledgements.markdown */,
+				DC9138D5FA2A75B4F2E3D6E1ECEE8C14 /* Pods-Speed Gauge Tests-acknowledgements.plist */,
+				554D0A0E9B9CEFE3250434DBA01FFB0F /* Pods-Speed Gauge Tests-dummy.m */,
+				DE12E7FD9A671E4A4FD10C419B034724 /* Pods-Speed Gauge Tests-frameworks.sh */,
+				919BF23513181F334D9C1BD1E971654F /* Pods-Speed Gauge Tests-resources.sh */,
+				AA972AD332E8E9EFA21F8653E3294B65 /* Pods-Speed Gauge Tests-umbrella.h */,
+				8BD6F14ABC65402196CA16138C734189 /* Pods-Speed Gauge Tests.debug.xcconfig */,
+				4F4F90E5D68C0383816D608C65300885 /* Pods-Speed Gauge Tests.release.xcconfig */,
+			);
+			name = "Pods-Speed Gauge Tests";
+			path = "Target Support Files/Pods-Speed Gauge Tests";
 			sourceTree = "<group>";
 		};
 		AB2CA77ECD31B68A6D58C9EA05CCB24F /* Core */ = {
@@ -619,22 +684,13 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		B07C144C72972705079FF8C7C9DEE430 /* Pods-Speed Gauge */ = {
+		F6C24951D4EB8F27C4472C83CDDEA999 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				31E2ECE178EB2672B8AAA6CF550940DB /* Info.plist */,
-				2FB45C2649868D7F33943B3042314663 /* Pods-Speed Gauge.modulemap */,
-				4AE4545399087D0A8B51A321C4B3AE2E /* Pods-Speed Gauge-acknowledgements.markdown */,
-				ADEF93A6271CD3E26DF8DE3EE577E05D /* Pods-Speed Gauge-acknowledgements.plist */,
-				3F7996C1119A0F7BBE9A95657AF87C7B /* Pods-Speed Gauge-dummy.m */,
-				4168DAEB687D1F6AA1B3686E925447AB /* Pods-Speed Gauge-frameworks.sh */,
-				A2E6C5A46A08EE974D6F883828394F77 /* Pods-Speed Gauge-resources.sh */,
-				6376C35AD7F403EDE531A4960AC01284 /* Pods-Speed Gauge-umbrella.h */,
-				E891C1B03FF9651DBECD821FE14AC945 /* Pods-Speed Gauge.debug.xcconfig */,
-				721438451F94245B3B4CD763A89A5B11 /* Pods-Speed Gauge.release.xcconfig */,
+				36877D47CF0F2AB9A95B76A1AA779AF4 /* Pods-Speed Gauge */,
+				848FA70681508B0704AE9875FF39689E /* Pods-Speed Gauge Tests */,
 			);
-			name = "Pods-Speed Gauge";
-			path = "Target Support Files/Pods-Speed Gauge";
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		FF0CDD07D727468B20C4F9027D3FB7F5 /* Surge */ = {
@@ -658,6 +714,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		24CC47EDE225FFE9EE5719952D1760A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B76C299CC2A0A79B43627D819EE0055C /* Pods-Speed Gauge Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		32B877E4A512183CAFE5DE9B86189BD4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -701,7 +765,7 @@
 			);
 			name = "Pods-Speed Gauge";
 			productName = "Pods-Speed Gauge";
-			productReference = DFFAD4D00877E5BBA4BC37A87554F1E8 /* Pods_Speed_Gauge.framework */;
+			productReference = 52550E91343945523D6928140DCF6BE7 /* Pods_Speed_Gauge.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1D416D5E8AAA52C62EECDEEAFED16087 /* Charts */ = {
@@ -718,7 +782,7 @@
 			);
 			name = Charts;
 			productName = Charts;
-			productReference = 4FA868A70B04D9541342ADC2570829D9 /* Charts.framework */;
+			productReference = 7B54E06D21AFEB43F7C9156C0E6D239C /* Charts.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C64B059C9DD4D0908B1A924D26EDC4DF /* Surge */ = {
@@ -735,7 +799,26 @@
 			);
 			name = Surge;
 			productName = Surge;
-			productReference = 8D805F5DF6AB5CF7A2CD4B1EC5221E21 /* Surge.framework */;
+			productReference = CC74CC64430DC838AC11ABB19A7CEEF1 /* Surge.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E37D3FAF558A8CEE4FCBAB3B207F6B74 /* Pods-Speed Gauge Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE2A671226AAAF5F88F220ABC7B6F28A /* Build configuration list for PBXNativeTarget "Pods-Speed Gauge Tests" */;
+			buildPhases = (
+				5D2206DB50214C0C1FF3005EF390BEBA /* Sources */,
+				45A249DB4CDCA548AAC3E7A6E18A0348 /* Frameworks */,
+				24CC47EDE225FFE9EE5719952D1760A9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3B2F23EF1E1FADB24964D2CD28063BC5 /* PBXTargetDependency */,
+				C3D2F36E5720AA3091A52CF8F305AD09 /* PBXTargetDependency */,
+			);
+			name = "Pods-Speed Gauge Tests";
+			productName = "Pods-Speed Gauge Tests";
+			productReference = BD5D318E376B827D60EAA64C7361D08E /* Pods_Speed_Gauge_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -755,12 +838,13 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 1B06CC497F12E5309DF5459C35CA59A1 /* Products */;
+			productRefGroup = 68C9642D80EAC819499AC21C9E77EB23 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				1D416D5E8AAA52C62EECDEEAFED16087 /* Charts */,
 				00EC37C7673731DFD96579FAB9FA06F7 /* Pods-Speed Gauge */,
+				E37D3FAF558A8CEE4FCBAB3B207F6B74 /* Pods-Speed Gauge Tests */,
 				C64B059C9DD4D0908B1A924D26EDC4DF /* Surge */,
 			);
 		};
@@ -927,6 +1011,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5D2206DB50214C0C1FF3005EF390BEBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF10CDD0887B3AE3A3A1FEC81FD6D3A3 /* Pods-Speed Gauge Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6B5266D9CB9B7D676D17BE6EB0902AA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -938,6 +1030,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3B2F23EF1E1FADB24964D2CD28063BC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			target = 1D416D5E8AAA52C62EECDEEAFED16087 /* Charts */;
+			targetProxy = 041C14EB444D2FDD6EB489760E933865 /* PBXContainerItemProxy */;
+		};
 		50AC39B5E0B84586BF349CAB983F5105 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Charts;
@@ -949,6 +1047,12 @@
 			name = Surge;
 			target = C64B059C9DD4D0908B1A924D26EDC4DF /* Surge */;
 			targetProxy = 03106D259D76F73A5498E22D72C49427 /* PBXContainerItemProxy */;
+		};
+		C3D2F36E5720AA3091A52CF8F305AD09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Surge;
+			target = C64B059C9DD4D0908B1A924D26EDC4DF /* Surge */;
+			targetProxy = 6C6BCB9BD973EDB0D9C020A1765B4F0E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1133,7 +1237,7 @@
 		};
 		8C096E5B9CA3EB7E0F45A8ED6A27FDBC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 721438451F94245B3B4CD763A89A5B11 /* Pods-Speed Gauge.release.xcconfig */;
+			baseConfigurationReference = CAFDAB5789345542EDDC04287E4080C4 /* Pods-Speed Gauge.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1164,6 +1268,40 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		AC713DEE489B85CE2E7534032055DC71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BD6F14ABC65402196CA16138C734189 /* Pods-Speed Gauge Tests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Speed Gauge Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Speed_Gauge_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		B946F5ED7330747C3DD755CCCAA129B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1198,7 +1336,7 @@
 		};
 		DE98D66A2128BBF69787F530F66F8B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E891C1B03FF9651DBECD821FE14AC945 /* Pods-Speed Gauge.debug.xcconfig */;
+			baseConfigurationReference = BF293D3EB7A935BFA35A41250F4C63D5 /* Pods-Speed Gauge.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1262,6 +1400,40 @@
 			};
 			name = Release;
 		};
+		F710383213FF193D23A6EBA86AB9CC75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F4F90E5D68C0383816D608C65300885 /* Pods-Speed Gauge Tests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Speed Gauge Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Speed_Gauge_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1297,6 +1469,15 @@
 			buildConfigurations = (
 				48E6132078065680265480894454AEBD /* Debug */,
 				2FE0BB20D52BBD6269BEFFE451274841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE2A671226AAAF5F88F220ABC7B6F28A /* Build configuration list for PBXNativeTarget "Pods-Speed Gauge Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC713DEE489B85CE2E7534032055DC71 /* Debug */,
+				F710383213FF193D23A6EBA86AB9CC75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
