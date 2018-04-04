@@ -11,7 +11,7 @@ import Surge
 
 class G_H_Filter {
     
-    var x0: Double  // The initial value of the state variable
+    var x0: Double  // The initial value of the state variable.
     var dx: Double  // The initial change rate for our state variable.
     let g: Double   // Scaling factor of the measurement.
     let h: Double   // Scaling factor of the change of the measurement.
@@ -19,7 +19,7 @@ class G_H_Filter {
     
     /**
      - parameters:
-        - x0: The initial value of the state variable
+        - x0: The initial value of the state variable.
         - dx: The initial change rate for our state variable.
         - g: Scaling factor of the measurement.
         - h: Scaling factor of the change of the measurement.

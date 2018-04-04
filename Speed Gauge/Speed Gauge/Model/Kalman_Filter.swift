@@ -12,7 +12,7 @@ import Surge
 class Kalman_Filter {
     
     /** Kalman Filter Algorithm:
-    
+     
      Initialization:
      1. Initialize the state of the filter.
      2. Initialize our belief in the state.
@@ -29,6 +29,45 @@ class Kalman_Filter {
      5. Update belief in the state based on how certain we are in the measurement
      
      */
+    
+    
+    var x: Matrix<Double> // State variable.
+    var P: Matrix<Double> // State covariance.
+    
+    var F: Matrix<Double> // Process model.
+    var Q: Matrix<Double> // Process noise.
+    
+    var B: Matrix<Double> // Control input model.
+    var u: Matrix<Double> // Control input.
+    
+    var H: Matrix<Double> // Measurement function.
+    var R: Matrix<Double> // Measurement noise.
+    
+    /**
+     - parameters:
+        - x: State variable.
+        - P: State covariance.
+        - F: Process model.
+        - Q: Process noise.
+        - B: Control input model.
+        - u: Control input.
+        - H: Measurement function.
+        - R: Measurement noise.
+     */
+    init(_ x: Matrix<Double>, _ P: Matrix<Double>, _ F: Matrix<Double>, _ Q: Matrix<Double>, _ B: Matrix<Double>, _ u: Matrix<Double>, _ H: Matrix<Double>, _ R: Matrix<Double>) {
+        self.x = x
+        self.P = P
+        self.F = F
+        self.Q = Q
+        self.B = B
+        self.u = u
+        self.H = H
+        self.R = R
+    }
+    
+    func filter(_ data: [Double]) -> [Double] {
+        return []
+    }
     
     class func filter(){
         
