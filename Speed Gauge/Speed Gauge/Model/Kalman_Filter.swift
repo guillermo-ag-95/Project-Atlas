@@ -65,58 +65,29 @@ class Kalman_Filter {
         self.R = R
     }
     
-    func filter(_ data: [Double]) -> [Double] {
-        return []
+    func filter(_ z: Matrix<Double>) -> (x: Matrix<Double>, P: Matrix<Double>) {
+        let (x_prior, P_prior) = self.predict()
+        let (x, P) = self.update(x_prior, P_prior, z)
+        return (x, P)
     }
     
-    class func filter(){
-        
-        let dt: Double = 0.1 // Time step
-        
-        var x: Matrix<Double> // State variable
-        var P: Matrix<Double> // State covariance
-        
-        var F: Matrix<Double> // Process model
-        var Q: Matrix<Double> // Process noise
-        
-        var B: Matrix<Double> // Control input model
-        var u: Matrix<Double> // Control input
-        
-        x = Matrix<Double>([[10.0],[4.5]])
-        P = Matrix<Double>([[500, 0],[0, 49]])
-        F = Matrix<Double>([[1, dt],[0, 1]])
-        Q = Matrix<Double>([[0.588, 1.175], [1.175, 2.35]]) // This calculation will be explained later
-        B = Matrix<Double>(rows: F.rows, columns: F.columns, repeatedValue: 0)
-        u = Matrix<Double>(rows: x.rows, columns: x.columns, repeatedValue: 0)
-        
-        let (x_prior, P_prior) = Kalman_Filter.predict(x, P, F, Q, B, u)
-        print(x_prior, P_prior)
-        
-        var z: Matrix<Double> // Measurement
-        var H: Matrix<Double> // Measurement function
-        var R: Matrix<Double> // Measurement noise
-        
-        z = Matrix<Double>([[1]])
-        H = Matrix<Double>([[1,0]])
-        R = Matrix<Double>([[5]])
-        
-        (x, P) = Kalman_Filter.update(x_prior, P_prior, z, R, H)
-        print(x, P)
-        
-    }
-    
-    class func predict(_ x: Matrix<Double>, _ P: Matrix<Double>, _ F: Matrix<Double>, _ Q: Matrix<Double>, _ B: Matrix<Double>, _ u: Matrix<Double>) -> (Matrix<Double>, Matrix<Double>) {
-        let x_prior = F * x + B * u
-        let P_prior = F * P * Surge.transpose(F) + Q
+    func predict() -> (x_prior: Matrix<Double>, P_prior: Matrix<Double>) {
+        let x_prior = self.F * self.x + self.B * self.u
+        let P_prior = self.F * self.P * Surge.transpose(self.F) + self.Q
         return (x_prior, P_prior)
     }
     
-    class func update(_ x_prior: Matrix<Double>, _ P_prior: Matrix<Double>, _ z: Matrix<Double>, _ R: Matrix<Double>, _ H: Matrix<Double>) -> (Matrix<Double>, Matrix<Double>){
-        let y = z + (-1) * H * x_prior
-        let K = P_prior * Surge.transpose(H) * Surge.inv((H * P_prior * Surge.transpose(H) + R))
+    func update(_ x_prior: Matrix<Double>, _ P_prior: Matrix<Double>, _ z: Matrix<Double>) -> (x: Matrix<Double>, P: Matrix<Double>) {
+        let y = z + (-1) * self.H * x_prior
+        let K = P_prior * Surge.transpose(self.H) * Surge.inv((self.H * P_prior * Surge.transpose(self.H) + self.R))
         let x = x_prior + K * y
-        let P = (P_prior * Surge.inv(P_prior) + (-1) * K * H) * P_prior
+        let P = (P_prior * Surge.inv(P_prior) + (-1) * K * self.H) * P_prior
+        
+        self.x = x
+        self.P = P
+        
         return (x, P)
+
     }
     
 }
