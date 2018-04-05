@@ -65,18 +65,33 @@ class Kalman_Filter {
         self.R = R
     }
     
+    /**
+     - parameters:
+        - z: A single measurement from the sensor.
+     - returns: Filtered measurement and updated state covariance matrix.
+     */
     func filter(_ z: Matrix<Double>) -> (x: Matrix<Double>, P: Matrix<Double>) {
         let (x_prior, P_prior) = self.predict()
         let (x, P) = self.update(x_prior, P_prior, z)
         return (x, P)
     }
     
+    /**
+     - returns: Predict state and belief for the next time step.
+     */
     func predict() -> (x_prior: Matrix<Double>, P_prior: Matrix<Double>) {
         let x_prior = self.F * self.x + self.B * self.u
         let P_prior = self.F * self.P * Surge.transpose(self.F) + self.Q
         return (x_prior, P_prior)
     }
     
+    /**
+     - parameters:
+        - x_prior: Prediction for the next time step.
+        - P_prior: Updated belief to account for the uncertainty in prediction.
+        - z: A single measurement from the sensor.
+     - returns: Filtered measurement and updated state covariance matrix.
+     */
     func update(_ x_prior: Matrix<Double>, _ P_prior: Matrix<Double>, _ z: Matrix<Double>) -> (x: Matrix<Double>, P: Matrix<Double>) {
         let y = z + (-1) * self.H * x_prior
         let K = P_prior * Surge.transpose(self.H) * Surge.inv((self.H * P_prior * Surge.transpose(self.H) + self.R))
