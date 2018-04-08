@@ -31,22 +31,22 @@ class Kalman_Filter {
      */
     
     
-    var x: Matrix<Double> // State variable.
-    var P: Matrix<Double> // State covariance.
+    var x: Matrix<Double> // State variable mean.
+    var P: Matrix<Double> // State variable covariance.
     
     var F: Matrix<Double> // Process model.
-    var Q: Matrix<Double> // Process noise.
+    var Q: Matrix<Double> // Process noise covariance.
     
     var B: Matrix<Double> // Control input model.
     var u: Matrix<Double> // Control input.
     
     var H: Matrix<Double> // Measurement function.
-    var R: Matrix<Double> // Measurement noise.
+    var R: Matrix<Double> // Measurement noise covariance.
     
     /**
      - parameters:
-        - x: State variable.
-        - P: State covariance.
+        - x: State variable mean.
+        - P: State variable covariance.
         - F: Process model.
         - Q: Process noise.
         - B: Control input model.

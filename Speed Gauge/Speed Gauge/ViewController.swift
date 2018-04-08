@@ -9,6 +9,7 @@
 import UIKit
 import CoreMotion
 import Charts
+import Surge
 
 import AVFoundation
 
@@ -39,7 +40,9 @@ class ViewController: UIViewController {
     var gravityXDataset: LineChartDataSet = LineChartDataSet()
     var gravityYDataset: LineChartDataSet = LineChartDataSet()
     var gravityZDataset: LineChartDataSet = LineChartDataSet()
-
+    
+    var kalman_filter: Kalman_Filter? = nil
+    
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
@@ -47,6 +50,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeInterface()
+        kalman_filter = initializeKalmanFilter()
     }
     
     @IBOutlet weak var playButton: UIButton!
@@ -82,6 +86,7 @@ class ViewController: UIViewController {
     func stopRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
+        printAccelerationData()
     }
     
     func initializeStoredData(){
@@ -145,6 +150,28 @@ class ViewController: UIViewController {
         gravityLineChartGraph.notifyDataSetChanged()
     }
     
+    func initializeKalmanFilter() -> Kalman_Filter {
+        
+        // State variable mean and covariance.
+        let x = Matrix<Double>.init([[0],[0],[0]])
+        let P = Matrix<Double>.init([[0.000045,0,0],[0,0.000045,0],[0,0, 0.000045]])
+        
+        // Process model and noise covariance
+        let F = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
+        let Q = Matrix<Double>.init([[updatesIntervalOn,0,0],[0,updatesIntervalOn,0],[0,updatesIntervalOn,0]])
+        
+        // Control function
+        let B = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
+        let u = Matrix<Double>.init([[0],[0],[0]])
+        
+        // Measurement function and covariance.
+        let H = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
+        let R = Matrix<Double>.init([[0.000045,0,0],[0,0.000045,0],[0,0,0.000045]])
+        
+        return Kalman_Filter.init(x, P, F, Q, B, u, H, R)
+        
+    }
+    
     func updateStoredData(_ data: CMDeviceMotion){
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
@@ -157,6 +184,8 @@ class ViewController: UIViewController {
         let newXGravity = data.gravity.x
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
+        
+        // Filtered acceleration
         
         // Instant velocity calculation by integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
