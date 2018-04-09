@@ -153,4 +153,41 @@ class Kalman_Filter_Tests: Abstract_Test {
         
     }
     
+    /// Transparent filter
+    func test_Kalman_filter_2(){
+        
+        let dt = 0.01
+        
+        // State variable mean and covariance.
+        var x = Matrix<Double>.init([[3],[4],[5]])
+        let P = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
+        
+        // Process model and noise covariance
+        let F = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
+        let Q = Matrix<Double>.init([[dt,0,0],[0,dt,0],[0,0,dt]])
+        
+        // Control function
+        let B = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
+        let u = Matrix<Double>.init([[0],[0],[0]])
+        
+        // Measurement function and covariance.
+        let H = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
+        let R = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
+        
+        // Measurement
+        let z = Matrix<Double>.init([[6],[1],[9]])
+        
+        let kalman_filter = Kalman_Filter.init(x, P, F, Q, B, u, H, R)
+        
+        let x_expected = Matrix<Double>.init([[6],[1],[9]])
+        x = kalman_filter.filter(z).x
+        
+        // Check matrix values.
+        for m in 0..<kalman_filter.x.rows {
+            for n in 0..<kalman_filter.x.columns {
+                XCTAssertEqual(x_expected[m,n], kalman_filter.x[m,n], accuracy: 0.01)
+            }
+        }
+    }
+    
 }

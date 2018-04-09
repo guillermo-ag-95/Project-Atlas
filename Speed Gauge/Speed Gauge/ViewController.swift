@@ -20,10 +20,12 @@ class ViewController: UIViewController {
     var accelerometerXData: [Double] = []
     var accelerometerYData: [Double] = []
     var accelerometerZData: [Double] = []
+    var accelerometerUpwardData: [Double] = []
     
     var velocityXData: [Double] = []
     var velocityYData: [Double] = []
     var velocityZData: [Double] = []
+    var velocityUpwardData: [Double] = []
     
     var gravityXData: [Double] = []
     var gravityYData: [Double] = []
@@ -32,10 +34,12 @@ class ViewController: UIViewController {
     var accelerometerXDataset: LineChartDataSet = LineChartDataSet()
     var accelerometerYDataset: LineChartDataSet = LineChartDataSet()
     var accelerometerZDataset: LineChartDataSet = LineChartDataSet()
+    var accelerometerUpwardDataset: LineChartDataSet = LineChartDataSet()
     
     var velocityXDataset: LineChartDataSet = LineChartDataSet()
     var velocityYDataset: LineChartDataSet = LineChartDataSet()
     var velocityZDataset: LineChartDataSet = LineChartDataSet()
+    var velocityUpwardDataset: LineChartDataSet = LineChartDataSet()
     
     var gravityXDataset: LineChartDataSet = LineChartDataSet()
     var gravityYDataset: LineChartDataSet = LineChartDataSet()
@@ -86,7 +90,6 @@ class ViewController: UIViewController {
     func stopRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
-        printAccelerationData()
     }
     
     func initializeStoredData(){
@@ -97,6 +100,8 @@ class ViewController: UIViewController {
         accelerometerYData.append(0)
         accelerometerZData.removeAll()
         accelerometerZData.append(0)
+        accelerometerUpwardData.removeAll()
+        accelerometerUpwardData.append(0)
         
         // Clean velocity data.
         velocityXData.removeAll()
@@ -105,6 +110,8 @@ class ViewController: UIViewController {
         velocityYData.append(0)
         velocityZData.removeAll()
         velocityZData.append(0)
+        velocityUpwardData.removeAll()
+        velocityUpwardData.append(0)
         
         // Clean gravity data
         gravityXData.removeAll()
@@ -118,11 +125,13 @@ class ViewController: UIViewController {
         accelerometerXDataset.values.removeAll()
         accelerometerYDataset.values.removeAll()
         accelerometerZDataset.values.removeAll()
+        accelerometerUpwardDataset.values.removeAll()
 
         // Clean velocity LineChartDataSet
         velocityXDataset.values.removeAll()
         velocityYDataset.values.removeAll()
         velocityZDataset.values.removeAll()
+        velocityUpwardDataset.values.removeAll()
         
         // Clean gravity LineChartDataSet
         gravityXDataset.values.removeAll()
@@ -135,8 +144,8 @@ class ViewController: UIViewController {
         gravityLineChartGraph.clear()
                 
         // Create empty chart data
-        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset])
-        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset])
+        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset, accelerometerUpwardDataset])
+        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset, velocityUpwardDataset])
         let gravityData: LineChartData = LineChartData(dataSets: [gravityXDataset, gravityYDataset, gravityZDataset])
         
         // Empty data added to the chart
@@ -154,11 +163,11 @@ class ViewController: UIViewController {
         
         // State variable mean and covariance.
         let x = Matrix<Double>.init([[0],[0],[0]])
-        let P = Matrix<Double>.init([[0.000045,0,0],[0,0.000045,0],[0,0, 0.000045]])
+        let P = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
         
         // Process model and noise covariance
         let F = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
-        let Q = Matrix<Double>.init([[updatesIntervalOn,0,0],[0,updatesIntervalOn,0],[0,updatesIntervalOn,0]])
+        let Q = Matrix<Double>.init([[updatesIntervalOn,0,0],[0,updatesIntervalOn,0],[0,0,updatesIntervalOn]])
         
         // Control function
         let B = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
@@ -166,7 +175,7 @@ class ViewController: UIViewController {
         
         // Measurement function and covariance.
         let H = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
-        let R = Matrix<Double>.init([[0.000045,0,0],[0,0.000045,0],[0,0,0.000045]])
+        let R = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
         
         return Kalman_Filter.init(x, P, F, Q, B, u, H, R)
         
@@ -177,15 +186,20 @@ class ViewController: UIViewController {
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
         // The accelerometer sensor seems to be inverted, so we need to change its sign
-        let newXAcceleration =  -data.userAcceleration.x * self.gravity
-        let newYAcceleration =  -data.userAcceleration.y * self.gravity
-        let newZAcceleration =  -data.userAcceleration.z * self.gravity
+        var newXAcceleration =  data.userAcceleration.x * self.gravity
+        var newYAcceleration =  data.userAcceleration.y * self.gravity
+        var newZAcceleration =  data.userAcceleration.z * self.gravity
         
         let newXGravity = data.gravity.x
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
         
         // Filtered acceleration
+        let rawAccelerationMatrix = Matrix<Double>.init([[newXAcceleration],[newYAcceleration],[newZAcceleration]])
+        let filteredAccelerationMatrix = kalman_filter!.filter(rawAccelerationMatrix).x
+        newXAcceleration = filteredAccelerationMatrix[0,0]
+        newYAcceleration = filteredAccelerationMatrix[1,0]
+        newZAcceleration = filteredAccelerationMatrix[2,0]
         
         // Instant velocity calculation by integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
@@ -197,14 +211,21 @@ class ViewController: UIViewController {
         let currentYVelocity = velocityYData.last! + newYVelocity
         let currentZVelocity = velocityZData.last! + newZVelocity
         
+        // Upward acceleration
+        let newUpwardAcceleration = newXAcceleration * newXGravity + newYAcceleration * newYGravity + newZAcceleration * newZGravity
+        let newUpwardVelocity = (accelerometerUpwardData.last! * updatesIntervalOn) + (newUpwardAcceleration - accelerometerUpwardData.last!) * (updatesIntervalOn / 2)
+        let currentUpwardVelocity = velocityUpwardData.last! + newUpwardVelocity
+        
         // Data storage
         accelerometerXData.append(newXAcceleration)
         accelerometerYData.append(newYAcceleration)
         accelerometerZData.append(newZAcceleration)
+        accelerometerUpwardData.append(newUpwardAcceleration)
         
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
+        velocityUpwardData.append(currentUpwardVelocity)
         
         gravityXData.append(newXGravity)
         gravityYData.append(newYGravity)
@@ -220,20 +241,24 @@ class ViewController: UIViewController {
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
         let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
         let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
+        let entryUpwardAcceleration = ChartDataEntry(x: position, y: newUpwardAcceleration)
         
         accelerationLineChartGraph.data?.addEntry(entryXAcceleration, dataSetIndex: 0)
         accelerationLineChartGraph.data?.addEntry(entryYAcceleration, dataSetIndex: 1)
         accelerationLineChartGraph.data?.addEntry(entryZAcceleration, dataSetIndex: 2)
+        accelerationLineChartGraph.data?.addEntry(entryUpwardAcceleration, dataSetIndex: 3)
         accelerationLineChartGraph.notifyDataSetChanged()
         
         // Velocity added to Chart
         let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
         let entryYVelocity = ChartDataEntry(x: position, y: currentYVelocity)
         let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
+        let entryUpwardVelocity = ChartDataEntry(x: position, y: currentUpwardVelocity)
         
         velocityLineChartGraph.data?.addEntry(entryXVelocity, dataSetIndex: 0)
         velocityLineChartGraph.data?.addEntry(entryYVelocity, dataSetIndex: 1)
         velocityLineChartGraph.data?.addEntry(entryZVelocity, dataSetIndex: 2)
+        velocityLineChartGraph.data?.addEntry(entryUpwardVelocity, dataSetIndex: 3)
         velocityLineChartGraph.notifyDataSetChanged()
         
         // Gravity added to the Chart
@@ -281,6 +306,12 @@ class ViewController: UIViewController {
         accelerometerZDataset.circleRadius = 1
         accelerometerZDataset.circleHoleRadius = 1
         
+        accelerometerUpwardDataset.label = "Upward acceleration"
+        accelerometerUpwardDataset.colors = [NSUIColor.black]
+        accelerometerUpwardDataset.setCircleColor(NSUIColor.black)
+        accelerometerUpwardDataset.circleRadius = 1
+        accelerometerUpwardDataset.circleHoleRadius = 1
+        
         velocityXDataset.label = "X - Axis"
         velocityXDataset.colors = [NSUIColor.red]
         velocityXDataset.setCircleColor(NSUIColor.red)
@@ -298,6 +329,12 @@ class ViewController: UIViewController {
         velocityZDataset.setCircleColor(NSUIColor.blue)
         velocityZDataset.circleRadius = 1
         velocityZDataset.circleHoleRadius = 1
+        
+        velocityUpwardDataset.label = "Upward velocity"
+        velocityUpwardDataset.colors = [NSUIColor.black]
+        velocityUpwardDataset.setCircleColor(NSUIColor.black)
+        velocityUpwardDataset.circleRadius = 1
+        velocityUpwardDataset.circleHoleRadius = 1
         
         gravityXDataset.label = "X - Axis"
         gravityXDataset.colors = [NSUIColor.red]
