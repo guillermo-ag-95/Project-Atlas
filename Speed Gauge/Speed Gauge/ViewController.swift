@@ -45,8 +45,6 @@ class ViewController: UIViewController {
     var gravityYDataset: LineChartDataSet = LineChartDataSet()
     var gravityZDataset: LineChartDataSet = LineChartDataSet()
     
-    var kalman_filter: Kalman_Filter? = nil
-    
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
@@ -54,7 +52,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeInterface()
-        kalman_filter = initializeKalmanFilter()
     }
     
     @IBOutlet weak var playButton: UIButton!
@@ -159,63 +156,38 @@ class ViewController: UIViewController {
         gravityLineChartGraph.notifyDataSetChanged()
     }
     
-    func initializeKalmanFilter() -> Kalman_Filter {
-        
-        // State variable mean and covariance.
-        let x = Matrix<Double>.init([[0],[0],[0]])
-        let P = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
-        
-        // Process model and noise covariance
-        let F = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
-        let Q = Matrix<Double>.init([[updatesIntervalOn,0,0],[0,updatesIntervalOn,0],[0,0,updatesIntervalOn]])
-        
-        // Control function
-        let B = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
-        let u = Matrix<Double>.init([[0],[0],[0]])
-        
-        // Measurement function and covariance.
-        let H = Matrix<Double>.init([[1,0,0],[0,1,0],[0,0,1]])
-        let R = Matrix<Double>.init([[0,0,0],[0,0,0],[0,0,0]])
-        
-        return Kalman_Filter.init(x, P, F, Q, B, u, H, R)
-        
-    }
-    
     func updateStoredData(_ data: CMDeviceMotion){
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
-        // The accelerometer sensor seems to be inverted, so we need to change its sign
-        var newXAcceleration =  data.userAcceleration.x * self.gravity
-        var newYAcceleration =  data.userAcceleration.y * self.gravity
-        var newZAcceleration =  data.userAcceleration.z * self.gravity
-        
+        var newXAcceleration =  data.userAcceleration.x
+        var newYAcceleration =  data.userAcceleration.y
+        var newZAcceleration =  data.userAcceleration.z
+
         let newXGravity = data.gravity.x
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
         
-        // Filtered acceleration
-        let rawAccelerationMatrix = Matrix<Double>.init([[newXAcceleration],[newYAcceleration],[newZAcceleration]])
-        let filteredAccelerationMatrix = kalman_filter!.filter(rawAccelerationMatrix).x
-        newXAcceleration = filteredAccelerationMatrix[0,0]
-        newYAcceleration = filteredAccelerationMatrix[1,0]
-        newZAcceleration = filteredAccelerationMatrix[2,0]
+        // Convert the G values to Meters per squared seconds.
+        newXAcceleration = newXAcceleration * self.gravity
+        newYAcceleration = newYAcceleration * self.gravity
+        newZAcceleration = newZAcceleration * self.gravity
+
+        // Calculate the upward acceleration using gravity values as normalization vectors.
+        let newUpwardAcceleration = newXAcceleration * newXGravity + newYAcceleration * newYGravity + newZAcceleration * newZGravity
         
         // Instant velocity calculation by integration
         let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
         let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
+        let newUpwardVelocity = (accelerometerUpwardData.last! * updatesIntervalOn) + (newUpwardAcceleration - accelerometerUpwardData.last!) * (updatesIntervalOn / 2)
         
         // Current velocity by cumulative velocities.
         let currentXVelocity = velocityXData.last! + newXVelocity
         let currentYVelocity = velocityYData.last! + newYVelocity
         let currentZVelocity = velocityZData.last! + newZVelocity
-        
-        // Upward acceleration
-        let newUpwardAcceleration = newXAcceleration * newXGravity + newYAcceleration * newYGravity + newZAcceleration * newZGravity
-        let newUpwardVelocity = (accelerometerUpwardData.last! * updatesIntervalOn) + (newUpwardAcceleration - accelerometerUpwardData.last!) * (updatesIntervalOn / 2)
         let currentUpwardVelocity = velocityUpwardData.last! + newUpwardVelocity
-        
+
         // Data storage
         accelerometerXData.append(newXAcceleration)
         accelerometerYData.append(newYAcceleration)
