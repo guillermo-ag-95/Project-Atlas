@@ -49,6 +49,8 @@ class ViewController: UIViewController {
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
 
+    let queue: OperationQueue = OperationQueue()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeInterface()
@@ -77,7 +79,7 @@ class ViewController: UIViewController {
         
         initializeStoredData()
         
-        motionManager.startDeviceMotionUpdates(to: OperationQueue.current!) { (data, error) in
+        motionManager.startDeviceMotionUpdates(to: queue) { (data, error) in
             if let data = data {
                 self.updateStoredData(data)
             }
@@ -219,7 +221,6 @@ class ViewController: UIViewController {
         accelerationLineChartGraph.data?.addEntry(entryYAcceleration, dataSetIndex: 1)
         accelerationLineChartGraph.data?.addEntry(entryZAcceleration, dataSetIndex: 2)
         accelerationLineChartGraph.data?.addEntry(entryUpwardAcceleration, dataSetIndex: 3)
-        accelerationLineChartGraph.notifyDataSetChanged()
         
         // Velocity added to Chart
         let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
@@ -231,7 +232,6 @@ class ViewController: UIViewController {
         velocityLineChartGraph.data?.addEntry(entryYVelocity, dataSetIndex: 1)
         velocityLineChartGraph.data?.addEntry(entryZVelocity, dataSetIndex: 2)
         velocityLineChartGraph.data?.addEntry(entryUpwardVelocity, dataSetIndex: 3)
-        velocityLineChartGraph.notifyDataSetChanged()
         
         // Gravity added to the Chart
         let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
@@ -241,7 +241,12 @@ class ViewController: UIViewController {
         gravityLineChartGraph.data?.addEntry(entryXGravity, dataSetIndex: 0)
         gravityLineChartGraph.data?.addEntry(entryYGravity, dataSetIndex: 1)
         gravityLineChartGraph.data?.addEntry(entryZGravity, dataSetIndex: 2)
-        gravityLineChartGraph.notifyDataSetChanged()
+        
+        DispatchQueue.main.async {
+            self.accelerationLineChartGraph.notifyDataSetChanged()
+            self.velocityLineChartGraph.notifyDataSetChanged()
+            self.gravityLineChartGraph.notifyDataSetChanged()
+        }
 
     }
     
