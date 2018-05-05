@@ -242,10 +242,8 @@ class ViewController: UIViewController {
         gravityLineChartGraph.data?.addEntry(entryYGravity, dataSetIndex: 1)
         gravityLineChartGraph.data?.addEntry(entryZGravity, dataSetIndex: 2)
         
-        DispatchQueue.main.async {
-            self.accelerationLineChartGraph.notifyDataSetChanged()
-            self.velocityLineChartGraph.notifyDataSetChanged()
-            self.gravityLineChartGraph.notifyDataSetChanged()
+        OperationQueue.main.addOperation {
+            self.reloadGraphs()
         }
 
     }
@@ -346,6 +344,19 @@ class ViewController: UIViewController {
             accelerationLineChartGraph.isHidden = true
             velocityLineChartGraph.isHidden = true
             gravityLineChartGraph.isHidden = false
+        default:
+            break
+        }
+    }
+    
+    func reloadGraphs(){
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            accelerationLineChartGraph.notifyDataSetChanged()
+        case 1:
+            velocityLineChartGraph.notifyDataSetChanged()
+        case 2:
+            gravityLineChartGraph.notifyDataSetChanged()
         default:
             break
         }
