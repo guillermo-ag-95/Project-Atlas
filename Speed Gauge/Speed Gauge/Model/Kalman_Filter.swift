@@ -97,7 +97,7 @@ class Kalman_Filter {
         let K = P_prior * Surge.transpose(self.H) * Surge.inv((self.H * P_prior * Surge.transpose(self.H) + self.R))
         let x = x_prior + K * y
         let P = (P_prior * Surge.inv(P_prior) + (-1) * K * self.H) * P_prior
-        
+                
         self.x = x
         self.P = P
         

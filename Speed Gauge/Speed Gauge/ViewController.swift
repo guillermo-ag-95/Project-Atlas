@@ -56,7 +56,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeInterface()
-        kalman_filter = initializeKalmanFilter()
     }
     
     @IBOutlet weak var playButton: UIButton!                        // Interface play button.
@@ -81,6 +80,7 @@ class ViewController: UIViewController {
         guard motionManager.isDeviceMotionAvailable else { return }
         
         initializeStoredData()
+        kalman_filter = initializeKalmanFilter()
         
         motionManager.startDeviceMotionUpdates(to: queue) { (data, error) in
             if let data = data {
@@ -161,11 +161,7 @@ class ViewController: UIViewController {
         accelerationLineChartGraph.data = accelerationData
         velocityLineChartGraph.data = velocityData
         gravityLineChartGraph.data = gravityData
-        
-        // Chart must recalculate itself
-        accelerationLineChartGraph.notifyDataSetChanged()
-        velocityLineChartGraph.notifyDataSetChanged()
-        gravityLineChartGraph.notifyDataSetChanged()
+
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -181,7 +177,7 @@ class ViewController: UIViewController {
         let newXGravity = data.gravity.x
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
-        
+                
         // Convert the G values to Meters per squared seconds.
         newXAcceleration = newXAcceleration * self.gravity
         newYAcceleration = newYAcceleration * self.gravity
@@ -198,7 +194,7 @@ class ViewController: UIViewController {
         
         let newVerticalAcceleration = result.x[1,0]
         let newVerticalVelocity = result.x[0,0]
-                
+                        
         // Current velocity by cumulative velocities.
         let currentXVelocity = velocityXData.last! + newXVelocity
         let currentYVelocity = velocityYData.last! + newYVelocity
@@ -225,7 +221,7 @@ class ViewController: UIViewController {
         
         // Add one of every four entrances per second.
         guard Int(position*100) % 10 == 0 else { return }
-        
+                
         // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
         let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
@@ -269,11 +265,11 @@ class ViewController: UIViewController {
         
         // State variable mean and covariance.
         let x = Matrix<Double>.init([[0],[0]])
-        let P = Matrix<Double>.init([[0,0],[0,0]])
+        let P = Matrix<Double>.init([[16,0],[0,16]])
         
         // Process model and noise covariance
         let F = Matrix<Double>.init([[1,dt],[0,1]])
-        let Q = Matrix<Double>.init([[1,0],[0,1]])
+        let Q = Matrix<Double>.init([[0,0],[0,16]])
         
         // Control function
         let B = Matrix<Double>.init([[0,0],[0,0]])
@@ -281,7 +277,7 @@ class ViewController: UIViewController {
         
         // Measurement function and covariance.
         let H = Matrix<Double>.init([[0,1]])
-        let R = Matrix<Double>.init([[0]])
+        let R = Matrix<Double>.init([[0.01]])
         
         return Kalman_Filter.init(x, P, F, Q, B, u, H, R)
     }
@@ -326,7 +322,7 @@ class ViewController: UIViewController {
         accelerometerZDataset.circleHoleRadius = 1
         
         // Set information of the vertical accelerometer dataset
-        accelerometerVerticalDataset.label = "Upward acceleration"
+        accelerometerVerticalDataset.label = "Vertical acceleration"
         accelerometerVerticalDataset.colors = [NSUIColor.black]
         accelerometerVerticalDataset.setCircleColor(NSUIColor.black)
         accelerometerVerticalDataset.circleRadius = 1
@@ -354,7 +350,7 @@ class ViewController: UIViewController {
         velocityZDataset.circleHoleRadius = 1
         
         // Set information of the vertical velocity dataset
-        velocityVerticalDataset.label = "Upward velocity"
+        velocityVerticalDataset.label = "Vertical velocity"
         velocityVerticalDataset.colors = [NSUIColor.black]
         velocityVerticalDataset.setCircleColor(NSUIColor.black)
         velocityVerticalDataset.circleRadius = 1
