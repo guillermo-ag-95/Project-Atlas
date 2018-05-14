@@ -8,6 +8,7 @@ def available_pods
   # Pods for Speed Gauge
   pod 'Charts'
   pod 'Surge'
+  pod 'SigmaSwiftStatistics'
 end
 
 target 'Speed Gauge' do
