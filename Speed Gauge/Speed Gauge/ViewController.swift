@@ -22,6 +22,10 @@ class ViewController: UIViewController {
     var accelerometerZData: [Double] = []           // Sensor values of the accelerometer in the Z-Axis.
     var accelerometerVerticalData: [Double] = []    // Computed values based on the accelerometer and gravity.
     
+    var gyroXData: [Double] = []                    // Sensor values of the gyro in the X-Axis.
+    var gyroYData: [Double] = []                    // Sensor values of the gyro in the Y-Axis.
+    var gyroZData: [Double] = []                    // Sensor values of the gyro in the Z-Axis.
+
     var velocityXData: [Double] = []                // Computed values based on the accelerometer in the X-Axis.
     var velocityYData: [Double] = []                // Computed values based on the accelerometer in the Y-Axis.
     var velocityZData: [Double] = []                // Computed values based on the accelerometer in the Z-Axis.
@@ -49,8 +53,10 @@ class ViewController: UIViewController {
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
     
-    var kalman_filter: Kalman_Filter? = nil
-
+    var gyroXTotal: Double = 0.0
+    var gyroYTotal: Double = 0.0
+    var gyroZTotal: Double = 0.0
+    
     let queue: OperationQueue = OperationQueue()
     
     override func viewDidLoad() {
@@ -80,7 +86,6 @@ class ViewController: UIViewController {
         guard motionManager.isDeviceMotionAvailable else { return }
         
         initializeStoredData()
-        kalman_filter = initializeKalmanFilter()
         
         motionManager.startDeviceMotionUpdates(to: queue) { (data, error) in
             if let data = data {
@@ -112,6 +117,19 @@ class ViewController: UIViewController {
         accelerometerVerticalData.removeAll()
         accelerometerVerticalData.append(0)
         
+        // Clean gyro data.
+        gyroXData.removeAll()
+        gyroXData.append(0)
+        gyroYData.removeAll()
+        gyroYData.append(0)
+        gyroZData.removeAll()
+        gyroZData.append(0)
+        
+        // Clear gyro total.
+        gyroXTotal = 0.0
+        gyroYTotal = 0.0
+        gyroZTotal = 0.0
+
         // Clean velocity data.
         velocityXData.removeAll()
         velocityXData.append(0)
@@ -172,12 +190,38 @@ class ViewController: UIViewController {
         var newXAcceleration =  data.userAcceleration.x
         var newYAcceleration =  data.userAcceleration.y
         var newZAcceleration =  data.userAcceleration.z
-
+        
         // Retrieve the gravity data from the sensor
         let newXGravity = data.gravity.x
         let newYGravity = data.gravity.y
         let newZGravity = data.gravity.z
-                
+        
+        // Retrieve the gyro data from the sensor
+        let newXGyro = data.rotationRate.x
+        let newYGyro = data.rotationRate.y
+        let newZGyro = data.rotationRate.z
+        
+        // Computed gyro delta, thus how much the sensor has rotated since the last sample was taken.
+        let gyroXDelta = (gyroXData.last! * updatesIntervalOn) + (newXGyro - gyroXData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
+        let gyroYDelta = (gyroYData.last! * updatesIntervalOn) + (newYGyro - gyroYData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
+        let gyroZDelta = (gyroZData.last! * updatesIntervalOn) + (newZGyro - gyroZData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
+
+        // Update accumulated gyro angle.
+        gyroXTotal += gyroXDelta
+        gyroYTotal += gyroYDelta
+        gyroZTotal += gyroZDelta
+
+        // Compute scalar projection onto gravity vector
+        let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
+        let accelerationVector = [newXAcceleration, newYAcceleration, newZAcceleration]
+        let gravityVector = [newXGravity, newYGravity, newZGravity]
+        let scalarProjection = gravityVector.map { Surge.dot(gravityVector, y: accelerationVector) / pow(gravityModule, 2) * $0 * self.gravity }
+        
+        // Computed accelerometer delta
+        let accelerometerXDelta = acos(newXGravity/gravityModule) * 180 / Double.pi
+        let accelerometerYDelta = acos(newYGravity/gravityModule) * 180 / Double.pi
+        let accelerometerZDelta = acos(newZGravity/gravityModule) * 180 / Double.pi
+        
         // Convert the G values to Meters per squared seconds.
         newXAcceleration = newXAcceleration * self.gravity
         newYAcceleration = newYAcceleration * self.gravity
@@ -188,18 +232,17 @@ class ViewController: UIViewController {
         let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
         
-        // Calculate the upward acceleration and velocity using gravity values as normalization vectors.
-        let z = Matrix<Double>.init([[newXAcceleration * newXGravity + newYAcceleration * newYGravity + newZAcceleration * newZGravity]])
-        let result = kalman_filter!.filter(z)
+        // Compute vertical acceleration and velocity
+        let newVerticalAcceleration =
+            sign(Surge.dot(gravityVector, y: accelerationVector)) * sqrt(pow(scalarProjection[0], 2) + pow(scalarProjection[1], 2) + pow(scalarProjection[2], 2))
+        let newVerticalVelocity =
+            (accelerometerVerticalData.last! * updatesIntervalOn) + (newVerticalAcceleration - accelerometerVerticalData.last!) * (updatesIntervalOn / 2)
         
-        let newVerticalAcceleration = result.x[1,0]
-        let newVerticalVelocity = result.x[0,0]
-                        
         // Current velocity by cumulative velocities.
         let currentXVelocity = velocityXData.last! + newXVelocity
         let currentYVelocity = velocityYData.last! + newYVelocity
         let currentZVelocity = velocityZData.last! + newZVelocity
-        let currentVerticalVelocity = newVerticalVelocity
+        let currentVerticalVelocity = velocityVerticalData.last! + newVerticalVelocity
 
         // Data storage
         accelerometerXData.append(newXAcceleration)
@@ -207,6 +250,10 @@ class ViewController: UIViewController {
         accelerometerZData.append(newZAcceleration)
         accelerometerVerticalData.append(newVerticalAcceleration)
         
+        gyroXData.append(newXGyro)
+        gyroXData.append(newYGyro)
+        gyroXData.append(newZGyro)
+
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
         velocityZData.append(currentZVelocity)
@@ -257,29 +304,6 @@ class ViewController: UIViewController {
             self.reloadGraphs()
         }
 
-    }
-    
-    func initializeKalmanFilter() -> Kalman_Filter {
-        
-        let dt = self.updatesIntervalOn
-        
-        // State variable mean and covariance.
-        let x = Matrix<Double>.init([[0],[0]])
-        let P = Matrix<Double>.init([[16,0],[0,16]])
-        
-        // Process model and noise covariance
-        let F = Matrix<Double>.init([[1,dt],[0,1]])
-        let Q = Matrix<Double>.init([[0,0],[0,16]])
-        
-        // Control function
-        let B = Matrix<Double>.init([[0,0],[0,0]])
-        let u = Matrix<Double>.init([[0],[0]])
-        
-        // Measurement function and covariance.
-        let H = Matrix<Double>.init([[0,1]])
-        let R = Matrix<Double>.init([[0.01]])
-        
-        return Kalman_Filter.init(x, P, F, Q, B, u, H, R)
     }
     
     // INTERFACE UPDATES
