@@ -10,6 +10,7 @@ import UIKit
 import CoreMotion
 import Charts
 import Surge
+import SigmaSwiftStatistics
 
 import AVFoundation
 
@@ -52,10 +53,6 @@ class ViewController: UIViewController {
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
-    
-    var gyroXTotal: Double = 0.0
-    var gyroYTotal: Double = 0.0
-    var gyroZTotal: Double = 0.0
     
     let queue: OperationQueue = OperationQueue()
     
@@ -124,11 +121,6 @@ class ViewController: UIViewController {
         gyroYData.append(0)
         gyroZData.removeAll()
         gyroZData.append(0)
-        
-        // Clear gyro total.
-        gyroXTotal = 0.0
-        gyroYTotal = 0.0
-        gyroZTotal = 0.0
 
         // Clean velocity data.
         velocityXData.removeAll()
@@ -200,27 +192,12 @@ class ViewController: UIViewController {
         let newXGyro = data.rotationRate.x
         let newYGyro = data.rotationRate.y
         let newZGyro = data.rotationRate.z
-        
-        // Computed gyro delta, thus how much the sensor has rotated since the last sample was taken.
-        let gyroXDelta = (gyroXData.last! * updatesIntervalOn) + (newXGyro - gyroXData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
-        let gyroYDelta = (gyroYData.last! * updatesIntervalOn) + (newYGyro - gyroYData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
-        let gyroZDelta = (gyroZData.last! * updatesIntervalOn) + (newZGyro - gyroZData.last!) * (updatesIntervalOn / 2) * 180 / Double.pi
-
-        // Update accumulated gyro angle.
-        gyroXTotal += gyroXDelta
-        gyroYTotal += gyroYDelta
-        gyroZTotal += gyroZDelta
 
         // Compute scalar projection onto gravity vector
         let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
         let accelerationVector = [newXAcceleration, newYAcceleration, newZAcceleration]
         let gravityVector = [newXGravity, newYGravity, newZGravity]
         let scalarProjection = gravityVector.map { Surge.dot(gravityVector, y: accelerationVector) / pow(gravityModule, 2) * $0 * self.gravity }
-        
-        // Computed accelerometer delta
-        let accelerometerXDelta = acos(newXGravity/gravityModule) * 180 / Double.pi
-        let accelerometerYDelta = acos(newYGravity/gravityModule) * 180 / Double.pi
-        let accelerometerZDelta = acos(newZGravity/gravityModule) * 180 / Double.pi
         
         // Convert the G values to Meters per squared seconds.
         newXAcceleration = newXAcceleration * self.gravity
@@ -250,9 +227,9 @@ class ViewController: UIViewController {
         accelerometerZData.append(newZAcceleration)
         accelerometerVerticalData.append(newVerticalAcceleration)
         
-        gyroXData.append(newXGyro)
-        gyroXData.append(newYGyro)
-        gyroXData.append(newZGyro)
+        gyroYData.append(newXGyro)
+        gyroYData.append(newYGyro)
+        gyroZData.append(newZGyro)
 
         velocityXData.append(currentXVelocity)
         velocityYData.append(currentYVelocity)
@@ -262,12 +239,18 @@ class ViewController: UIViewController {
         gravityXData.append(newXGravity)
         gravityYData.append(newYGravity)
         gravityZData.append(newZGravity)
-        
+
         // Current position in graft
         let position: Double = Double(accelerometerXData.count - 1) / 100
+
+        // Add one of every four entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
+        guard Int(round(position * 100)) % 10 == 0 else { return }
         
-        // Add one of every four entrances per second.
-        guard Int(position*100) % 10 == 0 else { return }
+        // Compute variance of the ten last elements of every acceleration data array.
+        let count = accelerometerXData.count - 11
+        let accelerometerXVariance = Sigma.variancePopulation(Array(accelerometerXData.suffix(from: count)))!
+        let accelerometerYVariance = Sigma.variancePopulation(Array(accelerometerYData.suffix(from: count)))!
+        let accelerometerZVariance = Sigma.variancePopulation(Array(accelerometerZData.suffix(from: count)))!
                 
         // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
