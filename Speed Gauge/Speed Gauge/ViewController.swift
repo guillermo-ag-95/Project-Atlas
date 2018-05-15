@@ -178,7 +178,7 @@ class ViewController: UIViewController {
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
-        // Retrive the accelerometer data from the sensor
+        // Retrieve the accelerometer data from the sensor
         var newXAcceleration =  data.userAcceleration.x
         var newYAcceleration =  data.userAcceleration.y
         var newZAcceleration =  data.userAcceleration.z
@@ -193,7 +193,7 @@ class ViewController: UIViewController {
         let newYGyro = data.rotationRate.y
         let newZGyro = data.rotationRate.z
 
-        // Compute scalar projection onto gravity vector
+        // Compute scalar projection of the acceleration vector onto the gravity vector
         let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
         let accelerationVector = [newXAcceleration, newYAcceleration, newZAcceleration]
         let gravityVector = [newXGravity, newYGravity, newZGravity]
@@ -243,7 +243,7 @@ class ViewController: UIViewController {
         // Current position in graft
         let position: Double = Double(accelerometerXData.count - 1) / 100
 
-        // Add one of every four entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
+        // Add one of every ten entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
         guard Int(round(position * 100)) % 10 == 0 else { return }
         
         // Compute variance of the ten last elements of every acceleration data array.
@@ -251,6 +251,7 @@ class ViewController: UIViewController {
         let accelerometerXVariance = Sigma.variancePopulation(Array(accelerometerXData.suffix(from: count)))!
         let accelerometerYVariance = Sigma.variancePopulation(Array(accelerometerYData.suffix(from: count)))!
         let accelerometerZVariance = Sigma.variancePopulation(Array(accelerometerZData.suffix(from: count)))!
+        let accelerometerVerticalVariance = Sigma.variancePopulation(Array(accelerometerVerticalData.suffix(from: count)))!
                 
         // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
