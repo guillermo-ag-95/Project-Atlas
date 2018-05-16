@@ -31,6 +31,7 @@ class ViewController: UIViewController {
     var velocityYData: [Double] = []                // Computed values based on the accelerometer in the Y-Axis.
     var velocityZData: [Double] = []                // Computed values based on the accelerometer in the Z-Axis.
     var velocityVerticalData: [Double] = []         // Computed values based on the accelerometer and gravity.
+    var velocityVerticalFixedData: [Double] = []    // Fixed computed values based on the accelerometer and gravity.
     
     var gravityXData: [Double] = []                 // Sensor values of the gravity in the X-Axis.
     var gravityYData: [Double] = []                 // Sensor values of the gravity in the Y-Axis.
@@ -95,12 +96,30 @@ class ViewController: UIViewController {
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
         
-        OperationQueue.main.addOperation {
-            self.accelerationLineChartGraph.notifyDataSetChanged()
-            self.velocityLineChartGraph.notifyDataSetChanged()
-            self.gravityLineChartGraph.notifyDataSetChanged()
+        let slope = velocityVerticalData.last! / Double(velocityVerticalData.count)
+        
+        // Lineally remove the slope from the vertical acceleration.
+        velocityVerticalFixedData = velocityVerticalData.enumerated().map({ (arg) -> Double in
+            let (index, element) = arg
+            return element - slope * Double(index)
+        })
+        
+        // Clear and update vertical velocity chart with new data
+        velocityLineChartGraph.data?.dataSets[3].clear()
+        
+        for i in 0..<velocityVerticalFixedData.count {
+            let position = Double(i) / 100
+            let element = velocityVerticalFixedData[i]
+            if i % 10 == 0 {
+                let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
+                velocityLineChartGraph.data?.addEntry(entryVerticalVelocity, dataSetIndex: 3)
+            }
         }
-
+        
+        // Update charts.
+        self.accelerationLineChartGraph.notifyDataSetChanged()
+        self.velocityLineChartGraph.notifyDataSetChanged()
+        self.gravityLineChartGraph.notifyDataSetChanged()
     }
     
     func initializeStoredData(){
@@ -131,6 +150,7 @@ class ViewController: UIViewController {
         velocityZData.append(0)
         velocityVerticalData.removeAll()
         velocityVerticalData.append(0)
+        velocityVerticalFixedData.removeAll()
         
         // Clean gravity data
         gravityXData.removeAll()
