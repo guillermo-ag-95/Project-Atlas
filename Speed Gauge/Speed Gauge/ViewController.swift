@@ -161,27 +161,41 @@ class ViewController: UIViewController {
         gravityZData.append(0)
         
         // Clean acceleration chart dataset
-        accelerometerXDataset.values.removeAll()
-        accelerometerYDataset.values.removeAll()
-        accelerometerZDataset.values.removeAll()
-        accelerometerVerticalDataset.values.removeAll()
-
+        accelerometerXDataset.clear()
+        accelerometerYDataset.clear()
+        accelerometerZDataset.clear()
+        accelerometerVerticalDataset.clear()
+        
+        _ = accelerometerXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = accelerometerYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = accelerometerZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = accelerometerVerticalDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        
         // Clean velocity chart dataset
-        velocityXDataset.values.removeAll()
-        velocityYDataset.values.removeAll()
-        velocityZDataset.values.removeAll()
-        velocityVerticalDataset.values.removeAll()
+        velocityXDataset.clear()
+        velocityYDataset.clear()
+        velocityZDataset.clear()
+        velocityVerticalDataset.clear()
         
+        _ = velocityXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = velocityYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = velocityZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = velocityVerticalDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+
         // Clean gravity chart dataset
-        gravityXDataset.values.removeAll()
-        gravityYDataset.values.removeAll()
-        gravityZDataset.values.removeAll()
-        
+        gravityXDataset.clear()
+        gravityYDataset.clear()
+        gravityZDataset.clear()
+
+        _ = gravityXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = gravityYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        _ = gravityZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+
         // Clean charts (LineChartView)
         accelerationLineChartGraph.clear()
         velocityLineChartGraph.clear()
         gravityLineChartGraph.clear()
-                
+        
         // Create empty chart data
         let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset, accelerometerVerticalDataset])
         let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset, velocityVerticalDataset])
@@ -191,7 +205,11 @@ class ViewController: UIViewController {
         accelerationLineChartGraph.data = accelerationData
         velocityLineChartGraph.data = velocityData
         gravityLineChartGraph.data = gravityData
-
+        
+        // Update charts.
+        accelerationLineChartGraph.notifyDataSetChanged()
+        velocityLineChartGraph.notifyDataSetChanged()
+        gravityLineChartGraph.notifyDataSetChanged()
     }
     
     func updateStoredData(_ data: CMDeviceMotion){
@@ -265,13 +283,6 @@ class ViewController: UIViewController {
 
         // Add one of every ten entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
         guard Int(round(position * 100)) % 10 == 0 else { return }
-        
-        // Compute variance of the ten last elements of every acceleration data array.
-        let count = accelerometerXData.count - 11
-        let accelerometerXVariance = Sigma.variancePopulation(Array(accelerometerXData.suffix(from: count)))!
-        let accelerometerYVariance = Sigma.variancePopulation(Array(accelerometerYData.suffix(from: count)))!
-        let accelerometerZVariance = Sigma.variancePopulation(Array(accelerometerZData.suffix(from: count)))!
-        let accelerometerVerticalVariance = Sigma.variancePopulation(Array(accelerometerVerticalData.suffix(from: count)))!
                 
         // Acceleration added to Chart
         let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
