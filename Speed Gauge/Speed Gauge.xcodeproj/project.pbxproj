@@ -11,6 +11,8 @@
 		7E8922CA8FE7A8FD0C176808 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BB87F65E9BB947A6BE8D6B /* Pods_Speed_Gauge.framework */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
+		B3177E5B20B0719900E283FC /* RepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */; };
+		B3177E5F20B0761600E283FC /* Repetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5E20B0761600E283FC /* Repetition.swift */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 		918C93B0FFAFFF1255463966 /* Pods-Speed Gauge Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
+		B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionTableViewController.swift; sourceTree = "<group>"; };
+		B3177E5E20B0761600E283FC /* Repetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repetition.swift; sourceTree = "<group>"; };
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 				B3C068E81FF7B4380076B4D2 /* Main.storyboard */,
 				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
 				B3AC61441FBDBBB100B2334D /* ViewController.swift */,
+				B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */,
+				B3177E5E20B0761600E283FC /* Repetition.swift */,
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
 				B3AC613B1FBDBB0C00B2334D /* LaunchScreen.storyboard */,
 				B39863FE206FA12A00066E06 /* Model */,
@@ -395,10 +401,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
+				B3177E5B20B0719900E283FC /* RepetitionTableViewController.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
 				B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */,
+				B3177E5F20B0761600E283FC /* Repetition.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

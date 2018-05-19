@@ -51,6 +51,9 @@ class ViewController: UIViewController {
     var gravityYDataset: LineChartDataSet = LineChartDataSet()              // Chart dataset of the gravity values in the Y-Axis.
     var gravityZDataset: LineChartDataSet = LineChartDataSet()              // Chart dataset of the gravity values in the Z-Axis.
     
+    var maxVelocities: [Double] = []
+    var meanVelocities: [Double] = []
+    
     let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
@@ -120,18 +123,19 @@ class ViewController: UIViewController {
         var maximum = 0.0
         var startingPoints: [Int] = []
         var endingPoints: [Int] = []
-        var maxes: [Double] = []
-        var meanVelocities: [Double] = []
+        
+        maxVelocities = []
+        meanVelocities = []
         
         for i in 0..<velocityVerticalFixedData.count {
             let element = abs(velocityVerticalFixedData[i]) < 0.1 ? 0.0 : velocityVerticalFixedData[i]
             
-            if element > 0.0 && maximum == 0.0 { startingPoints.append(i) } // Save the starting point of the rep.
-            if element > 0.0 && element > maximum { maximum = element } // Update the maximum velocity if needed.
+            if element > 0.0 && maximum == 0.0 { startingPoints.append(i) }     // Save the starting point of the rep.
+            if element > 0.0 && element > maximum { maximum = element }         // Update the maximum velocity if needed.
             
             if element == 0.0 && maximum != 0.0 {
                 endingPoints.append(i)  // Save the ending point.
-                maxes.append(maximum)   // Save the max velocity of the rep.
+                maxVelocities.append(maximum)   // Save the max velocity of the rep.
                 maximum = 0.0           // Reset the maximum velocity.
                 
                 let repVelocities = velocityVerticalFixedData.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
@@ -141,17 +145,11 @@ class ViewController: UIViewController {
             }
         }
         
-        print("Fixed velocity: \(velocityVerticalFixedData)")
-        
-        print("Starting points: \(startingPoints)")
-        print("Ending points: \(endingPoints)")
-        print("Max velocities: \(maxes)")
-        print("Mean velocities: \(meanVelocities)")
-        
         // Update charts.
         self.accelerationLineChartGraph.notifyDataSetChanged()
         self.velocityLineChartGraph.notifyDataSetChanged()
         self.gravityLineChartGraph.notifyDataSetChanged()
+        
     }
     
     func initializeStoredData(){
@@ -482,6 +480,16 @@ class ViewController: UIViewController {
     }
     
     // MARK: NAVIGATION
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.navigationItem.title = "Results"
+        
+        let repetitionTableViewController = segue.destination as! RepetitionTableViewController
+        
+        repetitionTableViewController.maxVelocities = maxVelocities
+        repetitionTableViewController.meanVelocities = meanVelocities
+        
+    }
     
     // MARK: - ANCILLARY FUNCTIONS
     
