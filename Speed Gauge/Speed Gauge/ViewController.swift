@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         
         let slope = velocityVerticalData.last! / Double(velocityVerticalData.count)
         
-        // Lineally remove the slope from the vertical acceleration.
+        // Remove lineally the slope from the vertical acceleration.
         velocityVerticalFixedData = velocityVerticalData.enumerated().map({ (arg) -> Double in
             let (index, element) = arg
             return element - slope * Double(index)
@@ -108,13 +108,45 @@ class ViewController: UIViewController {
         velocityLineChartGraph.data?.dataSets[3].clear()
         
         for i in 0..<velocityVerticalFixedData.count {
-            let position = Double(i) / 100
-            let element = velocityVerticalFixedData[i]
             if i % 10 == 0 {
+                let position = Double(i) / 100
+                let element = velocityVerticalFixedData[i]
                 let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
                 velocityLineChartGraph.data?.addEntry(entryVerticalVelocity, dataSetIndex: 3)
             }
         }
+        
+        // Calculate when the rep starts, ends,  max velocity and mean velocity.
+        var maximum = 0.0
+        var startingPoints: [Int] = []
+        var endingPoints: [Int] = []
+        var maxes: [Double] = []
+        var meanVelocities: [Double] = []
+        
+        for i in 0..<velocityVerticalFixedData.count {
+            let element = abs(velocityVerticalFixedData[i]) < 0.1 ? 0.0 : velocityVerticalFixedData[i]
+            
+            if element > 0.0 && maximum == 0.0 { startingPoints.append(i) } // Save the starting point of the rep.
+            if element > 0.0 && element > maximum { maximum = element } // Update the maximum velocity if needed.
+            
+            if element == 0.0 && maximum != 0.0 {
+                endingPoints.append(i)  // Save the ending point.
+                maxes.append(maximum)   // Save the max velocity of the rep.
+                maximum = 0.0           // Reset the maximum velocity.
+                
+                let repVelocities = velocityVerticalFixedData.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
+                let meanVelocity = Surge.mean(Array(repVelocities))
+                
+                meanVelocities.append(meanVelocity)
+            }
+        }
+        
+        print("Fixed velocity: \(velocityVerticalFixedData)")
+        
+        print("Starting points: \(startingPoints)")
+        print("Ending points: \(endingPoints)")
+        print("Max velocities: \(maxes)")
+        print("Mean velocities: \(meanVelocities)")
         
         // Update charts.
         self.accelerationLineChartGraph.notifyDataSetChanged()
