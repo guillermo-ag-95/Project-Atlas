@@ -135,14 +135,26 @@ class ViewController: UIViewController {
             
             if element == 0.0 && maximum != 0.0 {
                 endingPoints.append(i)  // Save the ending point.
-                maxVelocities.append(maximum)   // Save the max velocity of the rep.
-                maximum = 0.0           // Reset the maximum velocity.
                 
-                let repVelocities = velocityVerticalFixedData.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
-                let meanVelocity = Surge.mean(Array(repVelocities))
+                // Check that the interval is big enough
+                if (endingPoints.last! - startingPoints.last! < 30) {
+                    // If not,
+                    startingPoints.removeLast()
+                    endingPoints.removeLast()
+                    maximum = 0.0
+                } else {
+                    // If so, go on
+                    maxVelocities.append(maximum)   // Save the max velocity of the rep.
+                    maximum = 0.0                   // Reset the maximum velocity.
+                    
+                    let repVelocities = velocityVerticalFixedData.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
+                    let meanVelocity = Surge.mean(Array(repVelocities))
+                    
+                    meanVelocities.append(meanVelocity)
+                }
                 
-                meanVelocities.append(meanVelocity)
             }
+            
         }
         
         // Update charts.
