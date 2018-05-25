@@ -12,10 +12,17 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet var playButton: WKInterfaceButton!
+    @IBOutlet var pauseButton: WKInterfaceButton!
+    
+    var showPlayButton: Bool = true
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         // Configure interface objects here.
+        playButton.setHidden(false)
+        pauseButton.setHidden(true)
     }
     
     override func willActivate() {
@@ -27,5 +34,12 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
+    
+    @IBAction func playPauseButtonPressed() {
+        // Change the visibility of the button.
+        playButton.setHidden(showPlayButton)
+        pauseButton.setHidden(!showPlayButton)
+        
+        showPlayButton = !showPlayButton
+    }
 }
