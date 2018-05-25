@@ -12,17 +12,25 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet var timePicker: WKInterfacePicker!
     @IBOutlet var playButton: WKInterfaceButton!
     @IBOutlet var pauseButton: WKInterfaceButton!
     
-    var showPlayButton: Bool = true
+    let times: [Int] = [0,1,3,5,7,10,12,15,17,20,23,25,30]      // Array of possible delays to choose from.
+    var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
+    var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
+    var delay: Int = 0                                          // Delay to start the accelerometer measurements.
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        // Configure interface objects here.
+        // Configure buttons.
         playButton.setHidden(false)
         pauseButton.setHidden(true)
+        
+        // Configure time picker.
+        timePicker.setItems(initializePicker(times))
+        
     }
     
     override func willActivate() {
@@ -37,9 +45,37 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction func playPauseButtonPressed() {
         // Change the visibility of the button.
-        playButton.setHidden(showPlayButton)
-        pauseButton.setHidden(!showPlayButton)
+        playButton.setHidden(buttonVisibility)
+        pauseButton.setHidden(!buttonVisibility)
+        buttonVisibility = !buttonVisibility
+        buttonTimesPressed = buttonTimesPressed + 1
         
-        showPlayButton = !showPlayButton
+        // Print delay
+        guard buttonTimesPressed % 2 == 1 else { return }
+        playSound()
     }
+    
+    @IBAction func chooseDelay(_ value: Int) {
+        delay = times[value]
+    }
+    
+    // Ancillary functions:
+    
+    func initializePicker(_ times: [Int]) -> [WKPickerItem] {
+        var timePickerItems: [WKPickerItem] = []
+        
+        for time in times {
+            let timePickerItem = WKPickerItem()
+            
+            timePickerItem.title = "\(time) seconds"
+            timePickerItems.append(timePickerItem)
+        }
+        
+        return timePickerItems
+    }
+    
+    func playSound(){
+        print(delay)
+    }
+    
 }

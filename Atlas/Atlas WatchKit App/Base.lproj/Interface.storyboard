@@ -14,6 +14,11 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Atlas_WatchKit_App" customModuleProvider="target">
                     <items>
+                        <picker width="1" height="100" alignment="center" indicatorMode="shownWhileFocused" id="9Di-jc-yGM">
+                            <connections>
+                                <action selector="chooseDelay:" destination="AgC-eL-Hgc" id="Tc7-B8-FRP"/>
+                            </connections>
+                        </picker>
                         <group alignment="center" verticalAlignment="bottom" layout="overlap" id="Zvb-OL-bnq">
                             <items>
                                 <button alignment="center" verticalAlignment="bottom" backgroundImage="play" id="JPk-Pg-mX5">
@@ -32,6 +37,7 @@
                     <connections>
                         <outlet property="pauseButton" destination="o99-OW-Cxn" id="4BT-cG-Je5"/>
                         <outlet property="playButton" destination="JPk-Pg-mX5" id="i4r-QP-htj"/>
+                        <outlet property="timePicker" destination="9Di-jc-yGM" id="1FY-8e-Dde"/>
                     </connections>
                 </controller>
             </objects>
