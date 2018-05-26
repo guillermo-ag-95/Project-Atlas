@@ -25,6 +25,11 @@ class InterfaceController: WKInterfaceController {
     var motionManager: CMMotionManager?                         // Motion Manager that will retrieve the accelerometer information.
     var timer : Timer?                                          // Timer that will delay the start of the accelerometer measures.
     
+    var verticalAcceleration: [Double] = []                     // Array of vertical accelerations.
+    var verticalVelocity: [Double] = []                         // Array of vertical velocities.
+    var verticalFixedVelocity: [Double] = []                    // Array of vertical velocities after the data treatment.
+    
+    let queue: OperationQueue = OperationQueue()                // OperationQueue to execute the accelerometer updates.
     let times: [Int] = [0,1,3,5,7,10,12,15,17,20,23,25,30]      // Array of possible delays to choose from.
     let updateIntervalOn = 0.01                                 // Update interval of 0.01 seconds (100 Hz)
     let updateIntervalOff = 0.1                                 // Update interval of 0.1 seconds (10 Hz)
@@ -81,10 +86,21 @@ class InterfaceController: WKInterfaceController {
     
     @objc func startRecordData(){
         motionManager?.deviceMotionUpdateInterval = updateIntervalOn
+        guard (motionManager?.isDeviceMotionAvailable)! else { return }
+        
+        initializeStoredData()
+        
+        motionManager?.startDeviceMotionUpdates(to: queue, withHandler: { (data, error) in
+            if let data = data{
+                self.updateStoredData(data)
+            }
+        })
     }
     
     @objc func stopRecordData(){
         motionManager?.deviceMotionUpdateInterval = updateIntervalOff
+        guard (motionManager?.isDeviceMotionAvailable)! else { return }
+        motionManager?.stopDeviceMotionUpdates()
     }
     
     @IBAction func chooseDelay(_ value: Int) {
@@ -111,6 +127,44 @@ class InterfaceController: WKInterfaceController {
         return audioPlayer
     }
     
+    func initializeStoredData(){
+        // Clear data arrays.
+        verticalAcceleration.removeAll()
+        verticalVelocity.removeAll()
+        verticalFixedVelocity.removeAll()
+        
+        // Add zeros to let the integration work
+        verticalAcceleration.append(0)
+        verticalVelocity.append(0)
+    }
+    
+    func updateStoredData(_ data: CMDeviceMotion){
+        // Retrieve the accelerometer data from the sensor.
+        let newXAcceleration = data.userAcceleration.x
+        let newYAcceleration = data.userAcceleration.y
+        let newZAcceleration = data.userAcceleration.z
+        
+        // Retrieve the gravity data from the sensor.
+        let newXGravity = data.gravity.x
+        let newYGravity = data.gravity.y
+        let newZGravity = data.gravity.z
+        
+        // Compute scalar projection of the acceleration vector onto the gravity vector.
+        let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
+        let accelerometerData = [newXAcceleration, newYAcceleration, newZAcceleration]
+        let gravityData = [newXGravity, newYGravity, newZGravity]
+        let scalarProjection = 0.0 // TODO
+        
+        // Compute vertical acceleration and velocity.
+        let newVerticalAcceleration = 0.0 // TODO
+        let newVerticalVelocity = (verticalAcceleration.last! * updateIntervalOn) + (newVerticalAcceleration - verticalAcceleration.last!) * (updateIntervalOn / 2)
+        let currentVerticalVelocity = verticalVelocity.last! + newVerticalVelocity
+        
+        // Data storage.
+        verticalAcceleration.append(newVerticalAcceleration)
+        verticalVelocity.append(currentVerticalVelocity)
+    }
+    
     @objc func playSound(){
         do {
             let path = Bundle.main.path(forResource: "Comedy Low Honk.caf", ofType: nil)!
@@ -124,3 +178,4 @@ class InterfaceController: WKInterfaceController {
     }
     
 }
+// Compute scalar projection of the acceleration vector onto the gravity vector
