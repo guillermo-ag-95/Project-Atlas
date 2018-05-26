@@ -25,6 +25,8 @@ class InterfaceController: WKInterfaceController {
     var motionManager: CMMotionManager?                         // Motion Manager that will retrieve the accelerometer information.
     var timer : Timer?                                          // Timer that will delay the start of the accelerometer measures.
     
+    var maxVelocities: [Double] = []                            // Array with the max velocity of every rep.
+    var meanVelocities: [Double] = []                           // Array with the mean velocity of every rep.
     var verticalAcceleration: [Double] = []                     // Array of vertical accelerations.
     var verticalVelocity: [Double] = []                         // Array of vertical velocities.
     var verticalFixedVelocity: [Double] = []                    // Array of vertical velocities after the data treatment.
@@ -101,6 +103,8 @@ class InterfaceController: WKInterfaceController {
         motionManager?.deviceMotionUpdateInterval = updateIntervalOff
         guard (motionManager?.isDeviceMotionAvailable)! else { return }
         motionManager?.stopDeviceMotionUpdates()
+        
+        self.treatStoredData()
     }
     
     @IBAction func chooseDelay(_ value: Int) {
@@ -153,16 +157,62 @@ class InterfaceController: WKInterfaceController {
         let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
         let accelerometerData = [newXAcceleration, newYAcceleration, newZAcceleration]
         let gravityData = [newXGravity, newYGravity, newZGravity]
-        let scalarProjection = 0.0 // TODO
+        let scalarProjection = 0.0 // TODO with Surge.dot
         
         // Compute vertical acceleration and velocity.
-        let newVerticalAcceleration = 0.0 // TODO
+        let newVerticalAcceleration = 0.0 // TODO with Surge.dot
         let newVerticalVelocity = (verticalAcceleration.last! * updateIntervalOn) + (newVerticalAcceleration - verticalAcceleration.last!) * (updateIntervalOn / 2)
         let currentVerticalVelocity = verticalVelocity.last! + newVerticalVelocity
         
         // Data storage.
         verticalAcceleration.append(newVerticalAcceleration)
         verticalVelocity.append(currentVerticalVelocity)
+    }
+    
+    func treatStoredData(){
+        let slope = verticalVelocity.last! / Double(verticalVelocity.count)
+        
+        // Remove lineally the slope from the vertical acceleration.
+        verticalFixedVelocity = verticalVelocity.enumerated().map({ (arg) -> Double in
+            let (index, element) = arg
+            return element - slope * Double(index)
+        })
+        
+        // Calculate when the rep starts, ends,  max velocity and mean velocity.
+        var maximum = 0.0
+        var startingPoints: [Int] = []
+        var endingPoints: [Int] = []
+        
+        maxVelocities = []
+        meanVelocities = []
+        
+        for i in 0..<verticalFixedVelocity.count {
+            let element = abs(verticalFixedVelocity[i]) < 0.1 ? 0.0 : verticalFixedVelocity[i]
+            
+            if element > 0.0 && maximum == 0.0 { startingPoints.append(i) }     // Save the starting point of the rep.
+            if element > 0.0 && element > maximum { maximum = element }         // Update the maximum velocity if needed.
+            
+            if element == 0.0 && maximum != 0.0 {
+                endingPoints.append(i)  // Save the ending point.
+                
+                // Check that the interval is big enough
+                if (endingPoints.last! - startingPoints.last! < 30) {
+                    // If not,
+                    startingPoints.removeLast()
+                    endingPoints.removeLast()
+                    maximum = 0.0
+                } else {
+                    // If so, go on
+                    maxVelocities.append(maximum)   // Save the max velocity of the rep.
+                    maximum = 0.0                   // Reset the maximum velocity.
+                    
+                    let repVelocities = verticalFixedVelocity.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
+                    let meanVelocity = 0.0 // TODO: Surge.mean(Array(repVelocities))
+                    
+                    meanVelocities.append(meanVelocity)
+                }
+            }
+        }
     }
     
     @objc func playSound(){
