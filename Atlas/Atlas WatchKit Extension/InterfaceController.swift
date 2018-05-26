@@ -20,6 +20,7 @@ class InterfaceController: WKInterfaceController {
     var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
     var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
     var delay: Int = 0                                          // Delay to start the accelerometer measurements.
+    var timer : Timer = Timer.init();
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -52,7 +53,9 @@ class InterfaceController: WKInterfaceController {
         
         // Print delay
         guard buttonTimesPressed % 2 == 1 else { return }
-        playSound()
+        timer.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.playSound), userInfo: nil, repeats: false)
+
     }
     
     @IBAction func chooseDelay(_ value: Int) {
@@ -74,7 +77,7 @@ class InterfaceController: WKInterfaceController {
         return timePickerItems
     }
     
-    func playSound(){
+    @objc func playSound(){
         print(delay)
     }
     
