@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3C7571F20B96C29007502B9 /* Comedy Low Honk.caf in Resources */ = {isa = PBXBuildFile; fileRef = B3C7571E20B96C29007502B9 /* Comedy Low Honk.caf */; };
+		B3C7572020B96C29007502B9 /* Comedy Low Honk.caf in Resources */ = {isa = PBXBuildFile; fileRef = B3C7571E20B96C29007502B9 /* Comedy Low Honk.caf */; };
+		B3C7572120B96C29007502B9 /* Comedy Low Honk.caf in Resources */ = {isa = PBXBuildFile; fileRef = B3C7571E20B96C29007502B9 /* Comedy Low Honk.caf */; };
 		B3D6B7DE20B72F6D0044A2B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6B7DD20B72F6D0044A2B1 /* AppDelegate.swift */; };
 		B3D6B7E020B72F6D0044A2B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6B7DF20B72F6D0044A2B1 /* ViewController.swift */; };
 		B3D6B7E320B72F6D0044A2B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D6B7E120B72F6D0044A2B1 /* Main.storyboard */; };
@@ -65,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B3C7571E20B96C29007502B9 /* Comedy Low Honk.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Comedy Low Honk.caf"; sourceTree = "<group>"; };
 		B3D6B7DA20B72F6D0044A2B1 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D6B7DD20B72F6D0044A2B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3D6B7DF20B72F6D0044A2B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,12 +107,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3C7571D20B96BFF007502B9 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B3C7571E20B96C29007502B9 /* Comedy Low Honk.caf */,
+			);
+			name = Sounds;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		B3D6B7D120B72F6D0044A2B1 = {
 			isa = PBXGroup;
 			children = (
 				B3D6B7DC20B72F6D0044A2B1 /* Atlas */,
 				B3D6B7F020B72F6F0044A2B1 /* Atlas WatchKit App */,
 				B3D6B7FF20B72F6F0044A2B1 /* Atlas WatchKit Extension */,
+				B3C7571D20B96BFF007502B9 /* Sounds */,
 				B3D6B7DB20B72F6D0044A2B1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -263,6 +277,7 @@
 			files = (
 				B3D6B7E820B72F6F0044A2B1 /* LaunchScreen.storyboard in Resources */,
 				B3D6B7E520B72F6F0044A2B1 /* Assets.xcassets in Resources */,
+				B3C7571F20B96C29007502B9 /* Comedy Low Honk.caf in Resources */,
 				B3D6B7E320B72F6D0044A2B1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +288,7 @@
 			files = (
 				B3D6B7F520B72F6F0044A2B1 /* Assets.xcassets in Resources */,
 				B3D6B7F320B72F6F0044A2B1 /* Interface.storyboard in Resources */,
+				B3C7572020B96C29007502B9 /* Comedy Low Honk.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +296,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3C7572120B96C29007502B9 /* Comedy Low Honk.caf in Resources */,
 				B3D6B80720B72F700044A2B1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
