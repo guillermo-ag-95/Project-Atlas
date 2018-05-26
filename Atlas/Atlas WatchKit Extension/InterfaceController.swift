@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import AVFoundation
 
 
 class InterfaceController: WKInterfaceController {
@@ -20,7 +21,8 @@ class InterfaceController: WKInterfaceController {
     var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
     var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
     var delay: Int = 0                                          // Delay to start the accelerometer measurements.
-    var timer : Timer = Timer.init();
+    var timer : Timer?                                          // Timer that will delay the start of the accelerometer measures.
+    var audioPlayer: AVAudioPlayer?                             // Audio player that will play the starting sound.
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -31,6 +33,12 @@ class InterfaceController: WKInterfaceController {
         
         // Configure time picker.
         timePicker.setItems(initializePicker(times))
+        
+        // Configure timer.
+        timer = Timer.init()
+        
+        // Configure audio player.
+        audioPlayer = initializeAudioPlayer()
         
     }
     
@@ -53,7 +61,7 @@ class InterfaceController: WKInterfaceController {
         
         // Print delay
         guard buttonTimesPressed % 2 == 1 else { return }
-        timer.invalidate()
+        timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.playSound), userInfo: nil, repeats: false)
 
     }
@@ -77,8 +85,21 @@ class InterfaceController: WKInterfaceController {
         return timePickerItems
     }
     
+    func initializeAudioPlayer() -> AVAudioPlayer {
+        let audioPlayer = AVAudioPlayer()
+        return audioPlayer
+    }
+    
     @objc func playSound(){
-        print(delay)
+        do {
+            let path = Bundle.main.path(forResource: "SIMToolkitGeneralBeep.caf", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            // Couldn't load file
+            print("Couldn't load file")
+        }
     }
     
 }
