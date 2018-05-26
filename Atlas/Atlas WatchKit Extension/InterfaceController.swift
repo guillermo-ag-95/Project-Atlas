@@ -8,6 +8,7 @@
 
 import WatchKit
 import Foundation
+import CoreMotion
 import AVFoundation
 
 
@@ -17,12 +18,16 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet var playButton: WKInterfaceButton!
     @IBOutlet var pauseButton: WKInterfaceButton!
     
-    let times: [Int] = [0,1,3,5,7,10,12,15,17,20,23,25,30]      // Array of possible delays to choose from.
-    var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
-    var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
-    var delay: Int = 0                                          // Delay to start the accelerometer measurements.
-    var timer : Timer?                                          // Timer that will delay the start of the accelerometer measures.
     var audioPlayer: AVAudioPlayer?                             // Audio player that will play the starting sound.
+    var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
+    var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
+    var delay: Int = 0                                          // Delay to start the accelerometer measurements.
+    var motionManager: CMMotionManager?                         // Motion Manager that will retrieve the accelerometer information.
+    var timer : Timer?                                          // Timer that will delay the start of the accelerometer measures.
+    
+    let times: [Int] = [0,1,3,5,7,10,12,15,17,20,23,25,30]      // Array of possible delays to choose from.
+    let updateIntervalOn = 0.01                                 // Update interval of 0.01 seconds (100 Hz)
+    let updateIntervalOff = 0.1                                 // Update interval of 0.1 seconds (10 Hz)
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -39,6 +44,9 @@ class InterfaceController: WKInterfaceController {
         
         // Configure audio player.
         audioPlayer = initializeAudioPlayer()
+        
+        // Configure motion manager.
+        motionManager = CMMotionManager()
         
     }
     
@@ -59,11 +67,24 @@ class InterfaceController: WKInterfaceController {
         buttonVisibility = !buttonVisibility
         buttonTimesPressed = buttonTimesPressed + 1
         
-        // Print delay
-        guard buttonTimesPressed % 2 == 1 else { return }
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.playSound), userInfo: nil, repeats: false)
-
+        // Only trigger the action after the play button is pressed.
+        if buttonTimesPressed % 2 == 1 {
+            // Delay the start of the accelerometer updates.
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.playSound), userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.startRecordData), userInfo: nil, repeats: false)
+        } else {
+            stopRecordData()
+        }
+        
+    }
+    
+    @objc func startRecordData(){
+        motionManager?.deviceMotionUpdateInterval = updateIntervalOn
+    }
+    
+    @objc func stopRecordData(){
+        motionManager?.deviceMotionUpdateInterval = updateIntervalOff
     }
     
     @IBAction func chooseDelay(_ value: Int) {
