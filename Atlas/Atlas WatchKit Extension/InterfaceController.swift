@@ -6,10 +6,11 @@
 //  Copyright © 2018 Guillermo Alcalá Gamero. All rights reserved.
 //
 
-import WatchKit
-import Foundation
-import CoreMotion
 import AVFoundation
+import CoreMotion
+import Foundation
+import HealthKit
+import WatchKit
 
 
 class InterfaceController: WKInterfaceController {
@@ -40,6 +41,8 @@ class InterfaceController: WKInterfaceController {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        
+        // Configurate the screen to be turn on.
         
         // Configure buttons.
         playButton.setHidden(false)
@@ -109,6 +112,11 @@ class InterfaceController: WKInterfaceController {
         motionManager?.stopDeviceMotionUpdates()
         
         self.treatStoredData()
+        
+        // TODO: Remove when the new controller is configured.
+        print("Vertical fixed velocity: \(verticalFixedVelocity)")
+        print("Max velocities: \(maxVelocities)")
+        print("Mean velocities: \(meanVelocities)")
     }
     
     @IBAction func chooseDelay(_ value: Int) {
