@@ -492,7 +492,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -514,7 +514,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -533,7 +533,7 @@
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				IBSC_MODULE = Atlas_WatchKit_Extension;
 				INFOPLIST_FILE = "Atlas WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -552,7 +552,7 @@
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				IBSC_MODULE = Atlas_WatchKit_Extension;
 				INFOPLIST_FILE = "Atlas WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -573,7 +573,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -591,7 +591,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.Atlas;
+				PRODUCT_BUNDLE_IDENTIFIER = com.atlas.AtlasEncoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
