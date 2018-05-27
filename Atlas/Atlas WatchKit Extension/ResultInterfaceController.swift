@@ -33,9 +33,6 @@ class ResultInterfaceController: WKInterfaceController {
         let maxVelocities = data[0]
         let meanVelocities = data[1]
         
-        print("Max velocities: \(maxVelocities)")
-        print("Mean velocities: \(meanVelocities)")
-        
         // Initialize the row types.
         resultTable.setNumberOfRows(maxVelocities.count, withRowType: "ResultRowType")
 
@@ -45,8 +42,8 @@ class ResultInterfaceController: WKInterfaceController {
             let maxVelocity = String(format: "%.2f", maxVelocities[i])
             let meanVelocity = String(format: "%.2f", meanVelocities[i])
             rowController.repetitionLabel.setText("Repetition \(i + 1)")
-            rowController.maxVelocityLabel.setText("Max: \(maxVelocity)")
-            rowController.meanVelocityLabel.setText("Mean: \(meanVelocity)")
+            rowController.maxVelocityLabel.setText("Max: \(maxVelocity) m/s")
+            rowController.meanVelocityLabel.setText("Mean: \(meanVelocity) m/s")
         }
     }
 }

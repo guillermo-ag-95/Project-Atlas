@@ -252,7 +252,7 @@ class InterfaceController: WKInterfaceController {
     
     @objc func playSound(){
         do {
-            let path = Bundle.main.path(forResource: "Comedy Low Honk.caf", ofType: nil)!
+            let path = Bundle.main.path(forResource: "Air Horn Sound.mp3", ofType: nil)!
             let url = URL(fileURLWithPath: path)
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.play()
