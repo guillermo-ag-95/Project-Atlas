@@ -59,6 +59,40 @@
             </objects>
             <point key="canvasLocation" x="220" y="643"/>
         </scene>
+        <!--ResultInterfaceController-->
+        <scene sceneID="1qh-2a-Gwx">
+            <objects>
+                <controller identifier="ResultInterfaceController" id="yd5-tg-xv5" customClass="ResultInterfaceController" customModule="Atlas_WatchKit_Extension">
+                    <items>
+                        <label width="1" alignment="center" text="Results" textAlignment="center" id="BXs-ap-V9i"/>
+                        <table alignment="left" id="NgX-Du-4PP">
+                            <items>
+                                <tableRow identifier="ResultRowType" id="rtz-M3-bnJ" customClass="ResultRowController" customModule="Atlas_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="Hid-t4-KZM">
+                                        <items>
+                                            <label alignment="left" text="Label" id="1dn-Ka-6Z3">
+                                                <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                            </label>
+                                            <label alignment="left" text="Label" id="lZs-3M-nGz"/>
+                                            <label alignment="left" text="Label" id="SDl-98-cS3"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="maxVelocityLabel" destination="lZs-3M-nGz" id="ixr-SM-hue"/>
+                                        <outlet property="meanVelocityLabel" destination="SDl-98-cS3" id="rk1-pg-WMb"/>
+                                        <outlet property="repetitionLabel" destination="1dn-Ka-6Z3" id="mql-XW-6rk"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="resultTable" destination="NgX-Du-4PP" id="hqL-F7-2sq"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="486" y="344"/>
+        </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>

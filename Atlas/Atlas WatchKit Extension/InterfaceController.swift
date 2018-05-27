@@ -113,10 +113,8 @@ class InterfaceController: WKInterfaceController {
         
         self.treatStoredData()
         
-        // TODO: Remove when the new controller is configured.
-        print("Vertical fixed velocity: \(verticalFixedVelocity)")
-        print("Max velocities: \(maxVelocities)")
-        print("Mean velocities: \(meanVelocities)")
+        let data = [maxVelocities, meanVelocities]
+        pushController(withName: "ResultInterfaceController", context: data)
     }
     
     @IBAction func chooseDelay(_ value: Int) {
