@@ -23,6 +23,7 @@ class InterfaceController: WKInterfaceController {
     var buttonTimesPressed: Int = 0                             // Counter to track which button is displayed
     var buttonVisibility: Bool = true                           // Boolean to alternate between play and pause button.
     var delay: Int = 0                                          // Delay to start the accelerometer measurements.
+    var healthStore: HKHealthStore?                             //
     var motionManager: CMMotionManager?                         // Motion Manager that will retrieve the accelerometer information.
     var timerCount: Timer?                                      // Timer that will delay the start of the accelerometer measures.
     var timerAccelerometer: Timer?                              // Timer that will delay the start of the accelerometer measures.
@@ -41,8 +42,6 @@ class InterfaceController: WKInterfaceController {
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        // Configurate the screen to be turn on.
         
         // Configure buttons.
         playButton.setHidden(false)
@@ -71,6 +70,7 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        
     }
     
     @IBAction func playPauseButtonPressed() {
@@ -82,12 +82,16 @@ class InterfaceController: WKInterfaceController {
         
         // Only trigger the action after the play button is pressed.
         if buttonTimesPressed % 2 == 1 {
+            // Start workout
+            initializeWorkout(true)
             // Delay the start of the accelerometer updates.
             timerCount?.invalidate()
             timerAccelerometer?.invalidate()
             timerCount = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.playSound), userInfo: nil, repeats: false)
             timerAccelerometer = Timer.scheduledTimer(timeInterval: Double(delay), target: self, selector: #selector(self.startRecordData), userInfo: nil, repeats: false)
         } else {
+            // Stop workout
+            initializeWorkout(false)
             stopRecordData()
         }
         
@@ -139,6 +143,30 @@ class InterfaceController: WKInterfaceController {
     func initializeAudioPlayer() -> AVAudioPlayer {
         let audioPlayer = AVAudioPlayer()
         return audioPlayer
+    }
+    
+    func initializeWorkout(_ start: Bool){
+        // Initialize Health Store object
+        guard HKHealthStore.isHealthDataAvailable() else { return }
+        healthStore = HKHealthStore()
+        
+        // Initialize configuration
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .functionalStrengthTraining
+        configuration.locationType = .indoor
+        
+        do {
+            let session = try HKWorkoutSession(configuration: configuration)
+            session.delegate = self
+            if start == true {
+                healthStore?.start(session)
+            } else {
+                healthStore?.end(session)
+            }
+        } catch {
+            // Handle errors.
+        }
+        
     }
     
     func initializeStoredData(){
@@ -251,7 +279,10 @@ class InterfaceController: WKInterfaceController {
     // Ancillary functions:
     
     @objc func playSound(){
+        let audioSession = AVAudioSession.sharedInstance()
         do {
+            try audioSession.setActive(true)
+            try audioSession.setCategory("AVAudioSessionCategoryPlayback")
             let path = Bundle.main.path(forResource: "Air Horn Sound.mp3", ofType: nil)!
             let url = URL(fileURLWithPath: path)
             audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -260,6 +291,20 @@ class InterfaceController: WKInterfaceController {
             // Couldn't load file
             print("Couldn't load file")
         }
+    }
+    
+}
+
+extension InterfaceController: HKWorkoutSessionDelegate {
+    
+    // MARK: HKWorkoutSessionDelegate:
+    
+    func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date){
+        
+    }
+    
+    func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: Error) {
+        
     }
     
 }

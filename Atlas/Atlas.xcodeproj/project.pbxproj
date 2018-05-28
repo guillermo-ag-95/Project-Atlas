@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B329028A20BC79E8006F9CCC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B329028920BC79E8006F9CCC /* HealthKit.framework */; };
 		B3BEC4B720BAEA7000EE1AC0 /* ResultInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BEC4B620BAEA7000EE1AC0 /* ResultInterfaceController.swift */; };
 		B3BEC4B920BAF33A00EE1AC0 /* ResultRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BEC4B820BAF33A00EE1AC0 /* ResultRowController.swift */; };
 		B3D6B7DE20B72F6D0044A2B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6B7DD20B72F6D0044A2B1 /* AppDelegate.swift */; };
@@ -70,6 +71,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B329028920BC79E8006F9CCC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS4.3.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		B329028B20BC79E8006F9CCC /* Atlas WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Atlas WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		B3BEC4B620BAEA7000EE1AC0 /* ResultInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInterfaceController.swift; sourceTree = "<group>"; };
 		B3BEC4B820BAF33A00EE1AC0 /* ResultRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRowController.swift; sourceTree = "<group>"; };
 		B3D6B7DA20B72F6D0044A2B1 /* Atlas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atlas.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,12 +108,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B329028A20BC79E8006F9CCC /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B329028820BC79E8006F9CCC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B329028920BC79E8006F9CCC /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B3C7571D20B96BFF007502B9 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +140,7 @@
 				B3D6B7FF20B72F6F0044A2B1 /* Atlas WatchKit Extension */,
 				B3C7571D20B96BFF007502B9 /* Sounds */,
 				B3D6B7DB20B72F6D0044A2B1 /* Products */,
+				B329028820BC79E8006F9CCC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +180,7 @@
 		B3D6B7FF20B72F6F0044A2B1 /* Atlas WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				B329028B20BC79E8006F9CCC /* Atlas WatchKit Extension.entitlements */,
 				B3D6B80020B72F6F0044A2B1 /* InterfaceController.swift */,
 				B3D6B80220B72F6F0044A2B1 /* ExtensionDelegate.swift */,
 				B3D6B80420B72F700044A2B1 /* NotificationController.swift */,
@@ -253,6 +267,11 @@
 					};
 					B3D6B7FA20B72F6F0044A2B1 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.HealthKit.watchos = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -492,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Atlas WatchKit Extension/Atlas WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				INFOPLIST_FILE = "Atlas WatchKit Extension/Info.plist";
@@ -514,6 +534,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Atlas WatchKit Extension/Atlas WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				INFOPLIST_FILE = "Atlas WatchKit Extension/Info.plist";
