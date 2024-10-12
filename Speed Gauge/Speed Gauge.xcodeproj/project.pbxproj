@@ -82,13 +82,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B39863FE206FA12A00066E06 /* Model */ = {
+		B312D3142CBA7DF700028872 /* Filters */ = {
 			isa = PBXGroup;
 			children = (
 				B30F1412206FB24400DC1745 /* G_H_Filter.swift */,
 				B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */,
 				B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */,
 				B3E802762073B4E300166074 /* Kalman_Filter.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		B312D3152CBA7E2600028872 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				B398640F206FA75100066E06 /* Abstract_Test.swift */,
+				B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */,
+				B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */,
+				B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */,
+				B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		B39863FE206FA12A00066E06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B312D3142CBA7DF700028872 /* Filters */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -97,11 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				B3986407206FA35300066E06 /* Info.plist */,
-				B398640F206FA75100066E06 /* Abstract_Test.swift */,
-				B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */,
-				B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */,
-				B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */,
-				B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */,
+				B312D3152CBA7E2600028872 /* Filters */,
 			);
 			path = "Speed Gauge Tests";
 			sourceTree = "<group>";
