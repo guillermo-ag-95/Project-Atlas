@@ -10,11 +10,17 @@ DEPENDENCIES:
   - SigmaSwiftStatistics
   - Surge
 
+SPEC REPOS:
+  trunk:
+    - Charts
+    - SigmaSwiftStatistics
+    - Surge
+
 SPEC CHECKSUMS:
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Charts: 380e83be97bc41a9c813fae0f23a7d0e943e28d6
   SigmaSwiftStatistics: 6897d572d7e52c70dc60814526e931540aa25d08
   Surge: 1f0286bc5f0fe4283f3455479895bf85c7ef7760
 
 PODFILE CHECKSUM: 45cfb79ce22e77de8cd6755ec7bcc95437fa1ff0
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.15.2
