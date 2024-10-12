@@ -3,15 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43C36517B790E8AB418A1DA1 /* Pods_Speed_Gauge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83DBE3025A3884AA9C060F73 /* Pods_Speed_Gauge.framework */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
 		B3177E5B20B0719900E283FC /* RepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */; };
 		B3177E5F20B0761600E283FC /* Repetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5E20B0761600E283FC /* Repetition.swift */; };
+		B32822C62CBA7B3700BA521D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C52CBA7B3700BA521D /* DGCharts */; };
+		B32822C92CBA7BD000BA521D /* Surge in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C82CBA7BD000BA521D /* Surge */; };
+		B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
@@ -24,7 +26,6 @@
 		B3ED3D26207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */; };
 		B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */; };
 		B3F4E0122070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */; };
-		E5778981A2FAAE9AC26B140E /* Pods_Speed_Gauge_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B905E3DEDFE5E7A4222106 /* Pods_Speed_Gauge_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,11 +39,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00B905E3DEDFE5E7A4222106 /* Pods_Speed_Gauge_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Speed_Gauge_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B19E379628DCD7C89F119E1 /* Pods-Speed Gauge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.release.xcconfig"; path = "Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.release.xcconfig"; sourceTree = "<group>"; };
-		6A45E48036A33BB9CE2541C0 /* Pods-Speed Gauge Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge Tests.debug.xcconfig"; path = "Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		83DBE3025A3884AA9C060F73 /* Pods_Speed_Gauge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Speed_Gauge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A949E6DDDC89798B202F0F51 /* Pods-Speed Gauge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge.debug.xcconfig"; path = "Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge.debug.xcconfig"; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
 		B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionTableViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +59,6 @@
 		B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Dimensional_Kalman_Filter_Tests.swift; sourceTree = "<group>"; };
 		B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter.swift; sourceTree = "<group>"; };
 		B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter_Tests.swift; sourceTree = "<group>"; };
-		E055C20C14615E0E27AC09F5 /* Pods-Speed Gauge Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speed Gauge Tests.release.xcconfig"; path = "Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5778981A2FAAE9AC26B140E /* Pods_Speed_Gauge_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,33 +73,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43C36517B790E8AB418A1DA1 /* Pods_Speed_Gauge.framework in Frameworks */,
+				B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */,
+				B32822C62CBA7B3700BA521D /* DGCharts in Frameworks */,
+				B32822C92CBA7BD000BA521D /* Surge in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A8F960D750E3C3282E2F6E1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A949E6DDDC89798B202F0F51 /* Pods-Speed Gauge.debug.xcconfig */,
-				3B19E379628DCD7C89F119E1 /* Pods-Speed Gauge.release.xcconfig */,
-				6A45E48036A33BB9CE2541C0 /* Pods-Speed Gauge Tests.debug.xcconfig */,
-				E055C20C14615E0E27AC09F5 /* Pods-Speed Gauge Tests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		AB20D8CE3871D692C3CC4923 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				83DBE3025A3884AA9C060F73 /* Pods_Speed_Gauge.framework */,
-				00B905E3DEDFE5E7A4222106 /* Pods_Speed_Gauge_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		B39863FE206FA12A00066E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,8 +112,6 @@
 				B3AC61311FBDBB0C00B2334D /* Speed Gauge */,
 				B3986404206FA35200066E06 /* Speed Gauge Tests */,
 				B3AC61301FBDBB0C00B2334D /* Products */,
-				5A8F960D750E3C3282E2F6E1 /* Pods */,
-				AB20D8CE3871D692C3CC4923 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,11 +147,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B398640A206FA35300066E06 /* Build configuration list for PBXNativeTarget "Speed Gauge Tests" */;
 			buildPhases = (
-				5FDEAA61B2985D82961C7A98 /* [CP] Check Pods Manifest.lock */,
 				B39863FF206FA35200066E06 /* Sources */,
 				B3986400206FA35200066E06 /* Frameworks */,
 				B3986401206FA35200066E06 /* Resources */,
-				84C7C680D69530D806B3B12E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -193,11 +165,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3AC61411FBDBB0C00B2334D /* Build configuration list for PBXNativeTarget "Speed Gauge" */;
 			buildPhases = (
-				97ADBDC0EE28AB2CB0D8DC83 /* [CP] Check Pods Manifest.lock */,
 				B3AC612B1FBDBB0C00B2334D /* Sources */,
 				B3AC612C1FBDBB0C00B2334D /* Frameworks */,
 				B3AC612D1FBDBB0C00B2334D /* Resources */,
-				A613215C004E98A20CBC8C5F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,6 +208,11 @@
 				Base,
 			);
 			mainGroup = B3AC61261FBDBB0C00B2334D;
+			packageReferences = (
+				B32822C42CBA7B3700BA521D /* XCRemoteSwiftPackageReference "Charts" */,
+				B32822C72CBA7BD000BA521D /* XCRemoteSwiftPackageReference "Surge" */,
+				B32822CA2CBA7BF000BA521D /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */,
+			);
 			productRefGroup = B3AC61301FBDBB0C00B2334D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -267,97 +242,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		5FDEAA61B2985D82961C7A98 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Speed Gauge Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84C7C680D69530D806B3B12E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework",
-				"${BUILT_PRODUCTS_DIR}/SigmaSwiftStatistics/SigmaSwiftStatistics.framework",
-				"${BUILT_PRODUCTS_DIR}/Surge/Surge.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCharts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SigmaSwiftStatistics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Surge.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Speed Gauge Tests/Pods-Speed Gauge Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		97ADBDC0EE28AB2CB0D8DC83 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Speed Gauge-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A613215C004E98A20CBC8C5F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/DGCharts/DGCharts.framework",
-				"${BUILT_PRODUCTS_DIR}/SigmaSwiftStatistics/SigmaSwiftStatistics.framework",
-				"${BUILT_PRODUCTS_DIR}/Surge/Surge.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGCharts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SigmaSwiftStatistics.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Surge.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Speed Gauge/Pods-Speed Gauge-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B39863FF206FA35200066E06 /* Sources */ = {
@@ -411,7 +295,6 @@
 /* Begin XCBuildConfiguration section */
 		B398640B206FA35300066E06 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A45E48036A33BB9CE2541C0 /* Pods-Speed Gauge Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -421,7 +304,11 @@
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				INFOPLIST_FILE = "Speed Gauge Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -432,7 +319,6 @@
 		};
 		B398640C206FA35300066E06 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E055C20C14615E0E27AC09F5 /* Pods-Speed Gauge Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -442,7 +328,11 @@
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
 				INFOPLIST_FILE = "Speed Gauge Tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -553,14 +443,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		B3AC61421FBDBB0C00B2334D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A949E6DDDC89798B202F0F51 /* Pods-Speed Gauge.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -569,7 +459,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Speed Gauge/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -582,7 +475,6 @@
 		};
 		B3AC61431FBDBB0C00B2334D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B19E379628DCD7C89F119E1 /* Pods-Speed Gauge.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -591,7 +483,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Speed Gauge/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.atlas.Speed-Gauge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -633,6 +528,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B32822C42CBA7B3700BA521D /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.0;
+			};
+		};
+		B32822C72CBA7BD000BA521D /* XCRemoteSwiftPackageReference "Surge" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jounce/Surge.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.2;
+			};
+		};
+		B32822CA2CBA7BF000BA521D /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/SigmaSwiftStatistics.git";
+			requirement = {
+				kind = exactVersion;
+				version = 9.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B32822C52CBA7B3700BA521D /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B32822C42CBA7B3700BA521D /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		B32822C82CBA7BD000BA521D /* Surge */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B32822C72CBA7BD000BA521D /* XCRemoteSwiftPackageReference "Surge" */;
+			productName = Surge;
+		};
+		B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B32822CA2CBA7BF000BA521D /* XCRemoteSwiftPackageReference "SigmaSwiftStatistics" */;
+			productName = SigmaSwiftStatistics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3AC61271FBDBB0C00B2334D /* Project object */;
 }
