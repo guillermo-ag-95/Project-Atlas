@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,41 +30,43 @@
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlH-xt-mDI" customClass="LineChartView" customModule="DGCharts">
                                 <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="appWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-Wt-6eC" customClass="LineChartView" customModule="DGCharts">
                                 <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="appWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DC-Nz-X4G" customClass="LineChartView" customModule="DGCharts">
                                 <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="appWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uON-a0-ChI">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uON-a0-ChI">
                                 <rect key="frame" x="157.5" y="587" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="LH9-0p-Hk6"/>
                                     <constraint firstAttribute="height" constant="60" id="sbw-Lx-rjn"/>
                                 </constraints>
-                                <state key="normal" image="play"/>
+                                <color key="tintColor" name="appBlack"/>
+                                <state key="normal" image="play.fill" catalog="system"/>
                                 <connections>
                                     <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="TWu-zy-V4f"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-vI-dEO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-vI-dEO">
                                 <rect key="frame" x="157.5" y="587" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="FiG-hu-a8q"/>
                                     <constraint firstAttribute="width" constant="60" id="LNA-GJ-Fla"/>
                                 </constraints>
-                                <state key="normal" image="pause"/>
+                                <color key="tintColor" name="appBlack"/>
+                                <state key="normal" image="pause.fill" catalog="system"/>
                                 <connections>
                                     <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="5ib-GB-wBA"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZV7-gz-hBg"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="appWhite"/>
                         <constraints>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" constant="8" id="6l6-dU-SmD"/>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="7Tu-5y-c7h"/>
@@ -125,14 +128,14 @@
                                             <rect key="frame" x="16" y="12" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="appBlack"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PHz-7N-YJS">
                                             <rect key="frame" x="315" y="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="appBlack"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -170,7 +173,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pause" width="60" height="60"/>
-        <image name="play" width="60" height="60"/>
+        <image name="pause.fill" catalog="system" width="114" height="128"/>
+        <image name="play.fill" catalog="system" width="120" height="128"/>
+        <namedColor name="appBlack">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="appWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

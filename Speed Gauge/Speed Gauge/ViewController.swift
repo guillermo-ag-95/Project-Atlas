@@ -68,38 +68,45 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		setupNavigationBar()
 		setupHeader()
 		setupCharts()
 		setupButtons()
 	}
 	
 	// MARK: - Setup functions
+	func setupNavigationBar() {
+		guard let navigationController = navigationController else { return }
+		navigationController.navigationBar.topItem?.title = LocalizedKeys.Common.graphs
+		navigationController.navigationBar.topItem?.rightBarButtonItem?.title = LocalizedKeys.Common.results
+	}
+	
 	func setupHeader() {
-		segmentedControl.setTitle("Acceleration", forSegmentAt: 0)
-		segmentedControl.setTitle("Velocity", forSegmentAt: 1)
-		segmentedControl.setTitle("Gravity", forSegmentAt: 2)
+		segmentedControl.setTitle(LocalizedKeys.Acceleration.title, forSegmentAt: 0)
+		segmentedControl.setTitle(LocalizedKeys.Velocity.title, forSegmentAt: 1)
+		segmentedControl.setTitle(LocalizedKeys.Gravity.title, forSegmentAt: 2)
 		segmentedControl.selectedSegmentIndex = 1
 		segmentedControlChanged(segmentedControl)
 	}
 	
 	func setupCharts() {
-		accelerationLineChartGraph.chartDescription.text = "Acceleration by axis"
-		velocityLineChartGraph.chartDescription.text = "Velocity by axis"
-		gravityLineChartGraph.chartDescription.text = "Gravity by axis"
+		accelerationLineChartGraph.chartDescription.text = LocalizedKeys.Acceleration.byAxis
+		velocityLineChartGraph.chartDescription.text = LocalizedKeys.Velocity.byAxis
+		gravityLineChartGraph.chartDescription.text = LocalizedKeys.Gravity.byAxis
 		
-		setupDataSet(accelerometerXDataset, label: "X - Axis", color: .red)
-		setupDataSet(accelerometerYDataset, label: "Y - Axis", color: .green)
-		setupDataSet(accelerometerZDataset, label: "Z - Axis", color: .blue)
-		setupDataSet(accelerometerVerticalDataset, label: "Vertical acceleration", color: .black)
+		setupDataSet(accelerometerXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
+		setupDataSet(accelerometerYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
+		setupDataSet(accelerometerZDataset, label: LocalizedKeys.Common.zAxis, color: .appBlue)
+		setupDataSet(accelerometerVerticalDataset, label: LocalizedKeys.Acceleration.vertical, color: .appBlack)
 		
-		setupDataSet(velocityXDataset, label: "X - Axis", color: .red)
-		setupDataSet(velocityYDataset, label: "Y - Axis", color: .green)
-		setupDataSet(velocityZDataset, label: "Z - Axis", color: .blue)
-		setupDataSet(velocityVerticalDataset, label: "Vertical velocity", color: .black)
+		setupDataSet(velocityXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
+		setupDataSet(velocityYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
+		setupDataSet(velocityZDataset, label: LocalizedKeys.Common.zAxis, color: .appBlue)
+		setupDataSet(velocityVerticalDataset, label: LocalizedKeys.Velocity.vertical, color: .appBlack)
 		
-		setupDataSet(gravityXDataset, label: "X - Axis", color: .red)
-		setupDataSet(gravityYDataset, label: "Y - Axis", color: .green)
-		setupDataSet(gravityZDataset, label: "Z - Axis", color: .blue)
+		setupDataSet(gravityXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
+		setupDataSet(gravityYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
+		setupDataSet(gravityZDataset, label: LocalizedKeys.Common.zAxis, color: .appBlue)
 	}
 	
 	func setupDataSet(_ dataSet: LineChartDataSet, label: String, color: UIColor, pointSize: CGFloat = 1) {
@@ -152,9 +159,9 @@ class ViewController: UIViewController {
         
         setupStoredData()
         
-        motionManager.startDeviceMotionUpdates(to: queue) { (data, error) in
+        motionManager.startDeviceMotionUpdates(to: queue) { [weak self] (data, error) in
             if let data = data {
-                self.updateStoredData(data)
+				self?.updateStoredData(data)
             }
         }
     }
@@ -166,10 +173,10 @@ class ViewController: UIViewController {
         let slope = velocityVerticalData.last! / Double(velocityVerticalData.count)
 
         // Remove lineally the slope from the vertical acceleration.
-        velocityVerticalFixedData = velocityVerticalData.enumerated().map({ (arg) -> Double in
-            let (index, element) = arg
-            return element - slope * Double(index)
-        })
+		velocityVerticalFixedData = velocityVerticalData.enumerated().map({ index, element in
+			let result = element - slope * Double(index)
+			return result
+		})
 
         // Clear and update vertical velocity chart with new data
         velocityLineChartGraph.data?.dataSets[3].clear()
@@ -220,9 +227,9 @@ class ViewController: UIViewController {
         }
         
         // Update charts.
-        self.accelerationLineChartGraph.notifyDataSetChanged()
-        self.velocityLineChartGraph.notifyDataSetChanged()
-        self.gravityLineChartGraph.notifyDataSetChanged()
+        accelerationLineChartGraph.notifyDataSetChanged()
+        velocityLineChartGraph.notifyDataSetChanged()
+        gravityLineChartGraph.notifyDataSetChanged()
         
     }
     
@@ -433,8 +440,8 @@ class ViewController: UIViewController {
         gravityLineChartGraph.data?.appendEntry(entryYGravity, toDataSet: 1)
         gravityLineChartGraph.data?.appendEntry(entryZGravity, toDataSet: 2)
         
-        OperationQueue.main.addOperation {
-            self.reloadGraphs()
+		OperationQueue.main.addOperation { [weak self] in
+            self?.reloadGraphs()
         }
     }
     
@@ -453,7 +460,7 @@ class ViewController: UIViewController {
     
     // MARK: - Navigations
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        segue.destination.navigationItem.title = "Results"
+		segue.destination.navigationItem.title = LocalizedKeys.Common.results
         
         let repetitionTableViewController = segue.destination as! RepetitionTableViewController
         
