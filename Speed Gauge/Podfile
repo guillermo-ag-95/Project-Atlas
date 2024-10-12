@@ -6,9 +6,9 @@ use_frameworks!
 
 def available_pods
   # Pods for Speed Gauge
-  pod 'Charts', '3.1.1'
-  pod 'Surge', '2.0.0'
-  pod 'SigmaSwiftStatistics', '7.0.2'
+  pod 'DGCharts', '5.1.0' # TFG version: '3.1.1' (renamed from Charts)
+  pod 'Surge', '2.3.2' # TFG version: '2.0.0'
+  pod 'SigmaSwiftStatistics', '9.0.2' # TFG version: '7.0.2'
 end
 
 target 'Speed Gauge' do

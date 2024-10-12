@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QYd-Ml-jNY">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QYd-Ml-jNY">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-zI-CYz">
+                                <rect key="frame" x="89" y="72" width="197" height="32"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title="Gravity"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControlChanged:" destination="eoa-zI-3wh" eventType="valueChanged" id="mqA-hx-RvA"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlH-xt-mDI" customClass="LineChartView" customModule="DGCharts">
+                                <rect key="frame" x="16" y="111" width="343" height="468"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-Wt-6eC" customClass="LineChartView" customModule="DGCharts">
+                                <rect key="frame" x="16" y="111" width="343" height="468"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DC-Nz-X4G" customClass="LineChartView" customModule="DGCharts">
+                                <rect key="frame" x="16" y="111" width="343" height="468"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uON-a0-ChI">
                                 <rect key="frame" x="157.5" y="587" width="60" height="60"/>
                                 <constraints>
@@ -39,30 +61,8 @@
                                     <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="5ib-GB-wBA"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-zI-CYz">
-                                <rect key="frame" x="96.5" y="72" width="182" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                    <segment title="Gravity"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentedControlChanged:" destination="eoa-zI-3wh" eventType="valueChanged" id="mqA-hx-RvA"/>
-                                </connections>
-                            </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlH-xt-mDI" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="108" width="343" height="471"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-Wt-6eC" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="108" width="343" height="471"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DC-Nz-X4G" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="108" width="343" height="471"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZV7-gz-hBg"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" constant="8" id="6l6-dU-SmD"/>
@@ -84,7 +84,6 @@
                             <constraint firstItem="xlH-xt-mDI" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z6d-yk-LUa"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="xlH-xt-mDI" secondAttribute="bottom" constant="8" id="zKN-Fp-sdF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ZV7-gz-hBg"/>
                     </view>
                     <navigationItem key="navigationItem" title="Graphs" id="iF7-uI-lHJ">
                         <barButtonItem key="rightBarButtonItem" title="Results" id="HMt-Jm-ITM">
@@ -116,14 +115,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="repetitionCell" textLabel="NhR-qk-3dG" detailTextLabel="PHz-7N-YJS" style="IBUITableViewCellStyleValue1" id="Gyv-V7-kME">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gyv-V7-kME" id="nU1-f0-ba5">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NhR-qk-3dG">
-                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="16" y="12" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

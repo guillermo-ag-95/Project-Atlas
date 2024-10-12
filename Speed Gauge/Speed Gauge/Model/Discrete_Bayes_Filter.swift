@@ -44,7 +44,7 @@ class Discrete_Bayes_Filter {
     }
     
     func normalize(likehood: [Double], prior: [Double]) -> [Double] {
-        let posterior = Surge.mul(likehood, y: prior)
+		let posterior = likehood .* prior
         return posterior.map({ $0 / Surge.sum(posterior) })
     }
     

@@ -1,26 +1,26 @@
 PODS:
-  - Charts (3.1.1):
-    - Charts/Core (= 3.1.1)
-  - Charts/Core (3.1.1)
-  - SigmaSwiftStatistics (7.0.2)
-  - Surge (2.0.0)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
+  - SigmaSwiftStatistics (9.0.2)
+  - Surge (2.3.2)
 
 DEPENDENCIES:
-  - Charts (= 3.1.1)
-  - SigmaSwiftStatistics (= 7.0.2)
-  - Surge (= 2.0.0)
+  - DGCharts (= 5.1.0)
+  - SigmaSwiftStatistics (= 9.0.2)
+  - Surge (= 2.3.2)
 
 SPEC REPOS:
   trunk:
-    - Charts
+    - DGCharts
     - SigmaSwiftStatistics
     - Surge
 
 SPEC CHECKSUMS:
-  Charts: 380e83be97bc41a9c813fae0f23a7d0e943e28d6
-  SigmaSwiftStatistics: 6897d572d7e52c70dc60814526e931540aa25d08
-  Surge: 1f0286bc5f0fe4283f3455479895bf85c7ef7760
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
+  SigmaSwiftStatistics: 4ec81cd50b0f397baddba05fe88ce228a66edd8c
+  Surge: bd84c931a09caa001312ea35059751f2036c49c4
 
-PODFILE CHECKSUM: 49d27225e50fc5a33bd19e23e7b9c9560411ebf7
+PODFILE CHECKSUM: bbbe99992ee2ed029f09212cd94898e9b30991c0
 
 COCOAPODS: 1.15.2

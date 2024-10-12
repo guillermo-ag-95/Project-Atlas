@@ -8,14 +8,14 @@
 
 import UIKit
 import CoreMotion
-import Charts
+import DGCharts
 import Surge
 import SigmaSwiftStatistics
 
 import AVFoundation
 
 class ViewController: UIViewController {
-    
+	// MARK: - Variables
     var motionManager = CMMotionManager()
     
     var accelerometerXData: [Double] = []           // Sensor values of the accelerometer in the X-Axis.
@@ -83,6 +83,7 @@ class ViewController: UIViewController {
         playButton.isHidden ? startRecordData() : stopRecordData()
     }
     
+	// MARK: - Data recording
     func startRecordData(){
         guard motionManager.isDeviceMotionAvailable else { return }
         
@@ -115,7 +116,7 @@ class ViewController: UIViewController {
                 let position = Double(i) / 100
                 let element = velocityVerticalFixedData[i]
                 let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
-                velocityLineChartGraph.data?.addEntry(entryVerticalVelocity, dataSetIndex: 3)
+				velocityLineChartGraph.data?.appendEntry(entryVerticalVelocity, toDataSet: 3)
             }
         }
 
@@ -164,6 +165,7 @@ class ViewController: UIViewController {
         
     }
     
+	// MARK: - Data setup
     func initializeStoredData(){
         // Clean accelerometer data.
         accelerometerXData.removeAll()
@@ -203,35 +205,38 @@ class ViewController: UIViewController {
         gravityZData.append(0)
         
         // Clean acceleration chart dataset
-        accelerometerXDataset.clear()
-        accelerometerYDataset.clear()
-        accelerometerZDataset.clear()
-        accelerometerVerticalDataset.clear()
+		// - keepingCapacity must be true to keep dataset style.
+		accelerometerXDataset.removeAll(keepingCapacity: true)
+        accelerometerYDataset.removeAll(keepingCapacity: true)
+        accelerometerZDataset.removeAll(keepingCapacity: true)
+        accelerometerVerticalDataset.removeAll(keepingCapacity: true)
         
-        _ = accelerometerXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = accelerometerYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = accelerometerZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = accelerometerVerticalDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+		accelerometerXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        accelerometerYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        accelerometerZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        accelerometerVerticalDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
         
         // Clean velocity chart dataset
-        velocityXDataset.clear()
-        velocityYDataset.clear()
-        velocityZDataset.clear()
-        velocityVerticalDataset.clear()
+		// - keepingCapacity must be true to keep dataset style.
+        velocityXDataset.removeAll(keepingCapacity: true)
+        velocityYDataset.removeAll(keepingCapacity: true)
+        velocityZDataset.removeAll(keepingCapacity: true)
+        velocityVerticalDataset.removeAll(keepingCapacity: true)
         
-        _ = velocityXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = velocityYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = velocityZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = velocityVerticalDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        velocityXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        velocityYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        velocityZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        velocityVerticalDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
 
         // Clean gravity chart dataset
-        gravityXDataset.clear()
-        gravityYDataset.clear()
-        gravityZDataset.clear()
+		// - keepingCapacity must be true to keep dataset style.
+        gravityXDataset.removeAll(keepingCapacity: true)
+        gravityYDataset.removeAll(keepingCapacity: true)
+        gravityZDataset.removeAll(keepingCapacity: true)
 
-        _ = gravityXDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = gravityYDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
-        _ = gravityZDataset.addEntry(ChartDataEntry(x: 0.0, y: 0.0))
+        gravityXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        gravityYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+        gravityZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
 
         // Clean charts (LineChartView)
         accelerationLineChartGraph.clear()
@@ -277,7 +282,8 @@ class ViewController: UIViewController {
         let gravityModule = sqrt(pow(newXGravity, 2) + pow(newYGravity, 2) + pow(newZGravity, 2))
         let accelerationVector = [newXAcceleration, newYAcceleration, newZAcceleration]
         let gravityVector = [newXGravity, newYGravity, newZGravity]
-        let scalarProjection = gravityVector.map { Surge.dot(gravityVector, y: accelerationVector) / pow(gravityModule, 2) * $0 * self.gravity }
+		let dotProduct = Surge.dot(gravityVector, accelerationVector)
+		let scalarProjection = gravityVector.map { dotProduct / pow(gravityModule, 2) * $0 * self.gravity }
         
         // Convert the G values to Meters per squared seconds.
         newXAcceleration = newXAcceleration * self.gravity
@@ -290,8 +296,7 @@ class ViewController: UIViewController {
         let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
         
         // Compute vertical acceleration and velocity
-        let newVerticalAcceleration =
-            sign(Surge.dot(gravityVector, y: accelerationVector)) * sqrt(pow(scalarProjection[0], 2) + pow(scalarProjection[1], 2) + pow(scalarProjection[2], 2))
+        let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjection[0], 2) + pow(scalarProjection[1], 2) + pow(scalarProjection[2], 2))
         let newVerticalVelocity =
             (accelerometerVerticalData.last! * updatesIntervalOn) + (newVerticalAcceleration - accelerometerVerticalData.last!) * (updatesIntervalOn / 2)
         
@@ -332,10 +337,10 @@ class ViewController: UIViewController {
         let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
         let entryVerticalAcceleration = ChartDataEntry(x: position, y: newVerticalAcceleration)
         
-        accelerationLineChartGraph.data?.addEntry(entryXAcceleration, dataSetIndex: 0)
-        accelerationLineChartGraph.data?.addEntry(entryYAcceleration, dataSetIndex: 1)
-        accelerationLineChartGraph.data?.addEntry(entryZAcceleration, dataSetIndex: 2)
-        accelerationLineChartGraph.data?.addEntry(entryVerticalAcceleration, dataSetIndex: 3)
+		accelerationLineChartGraph.data?.appendEntry(entryXAcceleration, toDataSet: 0)
+		accelerationLineChartGraph.data?.appendEntry(entryYAcceleration, toDataSet: 1)
+		accelerationLineChartGraph.data?.appendEntry(entryZAcceleration, toDataSet: 2)
+		accelerationLineChartGraph.data?.appendEntry(entryVerticalAcceleration, toDataSet: 3)
         
         // Velocity added to Chart
         let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
@@ -343,19 +348,19 @@ class ViewController: UIViewController {
         let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
         let entryVerticalVelocity = ChartDataEntry(x: position, y: currentVerticalVelocity)
         
-        velocityLineChartGraph.data?.addEntry(entryXVelocity, dataSetIndex: 0)
-        velocityLineChartGraph.data?.addEntry(entryYVelocity, dataSetIndex: 1)
-        velocityLineChartGraph.data?.addEntry(entryZVelocity, dataSetIndex: 2)
-        velocityLineChartGraph.data?.addEntry(entryVerticalVelocity, dataSetIndex: 3)
+		velocityLineChartGraph.data?.appendEntry(entryXVelocity, toDataSet: 0)
+        velocityLineChartGraph.data?.appendEntry(entryYVelocity, toDataSet: 1)
+        velocityLineChartGraph.data?.appendEntry(entryZVelocity, toDataSet: 2)
+        velocityLineChartGraph.data?.appendEntry(entryVerticalVelocity, toDataSet: 3)
         
         // Gravity added to the Chart
         let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
         let entryYGravity = ChartDataEntry(x: position, y: newYGravity)
         let entryZGravity = ChartDataEntry(x: position, y: newZGravity)
         
-        gravityLineChartGraph.data?.addEntry(entryXGravity, dataSetIndex: 0)
-        gravityLineChartGraph.data?.addEntry(entryYGravity, dataSetIndex: 1)
-        gravityLineChartGraph.data?.addEntry(entryZGravity, dataSetIndex: 2)
+        gravityLineChartGraph.data?.appendEntry(entryXGravity, toDataSet: 0)
+        gravityLineChartGraph.data?.appendEntry(entryYGravity, toDataSet: 1)
+        gravityLineChartGraph.data?.appendEntry(entryZGravity, toDataSet: 2)
         
         OperationQueue.main.addOperation {
             self.reloadGraphs()
@@ -377,10 +382,10 @@ class ViewController: UIViewController {
         segmentedControlChanged(segmentedControl)
 
         // Set description of the chart
-        accelerationLineChartGraph.chartDescription?.text = "Acceleration by axis"
-        velocityLineChartGraph.chartDescription?.text = "Velocity by axis"
-        gravityLineChartGraph.chartDescription?.text = "Gravity by axis"
-        
+		accelerationLineChartGraph.chartDescription.text = "Acceleration by axis"
+        velocityLineChartGraph.chartDescription.text = "Velocity by axis"
+        gravityLineChartGraph.chartDescription.text = "Gravity by axis"
+		
         // Set information of the X-Axis accelerometer dataset
         accelerometerXDataset.label = "X - Axis"
         accelerometerXDataset.colors = [NSUIColor.red]
@@ -491,8 +496,7 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: NAVIGATION
-    
+    // MARK: - Navigations
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.navigationItem.title = "Results"
         
@@ -503,8 +507,7 @@ class ViewController: UIViewController {
         
     }
     
-    // MARK: - ANCILLARY FUNCTIONS
-    
+    // MARK: - Ancillary functions
     func printAccelerationData(){
         print("X-Acceleration")
         print(accelerometerXData)
