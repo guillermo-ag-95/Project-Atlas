@@ -1,14 +1,14 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '12.0'
 
 # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 use_frameworks!
 
 def available_pods
   # Pods for Speed Gauge
-  pod 'Charts'
-  pod 'Surge'
-  pod 'SigmaSwiftStatistics'
+  pod 'Charts', '3.1.1'
+  pod 'Surge', '2.0.0'
+  pod 'SigmaSwiftStatistics', '7.0.2'
 end
 
 target 'Speed Gauge' do
@@ -17,4 +17,14 @@ end
 
 target 'Speed Gauge Tests' do
   available_pods
+end
+
+post_install do |installer|
+		installer.generated_projects.each do |project|
+				project.targets.each do |target|
+						target.build_configurations.each do |config|
+								config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0'
+						end
+				end
+		end
 end
