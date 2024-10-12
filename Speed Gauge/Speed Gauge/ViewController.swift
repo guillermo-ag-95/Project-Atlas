@@ -6,18 +6,22 @@
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
 //
 
-import UIKit
 import CoreMotion
 import DGCharts
 import Surge
-import SigmaSwiftStatistics
+import UIKit
 
 import AVFoundation
 
 class ViewController: UIViewController {
+	@IBOutlet weak var segmentedControl: UISegmentedControl!        // Interface segmented control.
+	@IBOutlet weak var accelerationLineChartGraph: LineChartView!   // Interface acceleration chart.
+	@IBOutlet weak var velocityLineChartGraph: LineChartView!       // Interface velocity chart.
+	@IBOutlet weak var gravityLineChartGraph: LineChartView!        // Interface gravity chart.
+	@IBOutlet weak var playButton: UIButton!                        // Interface play button.
+	@IBOutlet weak var pauseButton: UIButton!                       // Interface pause button.
+	
 	// MARK: - Variables
-    var motionManager = CMMotionManager()
-    
     var accelerometerXData: [Double] = []           // Sensor values of the accelerometer in the X-Axis.
     var accelerometerYData: [Double] = []           // Sensor values of the accelerometer in the Y-Axis.
     var accelerometerZData: [Double] = []           // Sensor values of the accelerometer in the Z-Axis.
@@ -54,40 +58,99 @@ class ViewController: UIViewController {
     var maxVelocities: [Double] = []
     var meanVelocities: [Double] = []
     
-    let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
+	let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
     let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
     let gravity = 9.81
     
     let queue: OperationQueue = OperationQueue()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initializeInterface()
-    }
-    
-    @IBOutlet weak var playButton: UIButton!                        // Interface play button.
-    @IBOutlet weak var pauseButton: UIButton!                       // Interface pause button.
-    @IBOutlet weak var segmentedControl: UISegmentedControl!        // Interface segmented control.
-    @IBOutlet weak var accelerationLineChartGraph: LineChartView!   // Interface acceleration chart.
-    @IBOutlet weak var velocityLineChartGraph: LineChartView!       // Interface velocity chart.
-    @IBOutlet weak var gravityLineChartGraph: LineChartView!        // Interface gravity chart.
-    
+	var motionManager = CMMotionManager()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		setupHeader()
+		setupCharts()
+		setupButtons()
+	}
+	
+	// MARK: - Setup functions
+	func setupHeader() {
+		segmentedControl.setTitle("Acceleration", forSegmentAt: 0)
+		segmentedControl.setTitle("Velocity", forSegmentAt: 1)
+		segmentedControl.setTitle("Gravity", forSegmentAt: 2)
+		segmentedControl.selectedSegmentIndex = 1
+		segmentedControlChanged(segmentedControl)
+	}
+	
+	func setupCharts() {
+		accelerationLineChartGraph.chartDescription.text = "Acceleration by axis"
+		velocityLineChartGraph.chartDescription.text = "Velocity by axis"
+		gravityLineChartGraph.chartDescription.text = "Gravity by axis"
+		
+		setupDataSet(accelerometerXDataset, label: "X - Axis", color: .red)
+		setupDataSet(accelerometerYDataset, label: "Y - Axis", color: .green)
+		setupDataSet(accelerometerZDataset, label: "Z - Axis", color: .blue)
+		setupDataSet(accelerometerVerticalDataset, label: "Vertical acceleration", color: .black)
+		
+		setupDataSet(velocityXDataset, label: "X - Axis", color: .red)
+		setupDataSet(velocityYDataset, label: "Y - Axis", color: .green)
+		setupDataSet(velocityZDataset, label: "Z - Axis", color: .blue)
+		setupDataSet(velocityVerticalDataset, label: "Vertical velocity", color: .black)
+		
+		setupDataSet(gravityXDataset, label: "X - Axis", color: .red)
+		setupDataSet(gravityYDataset, label: "Y - Axis", color: .green)
+		setupDataSet(gravityZDataset, label: "Z - Axis", color: .blue)
+	}
+	
+	func setupDataSet(_ dataSet: LineChartDataSet, label: String, color: UIColor, pointSize: CGFloat = 1) {
+		dataSet.label = label
+		dataSet.colors = [color]
+		dataSet.setCircleColor(color)
+		dataSet.circleRadius = pointSize
+		dataSet.circleHoleRadius = pointSize
+	}
+	
+	func setupButtons(pause: Bool = true) {
+		playButton.isHidden = !pause
+		pauseButton.isHidden = pause
+	}
+	
+	// MARK: - Control actions
+	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+		case 0:
+			accelerationLineChartGraph.isHidden = false
+			velocityLineChartGraph.isHidden = true
+			gravityLineChartGraph.isHidden = true
+		case 1:
+			accelerationLineChartGraph.isHidden = true
+			velocityLineChartGraph.isHidden = false
+			gravityLineChartGraph.isHidden = true
+		case 2:
+			accelerationLineChartGraph.isHidden = true
+			velocityLineChartGraph.isHidden = true
+			gravityLineChartGraph.isHidden = false
+		default:
+			break
+		}
+	}
+	
     @IBAction func playPauseButtonPressed(_ sender: UIButton) {
         // Updates which button is shown.
-        playButton.isHidden = !playButton.isHidden
-        pauseButton.isHidden = !pauseButton.isHidden
+		playButton.isHidden.toggle()
+		pauseButton.isHidden.toggle()
         
         // Updates the interval to avoid 100Hz when the app is paused.
-        self.motionManager.deviceMotionUpdateInterval = playButton.isHidden ? self.updatesIntervalOn : self.updatesIntervalOff
+        motionManager.deviceMotionUpdateInterval = playButton.isHidden ? self.updatesIntervalOn : self.updatesIntervalOff
 
         playButton.isHidden ? startRecordData() : stopRecordData()
     }
     
 	// MARK: - Data recording
-    func startRecordData(){
+    func startRecordData() {
         guard motionManager.isDeviceMotionAvailable else { return }
         
-        initializeStoredData()
+        setupStoredData()
         
         motionManager.startDeviceMotionUpdates(to: queue) { (data, error) in
             if let data = data {
@@ -96,7 +159,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func stopRecordData(){
+    func stopRecordData() {
         guard motionManager.isDeviceMotionAvailable else { return }
         motionManager.stopDeviceMotionUpdates()
         
@@ -153,9 +216,7 @@ class ViewController: UIViewController {
 
                     meanVelocities.append(meanVelocity)
                 }
-
             }
-
         }
         
         // Update charts.
@@ -165,88 +226,79 @@ class ViewController: UIViewController {
         
     }
     
-	// MARK: - Data setup
-    func initializeStoredData(){
+	// MARK: - Data management
+    func setupStoredData() {
         // Clean accelerometer data.
-        accelerometerXData.removeAll()
-        accelerometerXData.append(0)
-        accelerometerYData.removeAll()
-        accelerometerYData.append(0)
-        accelerometerZData.removeAll()
-        accelerometerZData.append(0)
-        accelerometerVerticalData.removeAll()
-        accelerometerVerticalData.append(0)
+		restoreData(&accelerometerXData)
+		restoreData(&accelerometerYData)
+		restoreData(&accelerometerZData)
+		restoreData(&accelerometerVerticalData)
         
         // Clean gyro data.
-        gyroXData.removeAll()
-        gyroXData.append(0)
-        gyroYData.removeAll()
-        gyroYData.append(0)
-        gyroZData.removeAll()
-        gyroZData.append(0)
-
+		restoreData(&gyroXData)
+		restoreData(&gyroYData)
+		restoreData(&gyroZData)
+		
         // Clean velocity data.
-        velocityXData.removeAll()
-        velocityXData.append(0)
-        velocityYData.removeAll()
-        velocityYData.append(0)
-        velocityZData.removeAll()
-        velocityZData.append(0)
-        velocityVerticalData.removeAll()
-        velocityVerticalData.append(0)
-        velocityVerticalFixedData.removeAll()
+		restoreData(&velocityXData)
+		restoreData(&velocityYData)
+		restoreData(&velocityZData)
+		restoreData(&velocityVerticalData)
+		restoreData(&velocityVerticalFixedData, keepsEmpty: true)
         
         // Clean gravity data
-        gravityXData.removeAll()
-        gravityXData.append(0)
-        gravityYData.removeAll()
-        gravityYData.append(0)
-        gravityZData.removeAll()
-        gravityZData.append(0)
+		restoreData(&gravityXData)
+		restoreData(&gravityYData)
+		restoreData(&gravityZData)
         
         // Clean acceleration chart dataset
-		// - keepingCapacity must be true to keep dataset style.
-		accelerometerXDataset.removeAll(keepingCapacity: true)
-        accelerometerYDataset.removeAll(keepingCapacity: true)
-        accelerometerZDataset.removeAll(keepingCapacity: true)
-        accelerometerVerticalDataset.removeAll(keepingCapacity: true)
-        
-		accelerometerXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        accelerometerYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        accelerometerZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        accelerometerVerticalDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+		restoreDataSet(accelerometerXDataset)
+		restoreDataSet(accelerometerYDataset)
+		restoreDataSet(accelerometerZDataset)
+		restoreDataSet(accelerometerVerticalDataset)
         
         // Clean velocity chart dataset
-		// - keepingCapacity must be true to keep dataset style.
-        velocityXDataset.removeAll(keepingCapacity: true)
-        velocityYDataset.removeAll(keepingCapacity: true)
-        velocityZDataset.removeAll(keepingCapacity: true)
-        velocityVerticalDataset.removeAll(keepingCapacity: true)
-        
-        velocityXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        velocityYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        velocityZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        velocityVerticalDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+		restoreDataSet(velocityXDataset)
+		restoreDataSet(velocityYDataset)
+		restoreDataSet(velocityZDataset)
+		restoreDataSet(velocityVerticalDataset)
 
         // Clean gravity chart dataset
-		// - keepingCapacity must be true to keep dataset style.
-        gravityXDataset.removeAll(keepingCapacity: true)
-        gravityYDataset.removeAll(keepingCapacity: true)
-        gravityZDataset.removeAll(keepingCapacity: true)
-
-        gravityXDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        gravityYDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
-        gravityZDataset.append(ChartDataEntry(x: 0.0, y: 0.0))
+		restoreDataSet(gravityXDataset)
+		restoreDataSet(gravityYDataset)
+		restoreDataSet(gravityZDataset)
 
         // Clean charts (LineChartView)
-        accelerationLineChartGraph.clear()
-        velocityLineChartGraph.clear()
-        gravityLineChartGraph.clear()
+		restoreChart(accelerationLineChartGraph)
+		restoreChart(velocityLineChartGraph)
+		restoreChart(gravityLineChartGraph)
         
         // Create empty chart data
-        let accelerationData: LineChartData = LineChartData(dataSets: [accelerometerXDataset, accelerometerYDataset, accelerometerZDataset, accelerometerVerticalDataset])
-        let velocityData: LineChartData = LineChartData(dataSets: [velocityXDataset, velocityYDataset, velocityZDataset, velocityVerticalDataset])
-        let gravityData: LineChartData = LineChartData(dataSets: [gravityXDataset, gravityYDataset, gravityZDataset])
+        let accelerationData: LineChartData = LineChartData(
+			dataSets: [
+				accelerometerXDataset,
+				accelerometerYDataset,
+				accelerometerZDataset,
+				accelerometerVerticalDataset
+			]
+		)
+		
+        let velocityData: LineChartData = LineChartData(
+			dataSets: [
+				velocityXDataset,
+				velocityYDataset,
+				velocityZDataset,
+				velocityVerticalDataset
+			]
+		)
+		
+        let gravityData: LineChartData = LineChartData(
+			dataSets: [
+				gravityXDataset,
+				gravityYDataset,
+				gravityZDataset
+			]
+		)
         
         // Empty data added to the chart
         accelerationLineChartGraph.data = accelerationData
@@ -258,8 +310,27 @@ class ViewController: UIViewController {
         velocityLineChartGraph.notifyDataSetChanged()
         gravityLineChartGraph.notifyDataSetChanged()
     }
+	
+	func restoreData(_ data: inout Array<Double>, keepsEmpty: Bool = false) {
+		data.removeAll()
+		
+		guard !keepsEmpty else { return }
+		data.append(.zero)
+	}
+	
+	func restoreDataSet(_ dataSet: LineChartDataSet, keepsEmpty: Bool = false) {
+		// keepingCapacity must be true to keep dataset style.
+		dataSet.removeAll(keepingCapacity: true)
+		
+		guard !keepsEmpty else { return }
+		dataSet.append(.init(x: .zero, y: .zero))
+	}
+	
+	func restoreChart(_ chart: LineChartView) {
+		chart.clear()
+	}
     
-    func updateStoredData(_ data: CMDeviceMotion){
+    func updateStoredData(_ data: CMDeviceMotion) {
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
@@ -365,125 +436,9 @@ class ViewController: UIViewController {
         OperationQueue.main.addOperation {
             self.reloadGraphs()
         }
-
     }
     
-    // INTERFACE UPDATES
-    func initializeInterface(){
-        // Set play and pause buttons
-        playButton.isHidden = false
-        pauseButton.isHidden = true
-        
-        // Set segmented control info
-        segmentedControl.setTitle("Acceleration", forSegmentAt: 0)
-        segmentedControl.setTitle("Velocity", forSegmentAt: 1)
-        segmentedControl.setTitle("Gravity", forSegmentAt: 2)
-        segmentedControl.selectedSegmentIndex = 1
-        segmentedControlChanged(segmentedControl)
-
-        // Set description of the chart
-		accelerationLineChartGraph.chartDescription.text = "Acceleration by axis"
-        velocityLineChartGraph.chartDescription.text = "Velocity by axis"
-        gravityLineChartGraph.chartDescription.text = "Gravity by axis"
-		
-        // Set information of the X-Axis accelerometer dataset
-        accelerometerXDataset.label = "X - Axis"
-        accelerometerXDataset.colors = [NSUIColor.red]
-        accelerometerXDataset.setCircleColor(NSUIColor.red)
-        accelerometerXDataset.circleRadius = 1
-        accelerometerXDataset.circleHoleRadius = 1
-        
-        // Set information of the Y-Axis accelerometer dataset
-        accelerometerYDataset.label = "Y - Axis"
-        accelerometerYDataset.colors = [NSUIColor.green]
-        accelerometerYDataset.setCircleColor(NSUIColor.green)
-        accelerometerYDataset.circleRadius = 1
-        accelerometerYDataset.circleHoleRadius = 1
-        
-        // Set information of the Z-Axis accelerometer dataset
-        accelerometerZDataset.label = "Z - Axis"
-        accelerometerZDataset.colors = [NSUIColor.blue]
-        accelerometerZDataset.setCircleColor(NSUIColor.blue)
-        accelerometerZDataset.circleRadius = 1
-        accelerometerZDataset.circleHoleRadius = 1
-        
-        // Set information of the vertical accelerometer dataset
-        accelerometerVerticalDataset.label = "Vertical acceleration"
-        accelerometerVerticalDataset.colors = [NSUIColor.black]
-        accelerometerVerticalDataset.setCircleColor(NSUIColor.black)
-        accelerometerVerticalDataset.circleRadius = 1
-        accelerometerVerticalDataset.circleHoleRadius = 1
-        
-        // Set information of the X-Axis velocity dataset
-        velocityXDataset.label = "X - Axis"
-        velocityXDataset.colors = [NSUIColor.red]
-        velocityXDataset.setCircleColor(NSUIColor.red)
-        velocityXDataset.circleRadius = 1
-        velocityXDataset.circleHoleRadius = 1
-        
-        // Set information of the Y-Axis velocity dataset
-        velocityYDataset.label = "Y - Axis"
-        velocityYDataset.colors = [NSUIColor.green]
-        velocityYDataset.setCircleColor(NSUIColor.green)
-        velocityYDataset.circleRadius = 1
-        velocityYDataset.circleHoleRadius = 1
-        
-        // Set information of the Z-Axis velocity dataset
-        velocityZDataset.label = "Z - Axis"
-        velocityZDataset.colors = [NSUIColor.blue]
-        velocityZDataset.setCircleColor(NSUIColor.blue)
-        velocityZDataset.circleRadius = 1
-        velocityZDataset.circleHoleRadius = 1
-        
-        // Set information of the vertical velocity dataset
-        velocityVerticalDataset.label = "Vertical velocity"
-        velocityVerticalDataset.colors = [NSUIColor.black]
-        velocityVerticalDataset.setCircleColor(NSUIColor.black)
-        velocityVerticalDataset.circleRadius = 1
-        velocityVerticalDataset.circleHoleRadius = 1
-        
-        // Set information of the X-Axis gravity dataset
-        gravityXDataset.label = "X - Axis"
-        gravityXDataset.colors = [NSUIColor.red]
-        gravityXDataset.setCircleColor(NSUIColor.red)
-        gravityXDataset.circleRadius = 1
-        gravityXDataset.circleHoleRadius = 1
-        
-        // Set information of the Y-Axis gravity dataset
-        gravityYDataset.label = "Y - Axis"
-        gravityYDataset.colors = [NSUIColor.green]
-        gravityYDataset.setCircleColor(NSUIColor.green)
-        gravityYDataset.circleRadius = 1
-        gravityYDataset.circleHoleRadius = 1
-        
-        // Set information of the Z-Axis gravity dataset
-        gravityZDataset.label = "Z - Axis"
-        gravityZDataset.colors = [NSUIColor.blue]
-        gravityZDataset.setCircleColor(NSUIColor.blue)
-        gravityZDataset.circleRadius = 1
-        gravityZDataset.circleHoleRadius = 1
-    }
-    
-    @IBAction func segmentedControlChanged(_ sender: Any) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            accelerationLineChartGraph.isHidden = false
-            velocityLineChartGraph.isHidden = true
-            gravityLineChartGraph.isHidden = true
-        case 1:
-            accelerationLineChartGraph.isHidden = true
-            velocityLineChartGraph.isHidden = false
-            gravityLineChartGraph.isHidden = true
-        case 2:
-            accelerationLineChartGraph.isHidden = true
-            velocityLineChartGraph.isHidden = true
-            gravityLineChartGraph.isHidden = false
-        default:
-            break
-        }
-    }
-    
-    func reloadGraphs(){
+    func reloadGraphs() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             accelerationLineChartGraph.notifyDataSetChanged()
@@ -504,11 +459,10 @@ class ViewController: UIViewController {
         
         repetitionTableViewController.maxVelocities = maxVelocities
         repetitionTableViewController.meanVelocities = meanVelocities
-        
     }
     
     // MARK: - Ancillary functions
-    func printAccelerationData(){
+    func printAccelerationData() {
         print("X-Acceleration")
         print(accelerometerXData)
         print("Y-Acceleration")
@@ -517,8 +471,7 @@ class ViewController: UIViewController {
         print(accelerometerZData)
     }
     
-    func playSound(){
+    func playSound() {
         AudioServicesPlaySystemSound(1052) // SIMToolkitGeneralBeep.caf
     }
-    
 }
