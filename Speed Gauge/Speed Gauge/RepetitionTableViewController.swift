@@ -64,7 +64,7 @@ class RepetitionTableViewController: UITableViewController {
 		return result
 	}
 	
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             maxVelocities.remove(at: indexPath.section)
             meanVelocities.remove(at: indexPath.section)

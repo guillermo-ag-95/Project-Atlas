@@ -11,38 +11,38 @@ import Foundation
 struct LocalizedKeys {
 	// MARK: - Common
 	struct Common {
-		static var graphs = "graphs".localized
-		static var results = "results".localized
-		static var xAxis = "x_axis".localized
-		static var yAxis = "y_axis".localized
-		static var zAxis = "z_axis".localized
+		static let graphs = "graphs".localized
+		static let results = "results".localized
+		static let xAxis = "x_axis".localized
+		static let yAxis = "y_axis".localized
+		static let zAxis = "z_axis".localized
 	}
 	
 	// MARK: - Acceleration
 	struct Acceleration {
-		static var title = "acceleration".localized
-		static var byAxis = "acceleration_by_axis".localized
-		static var vertical = "vertical_acceleration".localized
+		static let title = "acceleration".localized
+		static let byAxis = "acceleration_by_axis".localized
+		static let vertical = "vertical_acceleration".localized
 	}
 	
 	// MARK: - Velocity
 	struct Velocity {
-		static var title = "velocity".localized
-		static var byAxis = "velocity_by_axis".localized
-		static var vertical = "vertical_velocity".localized
-		static var max = "max_velocity".localized
-		static var mean = "mean_velocity".localized
+		static let title = "velocity".localized
+		static let byAxis = "velocity_by_axis".localized
+		static let vertical = "vertical_velocity".localized
+		static let max = "max_velocity".localized
+		static let mean = "mean_velocity".localized
 	}
 	
 	// MARK: - Gravity
 	struct Gravity {
-		static var title = "gravity".localized
-		static var byAxis = "gravity_by_axis".localized
+		static let title = "gravity".localized
+		static let byAxis = "gravity_by_axis".localized
 	}
 	
 	// MARK: - Repetition
 	struct Repetition {
-		static var title = "repetition".localized
-		static var metersPerSecond = "meters_per_second_hint".localized
+		static let title = "repetition".localized
+		static let metersPerSecond = "meters_per_second_hint".localized
 	}
 }

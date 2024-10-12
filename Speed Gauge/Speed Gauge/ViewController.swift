@@ -439,13 +439,13 @@ class ViewController: UIViewController {
         gravityLineChartGraph.data?.appendEntry(entryXGravity, toDataSet: 0)
         gravityLineChartGraph.data?.appendEntry(entryYGravity, toDataSet: 1)
         gravityLineChartGraph.data?.appendEntry(entryZGravity, toDataSet: 2)
-        
+		
 		OperationQueue.main.addOperation { [weak self] in
             self?.reloadGraphs()
         }
     }
     
-    func reloadGraphs() {
+	func reloadGraphs() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             accelerationLineChartGraph.notifyDataSetChanged()
