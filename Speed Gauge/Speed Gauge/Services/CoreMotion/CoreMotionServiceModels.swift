@@ -13,6 +13,11 @@ typealias AccelerometerServiceModel = CMAccelerometerData
 typealias AccelerometerServiceSuccessHandler = ((AccelerometerServiceModel) -> Void)
 typealias AccelerometerServiceFailureHandler = ((any Error) -> Void)
 
+// MARK: - GyroscopeService models
+typealias GyroscopeServiceModel = CMGyroData
+typealias GyroscopeServiceSuccessHandler = ((GyroscopeServiceModel) -> Void)
+typealias GyroscopeServiceFailureHandler = ((any Error) -> Void)
+
 // MARK: - DeviceMotionService models
 typealias DeviceMotionServiceModel = CMDeviceMotion
 typealias DeviceMotionServiceSuccessHandler = ((DeviceMotionServiceModel) -> Void)

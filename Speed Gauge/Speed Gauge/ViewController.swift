@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     let gravity = 9.81
     
     let queue: OperationQueue = OperationQueue()
-	let motionService: DeviceMotionServiceProtocol = DeviceMotionService()
+	let motionService: DeviceMotionServiceProtocol = CoreMotionService()
 	
 	// MARK: - States
 	var isPaused = true {

@@ -30,8 +30,25 @@ protocol AccelerometerServiceProtocol: CoreMotionServiceProtocol {
 	)
 }
 
+// MARK: - Gyroscope protocol
+protocol GyroscopeServiceProtocol: CoreMotionServiceProtocol {
+	var isGyroAvailable: Bool { get }
+	var gyroData: CMGyroData? { get }
+	
+	var gyroUpdateInterval: TimeInterval { get set }
+	
+	func startGyroUpdates()
+	func stopGyroUpdates()
+	
+	func startGyroUpdates(
+		to operation: OperationQueue,
+		success: @escaping GyroscopeServiceSuccessHandler,
+		failure: @escaping GyroscopeServiceFailureHandler
+	)
+}
+
 // MARK: - DeviceMotion protocol
-protocol DeviceMotionServiceProtocol: AccelerometerServiceProtocol {
+protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
 	var isDeviceMotionAvailable: Bool { get }
 	var deviceMotion: CMDeviceMotion? { get }
 	
@@ -49,15 +66,10 @@ protocol DeviceMotionServiceProtocol: AccelerometerServiceProtocol {
 
 // MARK: - CoreMotion service
 class CoreMotionService: CoreMotionServiceProtocol {
-	internal var manager = CMMotionManager()
+	private var manager = CMMotionManager()
 }
 
-// MARK: - DeviceMotionService
-class DeviceMotionService: CoreMotionService {
-	
-}
-
-extension DeviceMotionService: AccelerometerServiceProtocol {
+extension CoreMotionService: AccelerometerServiceProtocol {
 	var isAccelerometerAvailable: Bool { manager.isAccelerometerAvailable }
 	var accelerometerData: CMAccelerometerData? { manager.accelerometerData }
 	
@@ -92,7 +104,42 @@ extension DeviceMotionService: AccelerometerServiceProtocol {
 	}
 }
 
-extension DeviceMotionService: DeviceMotionServiceProtocol {
+extension CoreMotionService: GyroscopeServiceProtocol {
+	var isGyroAvailable: Bool { manager.isGyroAvailable }
+	var gyroData: CMGyroData? { manager.gyroData }
+	
+	var gyroUpdateInterval: TimeInterval {
+		get { manager.gyroUpdateInterval }
+		set { manager.gyroUpdateInterval = newValue }
+	}
+	
+	func startGyroUpdates() {
+		manager.startGyroUpdates()
+	}
+	
+	func stopGyroUpdates() {
+		manager.stopGyroUpdates()
+	}
+	
+	func startGyroUpdates(
+		to operation: OperationQueue,
+		success: @escaping GyroscopeServiceSuccessHandler,
+		failure: @escaping GyroscopeServiceFailureHandler
+	) {
+		manager.startGyroUpdates(to: operation) { data, error in
+			if let error = error {
+				failure(error)
+			} else if let data = data {
+				success(data)
+			} else {
+				let error = NSError()
+				failure(error)
+			}
+		}
+	}
+}
+
+extension CoreMotionService: DeviceMotionServiceProtocol {
 	var isDeviceMotionAvailable: Bool { manager.isDeviceMotionAvailable }
 	var deviceMotion: CMDeviceMotion? { manager.deviceMotion }
 	
