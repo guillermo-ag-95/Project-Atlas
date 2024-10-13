@@ -6,20 +6,19 @@
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
 //
 
+import AVFoundation
 import CoreMotion
 import DGCharts
 import Surge
 import UIKit
 
-import AVFoundation
-
 class ViewController: UIViewController {
 	// MARK: - Outlets
-	@IBOutlet weak var segmentedControl: UISegmentedControl!		// Interface segmented control.
+	@IBOutlet weak var segmentedControl: UISegmentedControl!
 	@IBOutlet weak var accelerationLineChartGraph: LineChartView!	// Interface acceleration chart.
 	@IBOutlet weak var velocityLineChartGraph: LineChartView!		// Interface velocity chart.
 	@IBOutlet weak var gravityLineChartGraph: LineChartView!		// Interface gravity chart.
-	@IBOutlet weak var actionButton: UIButton!						// Interface play/pause button.
+	@IBOutlet weak var actionButton: UIButton!
 	
 	// MARK: - Variables
     var accelerometerXData: [Double] = []           // Sensor values of the accelerometer in the X-Axis.
@@ -90,17 +89,17 @@ class ViewController: UIViewController {
 	}
 	
 	func setupHeader() {
-		segmentedControl.setTitle(LocalizedKeys.Acceleration.title, forSegmentAt: 0)
-		segmentedControl.setTitle(LocalizedKeys.Velocity.title, forSegmentAt: 1)
-		segmentedControl.setTitle(LocalizedKeys.Gravity.title, forSegmentAt: 2)
-		segmentedControl.selectedSegmentIndex = 1
+		segmentedControl.setTitle(GraphCharts.ACCELERATION.title, forSegmentAt: GraphCharts.ACCELERATION.rawValue)
+		segmentedControl.setTitle(GraphCharts.VELOCITY.title, forSegmentAt: GraphCharts.VELOCITY.rawValue)
+		segmentedControl.setTitle(GraphCharts.GRAVITY.title, forSegmentAt: GraphCharts.GRAVITY.rawValue)
+		segmentedControl.selectedSegmentIndex = GraphCharts.VELOCITY.rawValue
 		segmentedControlChanged(segmentedControl)
 	}
 	
 	func setupCharts() {
-		accelerationLineChartGraph.chartDescription.text = LocalizedKeys.Acceleration.byAxis
-		velocityLineChartGraph.chartDescription.text = LocalizedKeys.Velocity.byAxis
-		gravityLineChartGraph.chartDescription.text = LocalizedKeys.Gravity.byAxis
+		accelerationLineChartGraph.chartDescription.text = GraphCharts.ACCELERATION.description
+		velocityLineChartGraph.chartDescription.text = GraphCharts.VELOCITY.description
+		gravityLineChartGraph.chartDescription.text = GraphCharts.GRAVITY.description
 		
 		setupDataSet(accelerometerXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
 		setupDataSet(accelerometerYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
@@ -133,15 +132,15 @@ class ViewController: UIViewController {
 	// MARK: - Actions
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
-		case 0:
+		case GraphCharts.ACCELERATION.rawValue:
 			accelerationLineChartGraph.isHidden = false
 			velocityLineChartGraph.isHidden = true
 			gravityLineChartGraph.isHidden = true
-		case 1:
+		case GraphCharts.VELOCITY.rawValue:
 			accelerationLineChartGraph.isHidden = true
 			velocityLineChartGraph.isHidden = false
 			gravityLineChartGraph.isHidden = true
-		case 2:
+		case GraphCharts.GRAVITY.rawValue:
 			accelerationLineChartGraph.isHidden = true
 			velocityLineChartGraph.isHidden = true
 			gravityLineChartGraph.isHidden = false
@@ -233,12 +232,8 @@ class ViewController: UIViewController {
                 }
             }
         }
-        
-        // Update charts.
-        accelerationLineChartGraph.notifyDataSetChanged()
-        velocityLineChartGraph.notifyDataSetChanged()
-        gravityLineChartGraph.notifyDataSetChanged()
-        
+		
+		reloadCharts()
     }
     
 	// MARK: - Data management
@@ -321,9 +316,7 @@ class ViewController: UIViewController {
         gravityLineChartGraph.data = gravityData
         
         // Update charts.
-        accelerationLineChartGraph.notifyDataSetChanged()
-        velocityLineChartGraph.notifyDataSetChanged()
-        gravityLineChartGraph.notifyDataSetChanged()
+		reloadCharts()
     }
 	
 	func restoreData(_ data: inout Array<Double>, keepsEmpty: Bool = false) {
@@ -455,16 +448,22 @@ class ViewController: UIViewController {
     
 	func reloadGraphs() {
         switch segmentedControl.selectedSegmentIndex {
-        case 0:
+		case GraphCharts.ACCELERATION.rawValue:
             accelerationLineChartGraph.notifyDataSetChanged()
-        case 1:
+		case GraphCharts.VELOCITY.rawValue:
             velocityLineChartGraph.notifyDataSetChanged()
-        case 2:
+		case GraphCharts.GRAVITY.rawValue:
             gravityLineChartGraph.notifyDataSetChanged()
         default:
             break
         }
     }
+	
+	func reloadCharts() {
+		accelerationLineChartGraph.notifyDataSetChanged()
+		velocityLineChartGraph.notifyDataSetChanged()
+		gravityLineChartGraph.notifyDataSetChanged()
+	}
     
     // MARK: - Navigations
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
