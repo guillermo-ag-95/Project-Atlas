@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import CoreMotion
 import DGCharts
 import Surge
 import UIKit
@@ -60,7 +59,7 @@ class ViewController: UIViewController {
     let gravity = 9.81
     
     let queue: OperationQueue = OperationQueue()
-	var motionManager = CMMotionManager()
+	let motionService: DeviceMotionServiceProtocol = DeviceMotionService()
 	
 	// MARK: - States
 	var isPaused = true {
@@ -135,27 +134,27 @@ class ViewController: UIViewController {
         
         // Updates the interval to avoid 100Hz when the app is paused.
 		let deviceMotionUpdateInterval = willPause ? self.updatesIntervalOff : self.updatesIntervalOn
-		motionManager.deviceMotionUpdateInterval = deviceMotionUpdateInterval
+		motionService.deviceMotionUpdateInterval = deviceMotionUpdateInterval
 		
 		willPause ? stopRecordData() : startRecordData()
     }
     
 	// MARK: - Data recording
     func startRecordData() {
-        guard motionManager.isDeviceMotionAvailable else { return }
+		guard motionService.isDeviceMotionAvailable else { return }
         
         setupStoredData()
-        
-        motionManager.startDeviceMotionUpdates(to: queue) { [weak self] (data, error) in
-            if let data = data {
-				self?.updateStoredData(data)
-            }
-        }
+		
+		motionService.startDeviceMotionUpdates(to: queue) { [weak self] model in
+			self?.updateStoredData(model)
+		} failure: { [weak self] error in
+			self?.stopRecordData()
+		}
     }
     
     func stopRecordData() {
-        guard motionManager.isDeviceMotionAvailable else { return }
-        motionManager.stopDeviceMotionUpdates()
+        guard motionService.isDeviceMotionAvailable else { return }
+		motionService.stopDeviceMotionUpdates()
         
         let slope = velocityVerticalData.last! / Double(velocityVerticalData.count)
 
@@ -284,7 +283,7 @@ class ViewController: UIViewController {
 		chart.clear()
 	}
     
-    func updateStoredData(_ data: CMDeviceMotion) {
+	func updateStoredData(_ data: DeviceMotionServiceModel) {
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
