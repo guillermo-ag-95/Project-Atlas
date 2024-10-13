@@ -136,6 +136,9 @@ class ChartViewController: UIViewController {
 		let deviceMotionUpdateInterval = willPause ? self.updatesIntervalOff : self.updatesIntervalOn
 		motionService.deviceMotionUpdateInterval = deviceMotionUpdateInterval
 		
+		// Trigger haptic notification
+		vibrateDevice()
+		
 		willPause ? stopRecordData() : startRecordData()
     }
     
@@ -442,9 +445,5 @@ class ChartViewController: UIViewController {
         print(accelerometerYData)
         print("Z-Acceleration")
         print(accelerometerZData)
-    }
-    
-    private func playSound() {
-        AudioServicesPlaySystemSound(1052) // SIMToolkitGeneralBeep.caf
     }
 }
