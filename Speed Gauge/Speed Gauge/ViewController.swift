@@ -14,12 +14,12 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-	@IBOutlet weak var segmentedControl: UISegmentedControl!        // Interface segmented control.
-	@IBOutlet weak var accelerationLineChartGraph: LineChartView!   // Interface acceleration chart.
-	@IBOutlet weak var velocityLineChartGraph: LineChartView!       // Interface velocity chart.
-	@IBOutlet weak var gravityLineChartGraph: LineChartView!        // Interface gravity chart.
-	@IBOutlet weak var playButton: UIButton!                        // Interface play button.
-	@IBOutlet weak var pauseButton: UIButton!                       // Interface pause button.
+	// MARK: - Outlets
+	@IBOutlet weak var segmentedControl: UISegmentedControl!		// Interface segmented control.
+	@IBOutlet weak var accelerationLineChartGraph: LineChartView!	// Interface acceleration chart.
+	@IBOutlet weak var velocityLineChartGraph: LineChartView!		// Interface velocity chart.
+	@IBOutlet weak var gravityLineChartGraph: LineChartView!		// Interface gravity chart.
+	@IBOutlet weak var actionButton: UIButton!						// Interface play/pause button.
 	
 	// MARK: - Variables
     var accelerometerXData: [Double] = []           // Sensor values of the accelerometer in the X-Axis.
@@ -65,6 +65,14 @@ class ViewController: UIViewController {
     let queue: OperationQueue = OperationQueue()
 	var motionManager = CMMotionManager()
 	
+	// MARK: - States
+	var isPaused = true {
+		didSet {
+			setupButtons()
+		}
+	}
+	
+	// MARK: - Life cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -117,12 +125,12 @@ class ViewController: UIViewController {
 		dataSet.circleHoleRadius = pointSize
 	}
 	
-	func setupButtons(pause: Bool = true) {
-		playButton.isHidden = !pause
-		pauseButton.isHidden = pause
+	func setupButtons() {
+		let actionButtonImage: UIImage? = isPaused ? .systemPlayFill : .systemPauseFill
+		actionButton.setImage(actionButtonImage, for: .normal)
 	}
 	
-	// MARK: - Control actions
+	// MARK: - Actions
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
 		case 0:
@@ -142,15 +150,15 @@ class ViewController: UIViewController {
 		}
 	}
 	
-    @IBAction func playPauseButtonPressed(_ sender: UIButton) {
-        // Updates which button is shown.
-		playButton.isHidden.toggle()
-		pauseButton.isHidden.toggle()
+    @IBAction func actionButtonPressed(_ sender: UIButton) {
+		let willPause = !isPaused
+		self.isPaused = willPause
         
         // Updates the interval to avoid 100Hz when the app is paused.
-        motionManager.deviceMotionUpdateInterval = playButton.isHidden ? self.updatesIntervalOn : self.updatesIntervalOff
-
-        playButton.isHidden ? startRecordData() : stopRecordData()
+		let deviceMotionUpdateInterval = willPause ? self.updatesIntervalOff : self.updatesIntervalOn
+		motionManager.deviceMotionUpdateInterval = deviceMotionUpdateInterval
+		
+		willPause ? stopRecordData() : startRecordData()
     }
     
 	// MARK: - Data recording
@@ -469,7 +477,7 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Ancillary functions
-    func printAccelerationData() {
+    private func printAccelerationData() {
         print("X-Acceleration")
         print(accelerometerXData)
         print("Y-Acceleration")
@@ -478,7 +486,7 @@ class ViewController: UIViewController {
         print(accelerometerZData)
     }
     
-    func playSound() {
+    private func playSound() {
         AudioServicesPlaySystemSound(1052) // SIMToolkitGeneralBeep.caf
     }
 }

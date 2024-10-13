@@ -44,24 +44,11 @@
                                 <rect key="frame" x="157.5" y="587" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="LH9-0p-Hk6"/>
-                                    <constraint firstAttribute="height" constant="60" id="sbw-Lx-rjn"/>
+                                    <constraint firstAttribute="width" secondItem="uON-a0-ChI" secondAttribute="height" multiplier="1:1" id="x8s-Ib-pct"/>
                                 </constraints>
                                 <color key="tintColor" name="appBlack"/>
-                                <state key="normal" image="play.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="TWu-zy-V4f"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-vI-dEO">
-                                <rect key="frame" x="157.5" y="587" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="FiG-hu-a8q"/>
-                                    <constraint firstAttribute="width" constant="60" id="LNA-GJ-Fla"/>
-                                </constraints>
-                                <color key="tintColor" name="appBlack"/>
-                                <state key="normal" image="pause.fill" catalog="system"/>
-                                <connections>
-                                    <action selector="playPauseButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="5ib-GB-wBA"/>
+                                    <action selector="actionButtonPressed:" destination="eoa-zI-3wh" eventType="touchUpInside" id="TWu-zy-V4f"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -75,13 +62,11 @@
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="5DC-Nz-X4G" secondAttribute="trailing" constant="16" id="UGl-1O-O6v"/>
                             <constraint firstItem="BIr-Wt-6eC" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Uzt-mn-MMK"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="uON-a0-ChI" secondAttribute="bottom" constant="20" id="Vmx-tT-GYo"/>
-                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="c9R-vI-dEO" secondAttribute="bottom" constant="20" id="X4G-kV-h4n"/>
                             <constraint firstItem="BIr-Wt-6eC" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="YG4-xl-QJD"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="BIr-Wt-6eC" secondAttribute="trailing" constant="16" id="cjp-TZ-6x7"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="gcA-Tl-VhR"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="BIr-Wt-6eC" secondAttribute="bottom" constant="8" id="lgj-Cr-mdc"/>
                             <constraint firstItem="xlH-xt-mDI" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="o6d-Jg-i5e"/>
-                            <constraint firstItem="c9R-vI-dEO" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="pMj-fm-fCn"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="xlH-xt-mDI" secondAttribute="trailing" constant="16" id="tdL-Rn-UtT"/>
                             <constraint firstItem="5DC-Nz-X4G" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z1Q-HC-eNd"/>
                             <constraint firstItem="xlH-xt-mDI" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z6d-yk-LUa"/>
@@ -97,9 +82,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="accelerationLineChartGraph" destination="xlH-xt-mDI" id="T2v-vT-N5B"/>
+                        <outlet property="actionButton" destination="uON-a0-ChI" id="OlZ-0v-q7R"/>
                         <outlet property="gravityLineChartGraph" destination="5DC-Nz-X4G" id="G8u-63-b0n"/>
-                        <outlet property="pauseButton" destination="c9R-vI-dEO" id="Rkc-fC-Xwz"/>
-                        <outlet property="playButton" destination="uON-a0-ChI" id="srq-KD-0hg"/>
                         <outlet property="segmentedControl" destination="cdj-zI-CYz" id="1sq-JQ-vIK"/>
                         <outlet property="velocityLineChartGraph" destination="BIr-Wt-6eC" id="Vr8-Af-DI3"/>
                     </connections>
@@ -173,8 +157,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pause.fill" catalog="system" width="114" height="128"/>
-        <image name="play.fill" catalog="system" width="120" height="128"/>
         <namedColor name="appBlack">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
