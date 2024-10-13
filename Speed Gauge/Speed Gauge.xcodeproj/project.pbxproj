@@ -11,7 +11,7 @@
 		B306A34C2CBA911F00A28CD8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
-		B3177E5B20B0719900E283FC /* RepetitionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */; };
+		B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */; };
 		B3177E5F20B0761600E283FC /* Repetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5E20B0761600E283FC /* Repetition.swift */; };
 		B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */; };
 		B32510A42CBBD79200CFE2F7 /* GraphCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */; };
@@ -27,7 +27,7 @@
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
-		B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ViewController.swift */; };
+		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
 		B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802762073B4E300166074 /* Kalman_Filter.swift */; };
 		B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */; };
 		B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */; };
@@ -51,7 +51,7 @@
 		B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
-		B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionTableViewController.swift; sourceTree = "<group>"; };
+		B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		B3177E5E20B0761600E283FC /* Repetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repetition.swift; sourceTree = "<group>"; };
 		B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCharts.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AC613E1FBDBB0C00B2334D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3AC61441FBDBBB100B2334D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B3AC61441FBDBBB100B2334D /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B3E802762073B4E300166074 /* Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter.swift; sourceTree = "<group>"; };
 		B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter_Tests.swift; sourceTree = "<group>"; };
 		B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Dimensional_Kalman_Filter.swift; sourceTree = "<group>"; };
@@ -138,6 +138,22 @@
 			path = CoreMotion;
 			sourceTree = "<group>";
 		};
+		B32510AD2CBBFB6F00CFE2F7 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		B32510AE2CBBFB7800CFE2F7 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				B3177E5E20B0761600E283FC /* Repetition.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
 		B3280A8F2CBA97DE005EBD32 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,8 +167,8 @@
 		B39863FE206FA12A00066E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */,
-				B3177E5E20B0761600E283FC /* Repetition.swift */,
+				B32510AD2CBBFB6F00CFE2F7 /* Charts */,
+				B32510AE2CBBFB7800CFE2F7 /* Results */,
 				B312D3142CBA7DF700028872 /* Filters */,
 			);
 			path = Model;
@@ -192,8 +208,8 @@
 				B306A3492CBA907C00A28CD8 /* LaunchScreen.storyboard */,
 				B3280A962CBAA243005EBD32 /* Main.storyboard */,
 				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
-				B3AC61441FBDBBB100B2334D /* ViewController.swift */,
-				B3177E5A20B0719900E283FC /* RepetitionTableViewController.swift */,
+				B3AC61441FBDBBB100B2334D /* ChartViewController.swift */,
+				B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */,
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
 				B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */,
 				B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */,
@@ -329,13 +345,13 @@
 			files = (
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
-				B3177E5B20B0719900E283FC /* RepetitionTableViewController.swift in Sources */,
+				B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */,
 				B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
 				B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */,
 				B32510A92CBBE8DE00CFE2F7 /* CoreMotionService.swift in Sources */,
-				B3AC61451FBDBBB100B2334D /* ViewController.swift in Sources */,
+				B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* GraphCharts.swift in Sources */,
 				B3177E5F20B0761600E283FC /* Repetition.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,

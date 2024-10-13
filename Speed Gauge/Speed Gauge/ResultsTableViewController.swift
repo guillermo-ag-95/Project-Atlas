@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepetitionTableViewController: UITableViewController {
+class ResultsTableViewController: UITableViewController {
 
     var maxVelocities: [Double] = []
     var meanVelocities: [Double] = []

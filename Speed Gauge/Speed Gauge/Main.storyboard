@@ -13,7 +13,7 @@
         <!--Graphs-->
         <scene sceneID="GJ0-Jo-ktS">
             <objects>
-                <viewController id="eoa-zI-3wh" customClass="ViewController" customModule="Speed_Gauge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eoa-zI-3wh" customClass="ChartViewController" customModule="Speed_Gauge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OwZ-9X-339">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="853.60000000000002" y="196.55172413793105"/>
         </scene>
-        <!--Repetition Table View Controller-->
+        <!--Results Table View Controller-->
         <scene sceneID="kaL-7B-uXe">
             <objects>
-                <tableViewController id="4Hh-z9-9Gp" customClass="RepetitionTableViewController" customModule="Speed_Gauge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Hh-z9-9Gp" customClass="ResultsTableViewController" customModule="Speed_Gauge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="L5H-PA-mTS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

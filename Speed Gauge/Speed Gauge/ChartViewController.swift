@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ChartViewController.swift
 //  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 16/11/17.
@@ -11,7 +11,7 @@ import DGCharts
 import Surge
 import UIKit
 
-class ViewController: UIViewController {
+class ChartViewController: UIViewController {
 	// MARK: - Outlets
 	@IBOutlet weak var segmentedControl: UISegmentedControl!
 	@IBOutlet weak var lineChartView: LineChartView!
@@ -428,10 +428,10 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		segue.destination.navigationItem.title = LocalizedKeys.Common.results
         
-        let repetitionTableViewController = segue.destination as! RepetitionTableViewController
+        let resultsTableViewController = segue.destination as! ResultsTableViewController
         
-        repetitionTableViewController.maxVelocities = maxVelocities
-        repetitionTableViewController.meanVelocities = meanVelocities
+        resultsTableViewController.maxVelocities = maxVelocities
+        resultsTableViewController.meanVelocities = meanVelocities
     }
     
     // MARK: - Ancillary functions

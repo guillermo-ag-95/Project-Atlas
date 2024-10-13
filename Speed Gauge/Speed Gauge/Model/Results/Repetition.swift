@@ -9,7 +9,6 @@
 import Foundation
 
 class Repetition {
-    
     var maxVelocity: Double
     var meanVelocity: Double
     
@@ -17,5 +16,4 @@ class Repetition {
         self.maxVelocity = maxVelocity
         self.meanVelocity = meanVelocity
     }
-    
 }
