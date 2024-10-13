@@ -15,9 +15,7 @@ import UIKit
 class ViewController: UIViewController {
 	// MARK: - Outlets
 	@IBOutlet weak var segmentedControl: UISegmentedControl!
-	@IBOutlet weak var accelerationLineChartGraph: LineChartView!	// Interface acceleration chart.
-	@IBOutlet weak var velocityLineChartGraph: LineChartView!		// Interface velocity chart.
-	@IBOutlet weak var gravityLineChartGraph: LineChartView!		// Interface gravity chart.
+	@IBOutlet weak var lineChartView: LineChartView!
 	@IBOutlet weak var actionButton: UIButton!
 	
 	// MARK: - Variables
@@ -93,13 +91,10 @@ class ViewController: UIViewController {
 		segmentedControl.setTitle(GraphCharts.VELOCITY.title, forSegmentAt: GraphCharts.VELOCITY.rawValue)
 		segmentedControl.setTitle(GraphCharts.GRAVITY.title, forSegmentAt: GraphCharts.GRAVITY.rawValue)
 		segmentedControl.selectedSegmentIndex = GraphCharts.VELOCITY.rawValue
-		segmentedControlChanged(segmentedControl)
 	}
 	
 	func setupCharts() {
-		accelerationLineChartGraph.chartDescription.text = GraphCharts.ACCELERATION.description
-		velocityLineChartGraph.chartDescription.text = GraphCharts.VELOCITY.description
-		gravityLineChartGraph.chartDescription.text = GraphCharts.GRAVITY.description
+		lineChartView.chartDescription.text = GraphCharts(rawValue: segmentedControl.selectedSegmentIndex)?.description
 		
 		setupDataSet(accelerometerXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
 		setupDataSet(accelerometerYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
@@ -131,22 +126,7 @@ class ViewController: UIViewController {
 	
 	// MARK: - Actions
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-		switch sender.selectedSegmentIndex {
-		case GraphCharts.ACCELERATION.rawValue:
-			accelerationLineChartGraph.isHidden = false
-			velocityLineChartGraph.isHidden = true
-			gravityLineChartGraph.isHidden = true
-		case GraphCharts.VELOCITY.rawValue:
-			accelerationLineChartGraph.isHidden = true
-			velocityLineChartGraph.isHidden = false
-			gravityLineChartGraph.isHidden = true
-		case GraphCharts.GRAVITY.rawValue:
-			accelerationLineChartGraph.isHidden = true
-			velocityLineChartGraph.isHidden = true
-			gravityLineChartGraph.isHidden = false
-		default:
-			break
-		}
+		reloadChart()
 	}
 	
     @IBAction func actionButtonPressed(_ sender: UIButton) {
@@ -186,14 +166,14 @@ class ViewController: UIViewController {
 		})
 
         // Clear and update vertical velocity chart with new data
-        velocityLineChartGraph.data?.dataSets[3].clear()
-
+		restoreDataSet(velocityVerticalDataset, keepsEmpty: true)
+		
         for i in 0..<velocityVerticalFixedData.count {
             if i % 10 == 0 {
                 let position = Double(i) / 100
                 let element = velocityVerticalFixedData[i]
                 let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
-				velocityLineChartGraph.data?.appendEntry(entryVerticalVelocity, toDataSet: 3)
+				velocityVerticalDataset.append(entryVerticalVelocity)
             }
         }
 
@@ -233,7 +213,7 @@ class ViewController: UIViewController {
             }
         }
 		
-		reloadCharts()
+		reloadChart()
     }
     
 	// MARK: - Data management
@@ -278,45 +258,11 @@ class ViewController: UIViewController {
 		restoreDataSet(gravityYDataset)
 		restoreDataSet(gravityZDataset)
 
-        // Clean charts (LineChartView)
-		restoreChart(accelerationLineChartGraph)
-		restoreChart(velocityLineChartGraph)
-		restoreChart(gravityLineChartGraph)
-        
-        // Create empty chart data
-        let accelerationData: LineChartData = LineChartData(
-			dataSets: [
-				accelerometerXDataset,
-				accelerometerYDataset,
-				accelerometerZDataset,
-				accelerometerVerticalDataset
-			]
-		)
-		
-        let velocityData: LineChartData = LineChartData(
-			dataSets: [
-				velocityXDataset,
-				velocityYDataset,
-				velocityZDataset,
-				velocityVerticalDataset
-			]
-		)
-		
-        let gravityData: LineChartData = LineChartData(
-			dataSets: [
-				gravityXDataset,
-				gravityYDataset,
-				gravityZDataset
-			]
-		)
+        // Clean chart (LineChartView)
+		restoreChart(lineChartView)
         
         // Empty data added to the chart
-        accelerationLineChartGraph.data = accelerationData
-        velocityLineChartGraph.data = velocityData
-        gravityLineChartGraph.data = gravityData
-        
-        // Update charts.
-		reloadCharts()
+		reloadChart()
     }
 	
 	func restoreData(_ data: inout Array<Double>, keepsEmpty: Bool = false) {
@@ -415,11 +361,11 @@ class ViewController: UIViewController {
         let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
         let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
         let entryVerticalAcceleration = ChartDataEntry(x: position, y: newVerticalAcceleration)
-        
-		accelerationLineChartGraph.data?.appendEntry(entryXAcceleration, toDataSet: 0)
-		accelerationLineChartGraph.data?.appendEntry(entryYAcceleration, toDataSet: 1)
-		accelerationLineChartGraph.data?.appendEntry(entryZAcceleration, toDataSet: 2)
-		accelerationLineChartGraph.data?.appendEntry(entryVerticalAcceleration, toDataSet: 3)
+		
+		accelerometerXDataset.append(entryXAcceleration)
+		accelerometerYDataset.append(entryYAcceleration)
+		accelerometerZDataset.append(entryZAcceleration)
+		accelerometerVerticalDataset.append(entryVerticalAcceleration)
         
         // Velocity added to Chart
         let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
@@ -427,42 +373,56 @@ class ViewController: UIViewController {
         let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
         let entryVerticalVelocity = ChartDataEntry(x: position, y: currentVerticalVelocity)
         
-		velocityLineChartGraph.data?.appendEntry(entryXVelocity, toDataSet: 0)
-        velocityLineChartGraph.data?.appendEntry(entryYVelocity, toDataSet: 1)
-        velocityLineChartGraph.data?.appendEntry(entryZVelocity, toDataSet: 2)
-        velocityLineChartGraph.data?.appendEntry(entryVerticalVelocity, toDataSet: 3)
+		velocityXDataset.append(entryXVelocity)
+		velocityYDataset.append(entryYVelocity)
+		velocityZDataset.append(entryZVelocity)
+		velocityVerticalDataset.append(entryVerticalVelocity)
         
         // Gravity added to the Chart
         let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
         let entryYGravity = ChartDataEntry(x: position, y: newYGravity)
         let entryZGravity = ChartDataEntry(x: position, y: newZGravity)
         
-        gravityLineChartGraph.data?.appendEntry(entryXGravity, toDataSet: 0)
-        gravityLineChartGraph.data?.appendEntry(entryYGravity, toDataSet: 1)
-        gravityLineChartGraph.data?.appendEntry(entryZGravity, toDataSet: 2)
+		gravityXDataset.append(entryXGravity)
+		gravityYDataset.append(entryYGravity)
+		gravityZDataset.append(entryZGravity)
 		
 		OperationQueue.main.addOperation { [weak self] in
-            self?.reloadGraphs()
-        }
-    }
-    
-	func reloadGraphs() {
-        switch segmentedControl.selectedSegmentIndex {
-		case GraphCharts.ACCELERATION.rawValue:
-            accelerationLineChartGraph.notifyDataSetChanged()
-		case GraphCharts.VELOCITY.rawValue:
-            velocityLineChartGraph.notifyDataSetChanged()
-		case GraphCharts.GRAVITY.rawValue:
-            gravityLineChartGraph.notifyDataSetChanged()
-        default:
-            break
+			self?.reloadChart()
         }
     }
 	
-	func reloadCharts() {
-		accelerationLineChartGraph.notifyDataSetChanged()
-		velocityLineChartGraph.notifyDataSetChanged()
-		gravityLineChartGraph.notifyDataSetChanged()
+	func reloadChart() {
+		let dataSets: [any ChartDataSetProtocol]
+		
+		switch segmentedControl.selectedSegmentIndex {
+		case GraphCharts.ACCELERATION.rawValue:
+			dataSets = [
+				accelerometerXDataset,
+				accelerometerYDataset,
+				accelerometerZDataset,
+				accelerometerVerticalDataset
+			]
+		case GraphCharts.VELOCITY.rawValue:
+			dataSets = [
+				velocityXDataset,
+				velocityYDataset,
+				velocityZDataset,
+				velocityVerticalDataset
+			]
+		case GraphCharts.GRAVITY.rawValue:
+			dataSets = [
+				gravityXDataset,
+				gravityYDataset,
+				gravityZDataset
+			]
+		default:
+			dataSets = []
+		}
+		
+		let lineChartData = LineChartData(dataSets: dataSets)
+		lineChartView.data = lineChartData
+		lineChartView.notifyDataSetChanged()
 	}
     
     // MARK: - Navigations

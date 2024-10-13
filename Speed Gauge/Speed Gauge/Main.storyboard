@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,27 +19,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-zI-CYz">
-                                <rect key="frame" x="89" y="72" width="197" height="32"/>
+                                <rect key="frame" x="42.5" y="72" width="290" height="32"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Acceleration"/>
+                                    <segment title="Velocity"/>
                                     <segment title="Gravity"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlChanged:" destination="eoa-zI-3wh" eventType="valueChanged" id="mqA-hx-RvA"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlH-xt-mDI" customClass="LineChartView" customModule="DGCharts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yi7-Hv-h80" customClass="LineChartView" customModule="DGCharts">
                                 <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" name="appWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BIr-Wt-6eC" customClass="LineChartView" customModule="DGCharts">
-                                <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" name="appWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DC-Nz-X4G" customClass="LineChartView" customModule="DGCharts">
-                                <rect key="frame" x="16" y="111" width="343" height="468"/>
-                                <color key="backgroundColor" name="appWhite"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uON-a0-ChI">
                                 <rect key="frame" x="157.5" y="587" width="60" height="60"/>
@@ -57,20 +50,12 @@
                         <constraints>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="top" secondItem="ZV7-gz-hBg" secondAttribute="top" constant="8" id="6l6-dU-SmD"/>
                             <constraint firstItem="cdj-zI-CYz" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="7Tu-5y-c7h"/>
-                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="5DC-Nz-X4G" secondAttribute="bottom" constant="8" id="8ym-gP-IYs"/>
-                            <constraint firstItem="5DC-Nz-X4G" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Den-WR-Pm2"/>
-                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="5DC-Nz-X4G" secondAttribute="trailing" constant="16" id="UGl-1O-O6v"/>
-                            <constraint firstItem="BIr-Wt-6eC" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="Uzt-mn-MMK"/>
+                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="yi7-Hv-h80" secondAttribute="trailing" constant="16" id="Gce-nn-EAW"/>
+                            <constraint firstItem="yi7-Hv-h80" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="KRQ-WL-IDw"/>
+                            <constraint firstItem="yi7-Hv-h80" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="SCq-hz-kpw"/>
                             <constraint firstItem="ZV7-gz-hBg" firstAttribute="bottom" secondItem="uON-a0-ChI" secondAttribute="bottom" constant="20" id="Vmx-tT-GYo"/>
-                            <constraint firstItem="BIr-Wt-6eC" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="YG4-xl-QJD"/>
-                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="BIr-Wt-6eC" secondAttribute="trailing" constant="16" id="cjp-TZ-6x7"/>
                             <constraint firstItem="uON-a0-ChI" firstAttribute="centerX" secondItem="OwZ-9X-339" secondAttribute="centerX" id="gcA-Tl-VhR"/>
-                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="BIr-Wt-6eC" secondAttribute="bottom" constant="8" id="lgj-Cr-mdc"/>
-                            <constraint firstItem="xlH-xt-mDI" firstAttribute="leading" secondItem="ZV7-gz-hBg" secondAttribute="leading" constant="16" id="o6d-Jg-i5e"/>
-                            <constraint firstItem="ZV7-gz-hBg" firstAttribute="trailing" secondItem="xlH-xt-mDI" secondAttribute="trailing" constant="16" id="tdL-Rn-UtT"/>
-                            <constraint firstItem="5DC-Nz-X4G" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z1Q-HC-eNd"/>
-                            <constraint firstItem="xlH-xt-mDI" firstAttribute="top" secondItem="cdj-zI-CYz" secondAttribute="bottom" constant="8" id="z6d-yk-LUa"/>
-                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="xlH-xt-mDI" secondAttribute="bottom" constant="8" id="zKN-Fp-sdF"/>
+                            <constraint firstItem="uON-a0-ChI" firstAttribute="top" secondItem="yi7-Hv-h80" secondAttribute="bottom" constant="8" id="jKU-eV-K6Y"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Graphs" id="iF7-uI-lHJ">
@@ -81,11 +66,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="accelerationLineChartGraph" destination="xlH-xt-mDI" id="T2v-vT-N5B"/>
                         <outlet property="actionButton" destination="uON-a0-ChI" id="OlZ-0v-q7R"/>
-                        <outlet property="gravityLineChartGraph" destination="5DC-Nz-X4G" id="G8u-63-b0n"/>
+                        <outlet property="lineChartView" destination="yi7-Hv-h80" id="Szt-9I-tpl"/>
                         <outlet property="segmentedControl" destination="cdj-zI-CYz" id="1sq-JQ-vIK"/>
-                        <outlet property="velocityLineChartGraph" destination="BIr-Wt-6eC" id="Vr8-Af-DI3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0h-xA-C95" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -163,5 +146,8 @@
         <namedColor name="appWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
