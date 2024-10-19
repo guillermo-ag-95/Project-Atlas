@@ -35,6 +35,23 @@
         }
       }
     },
+    "duration" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duración"
+          }
+        }
+      }
+    },
     "graphs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -167,6 +184,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resultados"
+          }
+        }
+      }
+    },
+    "seconds_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
           }
         }
       }

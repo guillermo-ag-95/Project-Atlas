@@ -17,17 +17,16 @@ class ChartViewController: UIViewController {
 	@IBOutlet weak var actionButton: UIButton!
 	
 	// MARK: - Variables
+	var numberOfDataPoints: Int = .zero
 	var accelerometerData: [MotionDataPointModel] = []
 	var gyroscopeData: [MotionDataPointModel] = []
 	var velocityData: [MotionDataPointModel] = []
 	var gravityData: [MotionDataPointModel] = []
 	
-	var accelerometerVerticalData: [Double] = []    // Computed values based on the accelerometer and gravity.
-	var velocityVerticalData: [Double] = []         // Computed values based on the accelerometer and gravity.
-	var velocityVerticalFixedData: [Double] = []    // Fixed computed values based on the accelerometer and gravity.
-	
-	var maxVelocities: [Double] = []
-	var meanVelocities: [Double] = []
+	var accelerometerVerticalData: [TimedDataPoint] = []	// Computed values based on the accelerometer and gravity.
+	var velocityVerticalData: [TimedDataPoint] = []			// Computed values based on the accelerometer and gravity.
+	var velocityVerticalFixedData: [TimedDataPoint] = []	// Fixed vertical velocity to avoid drifts.
+	var repetitions: [MotionRepetition] = []				// Computed repetitions based on velocities
 	
 	// MARK: - Chart datasets
 	var accelerometerXDataset: LineChartDataSet = LineChartDataSet()        	// Chart dataset of accelerometer values in the X-Axis.
@@ -46,6 +45,7 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Constants
 	let gravity = 9.81
+	let velocityThreshold: Double = 0.1
 	
 	// MARK: - Services
 	let motionQueue: OperationQueue = OperationQueue(maxConcurrentOperationCount: 1)
@@ -139,10 +139,14 @@ class ChartViewController: UIViewController {
 	func startRecordData() {
 		guard motionService.isDeviceMotionAvailable else { return }
 		
-		setupStoredData()
+		resetData()
 		
 		motionService.startDeviceMotionUpdates(to: motionQueue) { [weak self] model in
 			self?.updateMotionData(model)
+			
+			let position = self?.numberOfDataPoints ?? .zero
+			self?.updateChartIfNeeded(at: position - 1)
+			
 			self?.reloadChartOnMainThread()
 		} failure: { [weak self] error in
 			self?.stopRecordData()
@@ -154,6 +158,7 @@ class ChartViewController: UIViewController {
 		motionService.stopDeviceMotionUpdates()
 		
 		processMotionData()
+		evaluateRepetitions()
 		
 		reloadChart()
 	}
@@ -163,20 +168,18 @@ class ChartViewController: UIViewController {
 		// https://www.nxp.com/docs/en/application-note/AN3397.pdf
 		// https://www.wired.com/story/iphone-accelerometer-physics/
 		
-		// Retrieve device motion timestamp
+		// Retrieve device motion data
 		let newTimestamp = data.timestamp
 		
-		// Retrieve the accelerometer data from the sensor
-		var newXAcceleration =  data.userAcceleration.x
-		var newYAcceleration =  data.userAcceleration.y
-		var newZAcceleration =  data.userAcceleration.z
+		// Convert the G values to Meters per squared seconds.
+		let newXAcceleration =  data.userAcceleration.x * gravity
+		let newYAcceleration =  data.userAcceleration.y * gravity
+		let newZAcceleration =  data.userAcceleration.z * gravity
 		
-		// Retrieve the gravity data from the sensor
 		let newXGravity = data.gravity.x
 		let newYGravity = data.gravity.y
 		let newZGravity = data.gravity.z
 		
-		// Retrieve the gyro data from the sensor
 		let newXGyro = data.rotationRate.x
 		let newYGyro = data.rotationRate.y
 		let newZGyro = data.rotationRate.z
@@ -186,12 +189,7 @@ class ChartViewController: UIViewController {
 		let accelerationVector = [newXAcceleration, newYAcceleration, newZAcceleration]
 		let gravityVector = [newXGravity, newYGravity, newZGravity]
 		let dotProduct = Surge.dot(gravityVector, accelerationVector)
-		let scalarProjection = gravityVector.map { dotProduct / pow(gravityModule, 2) * $0 * self.gravity }
-		
-		// Convert the G values to Meters per squared seconds.
-		newXAcceleration = newXAcceleration * self.gravity
-		newYAcceleration = newYAcceleration * self.gravity
-		newZAcceleration = newZAcceleration * self.gravity
+		let scalarProjection = gravityVector.map { dotProduct / pow(gravityModule, 2) * $0 }
 		
 		// Instant velocity calculation by integration
 		let lastAccelerometerData = accelerometerData.last ?? .zero
@@ -201,7 +199,7 @@ class ChartViewController: UIViewController {
 		let newZVelocity = (lastAccelerometerData.z * updateIntervalOn) + (newZAcceleration - lastAccelerometerData.z) * (updateIntervalOn / 2)
 		
 		// Compute vertical acceleration and velocity
-		let lastAccelerometerVerticalData = accelerometerVerticalData.last ?? .zero
+		let lastAccelerometerVerticalData = accelerometerVerticalData.last?.value ?? .zero
 		
 		let dotProductSign = dotProduct.sign == .plus ? 1.0 : -1.0
 		let scalarProjectionX = scalarProjection.at(0) ?? .zero
@@ -214,7 +212,7 @@ class ChartViewController: UIViewController {
 		
 		// Current velocity by cumulative velocities.
 		let lastVelocityData = velocityData.last ?? .zero
-		let lastVelocityVerticalData = velocityVerticalData.last ?? .zero
+		let lastVelocityVerticalData = velocityVerticalData.last?.value ?? .zero
 		
 		let currentXVelocity = lastVelocityData.x + newXVelocity
 		let currentYVelocity = lastVelocityData.y + newYVelocity
@@ -222,31 +220,33 @@ class ChartViewController: UIViewController {
 		let currentVerticalVelocity = lastVelocityVerticalData + newVerticalVelocity
 		
 		// Data storage
-		let newAcceleration = MotionDataPointModel(
+		let acceleration = MotionDataPointModel(
 			timestamp: newTimestamp,
 			x: newXAcceleration,
 			y: newYAcceleration,
 			z: newZAcceleration
 		)
-		accelerometerData.append(newAcceleration)
-		accelerometerVerticalData.append(newVerticalAcceleration)
+		accelerometerData.append(acceleration)
 		
-		let newRotation = MotionDataPointModel(
+		let verticalAcceleration = TimedDataPointModel(
 			timestamp: newTimestamp,
-			x: newXGyro,
-			y: newYGyro,
-			z: newZGyro
+			value: newVerticalAcceleration
 		)
-		gyroscopeData.append(newRotation)
+		accelerometerVerticalData.append(verticalAcceleration)
 		
-		let currentVelocity = MotionDataPointModel(
+		let velocity = MotionDataPointModel(
 			timestamp: newTimestamp,
 			x: currentXVelocity,
 			y: currentYVelocity,
 			z: currentZVelocity
 		)
-		velocityData.append(currentVelocity)
-		velocityVerticalData.append(currentVerticalVelocity)
+		velocityData.append(velocity)
+		
+		let verticalVelocity = TimedDataPointModel(
+			timestamp: newTimestamp,
+			value: currentVerticalVelocity
+		)
+		velocityVerticalData.append(verticalVelocity)
 		
 		let newGravity = MotionDataPointModel(
 			timestamp: newTimestamp,
@@ -256,109 +256,65 @@ class ChartViewController: UIViewController {
 		)
 		gravityData.append(newGravity)
 		
-		// Current position in graft
-		let position: Double = Double(accelerometerData.count - 1) / 100
+		let newRotation = MotionDataPointModel(
+			timestamp: newTimestamp,
+			x: newXGyro,
+			y: newYGyro,
+			z: newZGyro
+		)
+		gyroscopeData.append(newRotation)
 		
-		// Add one of every ten entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
-		guard Int(round(position * 100)) % 10 == 0 else { return }
-		
-		// Acceleration added to Chart
-		let entryXAcceleration = ChartDataEntry(x: position, y: newXAcceleration)
-		let entryYAcceleration = ChartDataEntry(x: position, y: newYAcceleration)
-		let entryZAcceleration = ChartDataEntry(x: position, y: newZAcceleration)
-		let entryVerticalAcceleration = ChartDataEntry(x: position, y: newVerticalAcceleration)
-		
-		accelerometerXDataset.append(entryXAcceleration)
-		accelerometerYDataset.append(entryYAcceleration)
-		accelerometerZDataset.append(entryZAcceleration)
-		accelerometerVerticalDataset.append(entryVerticalAcceleration)
-		
-		// Velocity added to Chart
-		let entryXVelocity = ChartDataEntry(x: position, y: currentXVelocity)
-		let entryYVelocity = ChartDataEntry(x: position, y: currentYVelocity)
-		let entryZVelocity = ChartDataEntry(x: position, y: currentZVelocity)
-		let entryVerticalVelocity = ChartDataEntry(x: position, y: currentVerticalVelocity)
-		
-		velocityXDataset.append(entryXVelocity)
-		velocityYDataset.append(entryYVelocity)
-		velocityZDataset.append(entryZVelocity)
-		velocityVerticalDataset.append(entryVerticalVelocity)
-		
-		// Gravity added to the Chart
-		let entryXGravity = ChartDataEntry(x: position, y: newXGravity)
-		let entryYGravity = ChartDataEntry(x: position, y: newYGravity)
-		let entryZGravity = ChartDataEntry(x: position, y: newZGravity)
-		
-		gravityXDataset.append(entryXGravity)
-		gravityYDataset.append(entryYGravity)
-		gravityZDataset.append(entryZGravity)
+		numberOfDataPoints += 1
 	}
 	
 	func processMotionData() {
-		let lastVelocityVerticalData = velocityVerticalData.last ?? .zero
+		let lastVelocityVerticalData = velocityVerticalData.last?.value ?? .zero
 		let slope = lastVelocityVerticalData / Double(velocityVerticalData.count)
 		
 		// Remove lineally the slope from the vertical acceleration.
 		velocityVerticalFixedData = velocityVerticalData.enumerated().map({ index, element in
-			let result = element - slope * Double(index)
+			let fixedValue = element.value - slope * Double(index)
+			let result = TimedDataPointModel(
+				timestamp: element.timestamp,
+				value: fixedValue
+			)
 			return result
 		})
 		
 		// Clear and update vertical velocity chart with new data
-		restoreDataSet(velocityVerticalDataset)
+		resetDataSet(velocityVerticalDataset)
 		
-		for i in 0..<velocityVerticalFixedData.count {
-			if i % 10 == 0 {
-				let position = Double(i) / 100
-				let element = velocityVerticalFixedData.at(i) ?? .zero
-				let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
-				velocityVerticalDataset.append(entryVerticalVelocity)
-			}
-		}
-		
-		// Calculate when the rep starts, ends,  max velocity and mean velocity.
-		var maximum = 0.0
-		var startingPoints: [Int] = []
-		var endingPoints: [Int] = []
-		
-		maxVelocities = []
-		meanVelocities = []
-		
-		for i in 0..<velocityVerticalFixedData.count {
-			let element = velocityVerticalFixedData.at(i) ?? .zero
-			let fixedElement = abs(element) < 0.1 ? 0.0 : element
-			
-			if fixedElement > 0.0 && maximum == 0.0 { startingPoints.append(i) }			// Save the starting point of the rep.
-			if fixedElement > 0.0 && fixedElement > maximum { maximum = fixedElement }		// Update the maximum velocity if needed.
-			
-			if fixedElement == 0.0 && maximum != 0.0 {
-				endingPoints.append(i)  // Save the ending point.
-				
-				// Check that the interval is big enough
-				let startingPoint = startingPoints.last ?? .zero
-				let endingPoint = endingPoints.last ?? .zero
-				
-				if (endingPoint - startingPoint < 30) {
-					// If not,
-					startingPoints.removeLast()
-					endingPoints.removeLast()
-					maximum = 0.0
-				} else {
-					// If so, go on
-					maxVelocities.append(maximum)	// Save the max velocity of the rep.
-					maximum = 0.0					// Reset the maximum velocity.
-					
-					let repVelocities = velocityVerticalFixedData.suffix(from: startingPoint).prefix(upTo: endingPoint)
-					let meanVelocity = Surge.mean(Array(repVelocities))
-					
-					meanVelocities.append(meanVelocity)
-				}
-			}
+		for i in 0..<velocityVerticalFixedData.count where i % 10 == 0 {
+			let position = Double(i) / 100
+			let element = velocityVerticalFixedData.at(i)
+			let value = element?.value ?? .zero
+			let entryVerticalVelocity = ChartDataEntry(x: position, y: value)
+			velocityVerticalDataset.append(entryVerticalVelocity)
 		}
 	}
 	
+	func evaluateRepetitions() {
+		let slicedVelocities = velocityVerticalFixedData
+			.split(whereSeparator: { abs($0.value) < velocityThreshold })	// Split the sequence when the data crosses the threshold
+			.filter({ $0.count > 10 })										// Filter intervals that seems to be too short
+		
+		// Join split velocities by pairs to assemble a repetition (positive + negative)
+		let velocitiesByRepetition: [[any TimedDataPoint]] = stride(from: .zero, to: slicedVelocities.count, by: 2)
+			.compactMap { index in
+				guard index + 1 < slicedVelocities.count else { return nil }
+				let velocitiesSlice = slicedVelocities[index..<index+2]
+				let velocities = Array(velocitiesSlice).flatMap { $0 }
+				return velocities
+			}
+		
+		let repetitions = velocitiesByRepetition.map({ MotionRepetitionModel(velocities: $0) })
+		self.repetitions = repetitions
+	}
+
+	
 	// MARK: - Chart management
-	func setupStoredData() {
+	func resetData() {
+		numberOfDataPoints = .zero
 		accelerometerData.removeAll()
 		gyroscopeData.removeAll()
 		velocityData.removeAll()
@@ -367,38 +323,80 @@ class ChartViewController: UIViewController {
 		accelerometerVerticalData.removeAll()
 		velocityVerticalData.removeAll()
 		velocityVerticalFixedData.removeAll()
+		repetitions.removeAll()
 		
 		// Clean acceleration chart dataset
-		restoreDataSet(accelerometerXDataset)
-		restoreDataSet(accelerometerYDataset)
-		restoreDataSet(accelerometerZDataset)
-		restoreDataSet(accelerometerVerticalDataset)
+		resetDataSet(accelerometerXDataset)
+		resetDataSet(accelerometerYDataset)
+		resetDataSet(accelerometerZDataset)
+		resetDataSet(accelerometerVerticalDataset)
 		
 		// Clean velocity chart dataset
-		restoreDataSet(velocityXDataset)
-		restoreDataSet(velocityYDataset)
-		restoreDataSet(velocityZDataset)
-		restoreDataSet(velocityVerticalDataset)
+		resetDataSet(velocityXDataset)
+		resetDataSet(velocityYDataset)
+		resetDataSet(velocityZDataset)
+		resetDataSet(velocityVerticalDataset)
 		
 		// Clean gravity chart dataset
-		restoreDataSet(gravityXDataset)
-		restoreDataSet(gravityYDataset)
-		restoreDataSet(gravityZDataset)
+		resetDataSet(gravityXDataset)
+		resetDataSet(gravityYDataset)
+		resetDataSet(gravityZDataset)
 		
 		// Clean chart (LineChartView)
-		restoreChart(lineChartView)
+		resetChart(lineChartView)
 		
 		// Empty data added to the chart
 		reloadChart()
 	}
 	
-	func restoreDataSet(_ dataSet: LineChartDataSet) {
+	func resetDataSet(_ dataSet: LineChartDataSet) {
 		// keepingCapacity must be true to keep dataset style.
 		dataSet.removeAll(keepingCapacity: true)
 	}
 	
-	func restoreChart(_ chart: LineChartView) {
+	func resetChart(_ chart: LineChartView) {
 		chart.clear()
+	}
+	
+	func updateChart(at position: Int) {
+		let chartPosition = Double(position) * updateIntervalOn
+		
+		// Acceleration added to Chart
+		let entryXAcceleration = ChartDataEntry(x: chartPosition, y: accelerometerData.at(position)?.x ?? .zero)
+		let entryYAcceleration = ChartDataEntry(x: chartPosition, y: accelerometerData.at(position)?.y ?? .zero)
+		let entryZAcceleration = ChartDataEntry(x: chartPosition, y: accelerometerData.at(position)?.z ?? .zero)
+		let entryVerticalAcceleration = ChartDataEntry(x: chartPosition, y: accelerometerVerticalData.at(position)?.value ?? .zero)
+		
+		accelerometerXDataset.append(entryXAcceleration)
+		accelerometerYDataset.append(entryYAcceleration)
+		accelerometerZDataset.append(entryZAcceleration)
+		accelerometerVerticalDataset.append(entryVerticalAcceleration)
+		
+		// Velocity added to Chart
+		let entryXVelocity = ChartDataEntry(x: chartPosition, y: velocityData.at(position)?.x ?? .zero)
+		let entryYVelocity = ChartDataEntry(x: chartPosition, y: velocityData.at(position)?.y ?? .zero)
+		let entryZVelocity = ChartDataEntry(x: chartPosition, y: velocityData.at(position)?.z ?? .zero)
+		let entryVerticalVelocity = ChartDataEntry(x: chartPosition, y: velocityVerticalData.at(position)?.value ?? .zero)
+		
+		velocityXDataset.append(entryXVelocity)
+		velocityYDataset.append(entryYVelocity)
+		velocityZDataset.append(entryZVelocity)
+		velocityVerticalDataset.append(entryVerticalVelocity)
+		
+		// Gravity added to the Chart
+		let entryXGravity = ChartDataEntry(x: chartPosition, y: gravityData.at(position)?.x ?? .zero)
+		let entryYGravity = ChartDataEntry(x: chartPosition, y: gravityData.at(position)?.y ?? .zero)
+		let entryZGravity = ChartDataEntry(x: chartPosition, y: gravityData.at(position)?.z ?? .zero)
+		
+		gravityXDataset.append(entryXGravity)
+		gravityYDataset.append(entryYGravity)
+		gravityZDataset.append(entryZGravity)
+	}
+	
+	func updateChartIfNeeded(at position: Int) {
+		// Add one of every ten entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
+		guard position % 10 == 0 else { return }
+		updateChart(at: position)
 	}
 	
 	func reloadChart() {
@@ -446,7 +444,6 @@ class ChartViewController: UIViewController {
 		
 		let resultsTableViewController = segue.destination as? ResultsTableViewController
 		
-		resultsTableViewController?.maxVelocities = maxVelocities
-		resultsTableViewController?.meanVelocities = meanVelocities
+		resultsTableViewController?.repetitions = repetitions
 	}
 }

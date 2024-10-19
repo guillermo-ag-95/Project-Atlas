@@ -10,23 +10,15 @@ import UIKit
 
 class ResultsTableViewController: UITableViewController {
 
-    var maxVelocities: [Double] = []
-    var meanVelocities: [Double] = []
+	var repetitions: [MotionRepetition] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-		let result = maxVelocities.count
+		let result = repetitions.count
         return result
     }
 
@@ -39,13 +31,22 @@ class ResultsTableViewController: UITableViewController {
 		
 		let maxVelocityTitle = LocalizedKeys.Velocity.max
 		let meanVelocityTitle = LocalizedKeys.Velocity.mean
-		let title = [maxVelocityTitle, meanVelocityTitle].joined(separator: "\n")
+		let durationTitle = LocalizedKeys.Velocity.duration
+		let title = [maxVelocityTitle, meanVelocityTitle, durationTitle].joined(separator: "\n")
 		
+		let repetition = repetitions.at(indexPath.section)
+		
+		let maxVelocityValue = repetition?.maxVelocity ?? .zero
+		let meanVelocityValue = repetition?.meanVelocity ?? .zero
 		let metersPerSecond = LocalizedKeys.Repetition.metersPerSecond
 		
-        let maxVelocity = String(format: "%.2f %@", maxVelocities[indexPath.section], metersPerSecond)
-        let meanVelocity = String(format: "%.2f %@", meanVelocities[indexPath.section], metersPerSecond)
-		let detail = [maxVelocity, meanVelocity].joined(separator: "\n")
+		let durationValue = repetition?.duration ?? .zero
+		let seconds = LocalizedKeys.Repetition.seconds
+		
+		let maxVelocity = String(format: "%.2f %@", maxVelocityValue, metersPerSecond)
+		let meanVelocity = String(format: "%.2f %@", meanVelocityValue, metersPerSecond)
+		let duration = String(format: "%.2f %@", durationValue, seconds)
+		let detail = [maxVelocity, meanVelocity, duration].joined(separator: "\n")
 		
         cell.textLabel?.text = title
 		cell.textLabel?.numberOfLines = .zero
@@ -65,14 +66,12 @@ class ResultsTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            maxVelocities.remove(at: indexPath.section)
-            meanVelocities.remove(at: indexPath.section)
-            // Delete the row from the data source
-            // tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+		switch editingStyle {
+		case .delete:
+			repetitions.remove(at: indexPath.section)
+			tableView.reloadData()
+		default:
+			break
+		}  
     }
 }

@@ -8,6 +8,20 @@
 
 import Foundation
 
+protocol TimedDataPoint {
+	var timestamp: TimeInterval { get }
+	var value: Double { get }
+}
+
+struct TimedDataPointModel: TimedDataPoint {
+	let timestamp: TimeInterval
+	let value: Double
+	
+	static var zero: Self {
+		Self(timestamp: Date.now.timeIntervalSinceReferenceDate, value: .zero)
+	}
+}
+
 protocol MotionDataPoint {
 	var timestamp: TimeInterval { get }
 	var x: Double { get }

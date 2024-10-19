@@ -32,6 +32,7 @@ struct LocalizedKeys {
 		static let vertical = "vertical_velocity".localized
 		static let max = "max_velocity".localized
 		static let mean = "mean_velocity".localized
+		static let duration = "duration".localized
 	}
 	
 	// MARK: - Gravity
@@ -44,5 +45,6 @@ struct LocalizedKeys {
 	struct Repetition {
 		static let title = "repetition".localized
 		static let metersPerSecond = "meters_per_second_hint".localized
+		static let seconds = "seconds_hint".localized
 	}
 }
