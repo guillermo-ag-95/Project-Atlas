@@ -48,8 +48,9 @@ class ChartViewController: UIViewController {
 	let gravity = 9.81
 	
 	// MARK: - Services
-	let queue: OperationQueue = OperationQueue()
+	let motionQueue: OperationQueue = OperationQueue(maxConcurrentOperationCount: 1)
 	let motionService: DeviceMotionServiceProtocol = CoreMotionService.shared
+	
 	var updateIntervalOn: TimeInterval { motionService.updateIntervalOn }
 	var updateIntervalOff: TimeInterval { motionService.updateIntervalOff }
 	
@@ -140,8 +141,9 @@ class ChartViewController: UIViewController {
 		
 		setupStoredData()
 		
-		motionService.startDeviceMotionUpdates(to: queue) { [weak self] model in
+		motionService.startDeviceMotionUpdates(to: motionQueue) { [weak self] model in
 			self?.updateMotionData(model)
+			self?.reloadChartOnMainThread()
 		} failure: { [weak self] error in
 			self?.stopRecordData()
 		}
@@ -290,10 +292,6 @@ class ChartViewController: UIViewController {
 		gravityXDataset.append(entryXGravity)
 		gravityYDataset.append(entryYGravity)
 		gravityZDataset.append(entryZGravity)
-		
-		OperationQueue.main.addOperation { [weak self] in
-			self?.reloadChart()
-		}
 	}
 	
 	func processMotionData() {
@@ -434,6 +432,12 @@ class ChartViewController: UIViewController {
 		let lineChartData = LineChartData(dataSets: dataSets)
 		lineChartView.data = lineChartData
 		lineChartView.notifyDataSetChanged()
+	}
+	
+	func reloadChartOnMainThread() {
+		DispatchQueue.main.async {
+			self.reloadChart()
+		}
 	}
 	
 	// MARK: - Navigations

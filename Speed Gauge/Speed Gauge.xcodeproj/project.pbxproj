@@ -26,6 +26,7 @@
 		B32822C62CBA7B3700BA521D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C52CBA7B3700BA521D /* DGCharts */; };
 		B32822C92CBA7BD000BA521D /* Surge in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C82CBA7BD000BA521D /* Surge */; };
 		B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */; };
+		B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B39BDE6C2CBDADD70090D7D3 /* MotionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */; };
 		B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BEA092CC391120028E1B0 /* Date+Extension.swift */; };
@@ -67,6 +68,7 @@
 		B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedKeys.swift; sourceTree = "<group>"; };
 		B3280A902CBA97EF005EBD32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		B3280A962CBAA243005EBD32 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OperationQueue+Extension.swift"; sourceTree = "<group>"; };
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */,
 				B39BEA092CC391120028E1B0 /* Date+Extension.swift */,
+				B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */,
 				B3280A902CBA97EF005EBD32 /* String+Extension.swift */,
 				B32510AF2CBBFDAD00CFE2F7 /* UIDevice+Extension.swift */,
 				B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */,
@@ -370,6 +373,7 @@
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B3177E5F20B0761600E283FC /* Repetition.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
+				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,
 				B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */,
 				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,
