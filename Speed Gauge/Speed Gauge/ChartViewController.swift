@@ -169,12 +169,12 @@ class ChartViewController: UIViewController {
 		})
 
         // Clear and update vertical velocity chart with new data
-		restoreDataSet(velocityVerticalDataset, keepsEmpty: true)
+		restoreDataSet(velocityVerticalDataset)
 		
         for i in 0..<velocityVerticalFixedData.count {
             if i % 10 == 0 {
                 let position = Double(i) / 100
-                let element = velocityVerticalFixedData[i]
+				let element = velocityVerticalFixedData.at(i) ?? .zero
                 let entryVerticalVelocity = ChartDataEntry(x: position, y: element)
 				velocityVerticalDataset.append(entryVerticalVelocity)
             }
@@ -189,12 +189,13 @@ class ChartViewController: UIViewController {
         meanVelocities = []
 
         for i in 0..<velocityVerticalFixedData.count {
-            let element = abs(velocityVerticalFixedData[i]) < 0.1 ? 0.0 : velocityVerticalFixedData[i]
+			let element = velocityVerticalFixedData.at(i) ?? .zero
+            let fixedElement = abs(element) < 0.1 ? 0.0 : element
 
-            if element > 0.0 && maximum == 0.0 { startingPoints.append(i) }     // Save the starting point of the rep.
-            if element > 0.0 && element > maximum { maximum = element }         // Update the maximum velocity if needed.
+            if fixedElement > 0.0 && maximum == 0.0 { startingPoints.append(i) }     // Save the starting point of the rep.
+            if fixedElement > 0.0 && fixedElement > maximum { maximum = fixedElement }         // Update the maximum velocity if needed.
 
-            if element == 0.0 && maximum != 0.0 {
+            if fixedElement == 0.0 && maximum != 0.0 {
                 endingPoints.append(i)  // Save the ending point.
 
                 // Check that the interval is big enough
@@ -240,7 +241,7 @@ class ChartViewController: UIViewController {
 		restoreData(&velocityYData)
 		restoreData(&velocityZData)
 		restoreData(&velocityVerticalData)
-		restoreData(&velocityVerticalFixedData, keepsEmpty: true)
+		restoreData(&velocityVerticalFixedData)
         
         // Clean gravity data
 		restoreData(&gravityXData)
@@ -271,19 +272,13 @@ class ChartViewController: UIViewController {
 		reloadChart()
     }
 	
-	func restoreData(_ data: inout Array<Double>, keepsEmpty: Bool = false) {
+	func restoreData(_ data: inout Array<Double>) {
 		data.removeAll()
-		
-		guard !keepsEmpty else { return }
-		data.append(.zero)
 	}
 	
-	func restoreDataSet(_ dataSet: LineChartDataSet, keepsEmpty: Bool = false) {
+	func restoreDataSet(_ dataSet: LineChartDataSet) {
 		// keepingCapacity must be true to keep dataset style.
 		dataSet.removeAll(keepingCapacity: true)
-		
-		guard !keepsEmpty else { return }
-		dataSet.append(.init(x: .zero, y: .zero))
 	}
 	
 	func restoreChart(_ chart: LineChartView) {
@@ -333,7 +328,11 @@ class ChartViewController: UIViewController {
         // Compute vertical acceleration and velocity
 		let lastAccelerometerVerticalData = accelerometerVerticalData.last ?? .zero
 		
-        let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjection[0], 2) + pow(scalarProjection[1], 2) + pow(scalarProjection[2], 2))
+		let scalarProjectionX = scalarProjection.at(0) ?? .zero
+		let scalarProjectionY = scalarProjection.at(1) ?? .zero
+		let scalarProjectionZ = scalarProjection.at(2) ?? .zero
+		
+		let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjectionX, 2) + pow(scalarProjectionY, 2) + pow(scalarProjectionZ, 2))
         let newVerticalVelocity =
             (lastAccelerometerVerticalData * updatesIntervalOn) + (newVerticalAcceleration - lastAccelerometerVerticalData) * (updatesIntervalOn / 2)
         
