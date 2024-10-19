@@ -1,5 +1,5 @@
 //
-//  GraphCharts.swift
+//  MotionCharts.swift
 //  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 13/10/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum GraphCharts: Int {
+enum MotionCharts: Int {
 	case ACCELERATION
 	case VELOCITY
 	case GRAVITY

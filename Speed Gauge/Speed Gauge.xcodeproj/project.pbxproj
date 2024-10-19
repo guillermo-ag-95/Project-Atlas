@@ -14,7 +14,7 @@
 		B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */; };
 		B3177E5F20B0761600E283FC /* Repetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5E20B0761600E283FC /* Repetition.swift */; };
 		B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */; };
-		B32510A42CBBD79200CFE2F7 /* GraphCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */; };
+		B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */; };
 		B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */; };
 		B32510A92CBBE8DE00CFE2F7 /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A82CBBE8DE00CFE2F7 /* CoreMotionService.swift */; };
 		B32510AC2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510AB2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift */; };
@@ -58,7 +58,7 @@
 		B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
 		B3177E5E20B0761600E283FC /* Repetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repetition.swift; sourceTree = "<group>"; };
 		B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCharts.swift; sourceTree = "<group>"; };
+		B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCharts.swift; sourceTree = "<group>"; };
 		B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		B32510A82CBBE8DE00CFE2F7 /* CoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionService.swift; sourceTree = "<group>"; };
 		B32510AB2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionServiceModels.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		B32510AD2CBBFB6F00CFE2F7 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */,
+				B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */,
 				B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */,
 			);
 			path = Charts;
@@ -367,7 +367,7 @@
 				B32510A92CBBE8DE00CFE2F7 /* CoreMotionService.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */,
 				B32510B02CBBFDAD00CFE2F7 /* UIDevice+Extension.swift in Sources */,
-				B32510A42CBBD79200CFE2F7 /* GraphCharts.swift in Sources */,
+				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B3177E5F20B0761600E283FC /* Repetition.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,

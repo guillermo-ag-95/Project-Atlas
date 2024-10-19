@@ -79,14 +79,14 @@ class ChartViewController: UIViewController {
 	}
 	
 	func setupHeader() {
-		segmentedControl.setTitle(GraphCharts.ACCELERATION.title, forSegmentAt: GraphCharts.ACCELERATION.rawValue)
-		segmentedControl.setTitle(GraphCharts.VELOCITY.title, forSegmentAt: GraphCharts.VELOCITY.rawValue)
-		segmentedControl.setTitle(GraphCharts.GRAVITY.title, forSegmentAt: GraphCharts.GRAVITY.rawValue)
-		segmentedControl.selectedSegmentIndex = GraphCharts.VELOCITY.rawValue
+		segmentedControl.setTitle(MotionCharts.ACCELERATION.title, forSegmentAt: MotionCharts.ACCELERATION.rawValue)
+		segmentedControl.setTitle(MotionCharts.VELOCITY.title, forSegmentAt: MotionCharts.VELOCITY.rawValue)
+		segmentedControl.setTitle(MotionCharts.GRAVITY.title, forSegmentAt: MotionCharts.GRAVITY.rawValue)
+		segmentedControl.selectedSegmentIndex = MotionCharts.VELOCITY.rawValue
 	}
 	
 	func setupCharts() {
-		lineChartView.chartDescription.text = GraphCharts(rawValue: segmentedControl.selectedSegmentIndex)?.description
+		lineChartView.chartDescription.text = MotionCharts(rawValue: segmentedControl.selectedSegmentIndex)?.description
 		
 		setupDataSet(accelerometerXDataset, label: LocalizedKeys.Common.xAxis, color: .appRed)
 		setupDataSet(accelerometerYDataset, label: LocalizedKeys.Common.yAxis, color: .appGreen)
@@ -402,21 +402,21 @@ class ChartViewController: UIViewController {
 		let dataSets: [any ChartDataSetProtocol]
 		
 		switch segmentedControl.selectedSegmentIndex {
-		case GraphCharts.ACCELERATION.rawValue:
+		case MotionCharts.ACCELERATION.rawValue:
 			dataSets = [
 				accelerometerXDataset,
 				accelerometerYDataset,
 				accelerometerZDataset,
 				accelerometerVerticalDataset
 			]
-		case GraphCharts.VELOCITY.rawValue:
+		case MotionCharts.VELOCITY.rawValue:
 			dataSets = [
 				velocityXDataset,
 				velocityYDataset,
 				velocityZDataset,
 				velocityVerticalDataset
 			]
-		case GraphCharts.GRAVITY.rawValue:
+		case MotionCharts.GRAVITY.rawValue:
 			dataSets = [
 				gravityXDataset,
 				gravityYDataset,
