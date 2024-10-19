@@ -18,48 +18,41 @@ class ChartViewController: UIViewController {
 	@IBOutlet weak var actionButton: UIButton!
 	
 	// MARK: - Variables
-    var accelerometerXData: [Double] = []           // Sensor values of the accelerometer in the X-Axis.
-    var accelerometerYData: [Double] = []           // Sensor values of the accelerometer in the Y-Axis.
-    var accelerometerZData: [Double] = []           // Sensor values of the accelerometer in the Z-Axis.
+	var accelerometerData: [MotionDataPointModel] = []
+	var gyroscopeData: [MotionDataPointModel] = []
+	var velocityData: [MotionDataPointModel] = []
+	var gravityData: [MotionDataPointModel] = []
+	
     var accelerometerVerticalData: [Double] = []    // Computed values based on the accelerometer and gravity.
-    
-    var gyroXData: [Double] = []                    // Sensor values of the gyro in the X-Axis.
-    var gyroYData: [Double] = []                    // Sensor values of the gyro in the Y-Axis.
-    var gyroZData: [Double] = []                    // Sensor values of the gyro in the Z-Axis.
-
-    var velocityXData: [Double] = []                // Computed values based on the accelerometer in the X-Axis.
-    var velocityYData: [Double] = []                // Computed values based on the accelerometer in the Y-Axis.
-    var velocityZData: [Double] = []                // Computed values based on the accelerometer in the Z-Axis.
     var velocityVerticalData: [Double] = []         // Computed values based on the accelerometer and gravity.
     var velocityVerticalFixedData: [Double] = []    // Fixed computed values based on the accelerometer and gravity.
+	
+	var maxVelocities: [Double] = []
+	var meanVelocities: [Double] = []
+	
+	// MARK: - Chart datasets
+    var accelerometerXDataset: LineChartDataSet = LineChartDataSet()        	// Chart dataset of accelerometer values in the X-Axis.
+    var accelerometerYDataset: LineChartDataSet = LineChartDataSet()        	// Chart dataset of accelerometer values in the Y-Axis.
+    var accelerometerZDataset: LineChartDataSet = LineChartDataSet()        	// Chart dataset of accelerometer values in the Z-Axis.
+    var accelerometerVerticalDataset: LineChartDataSet = LineChartDataSet()   	// Chart dataset of accelerometer values based on the acceleration and gravity.
     
-    var gravityXData: [Double] = []                 // Sensor values of the gravity in the X-Axis.
-    var gravityYData: [Double] = []                 // Sensor values of the gravity in the Y-Axis.
-    var gravityZData: [Double] = []                 // Sensor values of the gravity in the Z-Axis.
-
-    var accelerometerXDataset: LineChartDataSet = LineChartDataSet()        // Chart dataset of accelerometer values in the X-Axis.
-    var accelerometerYDataset: LineChartDataSet = LineChartDataSet()        // Chart dataset of accelerometer values in the Y-Axis.
-    var accelerometerZDataset: LineChartDataSet = LineChartDataSet()        // Chart dataset of accelerometer values in the Z-Axis.
-    var accelerometerVerticalDataset: LineChartDataSet = LineChartDataSet()   // Chart dataset of accelerometer values based on the acceleration and gravity.
+    var velocityXDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of velocity values in the X-Axis.
+    var velocityYDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of velocity values in the Y-Axis.
+    var velocityZDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of velocity values in the Z-Axis.
+    var velocityVerticalDataset: LineChartDataSet = LineChartDataSet()			// Chart dataset of velocity values based on the accelerometer and gravity.
     
-    var velocityXDataset: LineChartDataSet = LineChartDataSet()             // Chart dataset of velocity values in the X-Axis.
-    var velocityYDataset: LineChartDataSet = LineChartDataSet()             // Chart dataset of velocity values in the Y-Axis.
-    var velocityZDataset: LineChartDataSet = LineChartDataSet()             // Chart dataset of velocity values in the Z-Axis.
-    var velocityVerticalDataset: LineChartDataSet = LineChartDataSet()        // Chart dataset of velocity values based on the accelerometer and gravity.
+    var gravityXDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of the gravity values in the X-Axis.
+    var gravityYDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of the gravity values in the Y-Axis.
+    var gravityZDataset: LineChartDataSet = LineChartDataSet()					// Chart dataset of the gravity values in the Z-Axis.
     
-    var gravityXDataset: LineChartDataSet = LineChartDataSet()              // Chart dataset of the gravity values in the X-Axis.
-    var gravityYDataset: LineChartDataSet = LineChartDataSet()              // Chart dataset of the gravity values in the Y-Axis.
-    var gravityZDataset: LineChartDataSet = LineChartDataSet()              // Chart dataset of the gravity values in the Z-Axis.
-    
-    var maxVelocities: [Double] = []
-    var meanVelocities: [Double] = []
-    
-	let updatesIntervalOn = 0.01 // 100 Hz (1/100 s)
-    let updatesIntervalOff = 0.1 // 10 Hz (1/10 s)
-    let gravity = 9.81
-    
-    let queue: OperationQueue = OperationQueue()
+	// MARK: - Constants
+	let gravity = 9.81
+	
+	// MARK: - Services
+	let queue: OperationQueue = OperationQueue()
 	let motionService: DeviceMotionServiceProtocol = CoreMotionService.shared
+	var updateIntervalOn: TimeInterval { motionService.updateIntervalOn }
+	var updateIntervalOff: TimeInterval { motionService.updateIntervalOff }
 	
 	// MARK: - States
 	var isPaused = true {
@@ -133,7 +126,7 @@ class ChartViewController: UIViewController {
 		self.isPaused = willPause
         
         // Updates the interval to avoid 100Hz when the app is paused.
-		let deviceMotionUpdateInterval = willPause ? self.updatesIntervalOff : self.updatesIntervalOn
+		let deviceMotionUpdateInterval = willPause ? updateIntervalOff : updateIntervalOn
 		motionService.deviceMotionUpdateInterval = deviceMotionUpdateInterval
 		
 		// Trigger haptic notification
@@ -225,28 +218,14 @@ class ChartViewController: UIViewController {
     
 	// MARK: - Data management
     func setupStoredData() {
-        // Clean accelerometer data.
-		restoreData(&accelerometerXData)
-		restoreData(&accelerometerYData)
-		restoreData(&accelerometerZData)
-		restoreData(&accelerometerVerticalData)
-        
-        // Clean gyro data.
-		restoreData(&gyroXData)
-		restoreData(&gyroYData)
-		restoreData(&gyroZData)
+		accelerometerData.removeAll()
+		gyroscopeData.removeAll()
+		velocityData.removeAll()
+		gravityData.removeAll()
 		
-        // Clean velocity data.
-		restoreData(&velocityXData)
-		restoreData(&velocityYData)
-		restoreData(&velocityZData)
-		restoreData(&velocityVerticalData)
-		restoreData(&velocityVerticalFixedData)
-        
-        // Clean gravity data
-		restoreData(&gravityXData)
-		restoreData(&gravityYData)
-		restoreData(&gravityZData)
+		accelerometerVerticalData.removeAll()
+		velocityVerticalData.removeAll()
+		velocityVerticalFixedData.removeAll()
         
         // Clean acceleration chart dataset
 		restoreDataSet(accelerometerXDataset)
@@ -272,10 +251,6 @@ class ChartViewController: UIViewController {
 		reloadChart()
     }
 	
-	func restoreData(_ data: inout Array<Double>) {
-		data.removeAll()
-	}
-	
 	func restoreDataSet(_ dataSet: LineChartDataSet) {
 		// keepingCapacity must be true to keep dataset style.
 		dataSet.removeAll(keepingCapacity: true)
@@ -289,6 +264,9 @@ class ChartViewController: UIViewController {
         // https://www.nxp.com/docs/en/application-note/AN3397.pdf
         // https://www.wired.com/story/iphone-accelerometer-physics/
         
+		// Retrieve device motion timestamp
+		let newTimestaamp = data.timestamp
+		
         // Retrieve the accelerometer data from the sensor
         var newXAcceleration =  data.userAcceleration.x
         var newYAcceleration =  data.userAcceleration.y
@@ -317,13 +295,11 @@ class ChartViewController: UIViewController {
         newZAcceleration = newZAcceleration * self.gravity
         
         // Instant velocity calculation by integration
-		let lastAccelerometerXData = accelerometerXData.last ?? .zero
-		let lastAccelerometerYData = accelerometerYData.last ?? .zero
-		let lastAccelerometerZData = accelerometerZData.last ?? .zero
+		let lastAccelerometerData = accelerometerData.last ?? .zero
 		
-        let newXVelocity = (lastAccelerometerXData * updatesIntervalOn) + (newXAcceleration - lastAccelerometerXData) * (updatesIntervalOn / 2)
-        let newYVelocity = (lastAccelerometerYData * updatesIntervalOn) + (newYAcceleration - lastAccelerometerYData) * (updatesIntervalOn / 2)
-        let newZVelocity = (lastAccelerometerZData * updatesIntervalOn) + (newZAcceleration - lastAccelerometerZData) * (updatesIntervalOn / 2)
+		let newXVelocity = (lastAccelerometerData.x * updateIntervalOn) + (newXAcceleration - lastAccelerometerData.x) * (updateIntervalOn / 2)
+		let newYVelocity = (lastAccelerometerData.y * updateIntervalOn) + (newYAcceleration - lastAccelerometerData.y) * (updateIntervalOn / 2)
+		let newZVelocity = (lastAccelerometerData.z * updateIntervalOn) + (newZAcceleration - lastAccelerometerData.z) * (updateIntervalOn / 2)
         
         // Compute vertical acceleration and velocity
 		let lastAccelerometerVerticalData = accelerometerVerticalData.last ?? .zero
@@ -334,40 +310,54 @@ class ChartViewController: UIViewController {
 		
 		let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjectionX, 2) + pow(scalarProjectionY, 2) + pow(scalarProjectionZ, 2))
         let newVerticalVelocity =
-            (lastAccelerometerVerticalData * updatesIntervalOn) + (newVerticalAcceleration - lastAccelerometerVerticalData) * (updatesIntervalOn / 2)
+            (lastAccelerometerVerticalData * updateIntervalOn) + (newVerticalAcceleration - lastAccelerometerVerticalData) * (updateIntervalOn / 2)
         
         // Current velocity by cumulative velocities.
-		let lastVelocityXData = velocityXData.last ?? .zero
-		let lastVelocityYData = velocityYData.last ?? .zero
-		let lastVelocityZData = velocityZData.last ?? .zero
+		let lastVelocityData = velocityData.last ?? .zero
 		let lastVelocityVerticalData = velocityVerticalData.last ?? .zero
 		
-        let currentXVelocity = lastVelocityXData + newXVelocity
-        let currentYVelocity = lastVelocityYData + newYVelocity
-        let currentZVelocity = lastVelocityZData + newZVelocity
+		let currentXVelocity = lastVelocityData.x + newXVelocity
+		let currentYVelocity = lastVelocityData.y + newYVelocity
+		let currentZVelocity = lastVelocityData.z + newZVelocity
         let currentVerticalVelocity = lastVelocityVerticalData + newVerticalVelocity
 
         // Data storage
-        accelerometerXData.append(newXAcceleration)
-        accelerometerYData.append(newYAcceleration)
-        accelerometerZData.append(newZAcceleration)
-        accelerometerVerticalData.append(newVerticalAcceleration)
+		let newAcceleration = MotionDataPointModel(
+			timestamp: newTimestaamp,
+			x: newXAcceleration,
+			y: newYAcceleration,
+			z: newZAcceleration
+		)
+		accelerometerData.append(newAcceleration)
+		accelerometerVerticalData.append(newVerticalAcceleration)
+		
+		let newRotation = MotionDataPointModel(
+			timestamp: newTimestaamp,
+			x: newXGyro,
+			y: newYGyro,
+			z: newZGyro
+		)
+		gyroscopeData.append(newRotation)
+		
+		let currentVelocity = MotionDataPointModel(
+			timestamp: newTimestaamp,
+			x: currentXVelocity,
+			y: currentYVelocity,
+			z: currentZVelocity
+		)
+		velocityData.append(currentVelocity)
+		velocityVerticalData.append(currentVerticalVelocity)
         
-        gyroYData.append(newXGyro)
-        gyroYData.append(newYGyro)
-        gyroZData.append(newZGyro)
-
-        velocityXData.append(currentXVelocity)
-        velocityYData.append(currentYVelocity)
-        velocityZData.append(currentZVelocity)
-        velocityVerticalData.append(currentVerticalVelocity)
-        
-        gravityXData.append(newXGravity)
-        gravityYData.append(newYGravity)
-        gravityZData.append(newZGravity)
+		let newGravity = MotionDataPointModel(
+			timestamp: newTimestaamp,
+			x: newXGravity,
+			y: newYGravity,
+			z: newZGravity
+		)
+		gravityData.append(newGravity)
 
         // Current position in graft
-        let position: Double = Double(accelerometerXData.count - 1) / 100
+		let position: Double = Double(accelerometerData.count - 1) / 100
 
         // Add one of every ten entrances per second. You need to use round(). If not, 201 is casted as 200, thus true.
         guard Int(round(position * 100)) % 10 == 0 else { return }
@@ -449,15 +439,5 @@ class ChartViewController: UIViewController {
         
         resultsTableViewController?.maxVelocities = maxVelocities
         resultsTableViewController?.meanVelocities = meanVelocities
-    }
-    
-    // MARK: - Ancillary functions
-    private func printAccelerationData() {
-        print("X-Acceleration")
-        print(accelerometerXData)
-        print("Y-Acceleration")
-        print(accelerometerYData)
-        print("Z-Acceleration")
-        print(accelerometerZData)
     }
 }

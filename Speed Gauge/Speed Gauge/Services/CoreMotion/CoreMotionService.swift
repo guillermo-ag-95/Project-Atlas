@@ -10,7 +10,8 @@ import CoreMotion
 
 // MARK: - CoreMotion protocol
 protocol CoreMotionServiceProtocol: AnyObject {
-	
+	var updateIntervalOn: TimeInterval { get }
+	var updateIntervalOff: TimeInterval { get }
 }
 
 // MARK: - Accelerometer protocol
@@ -66,6 +67,9 @@ protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
 
 // MARK: - CoreMotion service
 class CoreMotionService: CoreMotionServiceProtocol {
+	let updateIntervalOn: TimeInterval = 0.01 // 100 Hz (1/100 s)
+	let updateIntervalOff: TimeInterval = 0.1 // 10 Hz (1/10 s)
+	
 	private var manager = CMMotionManager()
 	
 	private init() { }

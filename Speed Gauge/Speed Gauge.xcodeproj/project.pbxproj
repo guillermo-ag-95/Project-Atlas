@@ -27,6 +27,8 @@
 		B32822C92CBA7BD000BA521D /* Surge in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C82CBA7BD000BA521D /* Surge */; };
 		B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
+		B39BDE6C2CBDADD70090D7D3 /* MotionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */; };
+		B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BEA092CC391120028E1B0 /* Date+Extension.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
@@ -68,6 +70,8 @@
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
+		B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataPoint.swift; sourceTree = "<group>"; };
+		B39BEA092CC391120028E1B0 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				B32510A32CBBD79200CFE2F7 /* GraphCharts.swift */,
+				B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */,
+				B39BEA092CC391120028E1B0 /* Date+Extension.swift */,
 				B3280A902CBA97EF005EBD32 /* String+Extension.swift */,
 				B32510AF2CBBFDAD00CFE2F7 /* UIDevice+Extension.swift */,
 				B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */,
@@ -219,9 +225,9 @@
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
 				B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */,
 				B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */,
-				B3280A8F2CBA97DE005EBD32 /* Extensions */,
 				B39863FE206FA12A00066E06 /* Model */,
 				B32510A72CBBE8A000CFE2F7 /* Services */,
+				B3280A8F2CBA97DE005EBD32 /* Extensions */,
 			);
 			path = "Speed Gauge";
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 			files = (
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
+				B39BDE6C2CBDADD70090D7D3 /* MotionDataPoint.swift in Sources */,
 				B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */,
 				B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */,
 				B32510B22CBBFE7800CFE2F7 /* UIResponder+Extension.swift in Sources */,
@@ -365,6 +372,7 @@
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,
 				B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */,
+				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
