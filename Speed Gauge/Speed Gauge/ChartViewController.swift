@@ -159,7 +159,8 @@ class ChartViewController: UIViewController {
         guard motionService.isDeviceMotionAvailable else { return }
 		motionService.stopDeviceMotionUpdates()
         
-        let slope = velocityVerticalData.last! / Double(velocityVerticalData.count)
+		let lastVelocityVerticalData = velocityVerticalData.last ?? .zero
+        let slope = lastVelocityVerticalData / Double(velocityVerticalData.count)
 
         // Remove lineally the slope from the vertical acceleration.
 		velocityVerticalFixedData = velocityVerticalData.enumerated().map({ index, element in
@@ -197,7 +198,10 @@ class ChartViewController: UIViewController {
                 endingPoints.append(i)  // Save the ending point.
 
                 // Check that the interval is big enough
-                if (endingPoints.last! - startingPoints.last! < 30) {
+				let startingPoint = startingPoints.last ?? .zero
+				let endingPoint = endingPoints.last ?? .zero
+				
+                if (endingPoint - startingPoint < 30) {
                     // If not,
                     startingPoints.removeLast()
                     endingPoints.removeLast()
@@ -207,7 +211,7 @@ class ChartViewController: UIViewController {
                     maxVelocities.append(maximum)   // Save the max velocity of the rep.
                     maximum = 0.0                   // Reset the maximum velocity.
 
-                    let repVelocities = velocityVerticalFixedData.suffix(from: startingPoints.last!).prefix(upTo: endingPoints.last!)
+					let repVelocities = velocityVerticalFixedData.suffix(from: startingPoint).prefix(upTo: endingPoint)
                     let meanVelocity = Surge.mean(Array(repVelocities))
 
                     meanVelocities.append(meanVelocity)
@@ -318,20 +322,31 @@ class ChartViewController: UIViewController {
         newZAcceleration = newZAcceleration * self.gravity
         
         // Instant velocity calculation by integration
-        let newXVelocity = (accelerometerXData.last! * updatesIntervalOn) + (newXAcceleration - accelerometerXData.last!) * (updatesIntervalOn / 2)
-        let newYVelocity = (accelerometerYData.last! * updatesIntervalOn) + (newYAcceleration - accelerometerYData.last!) * (updatesIntervalOn / 2)
-        let newZVelocity = (accelerometerZData.last! * updatesIntervalOn) + (newZAcceleration - accelerometerZData.last!) * (updatesIntervalOn / 2)
+		let lastAccelerometerXData = accelerometerXData.last ?? .zero
+		let lastAccelerometerYData = accelerometerYData.last ?? .zero
+		let lastAccelerometerZData = accelerometerZData.last ?? .zero
+		
+        let newXVelocity = (lastAccelerometerXData * updatesIntervalOn) + (newXAcceleration - lastAccelerometerXData) * (updatesIntervalOn / 2)
+        let newYVelocity = (lastAccelerometerYData * updatesIntervalOn) + (newYAcceleration - lastAccelerometerYData) * (updatesIntervalOn / 2)
+        let newZVelocity = (lastAccelerometerZData * updatesIntervalOn) + (newZAcceleration - lastAccelerometerZData) * (updatesIntervalOn / 2)
         
         // Compute vertical acceleration and velocity
+		let lastAccelerometerVerticalData = accelerometerVerticalData.last ?? .zero
+		
         let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjection[0], 2) + pow(scalarProjection[1], 2) + pow(scalarProjection[2], 2))
         let newVerticalVelocity =
-            (accelerometerVerticalData.last! * updatesIntervalOn) + (newVerticalAcceleration - accelerometerVerticalData.last!) * (updatesIntervalOn / 2)
+            (lastAccelerometerVerticalData * updatesIntervalOn) + (newVerticalAcceleration - lastAccelerometerVerticalData) * (updatesIntervalOn / 2)
         
         // Current velocity by cumulative velocities.
-        let currentXVelocity = velocityXData.last! + newXVelocity
-        let currentYVelocity = velocityYData.last! + newYVelocity
-        let currentZVelocity = velocityZData.last! + newZVelocity
-        let currentVerticalVelocity = velocityVerticalData.last! + newVerticalVelocity
+		let lastVelocityXData = velocityXData.last ?? .zero
+		let lastVelocityYData = velocityYData.last ?? .zero
+		let lastVelocityZData = velocityZData.last ?? .zero
+		let lastVelocityVerticalData = velocityVerticalData.last ?? .zero
+		
+        let currentXVelocity = lastVelocityXData + newXVelocity
+        let currentYVelocity = lastVelocityYData + newYVelocity
+        let currentZVelocity = lastVelocityZData + newZVelocity
+        let currentVerticalVelocity = lastVelocityVerticalData + newVerticalVelocity
 
         // Data storage
         accelerometerXData.append(newXAcceleration)
@@ -431,10 +446,10 @@ class ChartViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		segue.destination.navigationItem.title = LocalizedKeys.Common.results
         
-        let resultsTableViewController = segue.destination as! ResultsTableViewController
+        let resultsTableViewController = segue.destination as? ResultsTableViewController
         
-        resultsTableViewController.maxVelocities = maxVelocities
-        resultsTableViewController.meanVelocities = meanVelocities
+        resultsTableViewController?.maxVelocities = maxVelocities
+        resultsTableViewController?.meanVelocities = meanVelocities
     }
     
     // MARK: - Ancillary functions
