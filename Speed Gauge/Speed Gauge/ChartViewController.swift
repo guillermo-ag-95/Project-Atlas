@@ -6,7 +6,6 @@
 //  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
 //
 
-import AVFoundation
 import DGCharts
 import Surge
 import UIKit
@@ -202,11 +201,12 @@ class ChartViewController: UIViewController {
 		// Compute vertical acceleration and velocity
 		let lastAccelerometerVerticalData = accelerometerVerticalData.last ?? .zero
 		
+		let dotProductSign = dotProduct.sign == .plus ? 1.0 : -1.0
 		let scalarProjectionX = scalarProjection.at(0) ?? .zero
 		let scalarProjectionY = scalarProjection.at(1) ?? .zero
 		let scalarProjectionZ = scalarProjection.at(2) ?? .zero
 		
-		let newVerticalAcceleration = sign(dotProduct) * sqrt(pow(scalarProjectionX, 2) + pow(scalarProjectionY, 2) + pow(scalarProjectionZ, 2))
+		let newVerticalAcceleration = dotProductSign * sqrt(pow(scalarProjectionX, 2) + pow(scalarProjectionY, 2) + pow(scalarProjectionZ, 2))
 		let newVerticalVelocity =
 		(lastAccelerometerVerticalData * updateIntervalOn) + (newVerticalAcceleration - lastAccelerometerVerticalData) * (updateIntervalOn / 2)
 		
