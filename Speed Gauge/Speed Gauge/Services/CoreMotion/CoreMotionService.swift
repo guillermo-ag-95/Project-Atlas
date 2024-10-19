@@ -67,6 +67,10 @@ protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
 // MARK: - CoreMotion service
 class CoreMotionService: CoreMotionServiceProtocol {
 	private var manager = CMMotionManager()
+	
+	private init() { }
+	
+	static let shared: CoreMotionService = .init()
 }
 
 extension CoreMotionService: AccelerometerServiceProtocol {

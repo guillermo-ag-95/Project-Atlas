@@ -59,7 +59,7 @@ class ChartViewController: UIViewController {
     let gravity = 9.81
     
     let queue: OperationQueue = OperationQueue()
-	let motionService: DeviceMotionServiceProtocol = CoreMotionService()
+	let motionService: DeviceMotionServiceProtocol = CoreMotionService.shared
 	
 	// MARK: - States
 	var isPaused = true {
