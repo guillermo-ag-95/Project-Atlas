@@ -49,10 +49,10 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Services
 	let motionQueue: OperationQueue = OperationQueue(maxConcurrentOperationCount: 1)
-	let motionService: DeviceMotionServiceSyncProtocol = CoreMotionService.shared
+	let motionRepository: DeviceMotionRepositorySyncProtocol = CoreMotionRepository.shared
 	
-	var updateIntervalOn: TimeInterval { motionService.updateIntervalOn }
-	var updateIntervalOff: TimeInterval { motionService.updateIntervalOff }
+	var updateIntervalOn: TimeInterval { motionRepository.updateIntervalOn }
+	var updateIntervalOff: TimeInterval { motionRepository.updateIntervalOff }
 	
 	// MARK: - States
 	var isPaused = true {
@@ -127,7 +127,7 @@ class ChartViewController: UIViewController {
 		
 		// Updates the interval to avoid 100Hz when the app is paused.
 		let deviceMotionUpdateInterval = willPause ? updateIntervalOff : updateIntervalOn
-		motionService.deviceMotionUpdateInterval = deviceMotionUpdateInterval
+		motionRepository.deviceMotionUpdateInterval = deviceMotionUpdateInterval
 		
 		// Trigger haptic notification
 		vibrateDevice()
@@ -137,11 +137,11 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Data recording
 	func startRecordData() {
-		guard motionService.isDeviceMotionAvailable else { return }
+		guard motionRepository.isDeviceMotionAvailable else { return }
 		
 		resetData()
 		
-		motionService.startDeviceMotionUpdates(to: motionQueue) { [weak self] model in
+		motionRepository.startDeviceMotionUpdates(to: motionQueue) { [weak self] model in
 			self?.updateMotionData(model)
 			
 			let position = self?.numberOfDataPoints ?? .zero
@@ -154,8 +154,8 @@ class ChartViewController: UIViewController {
 	}
 	
 	func stopRecordData() {
-		guard motionService.isDeviceMotionAvailable else { return }
-		motionService.stopDeviceMotionUpdates()
+		guard motionRepository.isDeviceMotionAvailable else { return }
+		motionRepository.stopDeviceMotionUpdates()
 		
 		processMotionData()
 		evaluateRepetitions()
@@ -164,7 +164,7 @@ class ChartViewController: UIViewController {
 	}
 	
 	// MARK: - Data management
-	func updateMotionData(_ data: DeviceMotionServiceModel) {
+	func updateMotionData(_ data: DeviceMotionRepositoryModel) {
 		// https://www.nxp.com/docs/en/application-note/AN3397.pdf
 		// https://www.wired.com/story/iphone-accelerometer-physics/
 		

@@ -1,5 +1,5 @@
 //
-//  CoreMotionServiceProtocols.swift
+//  CoreMotionRepositoryProtocols.swift
 //  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 20/10/24.
@@ -9,13 +9,13 @@
 import CoreMotion
 
 // MARK: - CoreMotion protocol
-protocol CoreMotionServiceProtocol: AnyObject {
+protocol CoreMotionRepositoryProtocol: AnyObject {
 	var updateIntervalOn: TimeInterval { get }
 	var updateIntervalOff: TimeInterval { get }
 }
 
 // MARK: - Accelerometer protocols
-protocol AccelerometerServiceProtocol: CoreMotionServiceProtocol {
+protocol AccelerometerRepositoryProtocol: CoreMotionRepositoryProtocol {
 	var isAccelerometerAvailable: Bool { get }
 	var accelerometerData: CMAccelerometerData? { get }
 	
@@ -25,22 +25,22 @@ protocol AccelerometerServiceProtocol: CoreMotionServiceProtocol {
 	func stopAccelerometerUpdates()
 }
 
-protocol AccelerometerServiceSyncProtocol: AccelerometerServiceProtocol {
+protocol AccelerometerRepositorySyncProtocol: AccelerometerRepositoryProtocol {
 	func startAccelerometerUpdates(
 		to operation: OperationQueue,
-		success: @escaping AccelerometerServiceSuccessHandler,
-		failure: @escaping AccelerometerServiceFailureHandler
+		success: @escaping AccelerometerRepositorySuccessHandler,
+		failure: @escaping AccelerometerRepositoryFailureHandler
 	)
 }
 
-protocol AccelerometerServiceAsyncProtocol: AccelerometerServiceProtocol {
+protocol AccelerometerRepositoryAsyncProtocol: AccelerometerRepositoryProtocol {
 	func startacccelerometerUpdates(
 		to operation: OperationQueue
-	) async -> AccelerometerServiceAsyncResult
+	) async -> AccelerometerRepositoryAsyncResult
 }
 
 // MARK: - Gyroscope protocols
-protocol GyroscopeServiceProtocol: CoreMotionServiceProtocol {
+protocol GyroscopeRepositoryProtocol: CoreMotionRepositoryProtocol {
 	var isGyroAvailable: Bool { get }
 	var gyroData: CMGyroData? { get }
 	
@@ -50,22 +50,22 @@ protocol GyroscopeServiceProtocol: CoreMotionServiceProtocol {
 	func stopGyroUpdates()
 }
 
-protocol GyroscopeServiceSyncProtocol: GyroscopeServiceProtocol {
+protocol GyroscopeRepositorySyncProtocol: GyroscopeRepositoryProtocol {
 	func startGyroUpdates(
 		to operation: OperationQueue,
-		success: @escaping GyroscopeServiceSuccessHandler,
-		failure: @escaping GyroscopeServiceFailureHandler
+		success: @escaping GyroscopeRepositorySuccessHandler,
+		failure: @escaping GyroscopeRepositoryFailureHandler
 	)
 }
 
-protocol GyroscopeServiceAsyncProtocol: GyroscopeServiceProtocol {
+protocol GyroscopeRepositoryAsyncProtocol: GyroscopeRepositoryProtocol {
 	func startGyroUpdates(
 		to operation: OperationQueue
-	) async -> GyroscopeServiceAsyncResult
+	) async -> GyroscopeRepositoryAsyncResult
 }
 
 // MARK: - DeviceMotion protocols
-protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
+protocol DeviceMotionRepositoryProtocol: CoreMotionRepositoryProtocol {
 	var isDeviceMotionAvailable: Bool { get }
 	var deviceMotion: CMDeviceMotion? { get }
 	
@@ -75,16 +75,16 @@ protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
 	func stopDeviceMotionUpdates()
 }
 
-protocol DeviceMotionServiceSyncProtocol: DeviceMotionServiceProtocol {
+protocol DeviceMotionRepositorySyncProtocol: DeviceMotionRepositoryProtocol {
 	func startDeviceMotionUpdates(
 		to operation: OperationQueue,
-		success: @escaping DeviceMotionServiceSuccessHandler,
-		failure: @escaping DeviceMotionServiceFailureHandler
+		success: @escaping DeviceMotionRepositorySuccessHandler,
+		failure: @escaping DeviceMotionRepositoryFailureHandler
 	)
 }
 
-protocol DeviceMotionServiceAsyncProtocol: DeviceMotionServiceProtocol {
+protocol DeviceMotionRepositoryAsyncProtocol: DeviceMotionRepositoryProtocol {
 	func startDeviceMotionUpdates(
 		to operation: OperationQueue
-	) async -> DeviceMotionServiceAsyncResult
+	) async -> DeviceMotionRepositoryAsyncResult
 }

@@ -1,5 +1,5 @@
 //
-//  CoreMotionService.swift
+//  CoreMotionRepository.swift
 //  Speed Gauge
 //
 //  Created by Guillermo Alcalá Gamero on 13/10/24.
@@ -8,8 +8,8 @@
 
 import CoreMotion
 
-// MARK: - CoreMotion service
-class CoreMotionService: CoreMotionServiceProtocol {
+// MARK: - CoreMotion repository
+class CoreMotionRepository: CoreMotionRepositoryProtocol {
 	let updateIntervalOn: TimeInterval = 0.01 // 100 Hz (1/100 s)
 	let updateIntervalOff: TimeInterval = 0.1 // 10 Hz (1/10 s)
 	
@@ -17,11 +17,11 @@ class CoreMotionService: CoreMotionServiceProtocol {
 	
 	private init() { }
 	
-	static let shared: CoreMotionService = .init()
+	static let shared: CoreMotionRepository = .init()
 }
 
 // MARK: - Accelerometer protocols extensions
-extension CoreMotionService: AccelerometerServiceProtocol {
+extension CoreMotionRepository: AccelerometerRepositoryProtocol {
 	var isAccelerometerAvailable: Bool { manager.isAccelerometerAvailable }
 	var accelerometerData: CMAccelerometerData? { manager.accelerometerData }
 	
@@ -39,11 +39,11 @@ extension CoreMotionService: AccelerometerServiceProtocol {
 	}
 }
 
-extension CoreMotionService: AccelerometerServiceSyncProtocol {
+extension CoreMotionRepository: AccelerometerRepositorySyncProtocol {
 	func startAccelerometerUpdates(
 		to operation: OperationQueue,
-		success: @escaping AccelerometerServiceSuccessHandler,
-		failure: @escaping AccelerometerServiceFailureHandler
+		success: @escaping AccelerometerRepositorySuccessHandler,
+		failure: @escaping AccelerometerRepositoryFailureHandler
 	) {
 		manager.startAccelerometerUpdates(to: operation) { data, error in
 			if let error = error {
@@ -58,10 +58,10 @@ extension CoreMotionService: AccelerometerServiceSyncProtocol {
 	}
 }
 
-extension CoreMotionService: AccelerometerServiceAsyncProtocol {
+extension CoreMotionRepository: AccelerometerRepositoryAsyncProtocol {
 	func startacccelerometerUpdates(
 		to operation: OperationQueue
-	) async -> AccelerometerServiceAsyncResult {
+	) async -> AccelerometerRepositoryAsyncResult {
 		let result = await withCheckedContinuation { continuation in
 			self.startAccelerometerUpdates(to: operation) { data in
 				continuation.resume(returning: Result.success(data))
@@ -75,7 +75,7 @@ extension CoreMotionService: AccelerometerServiceAsyncProtocol {
 }
 
 // MARK: - Gyroscope protocols extensions
-extension CoreMotionService: GyroscopeServiceProtocol {
+extension CoreMotionRepository: GyroscopeRepositoryProtocol {
 	var isGyroAvailable: Bool { manager.isGyroAvailable }
 	var gyroData: CMGyroData? { manager.gyroData }
 	
@@ -93,11 +93,11 @@ extension CoreMotionService: GyroscopeServiceProtocol {
 	}
 }
 
-extension CoreMotionService: GyroscopeServiceSyncProtocol {
+extension CoreMotionRepository: GyroscopeRepositorySyncProtocol {
 	func startGyroUpdates(
 		to operation: OperationQueue,
-		success: @escaping GyroscopeServiceSuccessHandler,
-		failure: @escaping GyroscopeServiceFailureHandler
+		success: @escaping GyroscopeRepositorySuccessHandler,
+		failure: @escaping GyroscopeRepositoryFailureHandler
 	) {
 		manager.startGyroUpdates(to: operation) { data, error in
 			if let error = error {
@@ -112,10 +112,10 @@ extension CoreMotionService: GyroscopeServiceSyncProtocol {
 	}
 }
 
-extension CoreMotionService: GyroscopeServiceAsyncProtocol {
+extension CoreMotionRepository: GyroscopeRepositoryAsyncProtocol {
 	func startGyroUpdates(
 		to operation: OperationQueue
-	) async -> GyroscopeServiceAsyncResult {
+	) async -> GyroscopeRepositoryAsyncResult {
 		let result = await withCheckedContinuation { continuation in
 			self.startGyroUpdates(to: operation) { data in
 				continuation.resume(returning: Result.success(data))
@@ -129,7 +129,7 @@ extension CoreMotionService: GyroscopeServiceAsyncProtocol {
 }
 
 // MARK: - DeviceMotion protocols extensions
-extension CoreMotionService: DeviceMotionServiceProtocol {
+extension CoreMotionRepository: DeviceMotionRepositoryProtocol {
 	var isDeviceMotionAvailable: Bool { manager.isDeviceMotionAvailable }
 	var deviceMotion: CMDeviceMotion? { manager.deviceMotion }
 	
@@ -147,11 +147,11 @@ extension CoreMotionService: DeviceMotionServiceProtocol {
 	}
 }
 
-extension CoreMotionService: DeviceMotionServiceSyncProtocol {
+extension CoreMotionRepository: DeviceMotionRepositorySyncProtocol {
 	func startDeviceMotionUpdates(
 		to operation: OperationQueue,
-		success: @escaping DeviceMotionServiceSuccessHandler,
-		failure: @escaping DeviceMotionServiceFailureHandler
+		success: @escaping DeviceMotionRepositorySuccessHandler,
+		failure: @escaping DeviceMotionRepositoryFailureHandler
 	) {
 		manager.startDeviceMotionUpdates(to: operation) { data, error in
 			if let error = error {
@@ -166,10 +166,10 @@ extension CoreMotionService: DeviceMotionServiceSyncProtocol {
 	}
 }
 
-extension CoreMotionService: DeviceMotionServiceAsyncProtocol {
+extension CoreMotionRepository: DeviceMotionRepositoryAsyncProtocol {
 	func startDeviceMotionUpdates(
 		to operation: OperationQueue
-	) async -> DeviceMotionServiceAsyncResult {
+	) async -> DeviceMotionRepositoryAsyncResult {
 		let result = await withCheckedContinuation { continuation in
 			self.startDeviceMotionUpdates(to: operation) { data in
 				continuation.resume(returning: Result.success(data))
