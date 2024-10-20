@@ -8,63 +8,6 @@
 
 import CoreMotion
 
-// MARK: - CoreMotion protocol
-protocol CoreMotionServiceProtocol: AnyObject {
-	var updateIntervalOn: TimeInterval { get }
-	var updateIntervalOff: TimeInterval { get }
-}
-
-// MARK: - Accelerometer protocol
-protocol AccelerometerServiceProtocol: CoreMotionServiceProtocol {
-	var isAccelerometerAvailable: Bool { get }
-	var accelerometerData: CMAccelerometerData? { get }
-	
-	var accelerometerUpdateInterval: TimeInterval { get set }
-	
-	func startAccelerometerUpdates()
-	func stopAccelerometerUpdates()
-	
-	func startAccelerometerUpdates(
-		to operation: OperationQueue,
-		success: @escaping AccelerometerServiceSuccessHandler,
-		failure: @escaping AccelerometerServiceFailureHandler
-	)
-}
-
-// MARK: - Gyroscope protocol
-protocol GyroscopeServiceProtocol: CoreMotionServiceProtocol {
-	var isGyroAvailable: Bool { get }
-	var gyroData: CMGyroData? { get }
-	
-	var gyroUpdateInterval: TimeInterval { get set }
-	
-	func startGyroUpdates()
-	func stopGyroUpdates()
-	
-	func startGyroUpdates(
-		to operation: OperationQueue,
-		success: @escaping GyroscopeServiceSuccessHandler,
-		failure: @escaping GyroscopeServiceFailureHandler
-	)
-}
-
-// MARK: - DeviceMotion protocol
-protocol DeviceMotionServiceProtocol: CoreMotionServiceProtocol {
-	var isDeviceMotionAvailable: Bool { get }
-	var deviceMotion: CMDeviceMotion? { get }
-	
-	var deviceMotionUpdateInterval: TimeInterval { get set }
-	
-	func startDeviceMotionUpdates()
-	func stopDeviceMotionUpdates()
-	
-	func startDeviceMotionUpdates(
-		to operation: OperationQueue,
-		success: @escaping DeviceMotionServiceSuccessHandler,
-		failure: @escaping DeviceMotionServiceFailureHandler
-	)
-}
-
 // MARK: - CoreMotion service
 class CoreMotionService: CoreMotionServiceProtocol {
 	let updateIntervalOn: TimeInterval = 0.01 // 100 Hz (1/100 s)
@@ -77,6 +20,7 @@ class CoreMotionService: CoreMotionServiceProtocol {
 	static let shared: CoreMotionService = .init()
 }
 
+// MARK: - Accelerometer protocols extensions
 extension CoreMotionService: AccelerometerServiceProtocol {
 	var isAccelerometerAvailable: Bool { manager.isAccelerometerAvailable }
 	var accelerometerData: CMAccelerometerData? { manager.accelerometerData }
@@ -93,7 +37,9 @@ extension CoreMotionService: AccelerometerServiceProtocol {
 	func stopAccelerometerUpdates() {
 		manager.stopAccelerometerUpdates()
 	}
-	
+}
+
+extension CoreMotionService: AccelerometerServiceSyncProtocol {
 	func startAccelerometerUpdates(
 		to operation: OperationQueue,
 		success: @escaping AccelerometerServiceSuccessHandler,
@@ -112,6 +58,23 @@ extension CoreMotionService: AccelerometerServiceProtocol {
 	}
 }
 
+extension CoreMotionService: AccelerometerServiceAsyncProtocol {
+	func startacccelerometerUpdates(
+		to operation: OperationQueue
+	) async -> AccelerometerServiceAsyncResult {
+		let result = await withCheckedContinuation { continuation in
+			self.startAccelerometerUpdates(to: operation) { data in
+				continuation.resume(returning: Result.success(data))
+			} failure: { error in
+				continuation.resume(returning: Result.failure(error))
+			}
+		}
+		
+		return result
+	}
+}
+
+// MARK: - Gyroscope protocols extensions
 extension CoreMotionService: GyroscopeServiceProtocol {
 	var isGyroAvailable: Bool { manager.isGyroAvailable }
 	var gyroData: CMGyroData? { manager.gyroData }
@@ -128,7 +91,9 @@ extension CoreMotionService: GyroscopeServiceProtocol {
 	func stopGyroUpdates() {
 		manager.stopGyroUpdates()
 	}
-	
+}
+
+extension CoreMotionService: GyroscopeServiceSyncProtocol {
 	func startGyroUpdates(
 		to operation: OperationQueue,
 		success: @escaping GyroscopeServiceSuccessHandler,
@@ -147,6 +112,23 @@ extension CoreMotionService: GyroscopeServiceProtocol {
 	}
 }
 
+extension CoreMotionService: GyroscopeServiceAsyncProtocol {
+	func startGyroUpdates(
+		to operation: OperationQueue
+	) async -> GyroscopeServiceAsyncResult {
+		let result = await withCheckedContinuation { continuation in
+			self.startGyroUpdates(to: operation) { data in
+				continuation.resume(returning: Result.success(data))
+			} failure: { error in
+				continuation.resume(returning: Result.failure(error))
+			}
+		}
+		
+		return result
+	}
+}
+
+// MARK: - DeviceMotion protocols extensions
 extension CoreMotionService: DeviceMotionServiceProtocol {
 	var isDeviceMotionAvailable: Bool { manager.isDeviceMotionAvailable }
 	var deviceMotion: CMDeviceMotion? { manager.deviceMotion }
@@ -163,7 +145,9 @@ extension CoreMotionService: DeviceMotionServiceProtocol {
 	func stopDeviceMotionUpdates() {
 		manager.stopDeviceMotionUpdates()
 	}
-	
+}
+
+extension CoreMotionService: DeviceMotionServiceSyncProtocol {
 	func startDeviceMotionUpdates(
 		to operation: OperationQueue,
 		success: @escaping DeviceMotionServiceSuccessHandler,
@@ -179,5 +163,21 @@ extension CoreMotionService: DeviceMotionServiceProtocol {
 				failure(error)
 			}
 		}
+	}
+}
+
+extension CoreMotionService: DeviceMotionServiceAsyncProtocol {
+	func startDeviceMotionUpdates(
+		to operation: OperationQueue
+	) async -> DeviceMotionServiceAsyncResult {
+		let result = await withCheckedContinuation { continuation in
+			self.startDeviceMotionUpdates(to: operation) { data in
+				continuation.resume(returning: Result.success(data))
+			} failure: { error in
+				continuation.resume(returning: Result.failure(error))
+			}
+		}
+		
+		return result
 	}
 }

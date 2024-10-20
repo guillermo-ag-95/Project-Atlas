@@ -49,7 +49,7 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Services
 	let motionQueue: OperationQueue = OperationQueue(maxConcurrentOperationCount: 1)
-	let motionService: DeviceMotionServiceProtocol = CoreMotionService.shared
+	let motionService: DeviceMotionServiceSyncProtocol = CoreMotionService.shared
 	
 	var updateIntervalOn: TimeInterval { motionService.updateIntervalOn }
 	var updateIntervalOff: TimeInterval { motionService.updateIntervalOff }

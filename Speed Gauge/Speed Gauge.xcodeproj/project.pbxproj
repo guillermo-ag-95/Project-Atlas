@@ -36,6 +36,7 @@
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
+		B3DADDAE2CC5130A00FD6EAE /* CoreMotionServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDAD2CC5130A00FD6EAE /* CoreMotionServiceProtocols.swift */; };
 		B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802762073B4E300166074 /* Kalman_Filter.swift */; };
 		B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */; };
 		B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */; };
@@ -85,6 +86,7 @@
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3AC613E1FBDBB0C00B2334D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3AC61441FBDBBB100B2334D /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		B3DADDAD2CC5130A00FD6EAE /* CoreMotionServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionServiceProtocols.swift; sourceTree = "<group>"; };
 		B3E802762073B4E300166074 /* Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter.swift; sourceTree = "<group>"; };
 		B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter_Tests.swift; sourceTree = "<group>"; };
 		B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Dimensional_Kalman_Filter.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				B32510A82CBBE8DE00CFE2F7 /* CoreMotionService.swift */,
 				B32510AB2CBBF11D00CFE2F7 /* CoreMotionServiceModels.swift */,
+				B3DADDAD2CC5130A00FD6EAE /* CoreMotionServiceProtocols.swift */,
 			);
 			path = CoreMotion;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				B32510B02CBBFDAD00CFE2F7 /* UIDevice+Extension.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */,
+				B3DADDAE2CC5130A00FD6EAE /* CoreMotionServiceProtocols.swift in Sources */,
 				B3177E5F20B0761600E283FC /* Repetition.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
