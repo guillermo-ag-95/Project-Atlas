@@ -10,8 +10,9 @@ import CoreMotion
 
 // MARK: - CoreMotion repository
 class CoreMotionRepository: CoreMotionRepositoryProtocol {
-	let updateIntervalOn: TimeInterval = 0.01 // 100 Hz (1/100 s)
-	let updateIntervalOff: TimeInterval = 0.1 // 10 Hz (1/10 s)
+	let gravity: Double = 9.80665				// Standard gravity
+	let updateIntervalOn: TimeInterval = 0.01	// 100 Hz (1/100 s)
+	let updateIntervalOff: TimeInterval = 0.1	// 10 Hz (1/10 s)
 	
 	private var manager = CMMotionManager()
 	

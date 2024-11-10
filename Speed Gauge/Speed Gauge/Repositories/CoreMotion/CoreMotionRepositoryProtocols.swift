@@ -10,6 +10,7 @@ import CoreMotion
 
 // MARK: - CoreMotion protocol
 protocol CoreMotionRepositoryProtocol: AnyObject {
+	var gravity: Double { get }
 	var updateIntervalOn: TimeInterval { get }
 	var updateIntervalOff: TimeInterval { get }
 }

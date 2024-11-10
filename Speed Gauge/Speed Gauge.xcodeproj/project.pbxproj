@@ -30,14 +30,18 @@
 		B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */; };
 		B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123FB2CC3F3E000BF6A5A /* Double+Extension.swift */; };
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
-		B39BDE6C2CBDADD70090D7D3 /* MotionDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */; };
+		B39BDE6C2CBDADD70090D7D3 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BDE6B2CBDADD70090D7D3 /* MotionData.swift */; };
 		B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BEA092CC391120028E1B0 /* Date+Extension.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
 		B3DADDAE2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDAD2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift */; };
+		B3DADDB22CC5186900FD6EAE /* DeviceMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDB12CC5186900FD6EAE /* DeviceMotionService.swift */; };
+		B3DADDB92CC52D4F00FD6EAE /* RepetitionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDB82CC52D4F00FD6EAE /* RepetitionsService.swift */; };
+		B3DADDC02CC52F2100FD6EAE /* ChartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDBF2CC52F2100FD6EAE /* ChartPresenter.swift */; };
 		B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802762073B4E300166074 /* Kalman_Filter.swift */; };
 		B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */; };
+		B3EB61DC2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EB61DB2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift */; };
 		B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */; };
 		B3ED3D26207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */; };
 		B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */; };
@@ -77,7 +81,7 @@
 		B3986403206FA35200066E06 /* Speed Gauge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Speed Gauge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3986407206FA35300066E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
-		B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataPoint.swift; sourceTree = "<group>"; };
+		B39BDE6B2CBDADD70090D7D3 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		B39BEA092CC391120028E1B0 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,8 +89,12 @@
 		B3AC613E1FBDBB0C00B2334D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3AC61441FBDBBB100B2334D /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		B3DADDAD2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepositoryProtocols.swift; sourceTree = "<group>"; };
+		B3DADDB12CC5186900FD6EAE /* DeviceMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionService.swift; sourceTree = "<group>"; };
+		B3DADDB82CC52D4F00FD6EAE /* RepetitionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsService.swift; sourceTree = "<group>"; };
+		B3DADDBF2CC52F2100FD6EAE /* ChartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPresenter.swift; sourceTree = "<group>"; };
 		B3E802762073B4E300166074 /* Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter.swift; sourceTree = "<group>"; };
 		B3E802782073B99200166074 /* Kalman_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kalman_Filter_Tests.swift; sourceTree = "<group>"; };
+		B3EB61DB2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extension.swift"; sourceTree = "<group>"; };
 		B3ED3D23207145C20084256F /* One_Dimensional_Kalman_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Dimensional_Kalman_Filter.swift; sourceTree = "<group>"; };
 		B3ED3D25207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = One_Dimensional_Kalman_Filter_Tests.swift; sourceTree = "<group>"; };
 		B3F4E00F2070D35900FFE969 /* Discrete_Bayes_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter.swift; sourceTree = "<group>"; };
@@ -159,7 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */,
-				B39BDE6B2CBDADD70090D7D3 /* MotionDataPoint.swift */,
+				B39BDE6B2CBDADD70090D7D3 /* MotionData.swift */,
 				B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */,
 			);
 			path = Charts;
@@ -170,6 +178,7 @@
 			children = (
 				B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */,
 				B39BEA092CC391120028E1B0 /* Date+Extension.swift */,
+				B3EB61DB2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift */,
 				B39123FB2CC3F3E000BF6A5A /* Double+Extension.swift */,
 				B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */,
 				B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */,
@@ -221,19 +230,70 @@
 			isa = PBXGroup;
 			children = (
 				B3AC613E1FBDBB0C00B2334D /* Info.plist */,
+				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
 				B306A3492CBA907C00A28CD8 /* LaunchScreen.storyboard */,
 				B3280A962CBAA243005EBD32 /* Main.storyboard */,
-				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
-				B3AC61441FBDBBB100B2334D /* ChartViewController.swift */,
-				B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */,
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
 				B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */,
 				B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */,
 				B39863FE206FA12A00066E06 /* Model */,
+				B3DADDBC2CC52EA200FD6EAE /* Modules */,
+				B3DADDAF2CC5184900FD6EAE /* Services */,
 				B32510A72CBBE8A000CFE2F7 /* Repositories */,
 				B3280A8F2CBA97DE005EBD32 /* Extensions */,
 			);
 			path = "Speed Gauge";
+			sourceTree = "<group>";
+		};
+		B3DADDAF2CC5184900FD6EAE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B3DADDB02CC5185200FD6EAE /* CoreMotion */,
+				B3DADDB72CC52D3D00FD6EAE /* Repetitions */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B3DADDB02CC5185200FD6EAE /* CoreMotion */ = {
+			isa = PBXGroup;
+			children = (
+				B3DADDB12CC5186900FD6EAE /* DeviceMotionService.swift */,
+			);
+			path = CoreMotion;
+			sourceTree = "<group>";
+		};
+		B3DADDB72CC52D3D00FD6EAE /* Repetitions */ = {
+			isa = PBXGroup;
+			children = (
+				B3DADDB82CC52D4F00FD6EAE /* RepetitionsService.swift */,
+			);
+			path = Repetitions;
+			sourceTree = "<group>";
+		};
+		B3DADDBC2CC52EA200FD6EAE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B3DADDBD2CC52EB300FD6EAE /* Charts */,
+				B3DADDBE2CC52EB800FD6EAE /* Results */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B3DADDBD2CC52EB300FD6EAE /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B3AC61441FBDBBB100B2334D /* ChartViewController.swift */,
+				B3DADDBF2CC52F2100FD6EAE /* ChartPresenter.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		B3DADDBE2CC52EB800FD6EAE /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */,
+			);
+			path = Results;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,7 +421,7 @@
 			files = (
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionRepositoryModels.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
-				B39BDE6C2CBDADD70090D7D3 /* MotionDataPoint.swift in Sources */,
+				B39BDE6C2CBDADD70090D7D3 /* MotionData.swift in Sources */,
 				B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */,
 				B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */,
 				B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */,
@@ -369,9 +429,11 @@
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
 				B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
+				B3DADDB22CC5186900FD6EAE /* DeviceMotionService.swift in Sources */,
 				B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */,
 				B32510A92CBBE8DE00CFE2F7 /* CoreMotionRepository.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */,
+				B3DADDB92CC52D4F00FD6EAE /* RepetitionsService.swift in Sources */,
 				B32510B02CBBFDAD00CFE2F7 /* UIDevice+Extension.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */,
@@ -379,9 +441,11 @@
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,
+				B3EB61DC2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift in Sources */,
 				B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */,
 				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
+				B3DADDC02CC52F2100FD6EAE /* ChartPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

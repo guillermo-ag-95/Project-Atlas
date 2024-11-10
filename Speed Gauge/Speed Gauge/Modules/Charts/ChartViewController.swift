@@ -1,0 +1,138 @@
+//
+//  ChartViewController.swift
+//  Speed Gauge
+//
+//  Created by Guillermo Alcalá Gamero on 16/11/17.
+//  Copyright © 2017 Guillermo Alcalá Gamero. All rights reserved.
+//
+
+import DGCharts
+import UIKit
+
+protocol ChartViewControllerProtocol: AnyObject {
+	func setupChartDataSet(_ dataSet: ChartDataSet, label: String, color: UIColor, pointSize: CGFloat)
+	func resetChartDataSet(_ dataSet: ChartDataSet)
+	func updateCharts()
+	func updateChartDataSets(_ dataSets: [ChartDataSetProtocol])
+	func updateRepetitions(_ repetitions: [MotionRepetition])
+}
+
+class ChartViewController: UIViewController {
+	// MARK: - Outlets
+	@IBOutlet weak var segmentedControl: UISegmentedControl!
+	@IBOutlet weak var lineChartView: LineChartView!
+	@IBOutlet weak var actionButton: UIButton!
+	
+	// MARK: - Connections
+	lazy var presenter: ChartPresenterProtocol = ChartPresenter(view: self)
+	
+	// MARK: - Variables
+	private var repetitions: [any MotionRepetition] = []
+	
+	// MARK: - States
+	var isPaused = true {
+		didSet {
+			setupButtons()
+		}
+	}
+	
+	// MARK: - Life cycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		setupNavigationBar()
+		setupHeader()
+		setupCharts()
+		setupButtons()
+	}
+	
+	// MARK: - Setup functions
+	func setupNavigationBar() {
+		guard let navigationController = navigationController else { return }
+		navigationController.navigationBar.topItem?.title = LocalizedKeys.Common.graphs
+		navigationController.navigationBar.topItem?.rightBarButtonItem?.title = LocalizedKeys.Common.results
+	}
+	
+	func setupHeader() {
+		segmentedControl.setTitle(MotionCharts.ACCELERATION.title, forSegmentAt: MotionCharts.ACCELERATION.rawValue)
+		segmentedControl.setTitle(MotionCharts.VELOCITY.title, forSegmentAt: MotionCharts.VELOCITY.rawValue)
+		segmentedControl.setTitle(MotionCharts.GRAVITY.title, forSegmentAt: MotionCharts.GRAVITY.rawValue)
+		segmentedControl.selectedSegmentIndex = MotionCharts.VELOCITY.rawValue
+	}
+	
+	func setupCharts() {
+		lineChartView.chartDescription.text = MotionCharts(rawValue: segmentedControl.selectedSegmentIndex)?.description
+		
+		presenter.setupCharts()
+	}
+	
+	func setupButtons() {
+		let actionButtonImage: UIImage? = isPaused ? .systemPlayFill : .systemPauseFill
+		actionButton.setImage(actionButtonImage, for: .normal)
+	}
+	
+	// MARK: - Actions
+	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+		presenter.loadCharts()
+	}
+	
+	@IBAction func actionButtonPressed(_ sender: UIButton) {
+		let willPause = !isPaused
+		self.isPaused = willPause
+		
+		// Trigger haptic notification
+		vibrateDevice()
+		
+		willPause ? stopRecordData() : startRecordData()
+	}
+	
+	func startRecordData() {
+		presenter.startMeasures()
+	}
+	
+	func stopRecordData() {
+		presenter.stopMeasures()
+	}
+	
+	// MARK: - Navigations
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		segue.destination.navigationItem.title = LocalizedKeys.Common.results
+		
+		let resultsTableViewController = segue.destination as? ResultsTableViewController
+		
+		resultsTableViewController?.repetitions = repetitions
+	}
+}
+
+// MARK: - ChartViewControllerProtocol
+extension ChartViewController: ChartViewControllerProtocol {
+	func setupChartDataSet(_ dataSet: ChartDataSet, label: String, color: UIColor, pointSize: CGFloat = 1) {
+		dataSet.label = label
+		dataSet.colors = [color]
+		
+		guard let dataSet = dataSet as? LineChartDataSet else { return }
+		dataSet.setCircleColor(color)
+		dataSet.circleRadius = pointSize
+		dataSet.circleHoleRadius = pointSize
+	}
+	
+	func updateCharts() {
+		let position = segmentedControl.selectedSegmentIndex
+		presenter.loadChart(at: position)
+	}
+	
+	func updateChartDataSets(_ dataSets: [ChartDataSetProtocol]) {
+		let chartData = LineChartData(dataSets: dataSets)
+		lineChartView.data = chartData
+		lineChartView.notifyDataSetChanged()
+	}
+	
+	func resetChartDataSet(_ dataSet: ChartDataSet) {
+		// keepingCapacity must be true to keep dataset style.
+		dataSet.removeAll(keepingCapacity: true)
+	}
+	
+	func updateRepetitions(_ repetitions: [any MotionRepetition]) {
+		self.repetitions = repetitions
+	}
+}

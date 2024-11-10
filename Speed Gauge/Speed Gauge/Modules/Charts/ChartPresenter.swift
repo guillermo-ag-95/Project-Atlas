@@ -1,0 +1,229 @@
+//
+//  ChartPresenter.swift
+//  Speed Gauge
+//
+//  Created by Guillermo Alcalá Gamero on 20/10/24.
+//  Copyright © 2024 Guillermo Alcalá Gamero. All rights reserved.
+//
+
+import DGCharts
+import Foundation
+
+protocol ChartPresenterProtocol: AnyObject {
+	func setupCharts()
+	func resetCharts()
+	func loadCharts()
+	func loadChart(at position: Int)
+	
+	func startMeasures()
+	func stopMeasures()
+}
+
+class ChartPresenter {
+	weak var view: ChartViewControllerProtocol?
+	lazy var motionService: DeviceMotionServiceInputProtocol? = DeviceMotionService(output: self)
+	lazy var repetitionsService: RepetitionsServiceInputProtocol? = RepetitionsService(output: self)
+	
+	init(view: ChartViewControllerProtocol) {
+		self.view = view
+	}
+	
+	// MARK: - Presentation data
+	private var numberOfDataEntries: Int = .zero
+	
+	private var accelerationXDataset: ChartDataSet = LineChartDataSet()
+	private var accelerationYDataset: ChartDataSet = LineChartDataSet()
+	private var accelerationZDataset: ChartDataSet = LineChartDataSet()
+	
+	private var velocityXDataset: ChartDataSet = LineChartDataSet()
+	private var velocityYDataset: ChartDataSet = LineChartDataSet()
+	private var velocityZDataset: ChartDataSet = LineChartDataSet()
+	
+	private var gravityXDataset: ChartDataSet = LineChartDataSet()
+	private var gravityYDataset: ChartDataSet = LineChartDataSet()
+	private var gravityZDataset: ChartDataSet = LineChartDataSet()
+	
+	private var verticalAccelerationDataset: ChartDataSet = LineChartDataSet()
+	private var verticalVelocityDataset: ChartDataSet = LineChartDataSet()	
+}
+
+// MARK: - ChartPresenterProtocol
+extension ChartPresenter: ChartPresenterProtocol {
+	// Do nothing
+}
+
+// MARK: - Chart management
+extension ChartPresenter {
+	func setupCharts() {
+		[accelerationXDataset, velocityXDataset, gravityXDataset].forEach {
+			view?.setupChartDataSet($0, label: LocalizedKeys.Common.xAxis, color: .appRed, pointSize: 1)
+		}
+		
+		[accelerationYDataset, velocityYDataset, gravityYDataset].forEach {
+			view?.setupChartDataSet($0, label: LocalizedKeys.Common.yAxis, color: .appGreen, pointSize: 1)
+		}
+																		  
+		[accelerationZDataset, velocityZDataset, gravityZDataset].forEach {
+			view?.setupChartDataSet($0, label: LocalizedKeys.Common.zAxis, color: .appBlue, pointSize: 1)
+		}
+		
+		view?.setupChartDataSet(
+			verticalAccelerationDataset,
+			label: LocalizedKeys.Acceleration.vertical,
+			color: .appBlack,
+			pointSize: 1
+		)
+		
+		view?.setupChartDataSet(
+			verticalVelocityDataset,
+			label: LocalizedKeys.Velocity.vertical,
+			color: .appBlack,
+			pointSize: 1
+		)
+	}
+	
+	func resetCharts() {
+		numberOfDataEntries = .zero
+		
+		[accelerationXDataset, accelerationYDataset, accelerationZDataset].forEach {
+			view?.resetChartDataSet($0)
+		}
+		
+		[velocityXDataset, velocityYDataset, velocityZDataset].forEach {
+			view?.resetChartDataSet($0)
+		}
+		
+		[gravityXDataset, gravityYDataset, gravityZDataset].forEach {
+			view?.resetChartDataSet($0)
+		}
+		
+		[verticalAccelerationDataset, verticalVelocityDataset].forEach {
+			view?.resetChartDataSet($0)
+		}
+	}
+	
+	func loadCharts() {
+		view?.updateCharts()
+	}
+	
+	func loadChart(at position: Int) {
+		let dataSets: [any ChartDataSetProtocol]
+		
+		switch position {
+		case MotionCharts.ACCELERATION.rawValue:
+			dataSets = [
+				accelerationXDataset,
+				accelerationYDataset,
+				accelerationZDataset,
+				verticalAccelerationDataset
+			]
+		case MotionCharts.VELOCITY.rawValue:
+			dataSets = [
+				velocityXDataset,
+				velocityYDataset,
+				velocityZDataset,
+				verticalVelocityDataset
+			]
+		case MotionCharts.GRAVITY.rawValue:
+			dataSets = [
+				gravityXDataset,
+				gravityYDataset,
+				gravityZDataset
+			]
+		default:
+			dataSets = []
+		}
+		
+		runOnMainThreadIfNecessary { [weak self] in
+			self?.view?.updateChartDataSets(dataSets)
+		}
+	}
+}
+
+// MARK: - Measures management
+extension ChartPresenter {
+	func startMeasures() {
+		resetCharts()
+		loadCharts()
+		
+		motionService?.startDeviceMotionUpdates()
+	}
+	
+	func stopMeasures() {
+		motionService?.stopDeviceMotionUpdates()
+		motionService?.processMotionData()
+		
+		let motionData = motionService?.motionData ?? []
+		repetitionsService?.evaluateRepetitions(from: motionData)
+	}
+}
+
+
+extension ChartPresenter: DeviceMotionServiceOutputProtocol {
+	func deviceMotionDataUpdated(_ data: any MotionData) {
+		let position = Double(numberOfDataEntries)
+		
+		let accelerationXEntry = ChartDataEntry(x: position, y: data.acceleration.x)
+		let accelerationYEntry = ChartDataEntry(x: position, y: data.acceleration.y)
+		let accelerationZEntry = ChartDataEntry(x: position, y: data.acceleration.z)
+		
+		let velocityXEntry = ChartDataEntry(x: position, y: data.velocity.x)
+		let velocityYEntry = ChartDataEntry(x: position, y: data.velocity.y)
+		let velocityZEntry = ChartDataEntry(x: position, y: data.velocity.z)
+		
+		let gravityXEntry = ChartDataEntry(x: position, y: data.gravity.x)
+		let gravityYEntry = ChartDataEntry(x: position, y: data.gravity.y)
+		let gravityZEntry = ChartDataEntry(x: position, y: data.gravity.z)
+		
+		let verticalAccelerationEntry = ChartDataEntry(x: position, y: data.verticalAcceleration.value)
+		let verticalVelocityEntry = ChartDataEntry(x: position, y: data.verticalVelocity.value)
+		
+		accelerationXDataset.append(accelerationXEntry)
+		accelerationYDataset.append(accelerationYEntry)
+		accelerationZDataset.append(accelerationZEntry)
+		
+		velocityXDataset.append(velocityXEntry)
+		velocityYDataset.append(velocityYEntry)
+		velocityZDataset.append(velocityZEntry)
+		
+		gravityXDataset.append(gravityXEntry)
+		gravityYDataset.append(gravityYEntry)
+		gravityZDataset.append(gravityZEntry)
+		
+		verticalAccelerationDataset.append(verticalAccelerationEntry)
+		verticalVelocityDataset.append(verticalVelocityEntry)
+		
+		numberOfDataEntries += 1
+		
+		runOnMainThreadIfNecessary { [weak self] in
+			self?.view?.updateCharts()
+		}
+	}
+	
+	func deviceMotionDataUpdated(_ data: [any MotionData]) {
+		// TODO: Adapt function to limit its scope beyond vertical velocities
+		// For now, it'll manage only vertical velocities after post-processing
+		// In the future, it should be use to handle multiple motion data model at once.
+		
+		view?.resetChartDataSet(verticalVelocityDataset)
+		
+		let verticalVelocitiesEntries = data.enumerated().map { index, point in
+			let position = Double(index)
+			let entry = ChartDataEntry(x: position, y: point.verticalVelocity.value)
+			return entry
+		}
+		
+		verticalVelocityDataset.append(contentsOf: verticalVelocitiesEntries)
+		
+		runOnMainThreadIfNecessary { [weak self] in
+			self?.view?.updateCharts()
+		}
+	}
+}
+
+// MARK: - RepetitionsServiceOutputProtocol
+extension ChartPresenter: RepetitionsServiceOutputProtocol {
+	func evaluateRepetitions(_ repetitions: [any MotionRepetition]) {
+		view?.updateRepetitions(repetitions)
+	}
+}
