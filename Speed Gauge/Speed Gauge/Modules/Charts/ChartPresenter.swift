@@ -29,7 +29,8 @@ class ChartPresenter {
 	}
 	
 	// MARK: - Presentation data
-	private var numberOfDataEntries: Int = .zero
+	private var numberOfDataEntries: Int = -1
+	private let reduceNumberOfDataEntriesBy: Int = 10
 	
 	private var accelerationXDataset: ChartDataSet = LineChartDataSet()
 	private var accelerationYDataset: ChartDataSet = LineChartDataSet()
@@ -83,7 +84,7 @@ extension ChartPresenter {
 	}
 	
 	func resetCharts() {
-		numberOfDataEntries = .zero
+		numberOfDataEntries = -1
 		
 		[accelerationXDataset, accelerationYDataset, accelerationZDataset].forEach {
 			view?.resetChartDataSet($0)
@@ -160,7 +161,11 @@ extension ChartPresenter {
 
 
 extension ChartPresenter: DeviceMotionServiceOutputProtocol {
-	func deviceMotionDataUpdated(_ data: any MotionData) {
+	func deviceMotionDataUpdated(_ data: any MotionData) {		
+		numberOfDataEntries += 1
+		
+		guard shouldIncludesDataEntry(at: numberOfDataEntries) else { return }
+		
 		let position = Double(numberOfDataEntries)
 		
 		let accelerationXEntry = ChartDataEntry(x: position, y: data.acceleration.x)
@@ -193,8 +198,6 @@ extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 		verticalAccelerationDataset.append(verticalAccelerationEntry)
 		verticalVelocityDataset.append(verticalVelocityEntry)
 		
-		numberOfDataEntries += 1
-		
 		runOnMainThreadIfNecessary { [weak self] in
 			self?.view?.updateCharts()
 		}
@@ -207,17 +210,34 @@ extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 		
 		view?.resetChartDataSet(verticalVelocityDataset)
 		
-		let verticalVelocitiesEntries = data.enumerated().map { index, point in
+		let verticalVelocitiesEntries: [ChartDataEntry] = data.enumerated().map { index, point in
+			guard shouldIncludesDataEntry(at: index) else { return nil }
+			
 			let position = Double(index)
 			let entry = ChartDataEntry(x: position, y: point.verticalVelocity.value)
 			return entry
-		}
+		}.compactMap(\.self)
 		
 		verticalVelocityDataset.append(contentsOf: verticalVelocitiesEntries)
 		
 		runOnMainThreadIfNecessary { [weak self] in
 			self?.view?.updateCharts()
 		}
+	}
+	
+	/// Check if the new data entry should be included in the charts.
+	/// If the limiting factor is zero, all data entries are included.
+	/// - Parameter index: Position of the new data entry in the charts
+	/// - Returns: If the data entry should be included in the data set.
+	///
+	/// Due to performance issues, not every data entry should be included in the chart.
+	///
+	/// When these issues are resolved, this function won't be necessary.
+	private func shouldIncludesDataEntry(at index: Int) -> Bool {
+		guard reduceNumberOfDataEntriesBy > .zero else { return true }
+		
+		let result = index.isMultiple(of: reduceNumberOfDataEntriesBy)
+		return result
 	}
 }
 
