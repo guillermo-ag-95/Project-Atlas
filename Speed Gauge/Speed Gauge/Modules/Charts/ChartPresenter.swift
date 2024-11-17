@@ -30,7 +30,7 @@ class ChartPresenter {
 	
 	// MARK: - Presentation data
 	private var numberOfDataEntries: Int = -1
-	private let reduceNumberOfDataEntriesBy: Int = 10
+	private let reduceNumberOfDataEntriesBy: Int = 10 // .zero
 	
 	private var accelerationXDataset: ChartDataSet = LineChartDataSet()
 	private var accelerationYDataset: ChartDataSet = LineChartDataSet()
@@ -104,11 +104,19 @@ extension ChartPresenter {
 	}
 	
 	func loadCharts() {
-		view?.updateCharts()
+		view?.reloadChart()
 	}
 	
 	func loadChart(at position: Int) {
-		let dataSets: [any ChartDataSetProtocol]
+		let dataSets = manageDataSet(at: position)
+		
+		runOnMainThreadIfNecessary { [weak self] in
+			self?.view?.reloadChartDataSets(dataSets)
+		}
+	}
+	
+	private func manageDataSet(at position: Int) -> [ChartDataSet] {
+		let dataSets: [ChartDataSet]
 		
 		switch position {
 		case MotionCharts.ACCELERATION.rawValue:
@@ -135,9 +143,7 @@ extension ChartPresenter {
 			dataSets = []
 		}
 		
-		runOnMainThreadIfNecessary { [weak self] in
-			self?.view?.updateChartDataSets(dataSets)
-		}
+		return dataSets
 	}
 }
 
@@ -199,7 +205,7 @@ extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 		verticalVelocityDataset.append(verticalVelocityEntry)
 		
 		runOnMainThreadIfNecessary { [weak self] in
-			self?.view?.updateCharts()
+			self?.view?.reloadChart()
 		}
 	}
 	
@@ -221,7 +227,7 @@ extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 		verticalVelocityDataset.append(contentsOf: verticalVelocitiesEntries)
 		
 		runOnMainThreadIfNecessary { [weak self] in
-			self?.view?.updateCharts()
+			self?.view?.reloadChart()
 		}
 	}
 	

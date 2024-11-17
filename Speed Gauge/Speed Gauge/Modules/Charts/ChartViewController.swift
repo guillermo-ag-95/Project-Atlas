@@ -12,8 +12,8 @@ import UIKit
 protocol ChartViewControllerProtocol: AnyObject {
 	func setupChartDataSet(_ dataSet: ChartDataSet, label: String, color: UIColor, pointSize: CGFloat)
 	func resetChartDataSet(_ dataSet: ChartDataSet)
-	func updateCharts()
-	func updateChartDataSets(_ dataSets: [ChartDataSetProtocol])
+	func reloadChart()
+	func reloadChartDataSets(_ dataSets: [ChartDataSetProtocol])
 	func updateRepetitions(_ repetitions: [MotionRepetition])
 }
 
@@ -106,6 +106,12 @@ class ChartViewController: UIViewController {
 
 // MARK: - ChartViewControllerProtocol
 extension ChartViewController: ChartViewControllerProtocol {
+	/// Configure the data set.
+	/// - Parameters:
+	///   - dataSet: The data set to configure.
+	///   - label: The text to identify the data set in the chart.
+	///   - color: The color of the data entries in the chart.
+	///   - pointSize: The size of the data entries in the chart.
 	func setupChartDataSet(_ dataSet: ChartDataSet, label: String, color: UIColor, pointSize: CGFloat = 1) {
 		dataSet.label = label
 		dataSet.colors = [color]
@@ -116,22 +122,32 @@ extension ChartViewController: ChartViewControllerProtocol {
 		dataSet.circleHoleRadius = pointSize
 	}
 	
-	func updateCharts() {
-		let position = segmentedControl.selectedSegmentIndex
-		presenter.loadChart(at: position)
+	
+	/// Reload the chart with the data set of the selected data.
+	func reloadChart() {
+		let selectedChart = segmentedControl.selectedSegmentIndex
+		presenter.loadChart(at: selectedChart)
 	}
 	
-	func updateChartDataSets(_ dataSets: [ChartDataSetProtocol]) {
+	
+	/// Reload the chart with a new set of data entries.
+	/// - Parameter dataSets: The new data entries to display in the chart.
+	func reloadChartDataSets(_ dataSets: [ChartDataSetProtocol]) {
 		let chartData = LineChartData(dataSets: dataSets)
 		lineChartView.data = chartData
 		lineChartView.notifyDataSetChanged()
 	}
 	
+	/// Removes all entries a data set.
+	/// - Parameter dataSet: The data set we want to remove all the entries from.
 	func resetChartDataSet(_ dataSet: ChartDataSet) {
 		// keepingCapacity must be true to keep dataset style.
 		dataSet.removeAll(keepingCapacity: true)
 	}
 	
+	
+	/// Updates the repetitions computed based on the motion data.
+	/// - Parameter repetitions: The repetitions computed based on the motion data.
 	func updateRepetitions(_ repetitions: [any MotionRepetition]) {
 		self.repetitions = repetitions
 	}
