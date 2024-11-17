@@ -17,14 +17,19 @@ protocol ChartPresenterProtocol: AnyObject {
 	
 	func startMeasures()
 	func stopMeasures()
+	
+	func goToResults()
 }
 
 class ChartPresenter {
 	weak var view: ChartViewControllerProtocol?
-	lazy var motionService: DeviceMotionServiceInputProtocol? = DeviceMotionService(output: self)
-	lazy var repetitionsService: RepetitionsServiceInputProtocol? = RepetitionsService(output: self)
+	var motionService: DeviceMotionServiceInputProtocol?
+	var repetitionsService: RepetitionsServiceInputProtocol?
 	
-	init(view: ChartViewControllerProtocol) {
+	var assemblyDTO: ChartAssemblyDTO?
+	
+	init(view: ChartViewControllerProtocol, assemblyDTO: ChartAssemblyDTO?) {
+		self.assemblyDTO = assemblyDTO
 		self.view = view
 	}
 	
@@ -45,7 +50,9 @@ class ChartPresenter {
 	private var gravityZDataset: ChartDataSet = LineChartDataSet()
 	
 	private var verticalAccelerationDataset: ChartDataSet = LineChartDataSet()
-	private var verticalVelocityDataset: ChartDataSet = LineChartDataSet()	
+	private var verticalVelocityDataset: ChartDataSet = LineChartDataSet()
+	
+	private var repetitions: [any MotionRepetition] = []
 }
 
 // MARK: - ChartPresenterProtocol
@@ -144,6 +151,10 @@ extension ChartPresenter {
 		}
 		
 		return dataSets
+	}
+	
+	func goToResults() {
+		// TODO: Add router (and study how to avoid multiple routes from different modules)
 	}
 }
 
@@ -250,6 +261,8 @@ extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 // MARK: - RepetitionsServiceOutputProtocol
 extension ChartPresenter: RepetitionsServiceOutputProtocol {
 	func evaluateRepetitions(_ repetitions: [any MotionRepetition]) {
+		self.repetitions = repetitions
+		
 		view?.updateRepetitions(repetitions)
 	}
 }

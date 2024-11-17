@@ -24,7 +24,7 @@ class ChartViewController: UIViewController {
 	@IBOutlet weak var actionButton: UIButton!
 	
 	// MARK: - Connections
-	lazy var presenter: ChartPresenterProtocol = ChartPresenter(view: self)
+	var presenter: ChartPresenterProtocol?
 	
 	// MARK: - Variables
 	private var repetitions: [any MotionRepetition] = []
@@ -48,9 +48,17 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Setup functions
 	func setupNavigationBar() {
-		guard let navigationController = navigationController else { return }
-		navigationController.navigationBar.topItem?.title = LocalizedKeys.Common.graphs
-		navigationController.navigationBar.topItem?.rightBarButtonItem?.title = LocalizedKeys.Common.results
+		title = LocalizedKeys.Common.graphs
+		
+		guard let navigationController else { return }
+		
+		let rightBarButtonItem = UIBarButtonItem(
+			title: LocalizedKeys.Common.results,
+			style: .plain, target: self,
+			action: #selector(rightBarButtonTapped)
+		)
+		
+		navigationController.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
 	}
 	
 	func setupHeader() {
@@ -63,7 +71,7 @@ class ChartViewController: UIViewController {
 	func setupCharts() {
 		lineChartView.chartDescription.text = MotionCharts(rawValue: segmentedControl.selectedSegmentIndex)?.description
 		
-		presenter.setupCharts()
+		presenter?.setupCharts()
 	}
 	
 	func setupButtons() {
@@ -73,7 +81,7 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Actions
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-		presenter.loadCharts()
+		presenter?.loadCharts()
 	}
 	
 	@IBAction func actionButtonPressed(_ sender: UIButton) {
@@ -87,20 +95,20 @@ class ChartViewController: UIViewController {
 	}
 	
 	func startRecordData() {
-		presenter.startMeasures()
+		presenter?.startMeasures()
 	}
 	
 	func stopRecordData() {
-		presenter.stopMeasures()
+		presenter?.stopMeasures()
 	}
 	
-	// MARK: - Navigations
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		segue.destination.navigationItem.title = LocalizedKeys.Common.results
+	@objc func rightBarButtonTapped() {
+		// TODO: Remove when proper routing is added to the project
+		let dto = ResultsAssemblyDTO(repetitions: repetitions)
+		let results = ResultsAssembly.viewController(assemblyDTO: dto)
+		navigationController?.pushViewController(results, animated: true)
 		
-		let resultsTableViewController = segue.destination as? ResultsTableViewController
-		
-		resultsTableViewController?.repetitions = repetitions
+//		presenter?.goToResults()
 	}
 }
 
@@ -126,7 +134,7 @@ extension ChartViewController: ChartViewControllerProtocol {
 	/// Reload the chart with the data set of the selected data.
 	func reloadChart() {
 		let selectedChart = segmentedControl.selectedSegmentIndex
-		presenter.loadChart(at: selectedChart)
+		presenter?.loadChart(at: selectedChart)
 	}
 	
 	

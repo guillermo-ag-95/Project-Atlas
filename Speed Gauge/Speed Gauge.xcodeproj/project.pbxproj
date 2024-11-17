@@ -11,7 +11,7 @@
 		B306A34C2CBA911F00A28CD8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
-		B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */; };
+		B3177E5B20B0719900E283FC /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsViewController.swift */; };
 		B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */; };
 		B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */; };
 		B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */; };
@@ -21,10 +21,17 @@
 		B32510B22CBBFE7800CFE2F7 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510B12CBBFE7800CFE2F7 /* UIResponder+Extension.swift */; };
 		B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */; };
 		B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3280A902CBA97EF005EBD32 /* String+Extension.swift */; };
-		B3280A972CBAA243005EBD32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3280A962CBAA243005EBD32 /* Main.storyboard */; };
 		B32822C62CBA7B3700BA521D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C52CBA7B3700BA521D /* DGCharts */; };
 		B32822C92CBA7BD000BA521D /* Surge in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C82CBA7BD000BA521D /* Surge */; };
 		B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */; };
+		B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1772CEA23B900B0515C /* ChartAssembly.swift */; };
+		B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */; };
+		B35AE17C2CEA2D3100B0515C /* ChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */; };
+		B35AE1822CEA349100B0515C /* ResultsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1812CEA349100B0515C /* ResultsAssembly.swift */; };
+		B35AE1842CEA350D00B0515C /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35AE1832CEA350D00B0515C /* ResultsViewController.xib */; };
+		B35AE1882CEA3D9200B0515C /* RepetitionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35AE1872CEA3D9200B0515C /* RepetitionTableViewCell.xib */; };
+		B35AE1892CEA3D9200B0515C /* RepetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1862CEA3D9200B0515C /* RepetitionTableViewCell.swift */; };
+		B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */; };
 		B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */; };
 		B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */; };
 		B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */; };
@@ -63,7 +70,7 @@
 		B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
-		B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		B3177E5A20B0719900E283FC /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCharts.swift; sourceTree = "<group>"; };
 		B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -73,7 +80,14 @@
 		B32510B12CBBFE7800CFE2F7 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedKeys.swift; sourceTree = "<group>"; };
 		B3280A902CBA97EF005EBD32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		B3280A962CBAA243005EBD32 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		B35AE1772CEA23B900B0515C /* ChartAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAssembly.swift; sourceTree = "<group>"; };
+		B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewController.xib; sourceTree = "<group>"; };
+		B35AE1812CEA349100B0515C /* ResultsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsAssembly.swift; sourceTree = "<group>"; };
+		B35AE1832CEA350D00B0515C /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
+		B35AE1862CEA3D9200B0515C /* RepetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionTableViewCell.swift; sourceTree = "<group>"; };
+		B35AE1872CEA3D9200B0515C /* RepetitionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepetitionTableViewCell.xib; sourceTree = "<group>"; };
+		B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionCellModel.swift; sourceTree = "<group>"; };
 		B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OperationQueue+Extension.swift"; sourceTree = "<group>"; };
 		B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRepetition.swift; sourceTree = "<group>"; };
 		B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
@@ -180,6 +194,7 @@
 				B39BEA092CC391120028E1B0 /* Date+Extension.swift */,
 				B3EB61DB2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift */,
 				B39123FB2CC3F3E000BF6A5A /* Double+Extension.swift */,
+				B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */,
 				B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */,
 				B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */,
 				B3280A902CBA97EF005EBD32 /* String+Extension.swift */,
@@ -188,6 +203,16 @@
 				B32510B12CBBFE7800CFE2F7 /* UIResponder+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B35AE1852CEA3D7600B0515C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */,
+				B35AE1862CEA3D9200B0515C /* RepetitionTableViewCell.swift */,
+				B35AE1872CEA3D9200B0515C /* RepetitionTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B39863FE206FA12A00066E06 /* Model */ = {
@@ -231,7 +256,6 @@
 			children = (
 				B3AC613E1FBDBB0C00B2334D /* Info.plist */,
 				B306A3492CBA907C00A28CD8 /* LaunchScreen.storyboard */,
-				B3280A962CBAA243005EBD32 /* Main.storyboard */,
 				B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */,
 				B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */,
 				B3AC61391FBDBB0C00B2334D /* Assets.xcassets */,
@@ -282,8 +306,10 @@
 		B3DADDBD2CC52EB300FD6EAE /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				B3AC61441FBDBBB100B2334D /* ChartViewController.swift */,
+				B35AE1772CEA23B900B0515C /* ChartAssembly.swift */,
 				B3DADDBF2CC52F2100FD6EAE /* ChartPresenter.swift */,
+				B3AC61441FBDBBB100B2334D /* ChartViewController.swift */,
+				B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -291,7 +317,10 @@
 		B3DADDBE2CC52EB800FD6EAE /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				B3177E5A20B0719900E283FC /* ResultsTableViewController.swift */,
+				B35AE1852CEA3D7600B0515C /* Cell */,
+				B35AE1812CEA349100B0515C /* ResultsAssembly.swift */,
+				B3177E5A20B0719900E283FC /* ResultsViewController.swift */,
+				B35AE1832CEA350D00B0515C /* ResultsViewController.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -393,9 +422,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3280A972CBAA243005EBD32 /* Main.storyboard in Resources */,
+				B35AE17C2CEA2D3100B0515C /* ChartViewController.xib in Resources */,
 				B306A34A2CBA907C00A28CD8 /* LaunchScreen.storyboard in Resources */,
+				B35AE1842CEA350D00B0515C /* ResultsViewController.xib in Resources */,
 				B306A34C2CBA911F00A28CD8 /* Localizable.xcstrings in Resources */,
+				B35AE1882CEA3D9200B0515C /* RepetitionTableViewCell.xib in Resources */,
 				B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,13 +450,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */,
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionRepositoryModels.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
 				B39BDE6C2CBDADD70090D7D3 /* MotionData.swift in Sources */,
-				B3177E5B20B0719900E283FC /* ResultsTableViewController.swift in Sources */,
+				B3177E5B20B0719900E283FC /* ResultsViewController.swift in Sources */,
 				B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */,
 				B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */,
 				B32510B22CBBFE7800CFE2F7 /* UIResponder+Extension.swift in Sources */,
+				B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
 				B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
@@ -435,8 +468,10 @@
 				B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */,
 				B3DADDB92CC52D4F00FD6EAE /* RepetitionsService.swift in Sources */,
 				B32510B02CBBFDAD00CFE2F7 /* UIDevice+Extension.swift in Sources */,
+				B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */,
+				B35AE1822CEA349100B0515C /* ResultsAssembly.swift in Sources */,
 				B3DADDAE2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
@@ -446,6 +481,7 @@
 				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
 				B3DADDC02CC52F2100FD6EAE /* ChartPresenter.swift in Sources */,
+				B35AE1892CEA3D9200B0515C /* RepetitionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
@@ -658,6 +695,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P6CJPUQZP5;
