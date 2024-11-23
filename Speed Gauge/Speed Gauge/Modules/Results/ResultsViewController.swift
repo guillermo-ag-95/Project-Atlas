@@ -8,17 +8,20 @@
 
 import UIKit
 
+protocol ResultsViewControllerProtocol: AnyObject {
+	func updateRepetitions(_ repetitions: [any MotionRepetition])
+}
+
 class ResultsViewController: UIViewController {
 	// MARK: - Outlets
 	@IBOutlet weak var tableView: UITableView!
 	
 	// MARK: - Connections
-	// TODO: Move to presenter when available
-	var assemblyDTO: ResultsAssemblyDTO?
+	var presenter: ResultsPresenterProtocol?
 	
 	// MARK: - Variables
 	private let repetitionCellIdentifier = RepetitionTableViewCell.nameOfClass
-	lazy var repetitions = assemblyDTO?.repetitions ?? []
+	private var repetitions: [any MotionRepetition] = []
 	
 	// MARK: - States
 	
@@ -28,6 +31,8 @@ class ResultsViewController: UIViewController {
 		
 		setupNavigationBar()
 		setupTableView()
+		
+		loadData()
 	}
 	
 	// MARK: - Setup functions
@@ -43,6 +48,10 @@ class ResultsViewController: UIViewController {
 		tableView.dataSource = self
 	}
 	
+	func loadData() {
+		presenter?.loadResults()
+	}
+	
 	// MARK: - Actions
 }
 
@@ -56,7 +65,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell: UITableViewCell
 		
-		if let repetition = repetitions.at(indexPath.section) {
+		if let repetition = repetitions.at(indexPath.row) {
 			cell = tableView.dequeueReusableCell(
 				withIdentifier: repetitionCellIdentifier,
 				for: indexPath
@@ -84,10 +93,16 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		switch editingStyle {
 		case .delete:
-			repetitions.remove(at: indexPath.section)
-			tableView.reloadData()
+			presenter?.removeRepetition(at: indexPath.row)
 		default:
 			break
 		}  
     }
+}
+
+extension ResultsViewController: ResultsViewControllerProtocol {
+	func updateRepetitions(_ repetitions: [any MotionRepetition]) {
+		self.repetitions = repetitions
+		self.tableView.reloadData()
+	}
 }

@@ -10,17 +10,17 @@ import UIKit
 
 class ChartAssembly {
 	static func navigationController(assemblyDTO: ChartAssemblyDTO? = nil) -> UINavigationController {
-		let viewController = viewController(assemblyDTO: assemblyDTO)
-		let navigationController = UINavigationController(rootViewController: viewController)
+		let view = viewController(assemblyDTO: assemblyDTO)
+		let navigationController = UINavigationController(rootViewController: view)
 		
 		return navigationController
 	}
 	
 	static func viewController(assemblyDTO: ChartAssemblyDTO? = nil) -> UIViewController {
-		let viewController = ChartViewController(nibName: ChartViewController.nameOfClass, bundle: nil)
+		let view = ChartViewController(nibName: ChartViewController.nameOfClass, bundle: nil)
 		
-		let presenter = ChartPresenter(view: viewController, assemblyDTO: assemblyDTO)
-		viewController.presenter = presenter
+		let presenter = ChartPresenter(view: view, assemblyDTO: assemblyDTO)
+		view.presenter = presenter
 		
 		let motionService = DeviceMotionService(output: presenter)
 		let repetitionsService = RepetitionsService(output: presenter)
@@ -28,7 +28,7 @@ class ChartAssembly {
 		presenter.motionService = motionService
 		presenter.repetitionsService = repetitionsService
 		
-		return viewController
+		return view
 	}
 }
 

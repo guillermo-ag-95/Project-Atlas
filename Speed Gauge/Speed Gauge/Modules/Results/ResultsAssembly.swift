@@ -10,18 +10,19 @@ import UIKit
 
 class ResultsAssembly {
 	static func navigationController(assemblyDTO: ResultsAssemblyDTO? = nil) -> UINavigationController {
-		let viewController = viewController(assemblyDTO: assemblyDTO)
-		let navigationController = UINavigationController(rootViewController: viewController)
+		let view = viewController(assemblyDTO: assemblyDTO)
+		let navigationController = UINavigationController(rootViewController: view)
 		
 		return navigationController
 	}
 	
 	static func viewController(assemblyDTO: ResultsAssemblyDTO? = nil) -> UIViewController {
-		let viewController = ResultsViewController(nibName: ResultsViewController.nameOfClass, bundle: nil)
+		let view = ResultsViewController(nibName: ResultsViewController.nameOfClass, bundle: nil)
 		
-		viewController.assemblyDTO = assemblyDTO
+		let presenter = ResultsPresenter(view: view, assemblyDTO: assemblyDTO)
+		view.presenter = presenter
 		
-		return viewController
+		return view
 	}
 }
 
