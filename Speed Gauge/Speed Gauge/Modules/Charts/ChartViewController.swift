@@ -103,12 +103,7 @@ class ChartViewController: UIViewController {
 	}
 	
 	@objc func rightBarButtonTapped() {
-		// TODO: Remove when proper routing is added to the project
-		let dto = ResultsAssemblyDTO(repetitions: repetitions)
-		let results = ResultsAssembly.viewController(assemblyDTO: dto)
-		navigationController?.pushViewController(results, animated: true)
-		
-//		presenter?.goToResults()
+		presenter?.goToResults()
 	}
 }
 

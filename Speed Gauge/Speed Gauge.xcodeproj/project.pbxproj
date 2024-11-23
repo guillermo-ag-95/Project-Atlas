@@ -33,6 +33,7 @@
 		B35AE1892CEA3D9200B0515C /* RepetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1862CEA3D9200B0515C /* RepetitionTableViewCell.swift */; };
 		B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */; };
 		B37A6E102CF208F800B053C2 /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E0F2CF208F800B053C2 /* ResultsPresenter.swift */; };
+		B37A6E122CF20D1C00B053C2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E112CF20D1C00B053C2 /* Router.swift */; };
 		B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */; };
 		B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */; };
 		B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */; };
@@ -90,6 +91,7 @@
 		B35AE1872CEA3D9200B0515C /* RepetitionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepetitionTableViewCell.xib; sourceTree = "<group>"; };
 		B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionCellModel.swift; sourceTree = "<group>"; };
 		B37A6E0F2CF208F800B053C2 /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
+		B37A6E112CF20D1C00B053C2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OperationQueue+Extension.swift"; sourceTree = "<group>"; };
 		B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRepetition.swift; sourceTree = "<group>"; };
 		B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 		B3DADDBC2CC52EA200FD6EAE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B37A6E112CF20D1C00B053C2 /* Router.swift */,
 				B3DADDBD2CC52EB300FD6EAE /* Charts */,
 				B3DADDBE2CC52EB800FD6EAE /* Results */,
 			);
@@ -480,6 +483,7 @@
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,
+				B37A6E122CF20D1C00B053C2 /* Router.swift in Sources */,
 				B3EB61DC2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift in Sources */,
 				B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */,
 				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,

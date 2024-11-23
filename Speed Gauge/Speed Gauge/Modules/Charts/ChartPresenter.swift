@@ -154,7 +154,8 @@ extension ChartPresenter {
 	}
 	
 	func goToResults() {
-		// TODO: Add router (and study how to avoid multiple routes from different modules)
+		let dto = ResultsAssemblyDTO(repetitions: repetitions)
+		Router.push(.results(dto: dto))
 	}
 }
 
