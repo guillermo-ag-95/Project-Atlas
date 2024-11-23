@@ -34,8 +34,8 @@ class ChartPresenter {
 	}
 	
 	// MARK: - Presentation data
-	private var numberOfDataEntries: Int = -1
-	private let reduceNumberOfDataEntriesBy: Int = 10 // .zero
+	internal var numberOfDataEntries: Int = -1
+	internal let reduceNumberOfDataEntriesBy: Int = 10 // .zero
 	
 	private var accelerationXDataset: ChartDataSet = LineChartDataSet()
 	private var accelerationYDataset: ChartDataSet = LineChartDataSet()
@@ -176,7 +176,6 @@ extension ChartPresenter {
 		repetitionsService?.evaluateRepetitions(from: motionData)
 	}
 }
-
 
 extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 	func deviceMotionDataUpdated(_ data: any MotionData) {		

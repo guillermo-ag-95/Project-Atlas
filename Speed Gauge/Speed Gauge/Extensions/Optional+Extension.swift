@@ -17,3 +17,13 @@ extension Optional {
 		return !isNull
 	}
 }
+
+extension Optional where Wrapped == Bool {
+	public var isTrue: Bool {
+		return self ?? false
+	}
+	
+	public var isFalse: Bool {
+		return !isTrue
+	}
+}

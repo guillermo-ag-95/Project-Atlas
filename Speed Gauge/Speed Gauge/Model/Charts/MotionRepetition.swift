@@ -14,6 +14,8 @@ protocol MotionRepetition {
 	var duration: TimeInterval { get }
 	var maxVelocity: Double { get }
 	var meanVelocity: Double { get }
+	
+	static var zero: Self { get }
 }
 
 struct MotionRepetitionModel: MotionRepetition {
@@ -46,5 +48,9 @@ struct MotionRepetitionModel: MotionRepetition {
 		let positiveVelocities = velocities.filter(\.value.isPositive)
 		let meanVelocity = positiveVelocities.map(\.value).reduce(0, +) / Double(positiveVelocities.count)
 		self.meanVelocity = meanVelocity
+	}
+	
+	static var zero: MotionRepetitionModel {
+		.init(velocities: [])
 	}
 }

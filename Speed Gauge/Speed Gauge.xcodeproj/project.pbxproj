@@ -34,6 +34,14 @@
 		B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */; };
 		B37A6E102CF208F800B053C2 /* ResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E0F2CF208F800B053C2 /* ResultsPresenter.swift */; };
 		B37A6E122CF20D1C00B053C2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E112CF20D1C00B053C2 /* Router.swift */; };
+		B37A6E172CF2162F00B053C2 /* ChartViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E162CF2162F00B053C2 /* ChartViewControllerMock.swift */; };
+		B37A6E192CF216D200B053C2 /* ChartPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E182CF216D200B053C2 /* ChartPresenterMock.swift */; };
+		B37A6E1D2CF217A000B053C2 /* ChartViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E1C2CF217A000B053C2 /* ChartViewControllerTests.swift */; };
+		B37A6E1F2CF21B7A00B053C2 /* ChartPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E1E2CF21B7A00B053C2 /* ChartPresenterTests.swift */; };
+		B37A6E272CF2455300B053C2 /* DeviceMotionServiceInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E262CF2455300B053C2 /* DeviceMotionServiceInputMock.swift */; };
+		B37A6E292CF2455D00B053C2 /* RepetitionsServiceInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E282CF2455D00B053C2 /* RepetitionsServiceInputMock.swift */; };
+		B37A6E2B2CF2461800B053C2 /* DeviceMotionServiceOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E2A2CF2461800B053C2 /* DeviceMotionServiceOutputMock.swift */; };
+		B37A6E2D2CF2466D00B053C2 /* RepetitionsServiceOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A6E2C2CF2466D00B053C2 /* RepetitionsServiceOutputMock.swift */; };
 		B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */; };
 		B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */; };
 		B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */; };
@@ -92,6 +100,14 @@
 		B35AE18A2CEA400900B0515C /* RepetitionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionCellModel.swift; sourceTree = "<group>"; };
 		B37A6E0F2CF208F800B053C2 /* ResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsPresenter.swift; sourceTree = "<group>"; };
 		B37A6E112CF20D1C00B053C2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B37A6E162CF2162F00B053C2 /* ChartViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerMock.swift; sourceTree = "<group>"; };
+		B37A6E182CF216D200B053C2 /* ChartPresenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPresenterMock.swift; sourceTree = "<group>"; };
+		B37A6E1C2CF217A000B053C2 /* ChartViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewControllerTests.swift; sourceTree = "<group>"; };
+		B37A6E1E2CF21B7A00B053C2 /* ChartPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPresenterTests.swift; sourceTree = "<group>"; };
+		B37A6E262CF2455300B053C2 /* DeviceMotionServiceInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionServiceInputMock.swift; sourceTree = "<group>"; };
+		B37A6E282CF2455D00B053C2 /* RepetitionsServiceInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsServiceInputMock.swift; sourceTree = "<group>"; };
+		B37A6E2A2CF2461800B053C2 /* DeviceMotionServiceOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionServiceOutputMock.swift; sourceTree = "<group>"; };
+		B37A6E2C2CF2466D00B053C2 /* RepetitionsServiceOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsServiceOutputMock.swift; sourceTree = "<group>"; };
 		B39123F52CC3C26900BF6A5A /* OperationQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OperationQueue+Extension.swift"; sourceTree = "<group>"; };
 		B39123F72CC3D74B00BF6A5A /* MotionRepetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionRepetition.swift; sourceTree = "<group>"; };
 		B39123F92CC3DFD700BF6A5A /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
@@ -219,6 +235,76 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		B37A6E132CF215EC00B053C2 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E142CF2160300B053C2 /* Charts */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		B37A6E142CF2160300B053C2 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E152CF2162000B053C2 /* Mocks */,
+				B37A6E1E2CF21B7A00B053C2 /* ChartPresenterTests.swift */,
+				B37A6E1C2CF217A000B053C2 /* ChartViewControllerTests.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		B37A6E152CF2162000B053C2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E182CF216D200B053C2 /* ChartPresenterMock.swift */,
+				B37A6E162CF2162F00B053C2 /* ChartViewControllerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B37A6E212CF2451500B053C2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E222CF2452000B053C2 /* CoreMotion */,
+				B37A6E232CF2453700B053C2 /* Repetitions */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B37A6E222CF2452000B053C2 /* CoreMotion */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E242CF2453E00B053C2 /* Mocks */,
+			);
+			path = CoreMotion;
+			sourceTree = "<group>";
+		};
+		B37A6E232CF2453700B053C2 /* Repetitions */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E252CF2454600B053C2 /* Mocks */,
+			);
+			path = Repetitions;
+			sourceTree = "<group>";
+		};
+		B37A6E242CF2453E00B053C2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E262CF2455300B053C2 /* DeviceMotionServiceInputMock.swift */,
+				B37A6E2A2CF2461800B053C2 /* DeviceMotionServiceOutputMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B37A6E252CF2454600B053C2 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B37A6E282CF2455D00B053C2 /* RepetitionsServiceInputMock.swift */,
+				B37A6E2C2CF2466D00B053C2 /* RepetitionsServiceOutputMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		B39863FE206FA12A00066E06 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				B3986407206FA35300066E06 /* Info.plist */,
+				B37A6E132CF215EC00B053C2 /* Modules */,
+				B37A6E212CF2451500B053C2 /* Services */,
 				B312D3152CBA7E2600028872 /* Filters */,
 			);
 			path = "Speed Gauge Tests";
@@ -446,9 +534,17 @@
 			files = (
 				B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */,
 				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
+				B37A6E192CF216D200B053C2 /* ChartPresenterMock.swift in Sources */,
 				B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */,
+				B37A6E2B2CF2461800B053C2 /* DeviceMotionServiceOutputMock.swift in Sources */,
+				B37A6E172CF2162F00B053C2 /* ChartViewControllerMock.swift in Sources */,
+				B37A6E292CF2455D00B053C2 /* RepetitionsServiceInputMock.swift in Sources */,
+				B37A6E2D2CF2466D00B053C2 /* RepetitionsServiceOutputMock.swift in Sources */,
+				B37A6E1D2CF217A000B053C2 /* ChartViewControllerTests.swift in Sources */,
+				B37A6E1F2CF21B7A00B053C2 /* ChartPresenterTests.swift in Sources */,
 				B3ED3D26207146000084256F /* One_Dimensional_Kalman_Filter_Tests.swift in Sources */,
 				B3F4E0122070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift in Sources */,
+				B37A6E272CF2455300B053C2 /* DeviceMotionServiceInputMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

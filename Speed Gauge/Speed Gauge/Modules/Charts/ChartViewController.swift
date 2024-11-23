@@ -94,11 +94,11 @@ class ChartViewController: UIViewController {
 		willPause ? stopRecordData() : startRecordData()
 	}
 	
-	func startRecordData() {
+	private func startRecordData() {
 		presenter?.startMeasures()
 	}
 	
-	func stopRecordData() {
+	private func stopRecordData() {
 		presenter?.stopMeasures()
 	}
 	
