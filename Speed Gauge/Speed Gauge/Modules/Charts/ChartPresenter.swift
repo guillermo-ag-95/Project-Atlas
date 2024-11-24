@@ -23,10 +23,12 @@ protocol ChartPresenterProtocol: AnyObject {
 
 class ChartPresenter {
 	weak var view: ChartViewControllerProtocol?
+	
 	var motionService: DeviceMotionServiceInputProtocol?
 	var repetitionsService: RepetitionsServiceInputProtocol?
 	
 	var assemblyDTO: ChartAssemblyDTO?
+	var router: RouterProtocol = Router.shared
 	
 	init(view: ChartViewControllerProtocol, assemblyDTO: ChartAssemblyDTO?) {
 		self.assemblyDTO = assemblyDTO
@@ -155,7 +157,7 @@ extension ChartPresenter {
 	
 	func goToResults() {
 		let dto = ResultsAssemblyDTO(repetitions: repetitions)
-		Router.push(.results(dto: dto))
+		router.push(.results(dto: dto), animated: true)
 	}
 }
 

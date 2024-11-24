@@ -49,6 +49,7 @@
 		B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398640F206FA75100066E06 /* Abstract_Test.swift */; };
 		B39BDE6C2CBDADD70090D7D3 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BDE6B2CBDADD70090D7D3 /* MotionData.swift */; };
 		B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BEA092CC391120028E1B0 /* Date+Extension.swift */; };
+		B3A8891C2CF346170011082B /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8891B2CF346170011082B /* RouterMock.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
@@ -117,6 +118,7 @@
 		B398640F206FA75100066E06 /* Abstract_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Abstract_Test.swift; sourceTree = "<group>"; };
 		B39BDE6B2CBDADD70090D7D3 /* MotionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
 		B39BEA092CC391120028E1B0 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		B3A8891B2CF346170011082B /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 		B37A6E132CF215EC00B053C2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				B3A889192CF3460A0011082B /* Router */,
 				B37A6E142CF2160300B053C2 /* Charts */,
 			);
 			path = Modules;
@@ -323,6 +326,22 @@
 				B312D3152CBA7E2600028872 /* Filters */,
 			);
 			path = "Speed Gauge Tests";
+			sourceTree = "<group>";
+		};
+		B3A889192CF3460A0011082B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B3A8891A2CF3460E0011082B /* Mock */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B3A8891A2CF3460E0011082B /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B3A8891B2CF346170011082B /* RouterMock.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		B3AC61261FBDBB0C00B2334D = {
@@ -532,6 +551,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A8891C2CF346170011082B /* RouterMock.swift in Sources */,
 				B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */,
 				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
 				B37A6E192CF216D200B053C2 /* ChartPresenterMock.swift in Sources */,

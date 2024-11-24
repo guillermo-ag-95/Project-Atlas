@@ -16,6 +16,7 @@ final class ChartPresenterTests: XCTestCase {
 	var viewMock: ChartViewControllerMock?
 	var motionServiceMock: DeviceMotionServiceInputMock?
 	var repetitionsServiceMock: RepetitionsServiceInputMock?
+	var routerMock: RouterMock?
 	
 	override func setUpWithError() throws {
 		super.setUp()
@@ -23,14 +24,18 @@ final class ChartPresenterTests: XCTestCase {
 		let viewMock = ChartViewControllerMock()
 		let motionServiceMock = DeviceMotionServiceInputMock()
 		let repetitionsServiceMock = RepetitionsServiceInputMock()
+		let routerMock = RouterMock()
 		
 		let presenter = ChartPresenter(view: viewMock, assemblyDTO: nil)
 		presenter.motionService = motionServiceMock
 		presenter.repetitionsService = repetitionsServiceMock
+		presenter.router = routerMock
 		
 		self.viewMock = viewMock
 		self.motionServiceMock = motionServiceMock
 		self.repetitionsServiceMock = repetitionsServiceMock
+		self.routerMock = routerMock
+		
 		self.presenter = presenter
 	}
 	
@@ -90,7 +95,10 @@ final class ChartPresenterTests: XCTestCase {
 	}
 	
 	func test_goToResults() {
-		XCTAssert(false, "TODO: Mock Router")
+		presenter?.goToResults()
+		
+		let result = routerMock?.pushCalled
+		XCTAssert(result.isTrue)
 	}
 	
 	func test_startMeasures() {
@@ -119,7 +127,7 @@ final class ChartPresenterTests: XCTestCase {
 		XCTAssert(result.isTrue)
 	}
 	
-	func test_deviceMotionDataUpdated_test_deviceMotionDataUpdated_shouldNotIncludesDataEntry() {
+	func test_deviceMotionDataUpdated_shouldIncludesDataEntry() {
 		let motionData: MotionDataModel = .zero
 		presenter?.numberOfDataEntries = -1
 		

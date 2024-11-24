@@ -8,8 +8,11 @@
 
 import UIKit
 
+protocol RouterProtocol: AnyObject {
+	func push(_ module: Router.Module, animated: Bool)
+}
+
 class Router {
-	
 	enum Module {
 		case chart(dto: ChartAssemblyDTO)
 		case results(dto: ResultsAssemblyDTO)
@@ -17,7 +20,11 @@ class Router {
 	
 	private init() { }
 	
-	static func push(_ module: Module, animated: Bool = true) {
+	static let shared: RouterProtocol = Router()
+}
+
+extension Router: RouterProtocol {
+	func push(_ module: Module, animated: Bool = true) {
 		guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
 			  let rootViewController = scene.windows.first?.rootViewController,
 			  let navigationController = rootViewController as? UINavigationController
@@ -27,7 +34,7 @@ class Router {
 		navigationController.pushViewController(view, animated: animated)
 	}
 	
-	private static func build(_ module: Module) -> UIViewController {
+	private func build(_ module: Module) -> UIViewController {
 		let view: UIViewController
 		
 		switch module {
@@ -39,5 +46,4 @@ class Router {
 		
 		return view
 	}
-	
 }
