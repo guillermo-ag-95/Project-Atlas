@@ -2,7 +2,7 @@
 //  RepetitionsServiceInputMock.swift
 //  Speed Gauge Tests
 //
-//  Created by Guillermo Alcalá Gamero on 23/11/24.
+//  Created by Guillermo Alcalá Gamero on 24/11/24.
 //  Copyright © 2024 Guillermo Alcalá Gamero. All rights reserved.
 //
 
