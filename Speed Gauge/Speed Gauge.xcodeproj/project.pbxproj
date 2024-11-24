@@ -52,6 +52,8 @@
 		B3A889322CF3489B0011082B /* RepetitionsServiceInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8892D2CF3489B0011082B /* RepetitionsServiceInputMock.swift */; };
 		B3A889332CF3489B0011082B /* RepetitionsServiceOutputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8892E2CF3489B0011082B /* RepetitionsServiceOutputMock.swift */; };
 		B3A889342CF3489B0011082B /* RepetitionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A889302CF3489B0011082B /* RepetitionsService.swift */; };
+		B3A889392CF34B410011082B /* CoreMotionRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A889382CF34B410011082B /* CoreMotionRepositoryMock.swift */; };
+		B3A8893D2CF354910011082B /* CoreMotionRepositoryModelsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8893C2CF354910011082B /* CoreMotionRepositoryModelsMock.swift */; };
 		B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */; };
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
@@ -123,6 +125,8 @@
 		B3A8892D2CF3489B0011082B /* RepetitionsServiceInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsServiceInputMock.swift; sourceTree = "<group>"; };
 		B3A8892E2CF3489B0011082B /* RepetitionsServiceOutputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsServiceOutputMock.swift; sourceTree = "<group>"; };
 		B3A889302CF3489B0011082B /* RepetitionsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepetitionsService.swift; sourceTree = "<group>"; };
+		B3A889382CF34B410011082B /* CoreMotionRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepositoryMock.swift; sourceTree = "<group>"; };
+		B3A8893C2CF354910011082B /* CoreMotionRepositoryModelsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionRepositoryModelsMock.swift; sourceTree = "<group>"; };
 		B3AC612F1FBDBB0C00B2334D /* Speed Gauge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Speed Gauge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3AC61321FBDBB0C00B2334D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3AC61391FBDBB0C00B2334D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 				B3986407206FA35300066E06 /* Info.plist */,
 				B37A6E132CF215EC00B053C2 /* Modules */,
 				B37A6E212CF2451500B053C2 /* Services */,
+				B3A889352CF34AFC0011082B /* Repositories */,
 				B312D3152CBA7E2600028872 /* Filters */,
 			);
 			path = "Speed Gauge Tests";
@@ -348,6 +353,31 @@
 				B3A889302CF3489B0011082B /* RepetitionsService.swift */,
 			);
 			path = Repetitions;
+			sourceTree = "<group>";
+		};
+		B3A889352CF34AFC0011082B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B3A889362CF34B0D0011082B /* CoreMotion */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		B3A889362CF34B0D0011082B /* CoreMotion */ = {
+			isa = PBXGroup;
+			children = (
+				B3A889372CF34B1A0011082B /* Mocks */,
+			);
+			path = CoreMotion;
+			sourceTree = "<group>";
+		};
+		B3A889372CF34B1A0011082B /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				B3A889382CF34B410011082B /* CoreMotionRepositoryMock.swift */,
+				B3A8893C2CF354910011082B /* CoreMotionRepositoryModelsMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		B3AC61261FBDBB0C00B2334D = {
@@ -561,6 +591,7 @@
 				B3E802792073B99200166074 /* Kalman_Filter_Tests.swift in Sources */,
 				B3986410206FA75100066E06 /* Abstract_Test.swift in Sources */,
 				B37A6E192CF216D200B053C2 /* ChartPresenterMock.swift in Sources */,
+				B3A8893D2CF354910011082B /* CoreMotionRepositoryModelsMock.swift in Sources */,
 				B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */,
 				B37A6E172CF2162F00B053C2 /* ChartViewControllerMock.swift in Sources */,
 				B3A889322CF3489B0011082B /* RepetitionsServiceInputMock.swift in Sources */,
@@ -568,6 +599,7 @@
 				B3A889342CF3489B0011082B /* RepetitionsService.swift in Sources */,
 				B3A8892A2CF347AC0011082B /* DeviceMotionServiceOutputMock.swift in Sources */,
 				B3A8892B2CF347AC0011082B /* DeviceMotionServiceInputMock.swift in Sources */,
+				B3A889392CF34B410011082B /* CoreMotionRepositoryMock.swift in Sources */,
 				B3A8892C2CF347AC0011082B /* DeviceMotionService.swift in Sources */,
 				B37A6E1D2CF217A000B053C2 /* ChartViewControllerTests.swift in Sources */,
 				B37A6E1F2CF21B7A00B053C2 /* ChartPresenterTests.swift in Sources */,

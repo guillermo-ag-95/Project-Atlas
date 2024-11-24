@@ -15,6 +15,7 @@ final class DeviceMotionServiceTests: XCTestCase {
 	
 	// MARK: - Connections
 	var outputMock: DeviceMotionServiceOutputMock?
+	var repositoryMock: DeviceMotionRepositorySyncMock?
 	
 	// MARK: - Repositories
 	
@@ -22,9 +23,13 @@ final class DeviceMotionServiceTests: XCTestCase {
 		super.setUp()
 		
 		let outputMock = DeviceMotionServiceOutputMock()
+		let repositoryMock = DeviceMotionRepositorySyncMock()
+		
 		let service = DeviceMotionService(output: outputMock)
+		service.repository = repositoryMock
 		
 		self.outputMock = outputMock
+		self.repositoryMock = repositoryMock
 		self.service = service
 	}
 
@@ -35,7 +40,42 @@ final class DeviceMotionServiceTests: XCTestCase {
 		self.service = nil
 	}
 	
-	func test_example() {
+	func test_startDeviceMotionUpdates_isDeviceMotionNotAvailable() {
+		repositoryMock?.isDeviceMotionAvailable = false
 		
+		service?.startDeviceMotionUpdates()
+		
+		let result = outputMock?.deviceMotionDataUpdatedCalled
+		XCTAssert(result.isFalse)
+	}
+	
+	func test_startDeviceMotionUpdates_willFail() {
+		repositoryMock?.isDeviceMotionAvailable = true
+		repositoryMock?.willSucceed = false
+		
+		service?.startDeviceMotionUpdates()
+		
+		var result = outputMock?.deviceMotionDataUpdatedCalled
+		XCTAssert(result.isFalse)
+		
+		result = repositoryMock?.stopDeviceMotionUpdatesCalled
+		XCTAssert(result.isTrue)
+	}
+	
+	func test_startDeviceMotionUpdates_willSucceed() throws {
+		repositoryMock?.isDeviceMotionAvailable = true
+		repositoryMock?.willSucceed = true
+		
+		service?.startDeviceMotionUpdates()
+		
+		let result = outputMock?.deviceMotionDataUpdatedCalled
+		XCTAssert(result.isTrue)
+	}
+	
+	func test_processMotionData() {
+		service?.processMotionData()
+		
+		let result = outputMock?.deviceMotionDataUpdatedCalled
+		XCTAssert(result.isTrue)
 	}
 }
