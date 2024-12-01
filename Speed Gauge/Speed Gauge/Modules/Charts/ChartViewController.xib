@@ -41,6 +41,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu0-BR-VXd">
                     <rect key="frame" x="166.66666666666666" y="738" width="60" height="60"/>
                     <constraints>
+                        <constraint firstAttribute="width" secondItem="Yu0-BR-VXd" secondAttribute="height" multiplier="1:1" id="GfX-dU-m6Q"/>
                         <constraint firstAttribute="width" secondItem="Yu0-BR-VXd" secondAttribute="height" multiplier="1:1" id="NUQ-Dh-2RY"/>
                         <constraint firstAttribute="width" constant="60" id="asp-QL-6ya"/>
                     </constraints>
@@ -56,10 +57,11 @@
                 <constraint firstItem="Yu0-BR-VXd" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="15y-4j-XmK"/>
                 <constraint firstItem="Yu0-BR-VXd" firstAttribute="top" secondItem="fJc-7A-3Tg" secondAttribute="bottom" constant="8" id="BKg-Lf-J4r"/>
                 <constraint firstItem="eWT-Tr-fwQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fJc-7A-3Tg" secondAttribute="leading" id="GED-MU-eED"/>
-                <constraint firstItem="Yu0-BR-VXd" firstAttribute="width" secondItem="Yu0-BR-VXd" secondAttribute="height" multiplier="1:1" id="GfX-dU-m6Q"/>
                 <constraint firstItem="fJc-7A-3Tg" firstAttribute="top" secondItem="eWT-Tr-fwQ" secondAttribute="bottom" constant="8" id="LBY-Bm-9iG"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Yu0-BR-VXd" secondAttribute="bottom" constant="20" id="O1w-tc-ZXc"/>
-                <constraint firstItem="fJc-7A-3Tg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="OLE-4c-sak"/>
+                <constraint firstItem="fJc-7A-3Tg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="OLE-4c-sak">
+                    <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                </constraint>
                 <constraint firstItem="eWT-Tr-fwQ" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="aGh-i7-nZM"/>
                 <constraint firstItem="eWT-Tr-fwQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="dG7-uZ-WLi"/>
                 <constraint firstItem="fJc-7A-3Tg" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="wS8-V2-9bY"/>
