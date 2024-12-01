@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIResponder {
+	/// Trigger haptic notification
 	func vibrateDevice() {
 		UIDevice.current.vibrate()
 	}

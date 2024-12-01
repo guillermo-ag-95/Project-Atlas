@@ -12,7 +12,7 @@ import SwiftUI
 struct AtlasWatchApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ControlView()
         }
     }
 }
