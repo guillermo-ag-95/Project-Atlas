@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		B32822C62CBA7B3700BA521D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C52CBA7B3700BA521D /* DGCharts */; };
 		B32822C92CBA7BD000BA521D /* Surge in Frameworks */ = {isa = PBXBuildFile; productRef = B32822C82CBA7BD000BA521D /* Surge */; };
 		B32822CC2CBA7BF000BA521D /* SigmaSwiftStatistics in Frameworks */ = {isa = PBXBuildFile; productRef = B32822CB2CBA7BF000BA521D /* SigmaSwiftStatistics */; };
+		B343DA6F2CFC8D8B0005234E /* Atlas Companion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1772CEA23B900B0515C /* ChartAssembly.swift */; };
 		B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */; };
 		B35AE17C2CEA2D3100B0515C /* ChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */; };
@@ -71,6 +72,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B343DA5C2CFC8D8B0005234E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AC61271FBDBB0C00B2334D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B343DA4B2CFC8D8B0005234E;
+			remoteInfo = "Atlas Companion Watch App";
+		};
+		B343DA662CFC8D8B0005234E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AC61271FBDBB0C00B2334D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B343DA4B2CFC8D8B0005234E;
+			remoteInfo = "Atlas Companion Watch App";
+		};
+		B343DA6D2CFC8D8B0005234E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3AC61271FBDBB0C00B2334D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B343DA4B2CFC8D8B0005234E;
+			remoteInfo = "Atlas Companion Watch App";
+		};
 		B3986408206FA35300066E06 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B3AC61271FBDBB0C00B2334D /* Project object */;
@@ -79,6 +101,20 @@
 			remoteInfo = "Speed Gauge";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B343DA702CFC8D8B0005234E /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B343DA6F2CFC8D8B0005234E /* Atlas Companion Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B306A3492CBA907C00A28CD8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -95,6 +131,9 @@
 		B32510B12CBBFE7800CFE2F7 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		B3280A8D2CBA97C1005EBD32 /* LocalizedKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedKeys.swift; sourceTree = "<group>"; };
 		B3280A902CBA97EF005EBD32 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Atlas Companion Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B343DA5B2CFC8D8B0005234E /* Atlas Companion Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B343DA652CFC8D8B0005234E /* Atlas Companion Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35AE1772CEA23B900B0515C /* ChartAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAssembly.swift; sourceTree = "<group>"; };
 		B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewController.xib; sourceTree = "<group>"; };
@@ -145,7 +184,34 @@
 		B3F4E0112070D38200FFE969 /* Discrete_Bayes_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Discrete_Bayes_Filter_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B343DA4D2CFC8D8B0005234E /* Atlas Companion Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Atlas Companion Watch App"; sourceTree = "<group>"; };
+		B343DA5E2CFC8D8B0005234E /* Atlas Companion Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Atlas Companion Watch AppTests"; sourceTree = "<group>"; };
+		B343DA682CFC8D8B0005234E /* Atlas Companion Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Atlas Companion Watch AppUITests"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		B343DA492CFC8D8B0005234E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA582CFC8D8B0005234E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA622CFC8D8B0005234E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3986400206FA35200066E06 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -385,6 +451,9 @@
 			children = (
 				B3AC61311FBDBB0C00B2334D /* Atlas */,
 				B3986404206FA35200066E06 /* Atlas Tests */,
+				B343DA4D2CFC8D8B0005234E /* Atlas Companion Watch App */,
+				B343DA5E2CFC8D8B0005234E /* Atlas Companion Watch AppTests */,
+				B343DA682CFC8D8B0005234E /* Atlas Companion Watch AppUITests */,
 				B3AC61301FBDBB0C00B2334D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -394,6 +463,9 @@
 			children = (
 				B3AC612F1FBDBB0C00B2334D /* Atlas.app */,
 				B3986403206FA35200066E06 /* Atlas Tests.xctest */,
+				B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */,
+				B343DA5B2CFC8D8B0005234E /* Atlas Companion Watch AppTests.xctest */,
+				B343DA652CFC8D8B0005234E /* Atlas Companion Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -477,6 +549,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B343DA4B2CFC8D8B0005234E /* Atlas Companion Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B343DA772CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch App" */;
+			buildPhases = (
+				B343DA482CFC8D8B0005234E /* Sources */,
+				B343DA492CFC8D8B0005234E /* Frameworks */,
+				B343DA4A2CFC8D8B0005234E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B343DA4D2CFC8D8B0005234E /* Atlas Companion Watch App */,
+			);
+			name = "Atlas Companion Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Atlas Companion Watch App";
+			productReference = B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B343DA5A2CFC8D8B0005234E /* Atlas Companion Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B343DA782CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch AppTests" */;
+			buildPhases = (
+				B343DA572CFC8D8B0005234E /* Sources */,
+				B343DA582CFC8D8B0005234E /* Frameworks */,
+				B343DA592CFC8D8B0005234E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B343DA5D2CFC8D8B0005234E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B343DA5E2CFC8D8B0005234E /* Atlas Companion Watch AppTests */,
+			);
+			name = "Atlas Companion Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Atlas Companion Watch AppTests";
+			productReference = B343DA5B2CFC8D8B0005234E /* Atlas Companion Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B343DA642CFC8D8B0005234E /* Atlas Companion Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B343DA792CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch AppUITests" */;
+			buildPhases = (
+				B343DA612CFC8D8B0005234E /* Sources */,
+				B343DA622CFC8D8B0005234E /* Frameworks */,
+				B343DA632CFC8D8B0005234E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B343DA672CFC8D8B0005234E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B343DA682CFC8D8B0005234E /* Atlas Companion Watch AppUITests */,
+			);
+			name = "Atlas Companion Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Atlas Companion Watch AppUITests";
+			productReference = B343DA652CFC8D8B0005234E /* Atlas Companion Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B3986402206FA35200066E06 /* Atlas Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B398640A206FA35300066E06 /* Build configuration list for PBXNativeTarget "Atlas Tests" */;
@@ -502,10 +642,12 @@
 				B3AC612B1FBDBB0C00B2334D /* Sources */,
 				B3AC612C1FBDBB0C00B2334D /* Frameworks */,
 				B3AC612D1FBDBB0C00B2334D /* Resources */,
+				B343DA702CFC8D8B0005234E /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B343DA6E2CFC8D8B0005234E /* PBXTargetDependency */,
 			);
 			name = Atlas;
 			productName = "iPhone Accelerometer Gauge";
@@ -519,10 +661,21 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 0930;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = "Guillermo Alcalá Gamero";
 				TargetAttributes = {
+					B343DA4B2CFC8D8B0005234E = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					B343DA5A2CFC8D8B0005234E = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = B343DA4B2CFC8D8B0005234E;
+					};
+					B343DA642CFC8D8B0005234E = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = B343DA4B2CFC8D8B0005234E;
+					};
 					B3986402206FA35200066E06 = {
 						CreatedOnToolsVersion = 9.3;
 						ProvisioningStyle = Automatic;
@@ -554,11 +707,35 @@
 			targets = (
 				B3AC612E1FBDBB0C00B2334D /* Atlas */,
 				B3986402206FA35200066E06 /* Atlas Tests */,
+				B343DA4B2CFC8D8B0005234E /* Atlas Companion Watch App */,
+				B343DA5A2CFC8D8B0005234E /* Atlas Companion Watch AppTests */,
+				B343DA642CFC8D8B0005234E /* Atlas Companion Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B343DA4A2CFC8D8B0005234E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA592CFC8D8B0005234E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA632CFC8D8B0005234E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3986401206FA35200066E06 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,6 +759,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B343DA482CFC8D8B0005234E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA572CFC8D8B0005234E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B343DA612CFC8D8B0005234E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B39863FF206FA35200066E06 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +849,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B343DA5D2CFC8D8B0005234E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B343DA4B2CFC8D8B0005234E /* Atlas Companion Watch App */;
+			targetProxy = B343DA5C2CFC8D8B0005234E /* PBXContainerItemProxy */;
+		};
+		B343DA672CFC8D8B0005234E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B343DA4B2CFC8D8B0005234E /* Atlas Companion Watch App */;
+			targetProxy = B343DA662CFC8D8B0005234E /* PBXContainerItemProxy */;
+		};
+		B343DA6E2CFC8D8B0005234E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B343DA4B2CFC8D8B0005234E /* Atlas Companion Watch App */;
+			targetProxy = B343DA6D2CFC8D8B0005234E /* PBXContainerItemProxy */;
+		};
 		B3986409206FA35300066E06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B3AC612E1FBDBB0C00B2334D /* Atlas */;
@@ -659,6 +872,184 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B343DA712CFC8D8B0005234E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Atlas Companion Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.guillermo.alcala.gamero.atlas;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guillermo.alcala.gamero.atlas.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Debug;
+		};
+		B343DA722CFC8D8B0005234E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Atlas Companion Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Atlas;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.guillermo.alcala.gamero.atlas;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.guillermo.alcala.gamero.atlas.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Release;
+		};
+		B343DA732CFC8D8B0005234E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guillermo.alcala.gamero.Atlas-Companion-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Atlas Companion Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Atlas Companion Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Debug;
+		};
+		B343DA742CFC8D8B0005234E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guillermo.alcala.gamero.Atlas-Companion-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Atlas Companion Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Atlas Companion Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Release;
+		};
+		B343DA752CFC8D8B0005234E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guillermo.alcala.gamero.Atlas-Companion-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Atlas Companion Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Debug;
+		};
+		B343DA762CFC8D8B0005234E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P6CJPUQZP5;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.guillermo.alcala.gamero.Atlas-Companion-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Atlas Companion Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.7;
+			};
+			name = Release;
+		};
 		B398640B206FA35300066E06 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -882,6 +1273,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B343DA772CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B343DA712CFC8D8B0005234E /* Debug */,
+				B343DA722CFC8D8B0005234E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B343DA782CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B343DA732CFC8D8B0005234E /* Debug */,
+				B343DA742CFC8D8B0005234E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B343DA792CFC8D8B0005234E /* Build configuration list for PBXNativeTarget "Atlas Companion Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B343DA752CFC8D8B0005234E /* Debug */,
+				B343DA762CFC8D8B0005234E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B398640A206FA35300066E06 /* Build configuration list for PBXNativeTarget "Atlas Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
