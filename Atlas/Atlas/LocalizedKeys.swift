@@ -16,6 +16,8 @@ struct LocalizedKeys {
 		static let xAxis = "x_axis".localized
 		static let yAxis = "y_axis".localized
 		static let zAxis = "z_axis".localized
+		static let play = "play".localized
+		static let pause = "pause".localized
 	}
 	
 	// MARK: - Acceleration

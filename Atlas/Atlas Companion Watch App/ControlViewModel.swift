@@ -15,6 +15,7 @@ class ControlViewModel: NSObject, ObservableObject {
 	@Published var isPaused: Bool = true {
 		didSet {
 			guard isPaused != oldValue else { return }
+			vibrateDevice(isPaused ? .stop : .start)
 			notifyPhone()
 		}
 	}

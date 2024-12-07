@@ -13,7 +13,7 @@ struct ControlView: View {
 	
 	var body: some View {
 		let isPaused: Bool = viewModel.isPaused
-		let buttonTitle: String = isPaused ? "Play" : "Pause"
+		let buttonTitle: String = isPaused ? LocalizedKeys.Common.play : LocalizedKeys.Common.pause
 		let systemImage: String = isPaused ? "play.fill" : "pause.fill"
 		
 		let button = Button(buttonTitle, systemImage: systemImage) {
