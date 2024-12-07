@@ -19,6 +19,8 @@ protocol ChartPresenterProtocol: AnyObject {
 	func stopMeasures()
 	
 	func goToResults()
+	
+	func updateState(_ state: Bool)
 }
 
 class ChartPresenter {
@@ -26,6 +28,7 @@ class ChartPresenter {
 	
 	var motionService: DeviceMotionServiceInputProtocol?
 	var repetitionsService: RepetitionsServiceInputProtocol?
+	var watchConnectivityService: WatchConnectivityServiceInputProtocol?
 	
 	var assemblyDTO: ChartAssemblyDTO?
 	var router: RouterProtocol = Router.shared
@@ -159,6 +162,11 @@ extension ChartPresenter {
 		let dto = ResultsAssemblyDTO(repetitions: repetitions)
 		router.push(.results(dto: dto), animated: true)
 	}
+	
+	func updateState(_ state: Bool) {
+		let message = ["state": state]
+		watchConnectivityService?.sendMessage(message, reply: nil, error: nil)
+	}
 }
 
 // MARK: - Measures management
@@ -266,5 +274,16 @@ extension ChartPresenter: RepetitionsServiceOutputProtocol {
 		self.repetitions = repetitions
 		
 		view?.updateRepetitions(repetitions)
+	}
+}
+
+// MARK: - WatchConnectivityServiceOutputProtocol
+extension ChartPresenter: WatchConnectivityServiceOutputProtocol {
+	func didReceiveMessage(_ message: WatchConnectivityRepositoryMessageModel, reply: WatchConnectivityRepositoryReplyMessageHandler) {
+		if let state = message["state"] as? Bool {
+			runOnMainThreadIfNecessary { [weak self] in
+				self?.view?.updateState(state)
+			}
+		}
 	}
 }

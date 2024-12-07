@@ -11,6 +11,7 @@
 		B306A34C2CBA911F00A28CD8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */; };
 		B30F1413206FB24400DC1745 /* G_H_Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1412206FB24400DC1745 /* G_H_Filter.swift */; };
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
+		B31112632D04D4E200161FE5 /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31112622D04D4E200161FE5 /* WatchConnectivityService.swift */; };
 		B3177E5B20B0719900E283FC /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsViewController.swift */; };
 		B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */; };
 		B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */; };
@@ -35,6 +36,9 @@
 		B3285DEA2D04B99F009AD3C6 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285DE92D04B99F009AD3C6 /* UIResponder+Extension.swift */; };
 		B3285DEC2D04BDC1009AD3C6 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285DEB2D04BDC1009AD3C6 /* UIDevice+Extension.swift */; };
 		B3285DF32D04C02F009AD3C6 /* ObservableObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285DF22D04C02F009AD3C6 /* ObservableObject+Extension.swift */; };
+		B3285E112D04C3D2009AD3C6 /* WatchConnectivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285E102D04C3D2009AD3C6 /* WatchConnectivityRepository.swift */; };
+		B3285E132D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285E122D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift */; };
+		B3285E152D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285E142D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift */; };
 		B343DA6F2CFC8D8B0005234E /* Atlas Companion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1772CEA23B900B0515C /* ChartAssembly.swift */; };
 		B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */; };
@@ -132,6 +136,7 @@
 		B306A34B2CBA911F00A28CD8 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B30F1412206FB24400DC1745 /* G_H_Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter.swift; sourceTree = "<group>"; };
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
+		B31112622D04D4E200161FE5 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
 		B3177E5A20B0719900E283FC /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCharts.swift; sourceTree = "<group>"; };
@@ -143,6 +148,9 @@
 		B3285DE92D04B99F009AD3C6 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
 		B3285DEB2D04BDC1009AD3C6 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		B3285DF22D04C02F009AD3C6 /* ObservableObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableObject+Extension.swift"; sourceTree = "<group>"; };
+		B3285E102D04C3D2009AD3C6 /* WatchConnectivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityRepository.swift; sourceTree = "<group>"; };
+		B3285E122D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityRepositoryModels.swift; sourceTree = "<group>"; };
+		B3285E142D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityRepositoryProtocols.swift; sourceTree = "<group>"; };
 		B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Atlas Companion Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B343DA5B2CFC8D8B0005234E /* Atlas Companion Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B343DA652CFC8D8B0005234E /* Atlas Companion Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +252,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B31112612D04D4BB00161FE5 /* WatchConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				B31112622D04D4E200161FE5 /* WatchConnectivityService.swift */,
+			);
+			path = WatchConnectivity;
+			sourceTree = "<group>";
+		};
 		B312D3142CBA7DF700028872 /* Filters */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				B32510AA2CBBF10500CFE2F7 /* CoreMotion */,
+				B3285E0F2D04C3A3009AD3C6 /* WatchConnectivity */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -328,6 +345,16 @@
 				B3285DF22D04C02F009AD3C6 /* ObservableObject+Extension.swift */,
 			);
 			path = WatchKit;
+			sourceTree = "<group>";
+		};
+		B3285E0F2D04C3A3009AD3C6 /* WatchConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				B3285E102D04C3D2009AD3C6 /* WatchConnectivityRepository.swift */,
+				B3285E122D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift */,
+				B3285E142D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift */,
+			);
+			path = WatchConnectivity;
 			sourceTree = "<group>";
 		};
 		B35AE1852CEA3D7600B0515C /* Cell */ = {
@@ -522,6 +549,7 @@
 			children = (
 				B3DADDB02CC5185200FD6EAE /* CoreMotion */,
 				B3DADDB72CC52D3D00FD6EAE /* Repetitions */,
+				B31112612D04D4BB00161FE5 /* WatchConnectivity */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -860,6 +888,7 @@
 				B3285DEC2D04BDC1009AD3C6 /* UIDevice+Extension.swift in Sources */,
 				B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
+				B3285E112D04C3D2009AD3C6 /* WatchConnectivityRepository.swift in Sources */,
 				B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
 				B3DADDB22CC5186900FD6EAE /* DeviceMotionService.swift in Sources */,
@@ -871,15 +900,18 @@
 				B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */,
+				B3285E152D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift in Sources */,
 				B35AE1822CEA349100B0515C /* ResultsAssembly.swift in Sources */,
 				B3DADDAE2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
 				B39123F62CC3C26900BF6A5A /* OperationQueue+Extension.swift in Sources */,
 				B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */,
+				B3285E132D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift in Sources */,
 				B37A6E122CF20D1C00B053C2 /* Router.swift in Sources */,
 				B3EB61DC2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift in Sources */,
 				B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */,
 				B39BEA0A2CC391120028E1B0 /* Date+Extension.swift in Sources */,
+				B31112632D04D4E200161FE5 /* WatchConnectivityService.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
 				B3DADDC02CC52F2100FD6EAE /* ChartPresenter.swift in Sources */,
 				B35AE1892CEA3D9200B0515C /* RepetitionTableViewCell.swift in Sources */,

@@ -24,9 +24,14 @@ class ChartAssembly {
 		
 		let motionService = DeviceMotionService(output: presenter)
 		let repetitionsService = RepetitionsService(output: presenter)
+		let watchConnectivityService = WatchConnectivityService(output: presenter)
 		
 		presenter.motionService = motionService
 		presenter.repetitionsService = repetitionsService
+		presenter.watchConnectivityService = watchConnectivityService
+		
+		let watchConnectivityRepository = WatchConnectivityRepository(output: watchConnectivityService)
+		watchConnectivityService.repository = watchConnectivityRepository
 		
 		return view
 	}

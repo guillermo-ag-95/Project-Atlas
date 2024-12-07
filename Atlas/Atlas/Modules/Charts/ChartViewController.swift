@@ -16,6 +16,7 @@ protocol ChartViewControllerProtocol: AnyObject {
 	func reloadChart()
 	func reloadChartDataSets(_ dataSets: [ChartDataSetProtocol])
 	func updateRepetitions(_ repetitions: [MotionRepetition])
+	func updateState(_ state: Bool)
 }
 
 class ChartViewController: UIViewController {
@@ -26,7 +27,6 @@ class ChartViewController: UIViewController {
 	
 	// MARK: - Connections
 	var presenter: ChartPresenterProtocol?
-	var watchConnectivitySession: WCSession? = WCSession.default
 	
 	// MARK: - Variables
 	private var repetitions: [any MotionRepetition] = []
@@ -53,7 +53,6 @@ class ChartViewController: UIViewController {
 		setupHeader()
 		setupCharts()
 		setupButtons()
-		setupWatch()
 	}
 	
 	// MARK: - Setup functions
@@ -89,13 +88,6 @@ class ChartViewController: UIViewController {
 		actionButton.setImage(actionButtonImage, for: .normal)
 	}
 	
-	func setupWatch() {
-		guard WCSession.isSupported() else { return }
-		
-		watchConnectivitySession?.delegate = self
-		watchConnectivitySession?.activate()
-	}
-	
 	// MARK: - Actions
 	@IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
 		presenter?.loadCharts()
@@ -119,15 +111,7 @@ class ChartViewController: UIViewController {
 	}
 	
 	func notifyWatch() {
-		guard let watchConnectivitySession, watchConnectivitySession.isReachable else { return }
-		
-		let message: [String: Any] = ["isPaused": isPaused]
-		
-		watchConnectivitySession.sendMessage(message) { reply in
-			print("G - \(Self.self) - \(#function) - reply: \(reply)")
-		} errorHandler: { error in
-			print("G - \(Self.self) - \(#function) - error: \(error)")
-		}
+		presenter?.updateState(isPaused)
 	}
 }
 
@@ -178,39 +162,10 @@ extension ChartViewController: ChartViewControllerProtocol {
 	func updateRepetitions(_ repetitions: [any MotionRepetition]) {
 		self.repetitions = repetitions
 	}
-}
-
-extension ChartViewController: WCSessionDelegate {
-	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - activationState: \(activationState) - error: \(String(describing: error))")
-	}
 	
-	func sessionDidBecomeInactive(_ session: WCSession) {
-		print("G - \(Self.self) - \(#function) - session: \(session)")
-	}
-	
-	func sessionDidDeactivate(_ session: WCSession) {
-		print("G - \(Self.self) - \(#function) - session: \(session)")
-	}
-	
-	func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - message: \(message)")
-		
-		runOnMainThreadIfNecessary { [weak self] in
-			self?.updateState(message: message)
-		}
-	}
-	
-	func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - message: \(message) - replyHandler: \(String(describing: replyHandler))")
-		
-		runOnMainThreadIfNecessary { [weak self] in
-			self?.updateState(message: message)
-		}
-	}
-	
-	private func updateState(message: [String: Any]) {
-		guard let isPaused = message["isPaused"] as? Bool else { return }
-		self.isPaused = isPaused
+	/// Updates the state of the view
+	/// - Parameter state: Flag with the new value of the state.
+	func updateState(_ state: Bool) {
+		self.isPaused = state
 	}
 }

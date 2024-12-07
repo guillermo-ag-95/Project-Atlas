@@ -31,7 +31,7 @@ class ControlViewModel: NSObject, ObservableObject {
 	private func notifyPhone() {
 		guard let watchConnectivitySession, watchConnectivitySession.isReachable else { return }
 		
-		let message: [String: Any] = ["isPaused": isPaused]
+		let message: [String: Any] = ["state": isPaused]
 		
 		watchConnectivitySession.sendMessage(message) { reply in
 			print("G - \(Self.self) - \(#function) - reply: \(reply)")
@@ -63,7 +63,7 @@ extension ControlViewModel: WCSessionDelegate {
 	}
 	
 	private func updateState(message: [String: Any]) {
-		guard let isPaused = message["isPaused"] as? Bool else { return }
+		guard let isPaused = message["state"] as? Bool else { return }
 		self.isPaused = isPaused
 	}
 }
