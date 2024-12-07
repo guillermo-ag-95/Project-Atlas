@@ -9,8 +9,8 @@
 import SwiftUI
 import WatchConnectivity
 
-class ControlViewModel: NSObject, ObservableObject {
-	private var watchConnectivitySession: WCSession? = WCSession.default
+class ControlViewModel: ObservableObject {
+	private var repository: WatchConnectivityRepositoryInputProtocol?
 	
 	@Published var isPaused: Bool = true {
 		didSet {
@@ -20,50 +20,26 @@ class ControlViewModel: NSObject, ObservableObject {
 		}
 	}
 	
-	override init() {
-		super.init()
-		
-		guard WCSession.isSupported() else { return }
-		watchConnectivitySession?.delegate = self
-		watchConnectivitySession?.activate()
+	init() {
+		repository = WatchConnectivityRepository(output: self)
+	}
+	
+	private func updateState(_ state: Bool) {
+		self.isPaused = state
 	}
 	
 	private func notifyPhone() {
-		guard let watchConnectivitySession, watchConnectivitySession.isReachable else { return }
-		
 		let message: [String: Any] = ["state": isPaused]
-		
-		watchConnectivitySession.sendMessage(message) { reply in
-			print("G - \(Self.self) - \(#function) - reply: \(reply)")
-		} errorHandler: { error in
-			print("G - \(Self.self) - \(#function) - error: \(error.localizedDescription)")
-		}
+		repository?.sendMessage(message, reply: nil, error: nil)
 	}
 }
 
-extension ControlViewModel: WCSessionDelegate {
-	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - activationState: \(activationState) - error: \(error?.localizedDescription ?? "")")
-	}
-	
-	func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - message: \(message)")
-		
-		DispatchQueue.main.async { [weak self] in
-			self?.updateState(message: message)
+extension ControlViewModel: WatchConnectivityRepositoryOutputProtocol {
+	func didReceiveMessage(_ message: WatchConnectivityRepositoryMessageModel, reply: WatchConnectivityRepositoryReplyMessageHandler) {
+		if let state = message["state"] as? Bool {
+			runOnMainThreadIfNecessary { [weak self] in
+				self?.updateState(state)
+			}
 		}
-	}
-	
-	func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-		print("G - \(Self.self) - \(#function) - session: \(session) - message: \(message) - replyHandler: \(String(describing: replyHandler))")
-		
-		DispatchQueue.main.async { [weak self] in
-			self?.updateState(message: message)
-		}
-	}
-	
-	private func updateState(message: [String: Any]) {
-		guard let isPaused = message["state"] as? Bool else { return }
-		self.isPaused = isPaused
 	}
 }

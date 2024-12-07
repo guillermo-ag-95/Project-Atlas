@@ -57,6 +57,7 @@ extension WatchConnectivityRepository: WCSessionDelegate {
 		output?.didCompleteWith(status: activationState, error: error)
 	}
 	
+	#if os(iOS)
 	func sessionDidBecomeInactive(_ session: WCSession) {
 		output?.didBecomeInactive()
 	}
@@ -64,6 +65,7 @@ extension WatchConnectivityRepository: WCSessionDelegate {
 	func sessionDidDeactivate(_ session: WCSession) {
 		output?.didDeactivate()
 	}
+	#endif
 	
 	func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
 		output?.didReceiveMessage(message, reply: nil)
