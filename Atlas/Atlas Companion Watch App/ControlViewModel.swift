@@ -12,6 +12,7 @@ import WatchConnectivity
 class ControlViewModel: ObservableObject {
 	private var queue: OperationQueue = .init(maxConcurrentOperationCount: 1, qos: .userInteractive)
 	private var coreMotionRepository: DeviceMotionRepositorySyncProtocol?
+	private var healthKitRepository: HealthKitRepositoryProtocol?
 	private var watchConnectivityRepository: WatchConnectivityRepositoryInputProtocol?
 	
 	@Published var isPaused: Bool = true {
@@ -32,7 +33,21 @@ class ControlViewModel: ObservableObject {
 	
 	init() {
 		coreMotionRepository = CoreMotionRepository.shared
+		healthKitRepository = HealthKitRepository.shared
 		watchConnectivityRepository = WatchConnectivityRepository(output: self)
+		
+		// TODO: Improve session and activity management to start/stop when we start and stop measures
+		healthKitRepository?.startSession(
+			type: .functionalStrengthTraining,
+			location: .indoor
+		)
+		healthKitRepository?.startActivity()
+	}
+	
+	deinit {
+		// TODO: Move to other location. Not sure if it's called when removing the app from memory
+		healthKitRepository?.stopActivity()
+		healthKitRepository?.endSession()
 	}
 	
 	private func updateState(_ state: Bool) {
