@@ -57,7 +57,7 @@ class ControlViewModel: ObservableObject {
 	}
 	
 	private func sendMotionUpdates(_ model: DeviceMotionRepositoryModel) {
-		guard let updates = DeviceMotionData.encode(motion: model) else { return }
+		guard let updates = DeviceMotionCodableModel.encode(motion: model) else { return }
 		watchConnectivityRepository?.sendData(updates, reply: nil, error: nil)
 	}
 }
