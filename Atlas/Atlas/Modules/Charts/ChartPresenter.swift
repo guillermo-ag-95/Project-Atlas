@@ -164,7 +164,7 @@ extension ChartPresenter {
 	}
 	
 	func updateState(_ state: Bool) {
-		guard let state = state.encode() else { return }
+		guard let state = try? NSKeyedArchiver.archivedData(withRootObject: state, requiringSecureCoding: true) else { return }
 		watchConnectivityService?.sendData(state, reply: nil, error: nil)
 	}
 }
@@ -289,13 +289,17 @@ extension ChartPresenter: RepetitionsServiceOutputProtocol {
 // MARK: - WatchConnectivityServiceOutputProtocol
 extension ChartPresenter: WatchConnectivityServiceOutputProtocol {
 	func didReceiveData(session: WatchConnectivitySession, data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
-		if let update: DeviceMotionCodableModel = data.decode() {
-			let motion = CMDeviceMotionModel(motion: update)
-			motionService?.processMotionData(motion)
-		} else if let state: Bool = data.decode() {
+		let unarchivedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+		
+		switch unarchivedData {
+		case let state as Bool:
 			runOnMainThreadIfNecessary { [weak self] in
 				self?.view?.updateState(state)
 			}
+		case let motion as DeviceMotionRepositoryModel:
+			motionService?.processMotionData(motion)
+		default:
+			break
 		}
 	}
 }

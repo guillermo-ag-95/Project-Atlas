@@ -27,7 +27,7 @@ protocol DeviceMotionServiceOutputProtocol: AnyObject {
 
 class DeviceMotionService {
 	weak var output: DeviceMotionServiceOutputProtocol?
-	internal var queue: OperationQueue = .init(maxConcurrentOperationCount: 1)
+	internal var queue: OperationQueue = .init(maxConcurrentOperationCount: 1, qos: .userInteractive)
 	internal var repository: DeviceMotionRepositorySyncProtocol = CoreMotionRepository.shared
 	
 	init(output: DeviceMotionServiceOutputProtocol) {

@@ -9,8 +9,9 @@
 import Foundation
 
 extension OperationQueue {
-	convenience init(maxConcurrentOperationCount: Int) {
+	convenience init(maxConcurrentOperationCount: Int, qos: QualityOfService = .background) {
 		self.init()
 		self.maxConcurrentOperationCount = maxConcurrentOperationCount
+		self.qualityOfService = qos
 	}
 }

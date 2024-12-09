@@ -10,7 +10,7 @@ import SwiftUI
 import WatchConnectivity
 
 class ControlViewModel: ObservableObject {
-	private var queue: OperationQueue = .init(maxConcurrentOperationCount: 1)
+	private var queue: OperationQueue = .init(maxConcurrentOperationCount: 1, qos: .userInteractive)
 	private var coreMotionRepository: DeviceMotionRepositorySyncProtocol?
 	private var watchConnectivityRepository: WatchConnectivityRepositoryInputProtocol?
 	
@@ -40,13 +40,13 @@ class ControlViewModel: ObservableObject {
 	}
 	
 	private func notifyPhone() {
-		guard let state = isPaused.encode() else { return }
+		guard let state = try? NSKeyedArchiver.archivedData(withRootObject: isPaused, requiringSecureCoding: true) else { return }
 		watchConnectivityRepository?.sendData(state, reply: nil, error: nil)
 	}
 	
 	private func startMotionUpdates() {
 		coreMotionRepository?.startDeviceMotionUpdates(to: queue, success: { [weak self] model in
-//			self?.sendMotionUpdates(model)
+			self?.sendMotionUpdates(model)
 		}, failure: { [weak self] error  in
 			self?.stopMotionUpdates()
 		})
@@ -57,17 +57,22 @@ class ControlViewModel: ObservableObject {
 	}
 	
 	private func sendMotionUpdates(_ model: DeviceMotionRepositoryModel) {
-		guard let updates = DeviceMotionCodableModel.encode(motion: model) else { return }
+		guard let updates = try? NSKeyedArchiver.archivedData(withRootObject: model, requiringSecureCoding: true) else { return }
 		watchConnectivityRepository?.sendData(updates, reply: nil, error: nil)
 	}
 }
 
 extension ControlViewModel: WatchConnectivityRepositoryOutputProtocol {
 	func didReceiveData(session: WatchConnectivitySession, data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
-		if let state: Bool = data.decode() {
+		let unarchivedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+		
+		switch unarchivedData {
+		case let state as Bool:
 			runOnMainThreadIfNecessary { [weak self] in
 				self?.updateState(state)
 			}
+		default:
+			break
 		}
 	}
 }
