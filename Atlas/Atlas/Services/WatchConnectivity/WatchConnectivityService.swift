@@ -39,23 +39,23 @@ extension WatchConnectivityService: WatchConnectivityServiceInputProtocol {
 }
 
 extension WatchConnectivityService: WatchConnectivityRepositoryOutputProtocol {
-	func didCompleteWith(status: WatchConnectivityActivationStatus, error: WatchConnectivityActivationError) {
-		output?.didCompleteWith(status: status, error: error)
+	func didCompleteWith(session: WatchConnectivitySession, status: WatchConnectivityActivationStatus, error: WatchConnectivityActivationError) {
+		output?.didCompleteWith(session: session, status: status, error: error)
 	}
 	
-	func didBecomeInactive() {
-		output?.didBecomeInactive()
+	func didBecomeInactive(session: WatchConnectivitySession) {
+		output?.didBecomeInactive(session: session)
 	}
 	
-	func didDeactivate() {
-		output?.didDeactivate()
+	func didDeactivate(session: WatchConnectivitySession) {
+		output?.didDeactivate(session: session)
 	}
 	
-	func didReceiveMessage(_ message: WatchConnectivityRepositoryMessageModel, reply: WatchConnectivityRepositoryReplyMessageHandler) {
-		output?.didReceiveMessage(message, reply: reply)
+	func didReceiveMessage(session: WatchConnectivitySession, message: WatchConnectivityRepositoryMessageModel, reply: WatchConnectivityRepositoryReplyMessageHandler) {
+		output?.didReceiveMessage(session: session, message: message, reply: reply)
 	}
 	
-	func didReceiveData(_ data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
-		output?.didReceiveData(data, reply: reply)
+	func didReceiveData(session: WatchConnectivitySession, data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
+		output?.didReceiveData(session: session, data: data, reply: reply)
 	}
 }

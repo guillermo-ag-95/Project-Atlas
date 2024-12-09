@@ -164,8 +164,8 @@ extension ChartPresenter {
 	}
 	
 	func updateState(_ state: Bool) {
-		let message = ["state": state]
-		watchConnectivityService?.sendMessage(message, reply: nil, error: nil)
+		guard let state = state.encode() else { return }
+		watchConnectivityService?.sendData(state, reply: nil, error: nil)
 	}
 }
 
@@ -175,12 +175,21 @@ extension ChartPresenter {
 		resetCharts()
 		loadCharts()
 		
-		motionService?.startDeviceMotionUpdates()
+		if let isReachable = watchConnectivityService?.isReachable, isReachable {
+			motionService?.preProcessMotionData()
+		} else {
+			motionService?.startDeviceMotionUpdates()
+		}
 	}
 	
 	func stopMeasures() {
-		motionService?.stopDeviceMotionUpdates()
-		motionService?.processMotionData()
+		if let isReachable = watchConnectivityService?.isReachable, isReachable {
+			// Do nothing
+		} else {
+			motionService?.stopDeviceMotionUpdates()
+		}
+		
+		motionService?.postProcessMotionData()
 		
 		let motionData = motionService?.motionData ?? []
 		repetitionsService?.evaluateRepetitions(from: motionData)
@@ -279,8 +288,11 @@ extension ChartPresenter: RepetitionsServiceOutputProtocol {
 
 // MARK: - WatchConnectivityServiceOutputProtocol
 extension ChartPresenter: WatchConnectivityServiceOutputProtocol {
-	func didReceiveMessage(_ message: WatchConnectivityRepositoryMessageModel, reply: WatchConnectivityRepositoryReplyMessageHandler) {
-		if let state = message["state"] as? Bool {
+	func didReceiveData(session: WatchConnectivitySession, data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
+		if let update: DeviceMotionCodableModel = data.decode() {
+			let motion = CMDeviceMotionModel(motion: update)
+			motionService?.processMotionData(motion)
+		} else if let state: Bool = data.decode() {
 			runOnMainThreadIfNecessary { [weak self] in
 				self?.view?.updateState(state)
 			}

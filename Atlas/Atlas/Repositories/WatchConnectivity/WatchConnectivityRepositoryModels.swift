@@ -9,6 +9,7 @@
 import WatchConnectivity
 
 // MARK: - Watch connectivity models
+typealias WatchConnectivitySession = WCSession
 typealias WatchConnectivityActivationStatus = WCSessionActivationState
 typealias WatchConnectivityActivationError = (any Error)?
 

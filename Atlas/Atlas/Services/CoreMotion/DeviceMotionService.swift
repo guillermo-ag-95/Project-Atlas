@@ -14,7 +14,10 @@ protocol DeviceMotionServiceInputProtocol: AnyObject {
 	
 	func startDeviceMotionUpdates()
 	func stopDeviceMotionUpdates()
-	func processMotionData()
+	
+	func preProcessMotionData()
+	func processMotionData(_ data: DeviceMotionRepositoryModel)
+	func postProcessMotionData()
 }
 
 protocol DeviceMotionServiceOutputProtocol: AnyObject {
@@ -39,11 +42,11 @@ extension DeviceMotionService: DeviceMotionServiceInputProtocol {
 	func startDeviceMotionUpdates() {
 		guard repository.isDeviceMotionAvailable else { return }
 		
-		resetData()
+		preProcessMotionData()
 		
 		repository.deviceMotionUpdateInterval = repository.updateIntervalOn
 		repository.startDeviceMotionUpdates(to: queue) { [weak self] data in
-			self?.updateData(data)
+			self?.processMotionData(data)
 		} failure: { [weak self] error in
 			self?.stopDeviceMotionUpdates()
 		}
@@ -54,11 +57,11 @@ extension DeviceMotionService: DeviceMotionServiceInputProtocol {
 		repository.stopDeviceMotionUpdates()
 	}
 	
-	private func resetData() {
+	func preProcessMotionData() {
 		motionData.removeAll()
 	}
 	
-	private func updateData(_ data: DeviceMotionRepositoryModel) {
+	func processMotionData(_ data: DeviceMotionRepositoryModel) {
 		// https://www.nxp.com/docs/en/application-note/AN3397.pdf
 		// https://www.wired.com/story/iphone-accelerometer-physics/
 		
@@ -170,7 +173,7 @@ extension DeviceMotionService: DeviceMotionServiceInputProtocol {
 		output?.deviceMotionDataUpdated(motion)
 	}
 	
-	func processMotionData() {
+	func postProcessMotionData() {
 		let lastVerticalVelocity = motionData.last?.verticalVelocity.value ?? .zero
 		let slope = lastVerticalVelocity / Double(motionData.count)
 		

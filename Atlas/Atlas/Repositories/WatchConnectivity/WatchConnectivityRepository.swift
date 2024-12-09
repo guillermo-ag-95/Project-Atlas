@@ -54,32 +54,32 @@ extension WatchConnectivityRepository: WatchConnectivityRepositoryInputProtocol 
 
 extension WatchConnectivityRepository: WCSessionDelegate {
 	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-		output?.didCompleteWith(status: activationState, error: error)
+		output?.didCompleteWith(session: session, status: activationState, error: error)
 	}
 	
 	#if os(iOS)
 	func sessionDidBecomeInactive(_ session: WCSession) {
-		output?.didBecomeInactive()
+		output?.didBecomeInactive(session: session)
 	}
 	
 	func sessionDidDeactivate(_ session: WCSession) {
-		output?.didDeactivate()
+		output?.didDeactivate(session: session)
 	}
 	#endif
 	
 	func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-		output?.didReceiveMessage(message, reply: nil)
+		output?.didReceiveMessage(session: session, message: message, reply: nil)
 	}
 	
 	func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
-		output?.didReceiveMessage(message, reply: replyHandler)
+		output?.didReceiveMessage(session: session, message: message, reply: replyHandler)
 	}
 	
 	func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-		output?.didReceiveData(messageData, reply: nil)
+		output?.didReceiveData(session: session, data: messageData, reply: nil)
 	}
 	
 	func session(_ session: WCSession, didReceiveMessageData messageData: Data, replyHandler: @escaping (Data) -> Void) {
-		output?.didReceiveData(messageData, reply: replyHandler)
+		output?.didReceiveData(session: session, data: messageData, reply: nil)
 	}
 }

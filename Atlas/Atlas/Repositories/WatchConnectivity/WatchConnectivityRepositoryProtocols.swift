@@ -31,40 +31,56 @@ protocol WatchConnectivityRepositoryInputProtocol: AnyObject {
 // MARK: - WatchConnectivityRepositoryOutputProtocol
 protocol WatchConnectivityRepositoryOutputProtocol: AnyObject {
 	func didCompleteWith(
+		session: WatchConnectivitySession,
 		status: WatchConnectivityActivationStatus,
 		error: WatchConnectivityActivationError
 	)
 	
-	func didBecomeInactive()
-	func didDeactivate()
+	func didBecomeInactive(
+		session: WatchConnectivitySession
+	)
+	
+	func didDeactivate(
+		session: WatchConnectivitySession
+	)
 	
 	func didReceiveMessage(
-		_ message: WatchConnectivityRepositoryMessageModel,
+		session: WatchConnectivitySession,
+		message: WatchConnectivityRepositoryMessageModel,
 		reply: WatchConnectivityRepositoryReplyMessageHandler
 	)
 	
 	func didReceiveData(
-		_ data: WatchConnectivityRepositoryDataModel,
+		session: WatchConnectivitySession,
+		data: WatchConnectivityRepositoryDataModel,
 		reply: WatchConnectivityRepositoryReplyDataHandler
 	)
 }
 
 extension WatchConnectivityRepositoryOutputProtocol {
 	func didCompleteWith(
+		session: WatchConnectivitySession,
 		status: WatchConnectivityActivationStatus,
 		error: WatchConnectivityActivationError
 	) { }
 	
-	func didBecomeInactive() { }
-	func didDeactivate() { }
+	func didBecomeInactive(
+		session: WatchConnectivitySession
+	) { }
+	
+	func didDeactivate(
+		session: WatchConnectivitySession
+	) { }
 	
 	func didReceiveMessage(
-		_ message: WatchConnectivityRepositoryMessageModel,
+		session: WatchConnectivitySession,
+		message: WatchConnectivityRepositoryMessageModel,
 		reply: WatchConnectivityRepositoryReplyMessageHandler
 	) { }
 	
 	func didReceiveData(
-		_ data: WatchConnectivityRepositoryDataModel,
+		session: WatchConnectivitySession,
+		data: WatchConnectivityRepositoryDataModel,
 		reply: WatchConnectivityRepositoryReplyDataHandler
 	) { }
 }

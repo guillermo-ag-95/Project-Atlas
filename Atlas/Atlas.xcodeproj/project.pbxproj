@@ -40,6 +40,16 @@
 		B3285E132D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285E122D04C3EA009AD3C6 /* WatchConnectivityRepositoryModels.swift */; };
 		B3285E152D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3285E142D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift */; };
 		B343DA6F2CFC8D8B0005234E /* Atlas Companion Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B34CD85D2D05B243001867E2 /* DeviceMotionCodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD85C2D05B243001867E2 /* DeviceMotionCodableModel.swift */; };
+		B34CD85E2D05B243001867E2 /* DeviceMotionCodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD85C2D05B243001867E2 /* DeviceMotionCodableModel.swift */; };
+		B34CD8602D05BA90001867E2 /* CMAttitudeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD85F2D05BA90001867E2 /* CMAttitudeModel.swift */; };
+		B34CD8612D05BA90001867E2 /* CMAttitudeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD85F2D05BA90001867E2 /* CMAttitudeModel.swift */; };
+		B34CD8662D05BCC4001867E2 /* CMDeviceMotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD8652D05BCC4001867E2 /* CMDeviceMotionModel.swift */; };
+		B34CD8672D05BCC4001867E2 /* CMDeviceMotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD8652D05BCC4001867E2 /* CMDeviceMotionModel.swift */; };
+		B34CD8692D05BEAD001867E2 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD8682D05BEAD001867E2 /* Bool+Extension.swift */; };
+		B34CD86A2D05BEAD001867E2 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD8682D05BEAD001867E2 /* Bool+Extension.swift */; };
+		B34CD86C2D05BEE5001867E2 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD86B2D05BEE5001867E2 /* Data+Extension.swift */; };
+		B34CD86D2D05BEE5001867E2 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CD86B2D05BEE5001867E2 /* Data+Extension.swift */; };
 		B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1772CEA23B900B0515C /* ChartAssembly.swift */; };
 		B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */; };
 		B35AE17C2CEA2D3100B0515C /* ChartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */; };
@@ -160,6 +170,11 @@
 		B343DA4C2CFC8D8B0005234E /* Atlas Companion Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Atlas Companion Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B343DA5B2CFC8D8B0005234E /* Atlas Companion Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B343DA652CFC8D8B0005234E /* Atlas Companion Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Atlas Companion Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B34CD85C2D05B243001867E2 /* DeviceMotionCodableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionCodableModel.swift; sourceTree = "<group>"; };
+		B34CD85F2D05BA90001867E2 /* CMAttitudeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMAttitudeModel.swift; sourceTree = "<group>"; };
+		B34CD8652D05BCC4001867E2 /* CMDeviceMotionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMDeviceMotionModel.swift; sourceTree = "<group>"; };
+		B34CD8682D05BEAD001867E2 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
+		B34CD86B2D05BEE5001867E2 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		B35AE1772CEA23B900B0515C /* ChartAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartAssembly.swift; sourceTree = "<group>"; };
 		B35AE1792CEA28C700B0515C /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		B35AE17B2CEA2D3100B0515C /* ChartViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChartViewController.xib; sourceTree = "<group>"; };
@@ -322,6 +337,8 @@
 			isa = PBXGroup;
 			children = (
 				B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */,
+				B34CD8682D05BEAD001867E2 /* Bool+Extension.swift */,
+				B34CD86B2D05BEE5001867E2 /* Data+Extension.swift */,
 				B39BEA092CC391120028E1B0 /* Date+Extension.swift */,
 				B3EB61DB2CE0F1AC00AEDCEE /* DispatchQueue+Extension.swift */,
 				B39123FB2CC3F3E000BF6A5A /* Double+Extension.swift */,
@@ -361,6 +378,16 @@
 				B3285E142D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift */,
 			);
 			path = WatchConnectivity;
+			sourceTree = "<group>";
+		};
+		B34CD85B2D05B225001867E2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B34CD85F2D05BA90001867E2 /* CMAttitudeModel.swift */,
+				B34CD8652D05BCC4001867E2 /* CMDeviceMotionModel.swift */,
+				B34CD85C2D05B243001867E2 /* DeviceMotionCodableModel.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		B35AE1852CEA3D7600B0515C /* Cell */ = {
@@ -414,6 +441,7 @@
 			isa = PBXGroup;
 			children = (
 				B32510AD2CBBFB6F00CFE2F7 /* Charts */,
+				B34CD85B2D05B225001867E2 /* Data */,
 				B312D3142CBA7DF700028872 /* Filters */,
 			);
 			path = Model;
@@ -833,14 +861,19 @@
 				B392F2782D04E54F00792CEF /* CoreMotionRepositoryProtocols.swift in Sources */,
 				B392F2792D04E54F00792CEF /* WatchConnectivityRepositoryProtocols.swift in Sources */,
 				B392F27A2D04E54F00792CEF /* CoreMotionRepositoryModels.swift in Sources */,
+				B34CD8602D05BA90001867E2 /* CMAttitudeModel.swift in Sources */,
 				B392F27B2D04E54F00792CEF /* WatchConnectivityRepositoryModels.swift in Sources */,
 				B392F27C2D04E54F00792CEF /* CoreMotionRepository.swift in Sources */,
 				B3285DDB2D04B358009AD3C6 /* DispatchQueue+Extension.swift in Sources */,
 				B3285DDD2D04B358009AD3C6 /* String+Extension.swift in Sources */,
+				B34CD8692D05BEAD001867E2 /* Bool+Extension.swift in Sources */,
 				B3285DF32D04C02F009AD3C6 /* ObservableObject+Extension.swift in Sources */,
 				B3285DDF2D04B358009AD3C6 /* Array+Extension.swift in Sources */,
+				B34CD86C2D05BEE5001867E2 /* Data+Extension.swift in Sources */,
 				B3285DE02D04B358009AD3C6 /* Optional+Extension.swift in Sources */,
+				B34CD8672D05BCC4001867E2 /* CMDeviceMotionModel.swift in Sources */,
 				B3285DE12D04B358009AD3C6 /* Double+Extension.swift in Sources */,
+				B34CD85E2D05B243001867E2 /* DeviceMotionCodableModel.swift in Sources */,
 				B3285DE22D04B358009AD3C6 /* OperationQueue+Extension.swift in Sources */,
 				B3285DE42D04B3D0009AD3C6 /* LocalizedKeys.swift in Sources */,
 			);
@@ -898,8 +931,11 @@
 				B3280A8E2CBA97C1005EBD32 /* LocalizedKeys.swift in Sources */,
 				B39123FA2CC3DFD700BF6A5A /* Optional+Extension.swift in Sources */,
 				B3285DEC2D04BDC1009AD3C6 /* UIDevice+Extension.swift in Sources */,
+				B34CD86A2D05BEAD001867E2 /* Bool+Extension.swift in Sources */,
+				B34CD8662D05BCC4001867E2 /* CMDeviceMotionModel.swift in Sources */,
 				B35AE18B2CEA400900B0515C /* RepetitionCellModel.swift in Sources */,
 				B3F4E0102070D35900FFE969 /* Discrete_Bayes_Filter.swift in Sources */,
+				B34CD86D2D05BEE5001867E2 /* Data+Extension.swift in Sources */,
 				B3285E112D04C3D2009AD3C6 /* WatchConnectivityRepository.swift in Sources */,
 				B39123F82CC3D74B00BF6A5A /* MotionRepetition.swift in Sources */,
 				B3ED3D24207145C20084256F /* One_Dimensional_Kalman_Filter.swift in Sources */,
@@ -926,6 +962,8 @@
 				B31112632D04D4E200161FE5 /* WatchConnectivityService.swift in Sources */,
 				B3E802772073B4E300166074 /* Kalman_Filter.swift in Sources */,
 				B3DADDC02CC52F2100FD6EAE /* ChartPresenter.swift in Sources */,
+				B34CD8612D05BA90001867E2 /* CMAttitudeModel.swift in Sources */,
+				B34CD85D2D05B243001867E2 /* DeviceMotionCodableModel.swift in Sources */,
 				B35AE1892CEA3D9200B0515C /* RepetitionTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
