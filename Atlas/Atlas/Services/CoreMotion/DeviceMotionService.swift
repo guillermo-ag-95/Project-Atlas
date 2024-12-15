@@ -92,8 +92,12 @@ extension DeviceMotionService: DeviceMotionServiceInputProtocol {
 		
 		// Instant velocity calculation by integration
 		let lastMotionData = motionData.last ?? .zero
+		let lastTimestamp = lastMotionData.timestamp
 		let lastAccelerationData = lastMotionData.acceleration
-		let updateInterval = repository.deviceMotionUpdateInterval
+		
+		let updateInterval = motionData.isEmpty
+			? repository.deviceMotionUpdateInterval
+			: newTimestamp - lastTimestamp
 		
 		let newXVelocity = (lastAccelerationData.x * updateInterval) + (newXAcceleration - lastAccelerationData.x) * (updateInterval / 2)
 		let newYVelocity = (lastAccelerationData.y * updateInterval) + (newYAcceleration - lastAccelerationData.y) * (updateInterval / 2)
