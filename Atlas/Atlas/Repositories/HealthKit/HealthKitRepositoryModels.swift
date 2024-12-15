@@ -9,5 +9,7 @@
 import HealthKit
 
 // MARK: - HealthKit repository models
+typealias HealthKitRepositorySession = HKWorkoutSession
+typealias HealthKitRepositoryState = HKWorkoutSessionState
 typealias HealthKitRepositoryActivityType = HKWorkoutActivityType
 typealias HealthKitRepositoryLocationType = HKWorkoutSessionLocationType

@@ -80,9 +80,7 @@
 		B3AC613A1FBDBB0C00B2334D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3AC61391FBDBB0C00B2334D /* Assets.xcassets */; };
 		B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AC61441FBDBBB100B2334D /* ChartViewController.swift */; };
 		B3C29B232D0725300017C4C5 /* HealthKitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C29B222D0725300017C4C5 /* HealthKitRepository.swift */; };
-		B3C29B262D0725A10017C4C5 /* HealthKitRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C29B252D0725A10017C4C5 /* HealthKitRepositoryModels.swift */; };
 		B3C29B272D0725A10017C4C5 /* HealthKitRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C29B252D0725A10017C4C5 /* HealthKitRepositoryModels.swift */; };
-		B3C29B292D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C29B282D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift */; };
 		B3C29B2A2D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C29B282D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift */; };
 		B3DADDAE2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDAD2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift */; };
 		B3DADDB22CC5186900FD6EAE /* DeviceMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DADDB12CC5186900FD6EAE /* DeviceMotionService.swift */; };
@@ -912,7 +910,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */,
-				B3C29B292D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift in Sources */,
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionRepositoryModels.swift in Sources */,
 				B3285DEA2D04B99F009AD3C6 /* UIResponder+Extension.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
@@ -931,7 +928,6 @@
 				B32510A92CBBE8DE00CFE2F7 /* CoreMotionRepository.swift in Sources */,
 				B3AC61451FBDBBB100B2334D /* ChartViewController.swift in Sources */,
 				B3DADDB92CC52D4F00FD6EAE /* RepetitionsService.swift in Sources */,
-				B3C29B262D0725A10017C4C5 /* HealthKitRepositoryModels.swift in Sources */,
 				B37A6E102CF208F800B053C2 /* ResultsPresenter.swift in Sources */,
 				B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,

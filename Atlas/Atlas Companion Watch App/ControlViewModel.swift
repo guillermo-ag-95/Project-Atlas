@@ -12,7 +12,7 @@ import WatchConnectivity
 class ControlViewModel: ObservableObject {
 	private var queue: OperationQueue = .init(maxConcurrentOperationCount: 1, qos: .userInteractive)
 	private var coreMotionRepository: DeviceMotionRepositorySyncProtocol?
-	private var healthKitRepository: HealthKitRepositoryProtocol?
+	private var healthKitRepository: HealthKitRepositoryInputProtocol?
 	private var watchConnectivityRepository: WatchConnectivityRepositoryInputProtocol?
 	
 	@Published var isPaused: Bool = true {
@@ -20,34 +20,21 @@ class ControlViewModel: ObservableObject {
 			guard isPaused != oldValue else { return }
 			
 			if isPaused {
-				stopMotionUpdates()
+				stopMeasures()
 				vibrateDevice(.stop)
 				notifyPhone()
 			} else {
 				vibrateDevice(.start)
 				notifyPhone()
-				startMotionUpdates()
+				startMeasures()
 			}
 		}
 	}
 	
 	init() {
 		coreMotionRepository = CoreMotionRepository.shared
-		healthKitRepository = HealthKitRepository.shared
+		healthKitRepository = HealthKitRepository(output: self)
 		watchConnectivityRepository = WatchConnectivityRepository(output: self)
-		
-		// TODO: Improve session and activity management to start/stop when we start and stop measures
-		healthKitRepository?.startSession(
-			type: .functionalStrengthTraining,
-			location: .indoor
-		)
-		healthKitRepository?.startActivity()
-	}
-	
-	deinit {
-		// TODO: Move to other location. Not sure if it's called when removing the app from memory
-		healthKitRepository?.stopActivity()
-		healthKitRepository?.endSession()
 	}
 	
 	private func updateState(_ state: Bool) {
@@ -59,22 +46,30 @@ class ControlViewModel: ObservableObject {
 		watchConnectivityRepository?.sendData(state, reply: nil, error: nil)
 	}
 	
-	private func startMotionUpdates() {
+	private func startMeasures() {
+		healthKitRepository?.prepareSession(type: .functionalStrengthTraining, location: .indoor)
+		
 		coreMotionRepository?.startDeviceMotionUpdates(to: queue, success: { [weak self] model in
 			self?.sendMotionUpdates(model)
 		}, failure: { [weak self] error  in
-			self?.stopMotionUpdates()
+			self?.stopMeasures()
 		})
 	}
 	
-	private func stopMotionUpdates() {
+	private func stopMeasures() {
 		coreMotionRepository?.stopDeviceMotionUpdates()
+		
+		healthKitRepository?.endSession()
 	}
 	
 	private func sendMotionUpdates(_ model: DeviceMotionRepositoryModel) {
 		guard let updates = try? NSKeyedArchiver.archivedData(withRootObject: model, requiringSecureCoding: true) else { return }
 		watchConnectivityRepository?.sendData(updates, reply: nil, error: nil)
 	}
+}
+
+extension ControlViewModel: HealthKitRepositoryOutputProtocol {
+	
 }
 
 extension ControlViewModel: WatchConnectivityRepositoryOutputProtocol {

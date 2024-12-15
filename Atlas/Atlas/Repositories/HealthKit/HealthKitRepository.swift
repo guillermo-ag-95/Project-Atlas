@@ -8,20 +8,26 @@
 
 import HealthKit
 
-class HealthKitRepository {
-	private let store: HKHealthStore
+class HealthKitRepository: NSObject {
+	weak var output: HealthKitRepositoryOutputProtocol?
+	
+	private let store = HKHealthStore()
 	private var session: HKWorkoutSession?
 	
-	private init() {
-		self.store = HKHealthStore()
+	init(output: HealthKitRepositoryOutputProtocol) {
+		super.init()
+		
+		self.output = output
 	}
-	
-	static let shared: HealthKitRepository = .init()
 }
 
-extension HealthKitRepository: HealthKitRepositoryProtocol {
+extension HealthKitRepository: HealthKitRepositoryInputProtocol {
+	var isAvailable: Bool {
+		HKHealthStore.isHealthDataAvailable()
+	}
+	
 	func startSession(type: HealthKitRepositoryActivityType, location: HealthKitRepositoryLocationType) {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		if let session, session.state == .paused {
 			resumeSession()
@@ -30,47 +36,66 @@ extension HealthKitRepository: HealthKitRepositoryProtocol {
 		}
 	}
 	
-	private func prepareSession(type: HealthKitRepositoryActivityType, location: HealthKitRepositoryLocationType) {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+	func prepareSession(type: HealthKitRepositoryActivityType, location: HealthKitRepositoryLocationType) {
+		guard isAvailable else { return }
 		
 		let configuration = HKWorkoutConfiguration()
 		configuration.activityType = type
 		configuration.locationType = location
 		
 		let session = try? HKWorkoutSession(healthStore: store, configuration: configuration)
+		session?.delegate = self
 		session?.prepare()
 		
 		self.session = session
 	}
 	
 	func pauseSession() {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		self.session?.pause()
 	}
 	
 	func resumeSession() {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		self.session?.resume()
 	}
 	
 	func endSession() {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		self.session?.end()
 	}
 	
 	// MARK: - Activities	
 	func startActivity() {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		self.session?.startActivity(with: .now)
 	}
 	
 	func stopActivity() {
-		guard HKHealthStore.isHealthDataAvailable() else { return }
+		guard isAvailable else { return }
 		
 		self.session?.stopActivity(with: .now)
+	}
+}
+
+extension HealthKitRepository: HKWorkoutSessionDelegate {
+	func workoutSession(_ workoutSession: HKWorkoutSession, didChangeTo toState: HKWorkoutSessionState, from fromState: HKWorkoutSessionState, date: Date) {
+		output?.didChangeState(
+			session: workoutSession,
+			from: fromState,
+			to: toState,
+			date: date
+		)
+	}
+	
+	func workoutSession(_ workoutSession: HKWorkoutSession, didFailWithError error: any Error) {
+		output?.didFailWithError(
+			session: workoutSession,
+			error: error
+		)
 	}
 }
