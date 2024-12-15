@@ -17,6 +17,7 @@ protocol DeviceMotionServiceInputProtocol: AnyObject {
 	
 	func preProcessMotionData()
 	func processMotionData(_ data: DeviceMotionRepositoryModel)
+	func processMotionData(_ data: [DeviceMotionRepositoryModel])
 	func postProcessMotionData()
 }
 
@@ -171,6 +172,11 @@ extension DeviceMotionService: DeviceMotionServiceInputProtocol {
 		motionData.append(motion)
 		
 		output?.deviceMotionDataUpdated(motion)
+	}
+	
+	func processMotionData(_ data: [DeviceMotionRepositoryModel]) {
+		// TODO: IMPROVE - Slow to process but it works. Try multithreading or something
+		data.forEach { processMotionData($0) }
 	}
 	
 	func postProcessMotionData() {

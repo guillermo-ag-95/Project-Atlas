@@ -22,13 +22,18 @@ class ChartAssembly {
 		let presenter = ChartPresenter(view: view, assemblyDTO: assemblyDTO)
 		view.presenter = presenter
 		
+		let fileManagerService = FileManagerService(output: presenter)
 		let motionService = DeviceMotionService(output: presenter)
 		let repetitionsService = RepetitionsService(output: presenter)
 		let watchConnectivityService = WatchConnectivityService(output: presenter)
 		
+		presenter.fileManagerService = fileManagerService
 		presenter.motionService = motionService
 		presenter.repetitionsService = repetitionsService
 		presenter.watchConnectivityService = watchConnectivityService
+		
+		let fileManagerRepository = FileManagerRepository(output: fileManagerService)
+		fileManagerService.repository = fileManagerRepository
 		
 		let watchConnectivityRepository = WatchConnectivityRepository(output: watchConnectivityService)
 		watchConnectivityService.repository = watchConnectivityRepository

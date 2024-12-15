@@ -50,6 +50,18 @@ extension WatchConnectivityRepository: WatchConnectivityRepositoryInputProtocol 
 		guard session.isReachable else { return }
 		session.sendMessageData(data, replyHandler: reply, errorHandler: error)
 	}
+	
+	func transferUserInfo(
+		_ info: WatchConnectivityRepositoryUserInfo
+	) {
+		guard session.isReachable else { return }
+		session.transferUserInfo(info)
+	}
+	
+	func transferFile(_ file: WatchConnectivityRepositoryFileURL) {
+		guard session.isReachable else { return }
+		session.transferFile(file, metadata: nil)
+	}
 }
 
 extension WatchConnectivityRepository: WCSessionDelegate {
@@ -100,6 +112,36 @@ extension WatchConnectivityRepository: WCSessionDelegate {
 			session: session,
 			data: messageData,
 			reply: nil
+		)
+	}
+	
+	func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
+		output?.didReceiveUserInfo(
+			session: session,
+			userInfo: userInfo
+		)
+	}
+	
+	func session(_ session: WCSession, didFinish userInfoTransfer: WCSessionUserInfoTransfer, error: (any Error)?) {
+		output?.didFinishUserInfoTransfer(
+			session: session,
+			userInfo: userInfoTransfer,
+			error: error
+		)
+	}
+	
+	func session(_ session: WCSession, didReceive file: WCSessionFile) {
+		output?.didReceiveFile(
+			session: session,
+			file: file
+		)
+	}
+	
+	func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: (any Error)?) {
+		output?.didFinishFileTransfer(
+			session: session,
+			file: fileTransfer,
+			error: error
 		)
 	}
 }

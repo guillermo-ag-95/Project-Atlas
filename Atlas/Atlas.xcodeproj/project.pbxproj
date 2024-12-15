@@ -13,6 +13,14 @@
 		B30F1415206FB29300DC1745 /* G_H_Filter_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */; };
 		B31112632D04D4E200161FE5 /* WatchConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31112622D04D4E200161FE5 /* WatchConnectivityService.swift */; };
 		B3177E5B20B0719900E283FC /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3177E5A20B0719900E283FC /* ResultsViewController.swift */; };
+		B3196D4F2D0F20FC0029F27E /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D4E2D0F20FC0029F27E /* FileManagerRepository.swift */; };
+		B3196D502D0F20FC0029F27E /* FileManagerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D4E2D0F20FC0029F27E /* FileManagerRepository.swift */; };
+		B3196D522D0F21040029F27E /* FileManagerRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D512D0F21040029F27E /* FileManagerRepositoryModels.swift */; };
+		B3196D532D0F21040029F27E /* FileManagerRepositoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D512D0F21040029F27E /* FileManagerRepositoryModels.swift */; };
+		B3196D552D0F210C0029F27E /* FileManagerRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D542D0F210C0029F27E /* FileManagerRepositoryProtocols.swift */; };
+		B3196D562D0F210C0029F27E /* FileManagerRepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D542D0F210C0029F27E /* FileManagerRepositoryProtocols.swift */; };
+		B3196D592D0F33980029F27E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D582D0F33980029F27E /* FileManagerService.swift */; };
+		B3196D5A2D0F33980029F27E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3196D582D0F33980029F27E /* FileManagerService.swift */; };
 		B32510A22CBBC53E00CFE2F7 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */; };
 		B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */; };
 		B32510A62CBBDC6F00CFE2F7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */; };
@@ -147,6 +155,10 @@
 		B30F1414206FB29300DC1745 /* G_H_Filter_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = G_H_Filter_Tests.swift; sourceTree = "<group>"; };
 		B31112622D04D4E200161FE5 /* WatchConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityService.swift; sourceTree = "<group>"; };
 		B3177E5A20B0719900E283FC /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		B3196D4E2D0F20FC0029F27E /* FileManagerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepository.swift; sourceTree = "<group>"; };
+		B3196D512D0F21040029F27E /* FileManagerRepositoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepositoryModels.swift; sourceTree = "<group>"; };
+		B3196D542D0F210C0029F27E /* FileManagerRepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerRepositoryProtocols.swift; sourceTree = "<group>"; };
+		B3196D582D0F33980029F27E /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		B32510A12CBBC53E00CFE2F7 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		B32510A32CBBD79200CFE2F7 /* MotionCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCharts.swift; sourceTree = "<group>"; };
 		B32510A52CBBDC6F00CFE2F7 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -295,10 +307,29 @@
 			path = Filters;
 			sourceTree = "<group>";
 		};
+		B3196D4D2D0F20EB0029F27E /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				B3196D4E2D0F20FC0029F27E /* FileManagerRepository.swift */,
+				B3196D512D0F21040029F27E /* FileManagerRepositoryModels.swift */,
+				B3196D542D0F210C0029F27E /* FileManagerRepositoryProtocols.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		B3196D572D0F338A0029F27E /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				B3196D582D0F33980029F27E /* FileManagerService.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
 		B32510A72CBBE8A000CFE2F7 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
 				B32510AA2CBBF10500CFE2F7 /* CoreMotion */,
+				B3196D4D2D0F20EB0029F27E /* FileManager */,
 				B3C29B212D07251C0017C4C5 /* HealthKit */,
 				B3285E0F2D04C3A3009AD3C6 /* WatchConnectivity */,
 			);
@@ -571,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				B3DADDB02CC5185200FD6EAE /* CoreMotion */,
+				B3196D572D0F338A0029F27E /* FileManager */,
 				B3DADDB72CC52D3D00FD6EAE /* Repetitions */,
 				B31112612D04D4BB00161FE5 /* WatchConnectivity */,
 			);
@@ -742,7 +774,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1620;
 				ORGANIZATIONNAME = "Guillermo Alcalá Gamero";
 				TargetAttributes = {
 					B343DA4B2CFC8D8B0005234E = {
@@ -846,10 +878,12 @@
 			files = (
 				B3285DD82D04B358009AD3C6 /* Date+Extension.swift in Sources */,
 				B3285DDA2D04B358009AD3C6 /* NSObject+Extension.swift in Sources */,
+				B3196D4F2D0F20FC0029F27E /* FileManagerRepository.swift in Sources */,
 				B3C29B232D0725300017C4C5 /* HealthKitRepository.swift in Sources */,
 				B392F2772D04E54F00792CEF /* WatchConnectivityRepository.swift in Sources */,
 				B392F2782D04E54F00792CEF /* CoreMotionRepositoryProtocols.swift in Sources */,
 				B392F2792D04E54F00792CEF /* WatchConnectivityRepositoryProtocols.swift in Sources */,
+				B3196D562D0F210C0029F27E /* FileManagerRepositoryProtocols.swift in Sources */,
 				B392F27A2D04E54F00792CEF /* CoreMotionRepositoryModels.swift in Sources */,
 				B3C29B2A2D0725AA0017C4C5 /* HealthKitRepositoryProtocols.swift in Sources */,
 				B3C29B272D0725A10017C4C5 /* HealthKitRepositoryModels.swift in Sources */,
@@ -857,10 +891,12 @@
 				B392F27C2D04E54F00792CEF /* CoreMotionRepository.swift in Sources */,
 				B3285DDB2D04B358009AD3C6 /* DispatchQueue+Extension.swift in Sources */,
 				B3285DDD2D04B358009AD3C6 /* String+Extension.swift in Sources */,
+				B3196D522D0F21040029F27E /* FileManagerRepositoryModels.swift in Sources */,
 				B3285DF32D04C02F009AD3C6 /* ObservableObject+Extension.swift in Sources */,
 				B3285DDF2D04B358009AD3C6 /* Array+Extension.swift in Sources */,
 				B3285DE02D04B358009AD3C6 /* Optional+Extension.swift in Sources */,
 				B3285DE12D04B358009AD3C6 /* Double+Extension.swift in Sources */,
+				B3196D5A2D0F33980029F27E /* FileManagerService.swift in Sources */,
 				B3285DE22D04B358009AD3C6 /* OperationQueue+Extension.swift in Sources */,
 				B3285DE42D04B3D0009AD3C6 /* LocalizedKeys.swift in Sources */,
 			);
@@ -910,7 +946,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B35AE17A2CEA28C700B0515C /* NSObject+Extension.swift in Sources */,
+				B3196D532D0F21040029F27E /* FileManagerRepositoryModels.swift in Sources */,
 				B32510AC2CBBF11D00CFE2F7 /* CoreMotionRepositoryModels.swift in Sources */,
+				B3196D552D0F210C0029F27E /* FileManagerRepositoryProtocols.swift in Sources */,
 				B3285DEA2D04B99F009AD3C6 /* UIResponder+Extension.swift in Sources */,
 				B3AC61331FBDBB0C00B2334D /* AppDelegate.swift in Sources */,
 				B39BDE6C2CBDADD70090D7D3 /* MotionData.swift in Sources */,
@@ -930,9 +968,11 @@
 				B3DADDB92CC52D4F00FD6EAE /* RepetitionsService.swift in Sources */,
 				B37A6E102CF208F800B053C2 /* ResultsPresenter.swift in Sources */,
 				B35AE1782CEA23B900B0515C /* ChartAssembly.swift in Sources */,
+				B3196D592D0F33980029F27E /* FileManagerService.swift in Sources */,
 				B32510A42CBBD79200CFE2F7 /* MotionCharts.swift in Sources */,
 				B39123FC2CC3F3E000BF6A5A /* Double+Extension.swift in Sources */,
 				B3285E152D04C3F4009AD3C6 /* WatchConnectivityRepositoryProtocols.swift in Sources */,
+				B3196D502D0F20FC0029F27E /* FileManagerRepository.swift in Sources */,
 				B35AE1822CEA349100B0515C /* ResultsAssembly.swift in Sources */,
 				B3DADDAE2CC5130A00FD6EAE /* CoreMotionRepositoryProtocols.swift in Sources */,
 				B3280A912CBA97EF005EBD32 /* String+Extension.swift in Sources */,
@@ -1209,6 +1249,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1273,6 +1314,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -26,6 +26,7 @@ protocol ChartPresenterProtocol: AnyObject {
 class ChartPresenter {
 	weak var view: ChartViewControllerProtocol?
 	
+	var fileManagerService: FileManagerServiceInputProtocol?
 	var motionService: DeviceMotionServiceInputProtocol?
 	var repetitionsService: RepetitionsServiceInputProtocol?
 	var watchConnectivityService: WatchConnectivityServiceInputProtocol?
@@ -196,6 +197,12 @@ extension ChartPresenter {
 	}
 }
 
+// MARK: - FileManagerServiceOutputProtocol
+extension ChartPresenter: FileManagerServiceOutputProtocol {
+	
+}
+
+// MARK: - DeviceMotionServiceOutputProtocol
 extension ChartPresenter: DeviceMotionServiceOutputProtocol {
 	func deviceMotionDataUpdated(_ data: any MotionData) {		
 		numberOfDataEntries += 1
@@ -298,6 +305,22 @@ extension ChartPresenter: WatchConnectivityServiceOutputProtocol {
 			}
 		case let motion as DeviceMotionRepositoryModel:
 			motionService?.processMotionData(motion)
+		default:
+			break
+		}
+	}
+	
+	func didReceiveFile(session: WatchConnectivitySession, file: WatchConnectivityRepositoryFile) {
+		guard let data = fileManagerService?.read(file: file.fileURL) else { return }
+		
+		let unarchivedData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+		
+		switch unarchivedData {
+		case let motion as [DeviceMotionRepositoryModel]:
+			motionService?.processMotionData(motion)
+			
+			// TODO: IMPROVE - Force another stopMeasures since the flag triggers before the whole data is received
+			stopMeasures()
 		default:
 			break
 		}

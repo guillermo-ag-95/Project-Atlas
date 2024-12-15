@@ -36,6 +36,14 @@ extension WatchConnectivityService: WatchConnectivityServiceInputProtocol {
 	func sendData(_ data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler, error: WatchConnectivityRepositoryErrorDataHandler) {
 		repository?.sendData(data, reply: reply, error: error)
 	}
+	
+	func transferUserInfo(_ info: WatchConnectivityRepositoryUserInfo) {
+		repository?.transferUserInfo(info)
+	}
+	
+	func transferFile(_ file: WatchConnectivityRepositoryFileURL) {
+		repository?.transferFile(file)
+	}
 }
 
 extension WatchConnectivityService: WatchConnectivityRepositoryOutputProtocol {
@@ -57,5 +65,21 @@ extension WatchConnectivityService: WatchConnectivityRepositoryOutputProtocol {
 	
 	func didReceiveData(session: WatchConnectivitySession, data: WatchConnectivityRepositoryDataModel, reply: WatchConnectivityRepositoryReplyDataHandler) {
 		output?.didReceiveData(session: session, data: data, reply: reply)
+	}
+	
+	func didReceiveUserInfo(session: WatchConnectivitySession, userInfo: WatchConnectivityRepositoryUserInfo) {
+		output?.didReceiveUserInfo(session: session, userInfo: userInfo)
+	}
+	
+	func didFinishUserInfoTransfer(session: WatchConnectivitySession, userInfo: WatchConnectivityRepositoryUserInfoTransfer, error: WatchConnectivityRepositoryError) {
+		output?.didFinishUserInfoTransfer(session: session, userInfo: userInfo, error: error)
+	}
+	
+	func didReceiveFile(session: WatchConnectivitySession, file: WatchConnectivityRepositoryFile) {
+		output?.didReceiveFile(session: session, file: file)
+	}
+	
+	func didFinishFileTransfer(session: WatchConnectivitySession, file: WatchConnectivityRepositoryFileTransfer, error: WatchConnectivityRepositoryError) {
+		output?.didFinishFileTransfer(session: session, file: file, error: error)
 	}
 }

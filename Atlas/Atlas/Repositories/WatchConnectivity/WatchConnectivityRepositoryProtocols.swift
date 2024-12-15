@@ -26,6 +26,14 @@ protocol WatchConnectivityRepositoryInputProtocol: AnyObject {
 		reply: WatchConnectivityRepositoryReplyDataHandler,
 		error: WatchConnectivityRepositoryErrorDataHandler
 	)
+	
+	func transferUserInfo(
+		_ info: WatchConnectivityRepositoryUserInfo
+	)
+	
+	func transferFile(
+		_ file: WatchConnectivityRepositoryFileURL
+	)
 }
 
 // MARK: - WatchConnectivityRepositoryOutputProtocol
@@ -55,6 +63,28 @@ protocol WatchConnectivityRepositoryOutputProtocol: AnyObject {
 		data: WatchConnectivityRepositoryDataModel,
 		reply: WatchConnectivityRepositoryReplyDataHandler
 	)
+	
+	func didReceiveUserInfo(
+		session: WatchConnectivitySession,
+		userInfo: WatchConnectivityRepositoryUserInfo
+	)
+	
+	func didFinishUserInfoTransfer(
+		session: WatchConnectivitySession,
+		userInfo: WatchConnectivityRepositoryUserInfoTransfer,
+		error: WatchConnectivityRepositoryError
+	)
+	
+	func didReceiveFile(
+		session: WatchConnectivitySession,
+		file: WatchConnectivityRepositoryFile
+	)
+	
+	func didFinishFileTransfer(
+		session: WatchConnectivitySession,
+		file: WatchConnectivityRepositoryFileTransfer,
+		error: WatchConnectivityRepositoryError
+	)
 }
 
 extension WatchConnectivityRepositoryOutputProtocol {
@@ -82,5 +112,27 @@ extension WatchConnectivityRepositoryOutputProtocol {
 		session: WatchConnectivitySession,
 		data: WatchConnectivityRepositoryDataModel,
 		reply: WatchConnectivityRepositoryReplyDataHandler
+	) { }
+	
+	func didReceiveUserInfo(
+		session: WatchConnectivitySession,
+		userInfo: WatchConnectivityRepositoryUserInfo
+	) { }
+	
+	func didFinishUserInfoTransfer(
+		session: WatchConnectivitySession,
+		userInfo: WatchConnectivityRepositoryUserInfoTransfer,
+		error: WatchConnectivityRepositoryError
+	) { }
+	
+	func didReceiveFile(
+		session: WatchConnectivitySession,
+		file: WatchConnectivityRepositoryFile
+	) { }
+	
+	func didFinishFileTransfer(
+		session: WatchConnectivitySession,
+		file: WatchConnectivityRepositoryFileTransfer,
+		error: WatchConnectivityRepositoryError
 	) { }
 }

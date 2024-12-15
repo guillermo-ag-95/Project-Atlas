@@ -20,3 +20,10 @@ typealias WatchConnectivityRepositoryErrorMessageHandler = ((any Error) -> Void)
 typealias WatchConnectivityRepositoryDataModel = Data
 typealias WatchConnectivityRepositoryReplyDataHandler = ((Data) -> Void)?
 typealias WatchConnectivityRepositoryErrorDataHandler = ((any Error) -> Void)?
+
+typealias WatchConnectivityRepositoryUserInfo = [String: Any]
+typealias WatchConnectivityRepositoryUserInfoTransfer = WCSessionUserInfoTransfer
+typealias WatchConnectivityRepositoryFile = WCSessionFile
+typealias WatchConnectivityRepositoryFileURL = URL
+typealias WatchConnectivityRepositoryFileTransfer = WCSessionFileTransfer
+typealias WatchConnectivityRepositoryError = (any Error)?
